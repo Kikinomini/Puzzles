@@ -4,7 +4,7 @@ echo $this->doctype(); ?>
 <html lang="de">
 <head>
 	<meta charset="utf-8">
-   	<?php echo $this->headTitle("Silas.link")->setSeparator(' - ')->setAutoEscape(false) ?>
+	<?php echo $this->headTitle("Silas.link")->setSeparator(' - ')->setAutoEscape(false) ?>
 
 	<?php echo $this->headMeta()
 		->appendName('viewport', 'width=device-width, initial-scale=1.0')
@@ -12,7 +12,8 @@ echo $this->doctype(); ?>
 	?>
 
 	<!-- Le styles -->
-	<?php echo $this->headLink(array('rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/img/logo.ico'))
+	<?php echo $this->headLink(array('rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() .
+																											   '/img/logo.ico'))
 		->prependStylesheet($this->basePath() . '/css/myModalDialog.css')
 //		->prependStylesheet($this->basePath() . '/css/FormelEditor.css')
 //		->prependStylesheet($this->basePath() . '/css/bookbinder.css')
@@ -34,7 +35,7 @@ echo $this->doctype(); ?>
 		->prependFile($this->basePath() . '/js/userManager.js', 'text/javascript')
 //		->prependFile($this->basePath() . '/js/bookbinderFeedback.js', 'text/javascript')
 		->prependFile($this->basePath() . '/js/dropit.js', 'text/javascript')
-        ->prependFile($this->basePath() . '/js/always.js', 'text/javascript')
+		->prependFile($this->basePath() . '/js/always.js', 'text/javascript')
 		->prependFile($this->basePath() . '/js/myForm.js', 'text/javascript')
 //		->prependFile($this->basePath() . '/js/matrix.js', 'text/javascript')
 		->prependFile($this->basePath() . '/js/settings.js')
@@ -46,67 +47,77 @@ echo $this->doctype(); ?>
 		->prependFile($this->basePath() . '/js/respond.min.js', 'text/javascript', array('conditional' => 'lt IE 9',))
 		->prependFile($this->basePath() . '/js/html5shiv.js', 'text/javascript', array('conditional' => 'lt IE 9',))
 		->prependFile($this->basePath() . '/js/flashMessenger.js', 'text/javascript')
-//		->prependFile($this->basePath() . '/js/ajax.js', 'text/javascript')
-//		->prependFile($this->basePath() . '/js/ckeditor4.5.6/ckeditor.js', 'text/javascript')
-//		->prependFile($this->basePath() . '/js/functions.js', 'text/javascript');
-    ?>
-    <script>
-        settings.basePath = '<?php echo $this->basePath(); ?>';
-    </script>
+	//		->prependFile($this->basePath() . '/js/ajax.js', 'text/javascript')
+	//		->prependFile($this->basePath() . '/js/ckeditor4.5.6/ckeditor.js', 'text/javascript')
+	//		->prependFile($this->basePath() . '/js/functions.js', 'text/javascript');
+	?>
+	<script>
+		settings.basePath = '<?php echo $this->basePath(); ?>';
+	</script>
 
 
 </head>
 <body>
-<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-	<div class="container">
-		<div class="navbar-header">
-			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-				<span class="icon-bar">X</span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-			</button>
+	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+					<span class="icon-bar">X</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+			</div>
+			<div class="collapse navbar-collapse">
+				<?php
+
+				echo $this->navigation('navigation')->menu()->setUlClass("nav navbar-nav");
+				//				->renderMenu(
+				//					null,
+				//					array(
+				//						'maxDepth' => 1,
+				////					'addClassToListItem' => true
+				//					)
+				//				);
+
+				?>
+			</div>
+
 		</div>
-		<div class="collapse navbar-collapse">
-			<?php
+	</nav>
+	<div class="myMainContainerWrapper">
+	<div class="container mainContent">
 
-			echo $this->navigation('navigation')->menu()->setUlClass("nav navbar-nav");
-//				->renderMenu(
-//					null,
-//					array(
-//						'maxDepth' => 1,
-////					'addClassToListItem' => true
-//					)
-//				);
+		<!--	<nav class="navbar navbar-inverse" role="navigation">-->
+		<!--		<div class="collapse navbar-collapse">-->
+		<!--			--><?php
+		//			echo $this->navigation('navigation')->menu()
+		//				->setUlClass("nav navbar-nav")
+		//				->setOnlyActiveBranch(true)
+		//				->setRenderParents(false)
+		//				->setMinDepth(0)->renderSubMenu();
+		//
+		//			?>
+		<!--		</div>-->
+		<!--	</nav>-->
 
-			?>
-		</div>
+		<?php
+		//	echo $this->navigation('navigation')->breadcrumbs();
 
+		include("alerts.phtml");
+		echo $this->content;
+
+		?>
+		<?php echo $this->inlineScript() ?>
 	</div>
-</nav>
-<div class="container mainContent">
-
-	<!--	<nav class="navbar navbar-inverse" role="navigation">-->
-	<!--		<div class="collapse navbar-collapse">-->
-	<!--			--><?php
-	//			echo $this->navigation('navigation')->menu()
-	//				->setUlClass("nav navbar-nav")
-	//				->setOnlyActiveBranch(true)
-	//				->setRenderParents(false)
-	//				->setMinDepth(0)->renderSubMenu();
-	//
-	//			?>
-	<!--		</div>-->
-	<!--	</nav>-->
-
-	<?php
-//	echo $this->navigation('navigation')->breadcrumbs();
-
-	include("alerts.phtml");
-	echo $this->content;
-
-	?>
-    <?php echo $this->inlineScript() ?>
-</div>
-<!-- /container -->
+	</div>
+	<div class = "container">
+	<footer>
+		<small>
+			<a href="<?php echo $this->url("showImprint"); ?>">Impressum</a> -
+			<a href="<?php echo $this->url("showPrivacyPolicy"); ?>">Datenschutzbestimmungen</a> -
+			<a href="<?php echo $this->url("showAgb"); ?>">AGB</a>
+		</small>
+	</footer>
+	</div>
 </body>
 </html>

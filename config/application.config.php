@@ -93,6 +93,6 @@ $returnValue = array(
 
 if ($env == 'dev')
 {
-	$returnValue["modules"][] = 'ZendDeveloperTools';
+//	$returnValue["modules"][] = 'ZendDeveloperTools';
 }
 return $returnValue;

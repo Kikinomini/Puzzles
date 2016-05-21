@@ -1,47 +1,8 @@
 <?php
 
-return array(
+$config = array(
     'router' => array(
         'routes' => array(
-            'home' => array(
-                'type' => 'segment',
-                'options' => array(
-                    'route' => '/',
-                    'constraints' => array(),
-                    'defaults' => array(
-                        'controller' => 'Portal\Controller\Index',
-                        'action' => 'index',
-                        'resource' => 'default',
-                    ),
-                ),
-            ),
-            'cookie' => array(
-                'type' => 'segment',
-                'options' => array(
-                    'route' => '/cookie',
-                    'constraints' => array(),
-                    'defaults' => array(
-                        'controller' => 'Portal\Controller\Index',
-                        'action' => 'saveCookie',
-                        'resource' => 'default',
-                    ),
-                ),
-                'may_terminate' => true,
-                'child_routes' => array(
-                    'show' => array(
-                        'type' => 'segment',
-                        'options' => array(
-                            'route' => '/show',
-                            'constraints' => array(),
-                            'defaults' => array(
-                                'controller' => 'Portal\Controller\Index',
-                                'action' => 'showCookie',
-                                'resource' => 'admin',
-                            ),
-                        ),
-                    ),
-                ),
-            ),
             'login' => array(
                 'type' => 'segment',
                 'options' => array(
@@ -242,3 +203,8 @@ return array(
         ),
     ),
 );
+
+foreach (glob(__DIR__ . '/routes/routes.*.php') as $filename) {
+    $config = array_merge_recursive($config, include($filename));
+}
+return $config;
