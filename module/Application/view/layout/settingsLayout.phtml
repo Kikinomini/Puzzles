@@ -1,0 +1,24 @@
+<div class="wrapper">
+    <div class="wrapperHeader">
+        <h1>Einstellungen</h1>
+    </div>
+    <div class="wrapperContent">
+        <div class="wrapperRow" id="settings">
+            <div class="wrapperHeader">
+                <br/>
+                <br/>
+                <br/>
+                <?php
+                foreach ($this->settings as $setting) {
+                    echo "<div style = 'white-space: nowrap'><a href = '".$this->url($setting["route"]) . "'>" . $setting["label"] . "</a></div>";
+                }
+                ?>
+            </div>
+            <div class="horizontalSeparator">
+            </div>
+            <div class="wrapperContent" id="settingsPage">
+                <?php echo $this->settingsContent; ?>
+            </div>
+        </div>
+    </div>
+</div>

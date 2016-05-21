@@ -1,0 +1,10 @@
+<h1>Nicht erlaubt!</h1>
+
+<p>Es ist Ihnen nicht erlaubt, diese Seite zu betreten!</p>
+<br/>
+<br/>
+<?php
+if (!$this->layout()->isOnline) {
+    echo "<i>Sie sind nicht eingeloggt. Jetzt <a href = '" . $this->url("login", array("followTarget" => "1")) . "'>einloggen.</a></i>";
+}
+?>

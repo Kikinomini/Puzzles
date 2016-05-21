@@ -1,0 +1,45 @@
+<?php
+$n = 0;
+
+echo "<div id = 'flashMessageContainer'>";
+$this->flashMessenger()->setNamespace(\Zend\Mvc\Controller\Plugin\FlashMessenger::NAMESPACE_SUCCESS);
+foreach (array_merge($this->flashMessenger()->getMessages(), $this->flashMessenger()->getCurrentMessages()) as $message) {
+    echo "<div class = 'flashMessage success' id = 'flashMessage$n' onmouseout='flashMessenger.hideX($n)' onmouseover='flashMessenger.showX($n)'><b>" . $message . "</b><span class = 'flashMessage' id = 'flashMessageX$n' onclick = 'flashMessenger.deleteMessage($n)'>&#x2716;</span></div>";
+    $n++;
+}
+
+$this->flashMessenger()->setNamespace(\Zend\Mvc\Controller\Plugin\FlashMessenger::NAMESPACE_DEFAULT);
+foreach (array_merge($this->flashMessenger()->getMessages(), $this->flashMessenger()->getCurrentMessages()) as $message) {
+    echo "<div class = 'flashMessage default' id = 'flashMessage$n' onmouseout='flashMessenger.hideX($n)' onmouseover='flashMessenger.showX($n)'><b>" . $message . "</b><span class = 'flashMessage' id = 'flashMessageX$n' onclick = 'flashMessenger.deleteMessage($n)'>&#x2716;</span></div>";
+    $n++;
+}
+
+$this->flashMessenger()->setNamespace(\Zend\Mvc\Controller\Plugin\FlashMessenger::NAMESPACE_ERROR);
+foreach (array_merge($this->flashMessenger()->getMessages(), $this->flashMessenger()->getCurrentMessages()) as $message) {
+    echo "<div class = 'flashMessage error' id = 'flashMessage$n' onmouseout='flashMessenger.hideX($n)' onmouseover='flashMessenger.showX($n)'><b>" . $message . "</b><span class = 'flashMessage' id = 'flashMessageX$n' onclick = 'flashMessenger.deleteMessage($n)'>&#x2716;</span></div>";
+    $n++;
+}
+
+$this->flashMessenger()->setNamespace(\Zend\Mvc\Controller\Plugin\FlashMessenger::NAMESPACE_INFO);
+foreach (array_merge($this->flashMessenger()->getMessages(), $this->flashMessenger()->getCurrentMessages()) as $message) {
+    echo "<div class = 'flashMessage info' id = 'flashMessage$n' onmouseout='flashMessenger.hideX($n)' onmouseover='flashMessenger.showX($n)'><b>" . $message . "</b><span class = 'flashMessage' id = 'flashMessageX$n' onclick = 'flashMessenger.deleteMessage($n)'>&#x2716;</span></div>";
+    $n++;
+}
+
+$this->flashMessenger()->setNamespace(\Zend\Mvc\Controller\Plugin\FlashMessenger::NAMESPACE_WARNING);
+foreach (array_merge($this->flashMessenger()->getMessages(), $this->flashMessenger()->getCurrentMessages()) as $message) {
+    echo "<div class = 'flashMessage warning' id = 'flashMessage$n' onmouseout='flashMessenger.hideX($n)' onmouseover='flashMessenger.showX($n)'><b>" . $message . "</b><span class = 'flashMessage' id = 'flashMessageX$n' onclick = 'flashMessenger.deleteMessage($n)'>&#x2716;</span></div>";
+    $n++;
+}
+echo "</div>";
+
+$this->flashMessenger()->clearCurrentMessagesFromContainer();
+$this->flashMessenger()->clearMessagesFromContainer();
+
+$this->inlineScript()->captureStart();
+echo <<< JS
+//flashMessenger.setMessageCount($n);
+$(document).ready(function () {flashMessenger.messageCount = $n;});
+JS;
+
+$this->inlineScript()->captureEnd();

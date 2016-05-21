@@ -1,0 +1,21 @@
+<?php
+$title = 'Rollenverwaltung - '.$this->escapeHtml($this->role->getName());
+$this->headTitle($title);
+
+$changeRoleParentUrl = $this->url("userList/roleList/roleOverview/changeRoleParent", array("roleId" => $this->escapeHtml($this->role->getId())));
+$this->inlineScript()->captureStart();
+echo <<<JS
+    $(document).ready(function(){
+        userManager.init("", "", "$changeRoleParentUrl");
+    });
+JS;
+$this->inlineScript()->captureEnd();
+
+echo "<h1>".$title."</h1>";
+
+echo "<br/>";
+echo "<b>".$this->escapeHtml($this->role->getName())." erbt von:</b>";
+echo $this->datatable($this->parentList);
+echo "<br/><br/>";
+echo "<b>Verfügbare Rollen:</b>";
+echo $this->datatable($this->roleList);

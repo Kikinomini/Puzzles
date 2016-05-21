@@ -1,0 +1,22 @@
+div.flashMessage
+{
+    background-color: #ffDDdd;
+    border: 1px solid;
+    border-color: #afafaf;
+    border-radius: 10px;
+    padding: 3px 10px 3px 10px;
+}
+span.flashMessage
+{
+    float: right;
+    display: none;
+    cursor: pointer;
+}
+div.success
+{
+    background-color: #adeca1;
+}
+div.default
+{
+    background-color: #1a9cc8;
+}

@@ -1,0 +1,10 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: Silas
+ * Date: 29.09.14
+ * Time: 21:46
+ */
+
+echo "<h1>".$this->escapeHtml($this->layout()->statusCode)."</h1>";
+echo "Etwas ist falsch gelaufen: <i>".$this->escapeHtml($this->layout()->reasonPhrase)."</i>";

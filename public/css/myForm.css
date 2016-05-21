@@ -1,0 +1,51 @@
+div.formElement label
+{
+    text-align:right;
+    width: 50%;
+    padding: 10px;
+}
+div.formElement input
+{
+    width: 50%;
+}
+div.formElement select
+{
+    width: 50%;
+}
+
+div.formElement
+{
+
+}
+
+form.myForm
+{
+    width: auto;
+}
+
+div.myMultiCheckbox
+{
+    width: 100%;
+
+    border-top-width: 1px;
+    border-top-color: #6a6a6a;
+    border-top-style: solid;
+
+    border-bottom-width: 1px;
+    border-bottom-color: #6a6a6a;
+    border-bottom-style: solid;
+}
+
+div.myMultiCheckboxHead
+{
+    width: 50%;
+    margin: 0px;
+    text-align: right;
+    display: inline-block;
+}
+label.myMultiCheckboxHeadLabel
+{
+    width: 50%;
+    display: inline-block;
+    margin: 0px;
+}

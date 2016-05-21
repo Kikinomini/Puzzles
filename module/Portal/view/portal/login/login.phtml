@@ -1,0 +1,13 @@
+<?php
+$title = "Login";
+$this->headTitle($title);
+
+$this->form->setAttribute("action", $this->url("login", array("followTarget" => $this->followTarget)));
+
+echo "<h1>".$title."</h1>";
+echo $this->myForm($form);
+?>
+
+<i>Achtung, ich verwende Cookies für den automatischen Login!</i>
+<br/>
+<a href = '<?php echo $this->url('newPassword'); ?>'>Passwort vergessen</a>

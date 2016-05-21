@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Wiki</title>
+	<style>
+		.comment
+		{
+			color: green;
+		}
+		body
+		{
+			padding-left: 5%;
+			padding-right: 5%;
+		}
+	</style>
+</head>
+<body>
+	<h2>PHPStorm</h2>
+	<h3>Einbinden der Settings</h3>
+	Im Ordner orga findet ihr eine settings.jar. Geht unter File->Import Settings... und wählt diese aus. Danach solltet ihr zusätzliche fileTemplates haben. Diese findet
+	ihr unter rechtsklick(auf Ordner)->New. Dort müsste es Model, Manager, ManagerFactory und Repository geben (mehr zu den Klassen unter Doctrine/Datenbanken). <br/>
+	Die Settings sollten für PHP und JS auch eine Code-Formattierung haben (Ich hoffe, dass das geklappt hat). Mit Strg+Alt+L oder Strg+Alt+R solltet ihr
+	den Code der Formatierung anpassen können. Wir sollten der Übersichtshalber alle die Formatierung einheitlich haben, also bitte nicht anpassen.
+
+	<h3>Interessante Features</h3>
+	PHPStorm bietet viele interessante Features. Da PHP keine Typspezialisierung hat, weiß PHPStorm häufig nicht, welcher Typ ein Objekt ist. Daher funktioniert dort die
+	Autovervollständigung nicht. Das kann man wie Folgt änder: <br/>
+	<pre><code>
+/** @var User $user; */
+	</code></pre>
+	Durch diese Zeile sagen wir PHPStorm (und jeder anderen, halbwegs guten PHP-IDE), dass die Variable $user vom Typ User ist. Normalerweise schreibt man das
+	über die Zeile, wo wir der Variablen den Wert zuweisen. Ein weiteres Feature ist, dass selbst dabei die Autovervollständigung funktioniert. Sprich, wenn wir "/** " in die Zeile
+	über der Wertzuweisung schreiben, so vervollstäntigt die IDE das automatisch, sodass wir nur noch den Typ eingeben müssen.<br/><br/>
+
+	Ein anderes, wichtiges Menü ist das Generate-Menü. Dieses lässt sich durch Alt+Einfg aufrufen. Dadurch können wir Getter/Setter/Constructoren einfügen, sowie Methoden von
+	Interfaces implementieren oder von Klassen überladen. Außerdem lassen sich damit PHP-DocComments anfertigen, was teilweise echt hilfreich ist.<br/><br/>
+
+	Bei Git wird es sich zeigen, aber bei svn war es so, dass nicht veränderte Dateien schwarz sind, veränderte Dateien Blau, neue Dateien Grün und ignorierte Dateien (nicht eingecheckte) Rot.
+	Ich denke, dass es bei Git genauso sein sollte. Bevor ihr anfangt zu Programmieren, solltet ihr immer auschecken. Und wenn ihr fertig seid, ebenfalls hochladen. Wichtig ist, wenn ihr das über
+	den Dateibrowser macht, es im obersten Ordner zu machen, damit ihr nichts vergesst. <br/><br/>
+
+	Das ist zwar eher ZF2, als PHPStorm, aber egal. ZF2 hat ein AutoClassLoader. Normalerweise muss, wenn eine Klasse genutzt werden soll, diese durch Include eingebunden werden. ZF2 hat jedoch einen
+	Default-NameSpace. Kann eine Klasse nicht gefunden werden, so wird in diesen Namespaces nachgesehen. Jedes Modul fügt automatisch einen Namespace hinzu, der gleich benannt ist mit dem Modulnamen. Diese beginnt im Ordner src/&lt;ModulName&gt;.
+	Das heißt, dass der Namespace "Application" auf den Ordner src/Application verweist. Die Klassen in den Unterordnern müssen als Namespace den Ordnerpfad ab dem ModulNamen haben.<br/><br/>
+
+	<i>Wichtig! </i> ich selber programmiere unter Linux, sowie die meisten Webserver ebenfalls Linux sind. Linux ist bei Pfadangaben Case-Sensitive, also achtet auf Groß-Kleinschreibung, wenn ihr Pfade angebt.
+	Außerdem gebt nur relative Pfade an, da das Projekt bei jedem woanders liegen dürfte. Und ebenfalls unter Linux, benutzt / als Pfadtrenner. Unter Windows geht sowhol / als auch \. Unter Linux nur /.
+	Ich habe lange gebraucht, um diese Fehler zu finden, als ich das erste mal meine Webseite hochgeladen hatte.
+
+    <h2>Routing (URL)</h2>
+    <p>
+        Routing ist das Parsen der URL auf eine bestimmte Route. Die Route wird unter module/&lt; ModulName&gt/config/routes/routes.&lt;Controller&gt.php angegeben.<br/>
+		Aufbau:
+	</p>
+		<pre>
+		<code>
+return array(
+	'router' => array(
+		'routes' => array(
+			'settings' => array( <span class = "comment">&lt;- Anfang der Route</span>
+				'type' => 'segment', <span class = "comment">&lt;- Normalerweise immer 'segment'</span>
+				'options' => array(
+					'route' => '/settings', <span class = "comment">&lt;- Pfad in der URL, kann Variablen beinhalten</span>
+					'constraints' => array(),
+					'defaults' => array(
+						'controller' => 'Application\Controller\Settings', <span class = "comment">&lt;- Controller</span>
+						'action' => 'index', <span class = "comment">&lt;- Action</span>
+						'resource' => 'online', <span class = "comment">&lt;- Berechtigung</span>
+					),
+				),
+				'may_terminate' => true, <span class = "comment">&lt;- Ist bereits vollwertige Route, muss nur angegeben werden, wenn Child-Routes vorhanden sind</span>
+				'child_routes' => array(
+					'changePassword' => array( <span class = "comment">&lt;- Name der Child-Route</span>
+						'type'=> 'segment',
+						'options' => array(
+							'route' => '/changePassword[/:userId]', <span class = "comment">&lt;- :&lt;VarName&gt ist Variable, [ist optional]</span>
+							'constraints' => array(
+								'userId' => '[0-9]{1,}', <span class = "comment">&lt;- Format für Variable</span>
+							),
+							'defaults' => array(
+								'controller' => 'Application\Controller\Settings',
+								'action' => 'changePasswordSettings',
+								'resource' => 'online',
+								'userId' => '0', <span class = "comment">&lt;- Default für Variable</span>
+							),
+						),
+					),
+				),
+			),
+		),
+	),
+);
+		</code></pre>
+	<p>
+		Die URL für die Child-Route ist: <code>&lt;Host&gt/&lt;DocumentRoot&gt/settings/changePassword</code> oder <code>&lt;Host&gt/&lt;DocumentRoot&gt/settings/changePassword/&lt;userId&gt</code><br/>
+		Wenn die URL aufgerufen wird, wird automatisch überprüft, ob der User die passende Berechtigung hat, die bei resource angegeben ist.<br/><br/>
+	</p>
+	Default-Berechtigungen:
+	<ul>
+		<li>default</li>
+		<ul>
+			<li>dürfen alle</li>
+		</ul>
+		<li>offline</li>
+		<ul>
+			<li>dürfen nur ausgeloggte User</li>
+			<li>wird eig nur für Login/Registrierungs-Seite gebraucht</li>
+		</ul>
+		<li>online</li>
+		<ul>
+			<li>dürfen nur eingeloggte User</li>
+		</ul>
+		<li>admin</li>
+		<ul>
+			<li>dürfen nur Admins</li>
+		</ul>
+	</ul>
+	<br/>
+	<h4>Auflösung des Controllers & der Action</h4>
+	<p>
+		Der Controller erbt immer von der Klasse "AbstractActionController".<br/>
+		In der Routes-Config werden Controller-Aliase angegeben. Diese werden unter module/&lt; ModulName&gt/config/controller.config.php gespeichert und sieht wie folgt aus:
+		<pre>
+			<code>
+return array(
+	'controllers'  => array(
+		'invokables' => array(
+			'Portal\Controller\Login' => 'Portal\Controller\LoginController', <span class = "comment">&lt;- Alias => Voller Klassenname (Ab src-Ordner)</span>
+			'Portal\Controller\Code' => 'Portal\Controller\CodeController',
+			'Portal\Controller\Index' => 'Portal\Controller\IndexController',
+			'Portal\Controller\RoleResource' => 'Portal\Controller\RoleResourceController',
+		),
+	),
+);
+			</code>
+		</pre>
+
+	Im Controller gibt es dann eine Funktion, die wie die Action in der Route heißt - angehangen mit einem Action. Also wenn die Action in Route "changePasswordSettings" heißt, so heißt die Funktion im Controller "changePasswordSettingsAction"<br/>
+	An die Variablen der URL kommt ihr in dem Controller wie folgt:
+	<pre>
+		<code>
+$userId = $this->params("userId", 0);
+		</code>
+	</pre>
+	Dabei ist die 0 der default-Value, der zurückgegeben wird, wenn die Variable fehlt und kein Defaultwert in der Route-Config gesetzt wird. Der default-Value kann aber auch weggelassen werden. <br/>
+	<br/>
+	Rückgabeobjekte der Action-Funktion
+	<ul>
+		<li>ViewModel <span class="comment">&lt;- Klasse, die eine View beinhaltet</span></li>
+		<li>Array <span class="comment">&lt;- Wird dann automatisch zu einem ViewModel umgewandelt</span></li>
+		<li>void <span class="comment">&lt;- Leeres ViewModel wird erzeugt</span></li>
+		<li>redirect-Aufforderung <span class="comment">&lt;- User wird zu einer anderen Seite weitergeleitet</span></li>
+	</ul>
+	<br/>
+	<h4>Auflösung der Action zu der View</h4>
+	Auf gleicher Höhe zu dem src-Ordner gibt es im Modul ein view-Ordner. Dieser beinhaltet, wie der src-Ordner zuerst einen Ordner, der gleich benannt ist, wie das Modul (Theoretisch kann man noch andere hinzufügen, brauchen wir aber nicht).
+	Dieser Ordner beinhaltet pro Controller im Modul einen Ordner, der gleich benannt ist. Diese Ordner beinhalten pro Action eine <b>.phtml</b>-Datei, die gleich wie die Action benannt ist. Das ist
+	die View, die angezeigt wird. <br/><br/>
+	<i>Achtung!</i>: alle Großbuchstaben im Pfad im view-Ordner werden klein geschrieben. Außerdem folgt ein - wenn der Großbuchstabe nicht vorne im Namen stand. <br/>
+	Zu der Funktion "changeRoleParentAction" gehört also die View "change-role-parent.phtml"
+
+	<h3>Variablenübergabe von Controller zu View</h3>
+	Der Rückgabewert der Action-Function: <br/>
+	<pre>
+		<code>
+return array(
+	"varName" => "varWert",
+);
+		</code>
+	</pre>
+	oder
+	<pre>
+		<code>
+return new ViewModel(
+	array(
+		"varName" => "varWert",
+	)
+);
+		</code>
+	</pre>
+	Dann kann die Variable in der View wie folgt benutzt werden:
+	<pre>
+		<code>
+echo $varName <span class="comment">&lt;- gibt "varWert" aus</span>
+echo $this->varName <span class="comment">&lt;- gibt "varWert" aus, bevorzugte Methode, da PHPStorm sonst denkt, die Variable existiert nicht</span>
+		</code>
+	</pre>
+
+	<h2>Factories/ServiceLocator</h2>
+	<p>
+		Factories sind Objekte, welche andere Objekte generieren. In ZF2 werden diese im zusammenhang mit dem ServiceLocator genutzt. Die Factories werden
+		unter einem Namen registriert. Wenn ein Objekt durch den ServiceLocator durch diesen Namen aufgerufen wird, wird die Factory angeschmissen, um dieses Objekt zu erstellen.
+		Wird das Objekt noch einmal angefordert, wird das bereits erzeugte Objekt zurückgegeben (kann man umstellen, sodass immer ein neues Objekt erstellt wird).<br/>
+		Das System wird nur für Services genutzt. Dort ist es normalerweise ungewöhnlich, mehr als eine Instanz einer Klasse zu haben. <br/>
+		<br/>
+		Die Factories liegen unter module/&lt; ModulName&gt/src/&lt; ModulName&gt/Factory (und teilweise noch in Unterordnern). Dabei sind sie immer so benannt, wie das Objekt, welches sie zurückgeben plus
+		den Suffix "Factory".
+	</p>
+	<pre>
+		<code>
+
+namespace Application\Factory;
+
+use Zend\ServiceManager\FactoryInterface as FactoryInterface;
+use Zend\ServiceManager\ServiceLocatorInterface as ServiceLocatorInterface;
+use Zend\View\Helper\HelperInterface;
+use Zend\View\HelperPluginManager;
+
+class NavigationFactory implements FactoryInterface <span class="comment">&lt;- Interface, die jede Factory braucht</span>
+{
+    public function createService(ServiceLocatorInterface $serviceLocator)
+    {
+        $navigation = $serviceLocator->get('Zend\View\Helper\Navigation'); <span class="comment">&lt;- Anfordern eines anderen Services</span>
+        return $navigation;
+    }
+}
+		</code>
+	</pre>
+	<p>Das Registrieren einer Factory erfolgt in der config-Datei "factories.config.php" des jeweiligen Modules:</p>
+	<pre>
+		<code>
+return array(
+	'service_manager' => array(
+		'factories' => array(
+			'doctrine.entitymanager.Cronjob' => new \DoctrineORMModule\Service\EntityManagerFactory('Cronjob'), <span class="comment">&lt;- Registrieren einer Factory durch eine Klasse</span>
+			'doctrine.connection.Cronjob' => new \DoctrineORMModule\Service\DBALConnectionFactory('Cronjob'),
+			'Cronjob.cronjobManager' => 'Cronjob\Factory\Model\Manager\CronjobManagerFactory', <span class="comment">&lt;- Registrieren einer Factory durch Angabe des Pfades zur Klasse</span>
+		),
+	),
+);
+		</code>
+	</pre>
+	<i>Achtung:</i> Die Factories aus den einzelnen Modulen sollten immer mit  "&lt;Modulnamen&gt." anfangen, damit man in unterschiedlichen Modulen Factories mit gleichen Namen erstellen kann. <br/>
+	<i>Doppel-Achtung:</i> Die Manager-Factories aus dem Modul Application haben <b>nicht</b> den Modulnamen als Präfix (Relikt aus meiner Anfangszeit) <br/>
+	Normalerweise registriert man die Factories unter dem Namen, wie das Objekt heißt, welches sie zurück geben.<br/>
+	<br/>
+	Im Controller kann der ServiceLocator erreicht werden durch die Zeile:
+	<pre>
+		<code>
+$this->getServiceLocator();
+		</code>
+	</pre>
+	PHPStorm sagen wir durch folgende Zeilen, was der ServiceLocator zurück gibt (Damit die Auto-Vervollständigung auch klappt)
+	<pre>
+		<code>
+/** @var UserManager $userManager */ <span class="comment">&lt;- @var UserManager $userManager sagt, dass $userManager vom Typ UserManager ist</span>
+$userManager = $this->getServiceLocator()->get('userManager');
+		</code>
+	</pre>
+	<br/>
+
+    <h2>ViewHelper</h2>
+	ViewHelper sind Funktionen, die uns in der View zur verfügung stehen.
+	<h3>escapeViewHelper</h3>
+	Durch diese View-Helper wird eventueller gefährlicher Output in ungefährlichen Output umgewandelt.
+	<pre>
+		<code>
+echo $this->escapeHtml($userInput);
+?&gt
+&lt;script type="text/javascript"$gt
+    var foo = "&lt;?php echo $this->escapeJs($variable) ?&gt";
+&lt;/script&gt
+		</code>
+	</pre>
+	Das sollte überall dort eingesetzt werden, wo wir eine User-Eingabe (Egal ob Admin oder sonstiger User) ausgeben lassen, um Cross-Side-Scripting zu verhindern.
+
+	<h3>URLViewHelper</h3>
+	Durch diesen View-Helper kann man sich eine URL durch eine Route generieren lassen:
+	<pre>
+		<code>
+echo $this->url("settings");	<span class="comment">&lt;- Erzeugt "/settings" als Ausgabe, RouteName als Parameter (nicht der Pfad)</span>
+echo $this->url(
+	"settings/changePassword",
+	array(
+		"userId" => 7 <span class="comment">&lt;- Übergabe eines Parameters, der in der URL gebraucht wird</span>
+	));
+
+		</code>
+	</pre>
+
+	<h2>JS in View</h2>
+	Der Javascript-Code sollte immer an einer Stelle auf der Website sein. Es ist doof, wenn immer wieder JS-Schnipsel überall
+	auftauchen, doch das ist der Fall, wenn man JS einfach so in die View schreibt. Deswegen gibt es zwei ViewHelper, die dort helfen
+
+	<h3>ScriptViewHelper</h3>
+	der <code>inlineScript</code> und der <code>headScript</code>-ViewHelper sind sich ziemlich ähnlich. Beide können den output buffern. Das hat
+	zur folge, dass das, was eigentlich in der View ausgegeben wird (also durch echo, var_dump, usw), in einer Variable gespeichert wird und woanders ausgegeben wird.
+	Das Buffern startet man mit <code>$this->inlineScript()->captureStart();</code> und beendet wird es mit <code>$this->inlineScript()->captureEnd();</code>
+	Dabei empfiehlt es sich, die Ausgabe duch einen Heredoc-String auszugeben. Das ist wie ein Normaler String, nur dass das erste " durch &lt;&lt;&lt;MYMARKER
+	und das abschließende " durch MYMARKER ersetzt wird. Das erspart das escapen von ".<br/>
+	Beispiel (in der View):
+	<pre>
+		<code>
+$urlSettings = $this->url("settings"); <span class="comment">&lt;- Funktionsaufrufe innerhalb der Schreibweise nicht möglich. Daher einfache Variable</span>
+$this->inlineScript()->captureStart(); <span class="comment">&lt;- Startet Caputre</span>
+
+echo &lt;&lt;&lt;JS; <span class="comment">&lt;- benutze JS als Marker, damit PHPStorm erkennt, dass es sich um JS handelt</span>
+	$(document).ready(function(){ <span class="comment">&lt;- Sorgt dafür, dass es erst nach laden der Website ausgeführt wird</span>
+		alert("URL zu den Einstellungen: $urlSettings");
+	});
+JS; <span class="comment">&lt;- Muss am Anfang der Zeile stehen (ohne Leerzeichen), da sonst PHPStorm es nicht als End-Tag erkennt</span>
+$this->inlineScript()->captureEnd(); <span class="comment">&lt;- Beendet Capture</span>
+		</code>
+	</pre>
+	Große Javascript-Objekte sollten jedoch in eine eigene Datei ausgelagert werden. Diese Datei sollte unter public/js/ gespeichert werden. Im Script sollte dann nur noch
+	die Funktion des JS-Objekt aufgerufen werden und eventuell Variablen übergeben/initialisiert werden.<br/>
+	Wird das Javascript-Objekt nur für die eine View gebraucht, so kann man die js-Datei mit dem Befehl <br/>
+	<code>$this->headScript()->appendFile($this->basePath() . '/js/&ltName&gt.js', 'text/javascript');</code>
+	<br/> angehangen werden
+
+
+	<h2>Datenbankzugriffe/Doctrine</h2>
+	Doctrine ist eine eigenständige Bibliothek, die für den Datenbankzugriff zuständig ist. Sie ist in ZF2 integriert. Im Endeffekt gibt es drei Klassen, die für eine Tabelle
+	gebraucht werden. Das Model, den Manager und die Repository. Das Model ist dabei nur eine Klasse, die Attribute besitzt (und Getter & Setter). Diese Klasse spiegelt die Datenbank wieder.
+
+	<pre>
+		<code>
+/** @ORM\Entity(repositoryClass="\Application\Model\Repository\RoleRepository") <span class="comment">&lt;- Gibt dazugehörige Repository an</span>
+ * @ORM\Table(name="Role") <span class="comment">&lt;- Name der Tabelle</span>
+ */
+class Role {
+
+    /**
+     * @ORM\Id <span class="comment">&lt;- Spaltendefinition</span>
+     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\Column(type="integer", unique=true)
+     */
+    protected $id;
+
+    /**
+     * @ORM\Column(type="string", length=75, unique=true)
+     */
+    protected $name;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    protected $beschreibung;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="\Application\Model\User", cascade="all", inversedBy="roles") <span class="comment">&lt;- Beziehung zu anderen Model</span>
+     * @ORM\JoinTable(name="RoleUser", <span class="comment">&lt;- Zwischentabelle</span>
+     *      joinColumns={@ORM\JoinColumn(name="RoleId", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="UserId", referencedColumnName="id")})
+     */
+    protected $users;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="\Application\Model\Resource", cascade="all")
+     * @ORM\JoinTable(name="RoleResource",
+     *      joinColumns={@ORM\JoinColumn(name="RoleId", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="ResourceId", referencedColumnName="id")})
+     */
+    protected $resources;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="\Application\Model\Role", cascade="all", mappedBy="children") <span class="comment">&lt;- ManyToMany-Beziehung zu sich selber. $children ist Gegenstück</span>
+     */
+    protected $parents;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="\Application\Model\Role", cascade="all", inversedBy="parents", indexBy="id") <span class="comment">&lt;- ManyToMany-Beziehung zu sich selber. $parents ist Gegenstück</span>
+     * @ORM\JoinTable(name="RoleChildren",
+     *      joinColumns={@ORM\JoinColumn(name="ParentId", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="ChildId", referencedColumnName="id")})
+     */
+    protected $children;
+		</code>
+	</pre>
+
+	Ich habe bereits ein Template geschrieben, welches ein Model inklusive ID erstellt. Alle anderen Variablen müssen je nachdem angepasst werden.<br/>
+	Die Models werden in den Ordner src/&lt;ModulName&gt;/Model abgelegt. In die Unterordner Manager bzw Repository kommen dabei der Manager oder Repository. <br/>
+	Die Repository sieht wie folgt aus:
+	<pre>
+		<code>
+namespace Application\Model\Repository;
+
+use Application\Model\Repository\StandardRepository;
+
+class RoleRepository extends StandardRepository
+{
+
+}
+		</code>
+	</pre>
+	In einzelnen Fällen macht es Sinn, dass noch zusätzliche Funktionen in die Repository übernommen werden. Wenn z.B. etwas speziell in der Datenbank gesucht werden muss, wird
+	diese Klasse angepasst. Auch für diese Klasse gibt es eine Vorlage.
+
+	<br/><br/>
+	Der Manager sieht wie folgt aus:
+	<pre>
+		<code>
+class RoleManager extends StandardManager
+{
+    public function __construct(RoleRepository $repository, Role $entity = null)
+    {
+        parent::__construct($repository, $entity);
+    }
+
+    public function getByName($name) <span class="comment">&lt;- Keine defaultmäßige Funktion</span>
+    {
+        $this->entity = $this->repository->findOneBy(array( <span class="comment">&lt;- Datenbankzugriff an Repository weitergeleitet</span>
+            'name' => $name
+        ));
+        return $this->entity;
+    }
+    public function addUser(User $user, Role $role = null) <span class="comment">&lt;- Da das Model keine Logik beinhalten darf, muss das in den Manager (Ich halte mich auch nicht immer dran)</span>
+    {
+        $role = $this->selectCorrectEntity($role);
+        $role->getUsers()->add($user);
+    }
+    public function hasResource(Resource $resource, Role $role = NULL) <span class="comment">&lt;- überprüft, ob die Rolle eine Resource zugeordnet hat. 1 für hat es direkt, 2 für Parent hat es und 0 für hat es nicht</span>
+    {
+        /** @var Role $role */
+        $role = $this->selectCorrectEntity($role);
+        if ($role->getResources()->contains($resource))
+        {
+            return 1;
+        }
+
+        $parents = $role->getParents();
+        /** @var Role $parent */
+        foreach ($parents as $parent)
+        {
+            if ($this->hasResource($resource, $parent) == true)
+            {
+                return 2;
+            }
+        }
+        return 0;
+    }
+    public function getChildResourceAllowed(Resource $resource, Role $role = NULL)
+    {
+        /** @var Role $role */
+        $role = $this->selectCorrectEntity($role);
+
+        $roleArray = array($role->getId() => $this->hasResource($resource, $role));
+
+        $children = $role->getChildren();
+        /** @var Role $child */
+        foreach ($children as $child)
+        {
+            $roleArray = $roleArray + $this->getChildResourceAllowed($resource, $child);
+        }
+         return $roleArray;
+    }
+}
+		</code>
+	</pre>
+	Zusätlich zu den Funktionen, die das FileTemplate erstellt, ist der Manager in der Lage einen Dump im Form eines SQL-Scriptes als String zu erstellen (was vllt
+	für Datenausfall sinnvoll wäre), ein Model (Entity) per ID zu laden, alle Models zu laden, Models nach bestimmten Kriterien zu laden und ein Model nach bestimmten Kriterien zu laden. <br/>
+	Wenn die Möglichkeit besteht, dass mehr als ein Model gefunden wird, also wenn alle oder nach bestimmten Kriterien geladen wird, wird eine ArrayCollection zurückgegeben.
+	Außerdem ist der Manager dafür verantwortlich die Models zu speichern. <br/><br/>
+
+	Da wir die Manager als Service nutzen wollen, brauchen wir eine Factory. Diese wird unter src/&lt;ModulName&gt;/Factory/Model/Manager angelegt. Auch hierfür existiert bereits ein
+	FileTemplate. <br/>
+	Danach muss noch die Factory in der factory-Config eingetragen werden. (Bitte an Schreibweise denken: "&lt;ModulName&gt;.&lt;ModelName&gt;Manager" => "&lt;ModulName&gt;/Factory/Model/Manager/&lt;ModelName&gt;ManagerFactory")
+	<br/><br/>
+
+	Nun können wir den Manager in dem Controller nutzen:
+	<pre><code>
+/** @var UserManager $userManager */
+$userManager = $this->getServiceLocator()->get('userManager'); <span class="comment">&lt;- Holt sich den UserManager durch die Factory</span>
+$user = $userManager->findOneBy(array('username' => 'silas')); <span class="comment">&lt;- sucht einen user mit username == silas und gibt den ersten gefundenen zurück</span>
+
+/** @var RoleManager $roleManager */
+$roleManager = $this->getServiceLocator()->get('roleManager'); <span class="comment">&lt;- Holt sich den RoleManager durch die Factory</span>
+$role = $roleManager->getByName("admin");
+
+$roleManager->addUser($user, $role);
+$userManager->addRole($role, $user);
+
+$roleManager->save($role); <span class="comment">&lt;- Speichert role. Egal, ob es ein Update oder ein Insert  ist.</span>
+$userManager->save($user);
+	</code></pre>
+
+
+	<h2>FlashMessenger</h2>
+	Der FlashMessenger kann verschiedene Meldungen an den User senden. Diese Meldungen werden dabei solange gespeichert, bis sie im Layout angezeigt werden. Sprich beim
+	weiterleiten der Seite werden diese Nachrichten gespeichert, was es besonders sinnvoll für Fehlermeldungen/Erfolgsmeldungen bei Formularen macht.
+
+
+    <h2>Formulare</h2>
+	Für Formulare gibt es in der Regel drei Klassen. Das Formular, den InputFilter und den Hydrator. Dabei ist das Formular das HTMl-Formular. Der InputFilter überprüft die Eingaben und der Hydrator
+	wandelt die Eingaben in ein Objekt um oder wandelt ein Objekt in vorgefertigte Eingaben um
+	<h3>Form-Klasse</h3>
+	Die Formulare sollten von der Klasse MyForm ableiten
+
+	<pre>
+		<code>
+nnamespace Application\Form;
+
+use Application\Form\Hydrator\AccountSettingsHydrator;
+use Application\Form\InputFilter\AccountSettingsInputFilter;
+use Application\Model\Manager\UserManager;
+use Zend\Form\Element\Email;
+use Zend\Form\Element\Text;
+use Zend\Mvc\Controller\Plugin\FlashMessenger;
+
+class AccountSettingsForm extends MyForm
+{
+    /** @var  UserManager */ <span class="comment">&lt;- Klassenvariable einem Typ zuweisen</span>
+    private $userManager;
+
+    public function __construct(UserManager $userManager, FlashMessenger $flashMessenger = null, $name = null, $options = array())
+    {
+        $this->userManager = $userManager;
+        parent::__construct($flashMessenger, $name, $options); <span class="comment">&lt;- FlashMessenger sollte immer angegeben werden. Hilft bei der Fehlermeldung</span>
+    }
+			
+    public function addElements() <span class="comment">&lt;- Abstrakte Funktion, muss definiert werden</span>
+    {
+        $firstName = new Text("firstName"); <span class="comment">&lt;- Erstellen eines Text-Inputs, mit Name "firstName". Wenn keine id angegeben wird, so ist die id ebenfalls "firstName"</span>
+        $firstName->setLabel("Vorname"); <span class="comment">&lt;- Anzeigelabel zum Attribut hinzugefügt</span>
+        $this->add($firstName); <span class="comment">&lt;- Hizufügen des Elements zum Formular</span>
+
+        $actualEmailAddress = new Email("actualEmailAddress");
+        $actualEmailAddress->setLabel("Aktuelle Emailadresse");
+        $actualEmailAddress->setAttribute("readonly", "true"); <span class="comment">&lt;- Hinzufügen von Attributen fürs HTML-Tag</span>
+        $this->add($actualEmailAddress);
+
+        $lastName = new Text("lastName");
+        $lastName->setLabel("Nachname");
+        $this->add($lastName);
+
+        $newEmailAddress = new Email("newEmailAddress"); <span class="comment">&lt;- Beinhaltet auch (viele) neue HTML5-InputTypes</span>
+        $newEmailAddress->setLabel("Neue Emailadresse");
+        $newEmailAddress->setAttribute("required", false);
+        $this->add($newEmailAddress);
+
+        $username = new Text("username");
+        $username->setLabel("Username");
+        $this->add($username);
+
+        $this->addSubmitButton("Speichern"); <span class="comment">&lt;- Einfaches Hinzufügen des Submit-Button</span>
+    }
+
+    public function addEssentials() <span class="comment">&lt;- in parent-Klasse eine leere Funktion. Hier sollten Hydrator und InputFilter gesetzt werden</span>
+    {
+        $this->setHydrator(new AccountSettingsHydrator());
+        $this->setInputFilter(new AccountSettingsInputFilter($this->userManager)); <span class="comment">&lt;- InputFilter braucht in dem Fall den UserManager. UserManager wurde an Konstruktor der Form-Klasse übergeben, um ihn hier weiterzureichen</span>
+    }
+} 
+		</code>
+	</pre>
+	Erstellt werden sollte das Formular in den ordner src/&lt;ModulName&gt;/Form. Dieser Ordner sollte ebenfalls zwei unterordner haben, Hydrator und InputFilter. Logischer weise werden in diesen Ordnern die anderen
+	Klassen erstellt.
+
+	<h3>Hydrator</h3>
+	Der Hydrator besitzt zwei Funktionen. Einen, um ein Objekt in ein Array umzuwandeln und eine, die genau das Gegenteil macht.
+	<pre>
+		<code>
+			namespace Application\Form\Hydrator;
+
+use Application\Model\Code;
+use Application\Model\Manager\CodeManager;
+use Application\Model\Manager\UserManager;
+use Application\Model\User;
+use Zend\Stdlib\Hydrator\HydratorInterface;
+
+class AccountSettingsHydrator implements HydratorInterface <span class="comment">&lt;- Auf das richtige Interface achten. Gibt sehr ähnliche</span>
+{
+    /**
+     * Extract values from an object
+     *
+     * @param  User $user <span
+				class="comment">&lt;- Object muss zum User geändert werden (hier schon passiert), damit PHPStorm es versteht</span>
+     * @return array
+     */
+    public function extract($user) <span class="comment">&lt;- Wandelt Objekt in Array um</span>
+    {
+        $newEmailAddress = "";
+        $codes = $user->getCodes();
+        /** @var Code $code */
+        foreach ($codes as $code)
+        {
+            if ($code->getAction() == CodeManager::ACTION_VERIFY_NEW_EMAIL)
+            {
+                $newEmailAddress = $code->getWert();
+                break;
+            }
+        }
+        return array(
+            "username" => $user->getUsername(),  <span class="comment">&lt;- Key des Arrays ist der Name des Formularelements</span>
+            'firstName' => $user->getVorname(),
+            'lastName' => $user->getNachname(),
+            'actualEmailAddress' => $user->getEmail(),
+            'newEmailAddress' => $newEmailAddress,
+        );
+    }
+
+    /**
+     * Hydrate $object with the provided $data.
+     *
+     * @param  array $data
+     * @param  User $user
+     * @return User
+     */
+    public function hydrate(array $data, $user) <span class="comment">&lt;- Wandelt Array in Objekt um</span>
+    {
+        $user->setUsername($data["username"]); <span class="comment">&lt;- Key des Arrays ist der Name des Formularelements</span>
+        $user->setVorname($data["firstName"]);
+        $user->setNachname($data["lastName"]);
+
+		return $user;
+    }
+}
+		</code>
+	</pre>
+	<h3>InputFilter</h3>
+	Der InputFilter sollte wegen der Übersichtlichkeit pro Input eine Funktion haben:
+	<pre>
+		<code>
+namespace Application\Form\InputFilter;
+
+use Application\Form\InputFilter\CustomValidator\EmailValidator;
+use Application\Form\InputFilter\CustomValidator\UsernameValidator;
+use Application\Model\Manager\UserManager;
+use Zend\InputFilter\Input;
+use Zend\InputFilter\InputFilter;
+use Zend\Validator\NotEmpty;
+use Zend\Validator\StringLength;
+
+class AccountSettingsInputFilter extends InputFilter <span class="comment">&lt;- Erbt von InputFilter</span>
+{
+    /** @var  UserManager */
+    private $userManager;
+
+    public function __construct($userManager) <span class="comment">&lt;- Constructor ruft die einzelnen Funktionen auf</span>
+    {
+        $this->userManager = $userManager;
+
+        $this->addUsernameInputFilter();
+        $this->addNewEmailInputFilter();
+        $this->addFirstNameInputFilter();
+        $this->addLastNameInputFilter();
+    }
+
+    private function addUsernameInputFilter()
+    {
+        $inputFilter = new Input("username"); <span class="comment">&lt;- Input bekommt den Namen des Formularfeldes übergeben</span>
+        $inputFilter->getValidatorChain() <span class="comment">&lt;- ValidatorChain beinhaltet die Validatoren für den Input</span>
+            ->attach(new NotEmpty()) <span class="comment">&lt;- ZF2-Validator NotEmpty wird an die ValidatorChain angehangen</span>
+            ->attach(new UsernameValidator($this->userManager)); <span class="comment">&lt;- Selbstgeschriebener Validator wird angehangen</span>
+        $this->add($inputFilter); <span class="comment">&lt;- Input wird dem InputFilter zugeordnet</span>
+    }
+
+    private function addNewEmailInputFilter()
+    {
+        $inputFilter = new Input("newEmailAddress");
+        $inputFilter->setRequired(false); <span class="comment">&lt;- Bedeutet, dass es nicht mit dem Formular übergeben werden muss</span>
+        $inputFilter->setAllowEmpty(true); <span class="comment">&lt;- Bedeutet, dass es leer sein darf (Auch wenn es mit dem Formular übergeben wird). Eigentlich veraltet, aber keine Zeit/Lust</span>
+        $inputFilter->getValidatorChain()
+            ->attach(new EmailValidator($this->userManager));
+        $this->add($inputFilter);
+    }
+
+    private function addFirstNameInputFilter()
+    {
+        $inputFilter = new Input("firstName");
+        $inputFilter->getValidatorChain()
+            ->attach(new StringLength( <span class="comment">&lt;- Validator, der ein Options-Array übergeben bekommt</span>
+                array(
+                    'min' => 2, <span class="comment">&lt;- Mindestlänge von 2</span>
+                    'max' => 255, <span class="comment">&lt;- Maximallänge von 255. Ist empfehlenswert, da Doctrine beim Typ String einen Varchar(255) erwartet</span>
+                    'message' => "Der Vorname muss mindestens zwei Zeichen lang und darf maximal 255 Zeichen lang sein.", <span
+				class="comment">&lt;- Fehlermeldung, die ausgegeben wird, wenn Input nicht valide ist</span>
+                )
+            ));
+        $this->add($inputFilter);
+    }
+
+    private function addLastNameInputFilter()
+    {
+        $inputFilter = new Input("lastName");
+        $inputFilter->getValidatorChain()
+            ->attach(new StringLength(
+                array(
+                    'min' => 2,
+                    'max' => 255,
+                    'message' => "Der Nachname muss mindestens zwei Zeichen lang und darf maximal 255 Zeichen lang sein.",
+                )
+            ));
+        $this->add($inputFilter);
+    }
+}
+		</code>
+	</pre>
+
+	<h3>Verwendung des Forms in der View</h3>
+	Zuerst sollte man das Ziel des Formulares definiere. Das passiert mit folgender Zeile: <br/>
+	<code>$this->form->setAttribute('action', $this->url('routeName/childRoute'));</code> <br/>
+	Wenn das Formular an die gleich URL geht, kann das zwar weggelassen werden, sollte es aber nicht. Guter Style und so<br/>
+	In den meisten Fällen ist das überflüssig, aber in ein paar Fällen muss es geschehen, z.B. beim Dateiupload: <br>
+	<code>$this->form->prepare();</code> <br/><br/>
+
+	Ich habe einen einfachen View-Helper geschrieben, der die Formulare ausgeben kann. Dieser ist jedoch sehr allgemein und häufig eher schlecht als recht.
+	Wer ihn nutzen will, kann dies mit <br/>
+	<code>echo $this->myForm($this->form, &lt;Spaltenzahl&gt;, &lt;renderType&gt;);</code> <br/>
+	tun. Spaltenzahl und renderType sind optional. Defaultmäßig sind sie 1 und "table". Ansonsten gibt es als renderType noch "inline", "inlineFullWidth" und "tableTransferClasses".
+	inline und inlineFullWidth sollten selbsterklärend sein. Bei tableTransferClasses werden die Klassen des Elementes ebenfalls in die umschließenden Zellen der Tabelle geschrieben. <br/> <br/>
+
+	Sollte der ViewHelper nicht ausreichen (wovon ich in den meisten Fällen ausgehe), dann muss man auf ZF2-Methoden zurückgreifen.
+	<pre>
+		<code>
+echo $this->form()->openTag($form);
+echo $this->formHidden($form->get('id')); <span class="comment">&lt;- Hidden-Element</span>
+echo $this->formRow($form->get('title')); <span
+				class="comment">&lt;- $form->get() liefert das Formelement zurück</span>
+echo $this->formRow($form->get('artist'));
+echo $this->formSubmit($form->get('submit')); <span class="comment">&lt;- Eigener Befehl für SubmitButton</span>
+echo $this->form()->closeTag();
+		</code>
+	</pre>
+	oder einfach:
+	<pre>
+		<code>
+echo $this->form($form);
+		</code>
+	</pre>
+	<a href = "http://framework.zend.com/manual/current/en/modules/zend.form.view.helpers.html">weitere Form-ViewHelper</a> <br/>
+
+	<h3>Form in dem Controller</h3>
+	Die Benutzung eines Forms innerhalb einer Action sieht eigentlich immer ziemlich ähnlich aus:
+	<pre>
+		<code>
+
+/** @var UserManager $userManager */
+$userManager = $this->getServiceLocator()->get("userManager");
+$user = $userManager->getUserFromSession(); <span class="comment">&lt;- holt den aktuellen User aus der Session</span>
+
+/** @var \Zend\Http\Request $request */ <span class="comment">&lt;- Nötig, da durch Zugriff über Console ein anderes RequestObject zurückgegeben wird</span>
+$request = $this->getRequest();
+
+$form = new AccountSettingsForm($userManager, $this->flashMessenger()); <span class="comment">&lt;- FlashMessenger wird in Formular übergeben, um die Fehler auszugeben</span>
+$form->bind($user); <span class="comment">&lt;- $user ist vom Typ User, bindet das Objekt an das Formular (Hydrator wandelt Objekt in Array um)</span>
+if ($request->isPost()) <span class="comment">&lt;- Überprüfung des Request auf POST</span>
+{
+	$form->setData($request->getPost()); <span class="comment">&lt;- Setzten der Felder mit den POST-Parametern</span>
+	if ($form->isValid()) <span class="comment">&lt;- Überprüfen der Felder durch den InputFilter. Im Erfolgsfall wandelt der Hydrator die InputFelder in das Objekt um</span>
+	{
+		$userManager->save($user); <span class="comment">&lt;- Da PHP mit Referenzen arbeitet, muss das Objekt nicht noch einmal vom Formular geholt werden</span>
+		$this->flashMessenger()->addSuccessMessage("Die Daten wurden erfolgreich gespeichert."); <span class="comment">&lt;- Success-Message wird an den FlashMessenger gesendet</span>
+		return $this->redirect()->toRoute("settings"); <span class="comment">&lt;- Beenden der Funktion und Weiterleitung zu einer anderen Route. Wichtig, auch wenn es zur selben Route ist</span>
+								<span class="comment"> Verhindert das beim Neuladen der Setie (F5) die Daten erneut gesendet werden</span>
+	} <span class="comment">&lt;- Im Fehlerfall (nicht Valide) wird das Formular erneut an die View übergeben. Dieses mal aber mit den vorher eingegeben Parametern</span>
+}
+ return new ViewModel(array("form" => $form)); <span class="comment">&lt;- Übergibt das Formular an die View</span>
+		</code>
+	</pre>
+
+	<h2>Aufsetzten</h2>
+	Die Webseite sollte soweit funktionieren. Es muss lediglich die Datenbank aufgesetzt werden. Dafür gibt es im Ordner /puzzles/config/autoload/ eine Datei namens default.local.php. Kopiere
+	diese in den gleichen Ordner unter den Namen dev.local.php und achte darauf, dass du die Kopie <b>nicht</b> dem Git-Repository hinzufügst. Dann passe die Config darin an, besonders die dbDefault. Die
+	Maileinstellungen würde ich nicht ändern und die systemvariablen erst einmal auch nicht (Außer du weißt, wofür diese gut sind). Danach erstelle die Datenbank, wie du sie in der Config angegeben hast.
+	Jetzt hast du zwei Möglichkeiten: Entweder du kopierst die SQL-Befehle aus der Datei datenbank.sql oder du benutzt Doctrine (was wahrscheinlich besser ist). <br/>
+	Drücke strg+shift+x und die Konsole öffnet sich innerhalb von PHPStorm. Du musst hierfür PHP in deiner PATH-Variablen haben (<a href="http://www.gidf.de/PHP in PATH aufnehmen">PHP in Path aufnehmen</a>).
+	Folgende Befehle gibt es: <br/>
+	<pre>
+		<code>
+php doctrine.php orm:validate-schema
+php doctrine.php orm:schema-tool:create
+php doctrine.php orm:schema-tool:update --dump-sql
+php doctrine.php orm:schema-tool:update --force
+		</code>
+	</pre>
+	validate-schema überprüft dabei, ob die Models korrekt sind und ob diese mit der Datenbank übereinstimmen. <br/>
+	create erstellt die Tabellen. <br/>
+	update --dump-sql zeigt die Update-sql-Befehel an. Dieser Befehl sollte immer ausgeführt werden, bevor ein Update gemacht wird. Der Befehl dient lediglich zur Kontrolle.<br/>
+	update --force updatetet letztenendes die Datenbank. <br/><br/>
+
+	Nachdem die Datenbank erstellt ist, fehlen noch die Default-Rollen und Resourcen. Dafür kopiert man aus der <a href="../database.sql">database.sql</a> alle Insert-Befehle und führt
+	diese für die Datenbank aus. Jetzt sollte die Webseite laufen
+</body>
+</html>

@@ -1,0 +1,213 @@
+body {
+    padding-top: 60px;
+    padding-bottom: 40px;
+}
+
+.zf-green {
+    color: #68b604;
+}
+
+.btn-success {
+    background-color: #57a900;
+    background-image: -moz-linear-gradient(top, #70d900, #57a900);
+    background-image: -ms-linear-gradient(top, #70d900, #57a900);
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#70d900), to(#57a900));
+    background-image: -webkit-linear-gradient(top, #70d900, #57a900);
+    background-image: -o-linear-gradient(top, #70d900, #57a900);
+    background-image: linear-gradient(top, #70d900, #57a900);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#70d900', endColorstr='#57a900', GradientType=0);
+}
+
+.btn-success:hover,
+.btn-success:active,
+.btn-success.active,
+.btn-success.disabled,
+.btn-success[disabled] {
+    background-color: #57a900;
+}
+
+.btn-success:active, .btn-success.active {
+    background-color: #57a900;
+}
+
+div.container a.brand {
+    background: url("../img/zf2-logo.png") no-repeat scroll 0 10px transparent;
+    margin-left: 0;
+    padding: 8px 20px 12px 40px;
+}
+
+table.kalender {
+    border-collapse: separate;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+}
+
+table.kalender tr td {
+    width: 200px;
+    height: 100px;
+    padding: 0px;
+
+    background-color: #F8F8F8;
+}
+
+table.kalender tr td a {
+    color: black;
+}
+
+table.kalender tr td.nichtMonatstag {
+    background-color: #BBBBBB;
+}
+
+table.kalender tr td.monatstag:hover {
+    background-color: #FFFFFF;
+}
+
+div.termin {
+    max-height: 20px;
+    padding: 0px 10px;
+    margin-top: 3px;
+    text-align: center;
+    overflow: hidden;
+}
+
+.gruen {
+    background-color: lightgreen;
+}
+
+.blau {
+    background-color: lightblue;
+}
+
+img.button_quadratisch {
+    width: 60px;
+}
+
+.abstand {
+    padding: 9px;
+}
+
+input.small {
+    min-width: 70px;
+    width: 30%;
+}
+
+div.verticalLine {
+    width: 1px;
+    height: 100%;
+    background-color: #000000;
+
+}
+
+table.nolines {
+    border: 0px;
+}
+
+table.nolines tr {
+    border: 0px;
+}
+
+table.nolines tr td {
+    border: 0px;
+}
+
+table.nospace {
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+
+table.nospace tr {
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+
+table.nospace tr td {
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.nopadding {
+    padding: 0;
+}
+.nomargin {
+    margin: 0;
+}
+
+td.ckeditor
+{
+    padding-left: 2px !important;
+    padding-right: 2px !important;
+}
+table.normal
+{
+    border: solid 1px #000000;
+}
+table.normal tr
+{
+    vert-align: top;
+}
+table.normal tr td
+{
+    margin: 0;
+    border: solid 1px #000000;
+    text-align: left;
+}
+table.nowrap tr td
+{
+    white-space: nowrap;
+}
+
+.ui-datepicker-calendar
+{
+    /*background-color: #e4e4ee;*/
+}
+.ui-datepicker
+{
+    border: solid 1px #636363;
+}
+
+.scrollWidget
+{
+    border-bottom: solid 1px #919191;
+    max-height: 60%;
+    overflow: auto;
+}
+
+.wrapper
+{
+    display: flex;
+    min-height: 100%;
+    min-width: 100%;
+    flex-direction: column;
+}
+.wrapperRow
+{
+    display: flex;
+    min-width: 100%;
+    min-height: 100%;
+    flex-direction: row;
+}
+.wrapper .wrapperHeader, .wrapperRow .wrapperHeader
+{
+    height: 100%;
+    flex: 0;
+    /*width: 100%;*/
+}
+
+.wrapper .wrapperContent, .wrapperRow .wrapperContent
+{
+    flex: 1;
+}
+
+.horizontalSeparator
+{
+    width: 1px;
+    background-color: #959595;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+.center
+{
+    text-align: center;
+    vertical-align: middle;
+
+}

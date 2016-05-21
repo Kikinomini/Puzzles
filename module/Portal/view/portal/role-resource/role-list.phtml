@@ -1,0 +1,23 @@
+<?php
+
+$title = 'Rechteverwaltung';
+$this->headTitle($title);
+
+$changeRoleResourceUrl = $this->url("userList/roleList/changeRoleResource");
+$newRoleUrl = $this->url("userList/roleList/modifyRole");
+$this->inlineScript()->captureStart();
+echo <<<JS
+    $(document).ready(function(){
+        userManager.init("$changeRoleResourceUrl");
+        $("#btnNewRole").click(function(){
+            myDialog.ajaxDialog("Neue Rolle", "$newRoleUrl", "Schließen", {});
+        });
+    });
+JS;
+$this->inlineScript()->captureEnd();
+
+echo "<h1>".$title."</h1>";
+
+echo "<br\><br\>";
+echo "<a id = 'btnNewRole' class = 'btn btn-default'>Neue Rolle</a><br/>";
+echo $this->datatable($this->roleResourceList);

@@ -1,0 +1,21 @@
+<?php
+$title = 'Userverwaltung - '.$this->escapeHtml($this->user->getUsername());
+$this->headTitle($title);
+
+$changeUserRoleUrl = $this->url("userList/userOverview/changeUserRole", array("userId" => $this->escapeHtml($this->user->getId())));
+$this->inlineScript()->captureStart();
+echo <<<JS
+    $(document).ready(function(){
+        userManager.init("", "$changeUserRoleUrl");
+    });
+JS;
+$this->inlineScript()->captureEnd();
+
+echo "<h1>".$title."</h1>";
+echo "<br/><br/>";
+echo "<b>Rollen von ".$this->escapeHtml($this->user->getUsername())."</b>";
+echo $this->datatable($this->userRoleList);
+echo "<br/><br/>";
+echo "<br/><br/>";
+echo "<b>Verfügbare Rollen:</b>";
+echo $this->datatable($this->roleList);

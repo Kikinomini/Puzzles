@@ -1,0 +1,23 @@
+<?php
+echo $this->doctype(); ?>
+
+<html lang="de">
+<head>
+    <meta charset="utf-8">
+    <?php echo $this->headTitle("Silas.link")->setSeparator(' - ')->setAutoEscape(false);
+
+    echo $this->headMeta()
+        ->appendName('viewport', 'width=device-width, initial-scale=1.0')
+        ->appendHttpEquiv('X-UA-Compatible', 'IE=edge')."\n";
+    echo $this->headLink();
+    ?>
+
+    <?php echo $this->inlineScript() ?>
+
+</head>
+<body>
+<?php
+echo $this->content;
+?>
+</body>
+</html>

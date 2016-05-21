@@ -1,0 +1,10 @@
+<?php
+
+$title = 'Userverwaltung';
+$this->headTitle($title);
+
+echo "<h1>".$title."</h1>";
+echo "<a class = 'btn btn-default' href = '".$this->url("userList/roleList")."'>Rollenübersicht</a>";
+echo "<br/><br/>";
+echo $this->datatable($this->userResourceList);
+

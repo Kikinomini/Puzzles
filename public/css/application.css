@@ -1,0 +1,93 @@
+body
+{
+    height: 100vh;
+    background-color: #f4f4f4;
+}
+
+div.mainContent
+{
+    height: 100%;
+}
+
+iframe.application
+{
+    width: 100%;
+    height: 100%;
+    border: 1px solid #ddd;
+    border-radius: 15px;
+    background-color: #fff;
+}
+a.hiddenLink
+{ 
+    color: inherit;
+}
+a.totallyHidden:hover
+{
+    text-decoration: none;
+}
+.maxHeight
+{
+    height: 100%;
+}
+.maxWidth
+{
+    width: 100%;
+}
+.minWidth
+{
+    width: 1px;
+}
+.minHeight
+{
+    height: 1px;
+}
+
+.myModalDialog
+{
+    text-align: center;
+}
+
+.imageButton
+{
+    height: 40px;
+    width: 35px;
+    border: 1px solid #000000;
+    padding: 3px;
+}
+
+div.table
+{
+    display:table;
+}
+
+div.row
+{
+    display: table-row;
+}
+div.cell
+{
+    display: table-cell;
+}
+
+img.button
+{
+    cursor: pointer;
+}
+
+.link:hover
+{
+    cursor: pointer;
+    cursor: hand;
+}
+
+div#settings
+{
+    background-color: #ffffff;
+    border: 2px solid #c6c6c6;
+    border-radius: 30px;
+    padding: 15px;
+}
+div#settings div.wrapperContent
+{
+    margin: 10px;
+}
