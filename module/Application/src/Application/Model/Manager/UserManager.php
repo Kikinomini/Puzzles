@@ -14,9 +14,15 @@ use Application\Model\Repository\UserRepository;
 use Application\Model\Resource;
 use Application\Model\Role;
 use Application\Model\User;
+use Zend\Http\Header\Cookie;
+use Zend\Http\Header\SetCookie;
+use Zend\Http\Request;
+use Zend\Http\Response;
+use Zend\Session\Container;
 
 class UserManager extends StandardManager
 {
+	/** @var string  */
 	private $passwordHash;
 
 	/** @var CodeManager */
@@ -27,13 +33,25 @@ class UserManager extends StandardManager
 
     private $basePath;
 
-	public function __construct($passwordHash, $basePath, CodeManager $codeManager, RoleManager $roleManager, UserRepository $repository, User $userEntity = null)
+	/** @var  Container */
+	private $sessionContainer;
+
+	/** @var Response Response */
+	private $response;
+
+	/** @var  Request */
+	private $request;
+
+	public function __construct($passwordHash, $basePath, Request $request, Response $response, CodeManager $codeManager, RoleManager $roleManager, UserRepository $repository, User $userEntity = null)
 	{
+		parent::__construct($repository, $userEntity);
 		$this->roleManager = $roleManager;
 		$this->codeManager = $codeManager;
 		$this->passwordHash = $passwordHash;
 		$this->basePath = $basePath;
-		parent::__construct($repository, $userEntity);
+		$this->response = $response;
+		$this->request = $request;
+		$this->sessionContainer = new Container("userManager");
 	}
 
     public function updatePassword($password, User $user = NULL)
@@ -138,15 +156,16 @@ class UserManager extends StandardManager
 	{
 		$this->entity = null;
 
-		if (isset($_SESSION) && isset($_SESSION["user"]) && isset($_SESSION["user"]["online"]) && $_SESSION["user"]["online"] == true)
+		if ($this->sessionContainer->offsetExists("online") && $this->sessionContainer->offsetGet("online") == true && $this->sessionContainer->offsetExists("id"))
 		{
 			/** @var User entity */
-			$this->entity = $this->repository->findOneBy(array('id' => $_SESSION["user"]["id"], 'aktiviert' => true, 'blockiert' => false));
+			$this->entity = $this->repository->findOneBy(array('id' => $this->sessionContainer->offsetGet("id"), 'aktiviert' => true, 'blockiert' => false));
 		}
 
-		if ( !($this->entity instanceof User) && isset($_COOKIE) && isset($_COOKIE["email"]) && isset($_COOKIE["passwort"]))
+		$cookie = $this->request->getCookie();
+		if ( !($this->entity instanceof User) && $cookie && $cookie->offsetExists("email") && $cookie->offsetExists("password"))
 		{
-			$this->entity = $this->repository->findOneBy(array('email' => $_COOKIE["email"], 'password' => $_COOKIE["passwort"], 'aktiviert' => true, 'blockiert' => false));
+			$this->entity = $this->repository->findOneBy(array('email' => $cookie->offsetGet("email"), 'password' => $cookie->offsetGet("password"), 'aktiviert' => true, 'blockiert' => false));
 		}
 
 		if ($this->entity instanceof User)
@@ -164,27 +183,62 @@ class UserManager extends StandardManager
         return  ($user->getPassword() == $this->__codePassword($password));
     }
 
-	public function login($passwort, $autologin, User $user = null)
+	public function login($passwort, $autoLogin, User $user = null)
 	{
 		/** @var User $user */
 		$user = $this->selectCorrectEntity($user);
 		if ($user->getAktiviert() && !$user->getBlockiert() && $user->getPassword() == $this->__codePassword($passwort))
 		{
 			$user->setOnline(true);
-			$_SESSION["user"]["id"] = $user->getId();
-			$_SESSION["user"]["online"] = true;
+			$this->sessionContainer->offsetSet("id", $user->getId());
+			$this->sessionContainer->offsetSet("online", true);
 
-			if ($autologin)
+			if ($autoLogin)
 			{
-				setcookie("email", $user->getEmail(), time() + 60 * 60 * 24 * 30, $this->basePath, null, null, true);
-				setcookie("passwort", $user->getPassword(), time() + 60 * 60 * 24 * 30, $this->basePath, null, null, true);
+				$emailCookie = new SetCookie(
+					"email",
+					$user->getEmail(),
+					time() + 60 * 60 * 24 * 30,
+					null,
+					null,
+					false,
+					true
+				);
+				$passwordCookie = new SetCookie(
+					"password",
+					$user->getPassword(),
+					time() + 60 * 60 * 24 * 30,
+					null,
+					null,
+					false,
+					true
+				);
+				$this->response->getHeaders()->addHeader($emailCookie);
+				$this->response->getHeaders()->addHeader($passwordCookie);
 			}
 			else
 			{
-				setcookie("email", "",0 ,  $this->basePath, null, null, true);
-				setcookie("passwort", "", 0, $this->basePath, null, null, true);
+				$emailCookie = new SetCookie(
+					"email",
+					"",
+					0,
+					null,
+					null,
+					false,
+					true
+				);
+				$passwordCookie = new SetCookie(
+					"password",
+					"",
+					0,
+					null,
+					null,
+					false,
+					true
+				);
+				$this->response->getHeaders()->addHeader($emailCookie);
+				$this->response->getHeaders()->addHeader($passwordCookie);
 			}
-
 			return true;
 		}
 
@@ -198,11 +252,29 @@ class UserManager extends StandardManager
         if ($user instanceof User) {
             $user->setOnline(false);
         }
-		unset($_SESSION["user"]["id"]);
-		$_SESSION["user"]["online"] = false;
+		$this->sessionContainer->offsetUnset("id");
+		$this->sessionContainer->offsetSet("online", false);
 
-		setcookie("email", "", 0, $this->basePath, null, null, true);
-		setcookie("passwort", "", 0, $this->basePath, null, null, true);
+		$emailCookie = new SetCookie(
+			"email",
+			"",
+			0,
+			null,
+			null,
+			false,
+			true
+		);
+		$passwordCookie = new SetCookie(
+			"password",
+			"",
+			0,
+			null,
+			null,
+			false,
+			true
+		);
+		$this->response->getHeaders()->addHeader($emailCookie);
+		$this->response->getHeaders()->addHeader($passwordCookie);
 		return true;
 	}
 	public function getUserByEmail($email)

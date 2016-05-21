@@ -29,7 +29,7 @@ $returnValue = array(
 //        'FormelEditor',
 //        'TelegramBot',
 //        'VocCollector',
-//        'DataBuilder',
+//        'BikeStore',
 	),
 
 	// These are various options for the listeners attached to the ModuleManager

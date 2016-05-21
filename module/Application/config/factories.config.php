@@ -17,6 +17,8 @@ return array(
             'doctrine.entitymanager.custom' => new \DoctrineORMModule\Service\EntityManagerFactory('custom'),
             'doctrine.connection.custom' => new \DoctrineORMModule\Service\DBALConnectionFactory('custom'),
 //			'doctrine.configuration.custom' => new \DoctrineORMModule\Service\ConfigurationFactory('custom'),
+
+			'Zend\Session\SessionManager' => 'Application\Factory\SessionManagerFactory',
         ),
     ),
 );

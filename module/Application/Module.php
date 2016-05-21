@@ -25,13 +25,14 @@ use Zend\Log\Logger;
 use Zend\Log\Writer\Stream;
 use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\MvcEvent;
+use Zend\Session\Container;
 use Zend\View\Model\ViewModel;
 
 class Module implements CronjobModelInterface, MySettingsInterface
 {
     public function onBootstrap(MvcEvent $e)
     {
-        session_start();
+//        session_start();
 
         $serviceLocator = $e->getApplication()->getServiceManager();
         $serviceLocator->myVar = 5;
@@ -88,10 +89,9 @@ class Module implements CronjobModelInterface, MySettingsInterface
             }
         }, -95);
 
-
         $eventManager->attach(MvcEvent::EVENT_DISPATCH_ERROR, array($this, 'dispatchError'), -100);
         $eventManager->getSharedManager()->attach('Zend\Mvc\Controller\AbstractActionController', 'dispatchError', array($this, 'dispatchError'));
-
+        $this->bootstrapSession($e);
     }
 
     public function dispatchError(MvcEvent $e)
@@ -201,6 +201,50 @@ class Module implements CronjobModelInterface, MySettingsInterface
         return array(
             '\Application\Model\DeleteCodeCronjob'
         );
+    }
+
+    public function bootstrapSession(MvcEvent $e)
+    {
+        $session = $e->getApplication()
+            ->getServiceManager()
+            ->get('Zend\Session\SessionManager');
+        $session->start();
+
+        $container = new Container('initialized');
+        if (!isset($container->init)) {
+            $serviceManager = $e->getApplication()->getServiceManager();
+            $request        = $serviceManager->get('Request');
+
+            $session->regenerateId(true);
+            $container->init          = 1;
+            $container->remoteAddr    = $request->getServer()->get('REMOTE_ADDR');
+            $container->httpUserAgent = $request->getServer()->get('HTTP_USER_AGENT');
+
+            $config = $serviceManager->get('Config');
+            if (!isset($config['session'])) {
+                return;
+            }
+
+            $sessionConfig = $config['session'];
+            if (isset($sessionConfig['validators'])) {
+                $chain   = $session->getValidatorChain();
+
+                foreach ($sessionConfig['validators'] as $validator) {
+                    switch ($validator) {
+                        case 'Zend\Session\Validator\HttpUserAgent':
+                            $validator = new $validator($container->httpUserAgent);
+                            break;
+                        case 'Zend\Session\Validator\RemoteAddr':
+                            $validator  = new $validator($container->remoteAddr);
+                            break;
+                        default:
+                            $validator = new $validator();
+                    }
+
+                    $chain->attach('session.validate', array($validator, 'isValid'));
+                }
+            }
+        }
     }
 
     public function getSettings()
