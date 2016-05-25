@@ -91,7 +91,7 @@ class Module implements CronjobModelInterface, MySettingsInterface
 
         $eventManager->attach(MvcEvent::EVENT_DISPATCH_ERROR, array($this, 'dispatchError'), -100);
         $eventManager->getSharedManager()->attach('Zend\Mvc\Controller\AbstractActionController', 'dispatchError', array($this, 'dispatchError'));
-        $this->bootstrapSession($e);
+//        $this->bootstrapSession($e);
     }
 
     public function dispatchError(MvcEvent $e)
