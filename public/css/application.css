@@ -7,10 +7,11 @@ body
 {
 	min-height: 100vh !important;
     height: 100vh;
-    background-color: #f4f4f4;
+    background-color:transparent;
+	font-family: "Tahoma" !important;
 }
 
-div.myMainContainerWrapper
+.myMainContainerWrapper
 {
 	height: 100%;
     max-height: 100%;
@@ -87,14 +88,142 @@ div#settings
     border-radius: 30px;
     padding: 15px;
 }
+
 div#settings div.wrapperContent
 {
     margin: 10px;
 }
+
 footer
 {
     text-align: center;
 	display: block;
-	border-top: 1px solid #c6c6c6;
-	margin-top: 3px;
+	background-color: #8e8e8e ;
+	color: #ffffff;
+	height: 40px;
+	line-height: 25pt;
+}
+
+footer a
+{
+	color: #ffffff;
+}
+
+footer a:hover
+{
+	color: #82d77e;
+	text-decoration: none;
+}
+
+.navbar
+{
+	height: 50px;
+	background-color: #8e8e8e !important;
+	font-size: 12pt;
+}
+
+.navbar div div ul li a
+{
+	color: #ffffff;
+}
+
+.navbar div div ul
+{
+	float: right;
+}
+
+
+.navbar div div ul li a:hover
+{
+	color: #82d77e;
+	background-color: transparent;
+}
+
+.header
+{
+	height: 115px;
+}
+
+.mainnav{
+	height: 50px;
+	background-color: #cfcccc;
+
+}
+
+.mainnav div ul li a
+{
+	font-size: 18pt;
+	color: #ffffff;
+}
+
+.mainnav div ul li a:hover
+{
+	background-color: #82d77e;
+}
+
+div.logo{
+	float: left;
+}
+
+div.warenkorb{
+	float: right;
+	font-size: 14pt;
+	text-align: center;
+	margin: auto;
+}
+
+div.warenkorb a{
+	text-decoration: none;
+	color: #8e8e8e;
+}
+
+div.warenkorb a:hover
+{
+	text-decoration: none;
+	color: #82d77e;
+}
+
+input.suchleiste{
+	width: 100%;
+	display: inline;
+}
+
+.suche{
+	margin: auto;
+}
+
+.sucheButton{
+	display: inline;
+}
+
+.suchePic{
+	height: 18px;
+	margin: auto;
+}
+
+.flexHeader{
+	width: 100%;
+	display: flex;
+	display: -webkit-flex;
+}
+
+.flexFillWidth{
+	-webkit-flex: 1;
+	flex: 1;
+}
+
+h1{
+	font-size: 24pt;
+	color: #000000;
+	margin-left: 5pt;
+}
+
+p{
+	margin-left: 5pt;
+	margin-right: 5pt;
+}
+
+h2{
+	margin-left: 5pt;
+	font-size: 20pt ;
 }

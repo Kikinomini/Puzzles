@@ -15,8 +15,6 @@ echo $this->doctype(); ?>
 	<?php echo $this->headLink(array('rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() .
 																											   '/img/logo.ico'))
 		->prependStylesheet($this->basePath() . '/css/myModalDialog.css')
-//		->prependStylesheet($this->basePath() . '/css/FormelEditor.css')
-//		->prependStylesheet($this->basePath() . '/css/bookbinder.css')
 		->prependStylesheet($this->basePath() . '/css/application.css')
 		->prependStylesheet($this->basePath() . '/css/style.css')
 		->prependStylesheet($this->basePath() . '/css/jquery-ui.theme.css')
@@ -24,8 +22,6 @@ echo $this->doctype(); ?>
 		->prependStylesheet($this->basePath() . '/css/bootstrap-theme.min.css')
 		->prependStylesheet($this->basePath() . '/css/bootstrap.css')
 		->prependStylesheet($this->basePath() . '/css/flashMessenger.css')
-//		->prependStylesheet($this->basePath() . '/css/matrix.css')
-//		->prependStylesheet($this->basePath() . '/css/tasklist.css')
 		->prependStylesheet($this->basePath() . '/css/dropit.css')
 		->prependStylesheet($this->basePath() . '/css/myForm.css'); ?>
 
@@ -58,7 +54,7 @@ echo $this->doctype(); ?>
 
 </head>
 <body>
-	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+	<nav class="navbar  navbar-fixed-top" role="navigation">
 		<div class="container">
 			<div class="navbar-header">
 				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -69,48 +65,58 @@ echo $this->doctype(); ?>
 			</div>
 			<div class="collapse navbar-collapse">
 				<?php
-
 				echo $this->navigation('navigation')->menu()->setUlClass("nav navbar-nav");
-				//				->renderMenu(
-				//					null,
-				//					array(
-				//						'maxDepth' => 1,
-				////					'addClassToListItem' => true
-				//					)
-				//				);
-
 				?>
 			</div>
-
 		</div>
 	</nav>
-	<div class="myMainContainerWrapper">
-	<div class="container mainContent">
+	<div class="container">
+		<div class="header flexHeader">
+			<div class="logo">
+				<p>Hier fehlt ein Logo</p>
+			</div>
+			<div class="suche flexFillWidth">
+				<div class ="flexHeader">
+					 <div class="flexFillWidth">
+						<input class="suchleiste flexFillWidth" type="text" value="Suche..."/>
+					 </div>
+					<div>
+						<button class="sucheButton"><img class="suchePic" src = "image/Lupe_grau.png"/></button>
+					</div>
 
-		<!--	<nav class="navbar navbar-inverse" role="navigation">-->
-		<!--		<div class="collapse navbar-collapse">-->
-		<!--			--><?php
-		//			echo $this->navigation('navigation')->menu()
-		//				->setUlClass("nav navbar-nav")
-		//				->setOnlyActiveBranch(true)
-		//				->setRenderParents(false)
-		//				->setMinDepth(0)->renderSubMenu();
-		//
-		//			?>
-		<!--		</div>-->
-		<!--	</nav>-->
+				</div>
+			</div>
+			<div class="warenkorb">
+				<a href=" ">0 Artikel im Warenkorb</a>
+			</div>
+		</div>
+			<nav class="mainnav">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+						<span class="icon-bar">X</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+				</div>
+				<div class="collapse navbar-collapse">
+					<?php
+					echo $this->navigation('mainNavigation')->menu()->setUlClass("nav navbar-nav");
+					?>
+				</div>
+			</nav>
+		<div class="myMainContainerWrapper">
+			<div class="mainContent">
+				<?php
 
-		<?php
-		//	echo $this->navigation('navigation')->breadcrumbs();
+				include("alerts.phtml");
+				echo $this->content;
 
-		include("alerts.phtml");
-		echo $this->content;
-
-		?>
-		<?php echo $this->inlineScript() ?>
+				?>
+				<?php echo $this->inlineScript() ?>
+			</div>
+		</div>
 	</div>
-	</div>
-	<div class = "container">
+
 	<footer>
 		<small>
 			<a href="<?php echo $this->url("showImprint"); ?>">Impressum</a> -
@@ -118,6 +124,5 @@ echo $this->doctype(); ?>
 			<a href="<?php echo $this->url("showAgb"); ?>">AGB</a>
 		</small>
 	</footer>
-	</div>
 </body>
 </html>
