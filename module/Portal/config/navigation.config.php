@@ -4,12 +4,6 @@ return array(
 	'navigation' => array(
 		'default' => array(
 			array(
-				'label' => 'Startseite',
-				'route' => 'home',
-				'order' => -1000,
-				'resource' => 'default',
-			),
-			array(
 				'label' => 'Login',
 				'route' => 'login',
 				'resource' => 'offline',
@@ -32,5 +26,15 @@ return array(
                 'resource' => 'admin',
             ),
 		),
+	),
+	'mainNavigation' => array(
+		array(
+			array(
+				'label' => 'Startseite',
+				'route' => 'home',
+				'order' => -1000,
+				'resource' => 'default',
+			),
+		)
 	),
 );
