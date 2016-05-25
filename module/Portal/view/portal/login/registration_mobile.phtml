@@ -1,0 +1,19 @@
+<?php
+$title = "Anmelden";
+$this->headTitle($title);
+echo "<h1>".$title."</h1>";
+//echo $this->myForm($this->form, 2);
+
+$this->form->prepare();
+$agb = $this->form->get("agb");
+echo $this->form()->openTag($this->form);
+echo $this->formRow($this->form->get('vorname'));
+echo $this->formRow($this->form->get('nachname'));
+echo $this->formRow($this->form->get('email'));
+echo $this->formRow($this->form->get('geburtsdatum'));
+echo $this->formRow($this->form->get('passwort1'));
+echo $this->formRow($this->form->get('passwort2'));
+echo $this->formRow($agb);
+echo "<br/>";
+echo $this->formSubmit($this->form->get('submitButton'));
+echo $this->form()->closeTag();

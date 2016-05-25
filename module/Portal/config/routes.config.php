@@ -39,6 +39,7 @@ $config = array(
                         'controller' => 'Portal\Controller\Login',
                         'action' => 'registration',
                         'resource' => 'offline',
+                        'mobile' => 'registration_mobile'
                     ),
                 ),
             ),
