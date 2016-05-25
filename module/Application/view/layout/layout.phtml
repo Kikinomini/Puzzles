@@ -70,26 +70,27 @@ echo $this->doctype(); ?>
 			</div>
 		</div>
 	</nav>
-	<div class="container">
-		<div class="header flexHeader">
-			<div class="logo">
-				<p>Hier fehlt ein Logo</p>
-			</div>
-			<div class="suche flexFillWidth">
-				<div class ="flexHeader">
-					 <div class="flexFillWidth">
-						<input class="suchleiste flexFillWidth" type="text" value="Suche..."/>
-					 </div>
-					<div>
-						<button class="sucheButton"><img class="suchePic" src = "image/Lupe_grau.png"/></button>
-					</div>
+	<div class="myMainContainerWrapper">
+		<div class="container">
+			<div class="header flexHeader">
+				<div class="logo">
+					<p>Hier fehlt ein Logo</p>
+				</div>
+				<div class="suche flexFillWidth">
+					<div class="flexHeader">
+						<div class="flexFillWidth">
+							<input class="suchleiste flexFillWidth" type="text" value="Suche..."/>
+						</div>
+						<div>
+							<button class="sucheButton"><img class="suchePic" src="image/Lupe_grau.png"/></button>
+						</div>
 
+					</div>
+				</div>
+				<div class="warenkorb">
+					<a href=" ">0 Artikel im Warenkorb</a>
 				</div>
 			</div>
-			<div class="warenkorb">
-				<a href=" ">0 Artikel im Warenkorb</a>
-			</div>
-		</div>
 			<nav class="mainnav">
 				<div class="navbar-header">
 					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -104,7 +105,6 @@ echo $this->doctype(); ?>
 					?>
 				</div>
 			</nav>
-		<div class="myMainContainerWrapper">
 			<div class="mainContent">
 				<?php
 
@@ -116,7 +116,6 @@ echo $this->doctype(); ?>
 			</div>
 		</div>
 	</div>
-
 	<footer>
 		<small>
 			<a href="<?php echo $this->url("showImprint"); ?>">Impressum</a> -
