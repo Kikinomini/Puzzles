@@ -71,7 +71,10 @@ class LoginController extends AbstractActionController
     {
         /** @var UserManager $userManager */
         $userManager = $this->serviceLocator->get('userManager');
-        $registrationForm = new RegistrationForm($userManager);
+        $registrationForm = new RegistrationForm(
+            $userManager,
+            $this->getServiceLocator()->get('viewHelperManager')->get('url')->__invoke("showAgb")
+        );
         $user = new User();
 
         $registrationForm->bind($user);

@@ -16,10 +16,12 @@ use Zend\Stdlib\Hydrator\Aggregate\AggregateHydrator;
 
 class RegistrationForm extends Form
 {
-	public function __construct(UserManager $userManager, $name = null, $options = array())
+	private $urlAgb;
+	public function __construct(UserManager $userManager, $urlAgb, $name = null, $options = array())
 	{
 		parent::__construct($name, $options);
 
+		$this->urlAgb = $urlAgb;
 		$this->setHydrator(new UserHydrator());
 		$this->setInputFilter(new RegistrationInputFilter($userManager));
 		$this->addElements();
@@ -70,13 +72,14 @@ class RegistrationForm extends Form
 		$password->setAttribute('class', 'form-control');
 		$this->add($password);
 
-//		$agb = new Checkbox('agb');
-//		$agb->setLabel('AGB gelesen und einverstanden');
-//		$agb->setAttribute('id', 'agb');
-//		$agb->setAttribute('required', 'true');
-//		$agb->setAttribute('class', 'form-control');
-//		$agb->setUncheckedValue('no');
-//		$this->add($agb);
+		$agb = new Checkbox('agb');
+		$agb->setLabel('<a href= "'.$this->urlAgb.'">AGB</a> gelesen und einverstanden');
+		$agb->setAttribute('id', 'agb');
+		$agb->setAttribute('required', 'true');
+		$agb->setAttribute('class', 'form-control');
+		$agb->setUncheckedValue('no');
+		$agb->setLabelOption('disable_html_escape', true);
+		$this->add($agb);
 
 		$password = new Password('passwort2');
 		$password->setLabel('Passwort wiederholen');

@@ -29,7 +29,7 @@ class RegistrationInputFilter extends InputFilter
 		$this->addGeburtsdatum();
 		$this->addUsername();
 		$this->addPasswort1();
-//		$this->addAgb();
+		$this->addAgb();
 		$this->addPasswort2();
 	}
 
