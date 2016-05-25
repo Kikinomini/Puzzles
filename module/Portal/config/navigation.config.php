@@ -11,7 +11,7 @@ return array(
 			array(
 				'label' => 'Logout',
 				'route' => 'logout',
-                'order' => 1100,
+				'order' => 1100,
 				'resource' => 'online',
 			),
 			array(
@@ -19,22 +19,20 @@ return array(
 				'route' => 'registration',
 				'resource' => 'offline',
 			),
-            array(
-                'label' => 'Userverwaltung',
-                'route' => 'userList',
-                'order' => -900,
-                'resource' => 'admin',
-            ),
+			array(
+				'label' => 'Userverwaltung',
+				'route' => 'userList',
+				'order' => -900,
+				'resource' => 'admin',
+			),
 		),
-	),
-	'mainNavigation' => array(
-		array(
+		'mainNavigation' => array(
 			array(
 				'label' => 'Startseite',
 				'route' => 'home',
 				'order' => -1000,
 				'resource' => 'default',
 			),
-		)
+		),
 	),
 );
