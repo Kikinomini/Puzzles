@@ -121,7 +121,6 @@ class Datatable
 		$scriptAdditionalFunctions
 	});
 JS;
-
 		return $script;
 	}
 
@@ -190,6 +189,7 @@ JS;
 					sPrevious: "Vorherige Seite"
 				}
 			},
+			responsive: true,
 			 dom: '<"top"lpf<"clear">>rt<"bottom"ip<"clear">>'
 					};
 					dataTableInitObject.pageLength = $pageLength;

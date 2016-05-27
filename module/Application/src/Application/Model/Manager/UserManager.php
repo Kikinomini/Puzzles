@@ -159,13 +159,23 @@ class UserManager extends StandardManager
 		if ($this->sessionContainer->offsetExists("online") && $this->sessionContainer->offsetGet("online") == true && $this->sessionContainer->offsetExists("id"))
 		{
 			/** @var User entity */
-			$this->entity = $this->repository->findOneBy(array('id' => $this->sessionContainer->offsetGet("id"), 'aktiviert' => true, 'blockiert' => false));
+			$this->entity = $this->repository->findOneBy(array(
+				'id' => $this->sessionContainer->offsetGet("id"),
+//				'aktiviert' => true,
+				'blockiert' => false
+			));
 		}
 
 		$cookie = $this->request->getCookie();
 		if ( !($this->entity instanceof User) && $cookie && $cookie->offsetExists("email") && $cookie->offsetExists("password"))
 		{
-			$this->entity = $this->repository->findOneBy(array('email' => $cookie->offsetGet("email"), 'password' => $cookie->offsetGet("password"), 'aktiviert' => true, 'blockiert' => false));
+			$this->entity = $this->repository->findOneBy(array
+			(
+				'email' => $cookie->offsetGet("email"),
+				'password' => $cookie->offsetGet("password"),
+//				'aktiviert' => true,
+				'blockiert' => false
+			));
 		}
 
 		if ($this->entity instanceof User)
@@ -187,7 +197,11 @@ class UserManager extends StandardManager
 	{
 		/** @var User $user */
 		$user = $this->selectCorrectEntity($user);
-		if ($user->getAktiviert() && !$user->getBlockiert() && $user->getPassword() == $this->__codePassword($passwort))
+		if (
+//			$user->getAktiviert() &&
+			!$user->getBlockiert() &&
+			$user->getPassword() == $this->__codePassword($passwort)
+		)
 		{
 			$user->setOnline(true);
 			$this->sessionContainer->offsetSet("id", $user->getId());

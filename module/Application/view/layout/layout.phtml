@@ -29,11 +29,9 @@ echo $this->doctype(); ?>
 	<?php echo $this->headScript()
 		->prependFile($this->basePath() . '/js/MyJsonAjax.js', 'text/javascript')
 		->prependFile($this->basePath() . '/js/userManager.js', 'text/javascript')
-//		->prependFile($this->basePath() . '/js/bookbinderFeedback.js', 'text/javascript')
 		->prependFile($this->basePath() . '/js/dropit.js', 'text/javascript')
 		->prependFile($this->basePath() . '/js/always.js', 'text/javascript')
 		->prependFile($this->basePath() . '/js/myForm.js', 'text/javascript')
-//		->prependFile($this->basePath() . '/js/matrix.js', 'text/javascript')
 		->prependFile($this->basePath() . '/js/settings.js')
 		->prependFile($this->basePath() . '/js/myDialog.js')
 		->prependFile($this->basePath() . '/js/jquery.confirm.min.js')
@@ -42,15 +40,16 @@ echo $this->doctype(); ?>
 		->prependFile($this->basePath() . '/js/jquery.min.js')
 		->prependFile($this->basePath() . '/js/respond.min.js', 'text/javascript', array('conditional' => 'lt IE 9',))
 		->prependFile($this->basePath() . '/js/html5shiv.js', 'text/javascript', array('conditional' => 'lt IE 9',))
-		->prependFile($this->basePath() . '/js/flashMessenger.js', 'text/javascript')
-	//		->prependFile($this->basePath() . '/js/ajax.js', 'text/javascript')
-	//		->prependFile($this->basePath() . '/js/ckeditor4.5.6/ckeditor.js', 'text/javascript')
-	//		->prependFile($this->basePath() . '/js/functions.js', 'text/javascript');
-	?>
-	<script>
-		settings.basePath = '<?php echo $this->basePath(); ?>';
-	</script>
+		->prependFile($this->basePath() . '/js/flashMessenger.js', 'text/javascript');
 
+	$basePath = $this->basePath();
+	$this->inlineScript()->captureStart();
+	echo <<<JS
+		settings.basePath = '$basePath';
+JS;
+
+	$this->inlineScript()->captureEnd();
+	?>
 
 </head>
 <body>

@@ -58,7 +58,6 @@ class DatatablesHelper extends AbstractHelper
 			}
 		}
 		$datatable->setContent($content);
-
 	}
 
 	private function appendScriptFiles()
