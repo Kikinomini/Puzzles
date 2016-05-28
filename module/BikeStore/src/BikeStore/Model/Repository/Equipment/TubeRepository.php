@@ -4,7 +4,7 @@ namespace BikeStore\Model\Repository;
 
 use Application\Model\Repository\StandardRepository;
 
-class DeliveryAddressRepository extends StandardRepository
+class TubeRepository extends StandardRepository
 {
 
 }

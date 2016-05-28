@@ -10,7 +10,9 @@ namespace Portal\Controller;
 
 use BikeStore\Model\Article;
 use BikeStore\Model\Bicycle;
+use BikeStore\Model\Equipment\Saddle;
 use BikeStore\Model\Manager\ArticleManager;
+use BikeStore\Model\Manager\SaddleManager;
 use Zend\Http\Response;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
@@ -20,13 +22,21 @@ class IndexController extends AbstractActionController
 	public function indexAction()
 	{
 		/** @var ArticleManager $articleManager */
-		$articleManager = $this->getServiceLocator()->get("BikeStore.articleManager");
+//		$articleManager = $this->getServiceLocator()->get("BikeStore.articleManager");
 
-		$article = new Article();
-		$articleManager->save($article);
+//		$article = new Article();
+//		$articleManager->save($article);
+//
+//		$articles = $articleManager->getAllEntities();
+//		var_dump($articles);
 
-		$articles = $articleManager->getAllEntities();
-		var_dump($articles);
+		/** @var SaddleManager $saddleManager */
+		$saddleManager = $this->getServiceLocator()->get("BikeStore.equipment.saddleManager");
+		$saddle = new Saddle();
+		
+		$saddleManager->save($saddle);
+		var_dump($saddleManager->getAllEntities());
+
 		return new ViewModel(array());
 	}
 

@@ -40,20 +40,11 @@ class Order
     protected $customer;
 
 	/**
-	 * @OneToOne(targetEntity="\BikeStore\Model\PaymentInfo", inversedBy="order")
-	 * @JoinColumn(name="paymentInfoId", referencedColumnName="id")
+	 * @ORM\OneToOne(targetEntity="\BikeStore\Model\PaymentInfo", inversedBy="order")
+	 * @ORM\JoinColumn(name="paymentInfoId", referencedColumnName="id")
 	 * @var PaymentInfo
 	 */
 	protected $paymentInfo;
-
-	/**
-	 * @OneToOne(targetEntity="\BikeStore\Model\DeliveryAddress", inversedBy="order")
-	 * @JoinColumn(name="deliveryAddressId", referencedColumnName="id")
-	 * @var DeliveryAddress
-	 */
-	protected $deliveryAddress;
-
-
 
     public function __construct()
     {
@@ -75,6 +66,4 @@ class Order
     {
         $this->id = $id;
     }
-
-
 }

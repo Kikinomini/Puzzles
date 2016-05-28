@@ -5,10 +5,10 @@ namespace BikeStore\Model;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="\BikeStore\Model\Repository\DeliveryAddressRepository")
- * @ORM\Table(name="DeliveryAddress")
+ * @ORM\Entity(repositoryClass="\BikeStore\Model\Repository\HandlebarsRepository")
+ * @ORM\Table(name="Handlebars")
  */
-class DeliveryAddress
+class Handlebars
 {
     /**
      * @ORM\Id

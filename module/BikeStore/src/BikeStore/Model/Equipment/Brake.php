@@ -1,14 +1,16 @@
 <?php
 
-namespace BikeStore\Model;
+namespace BikeStore\Model\Equipment;
 
 use Doctrine\ORM\Mapping as ORM;
+use BikeStore\Model\Equipment;
+
 
 /**
- * @ORM\Entity(repositoryClass="\BikeStore\Model\Repository\PaymentInfoRepository")
- * @ORM\Table(name="PaymentInfo")
+ * @ORM\Entity(repositoryClass="\BikeStore\Model\Repository\Equipment\BrakeRepository")
+ * @ORM\Table(name="Brake")
  */
-class PaymentInfo
+class Brake extends Equipment
 {
     /**
      * @ORM\Id
@@ -18,13 +20,9 @@ class PaymentInfo
      */
     protected $id;
 
-    /**
-     * @ORM\OneToOne(targetEntity="\BikeStore\Model\Order", mappedBy="paymentInfo")
-     */
-    protected $order;
-
     public function __construct()
     {
+    	parent::__construct();
         $this->id = null;
     }
 

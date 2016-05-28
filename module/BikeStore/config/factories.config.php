@@ -11,6 +11,7 @@ return array(
 			'BikeStore.eBikeManager' => 'BikeStore\Factory\Model\Manager\EBikeManagerFactory',
 			'BikeStore.equipmentManager' => 'BikeStore\Factory\Model\Manager\EquipmentManagerFactory',
 			'BikeStore.paymentInfoManager' => 'BikeStore\Factory\Model\Manager\PaymentInfoManagerFactory',
+			'BikeStore.equipment.SaddleManager' => 'BikeStore\Factory\Model\Manager\Equipment\SaddleManagerFactory',
 		),
 	)
 );
