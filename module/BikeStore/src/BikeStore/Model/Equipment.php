@@ -5,14 +5,10 @@ namespace BikeStore\Model;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="BikeStore\Model\Repository\ArticleRepository")
- * @ORM\Table(name="Article")
- * @ORM\InheritanceType("JOINED")
- * @ORM\DiscriminatorColumn(name="discr", type="string")
- * @ORM\DiscriminatorMap({})
+ * @ORM\Entity(repositoryClass="\BikeStore\Model\Repository\EquipmentRepository")
+ * @ORM\Table(name="Equipment")
  */
-
-class Article
+class Equipment
 {
     /**
      * @ORM\Id
