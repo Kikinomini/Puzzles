@@ -22,14 +22,8 @@ $returnValue = array(
 		//MyModules
 		'Application',
 		'Portal',
-//		'Matrix',
-//		'Bookbinder',
         'Cronjob',
-//        'Tasklist',
-//        'FormelEditor',
-//        'TelegramBot',
-//        'VocCollector',
-//        'BikeStore',
+		'BikeStore',
 	),
 
 	// These are various options for the listeners attached to the ModuleManager
