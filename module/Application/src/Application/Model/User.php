@@ -10,9 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class User
 {
-
 	const USERNAME_ALLOWED_REGEX = "[a-zA-Z0-9\-_.&;()#!?$^~+]{1,255}$";
-
 
 	/**
 	 * @ORM\Id
@@ -284,6 +282,4 @@ class User
 	{
 		$this->password = $password;
 	}
-
-
 }
