@@ -64,7 +64,7 @@ JS;
 			</div>
 			<div class="collapse navbar-collapse">
 				<?php
-				echo $this->navigation('navigation')->menu()->setUlClass("nav navbar-nav");
+				echo $this->navigation('navigation')->menu()->setUlClass("nav navbar-nav default");
 				?>
 			</div>
 		</div>
@@ -79,16 +79,21 @@ JS;
 				<div class="suche flexFillWidth">
 					<div class="flexHeader">
 						<div class="flexFillWidth">
-							<input class="suchleiste flexFillWidth" type="text" value="Suche..."/>
+							<input class="suchleiste flexFillWidth" type="text" placeholder=" Suche..."/>
 						</div>
 						<div>
-							<button class="sucheButton"><img class="suchePic" src="image/Lupe_grau.png"/></button>
+							<button class="sucheButton"><div class="suchePic"> &nbsp;</div></button>
 						</div>
 
 					</div>
 				</div>
 				<div class="warenkorb">
-					<a href=" ">0 Artikel im Warenkorb</a>
+					<a href=" ">
+						<div class="warenkorbAlgemein">
+							<div class="warenkorbPic">&nbsp;</div>
+							<div class="warenkorbText">0 Artikel <br> im Warenkorb</div>
+						</div>
+					</a>
 				</div>
 			</div>
 			<nav class="mainnav">
@@ -101,7 +106,7 @@ JS;
 				</div>
 				<div class="collapse navbar-collapse">
 					<?php
-					echo $this->navigation('mainNavigation')->menu()->setUlClass("nav navbar-nav");
+					echo $this->navigation('mainNavigation')->menu()->setUlClass("nav navbar-nav mainNavigation");
 					?>
 				</div>
 			</nav>

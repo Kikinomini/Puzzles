@@ -7,6 +7,7 @@ return array(
 				'label' => 'Login',
 				'route' => 'login',
 				'resource' => 'offline',
+				'class' => 'loginLable',
 			),
 			array(
 				'label' => 'Logout',
@@ -18,6 +19,7 @@ return array(
 				'label' => 'Registrieren',
 				'route' => 'registration',
 				'resource' => 'offline',
+				'class' => 'regLable ',
 			),
 			array(
 				'label' => 'Userverwaltung',
@@ -33,6 +35,12 @@ return array(
 				'order' => -1000,
 				'resource' => 'default',
 			),
+			array(
+				'label' => 'Fahrräder',
+				'route' => '',
+				'order' => ,
+				'resource' => 'default'
+			)
 		),
 	),
 );
