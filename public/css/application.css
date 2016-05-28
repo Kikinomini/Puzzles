@@ -176,6 +176,11 @@ footer a:hover
 
 }
 
+.mainnav div{
+	margin-left: 0;
+	padding-left: 0;
+}
+
 .mainnav div ul li a
 {
 	font-size: 18pt;

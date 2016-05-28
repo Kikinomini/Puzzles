@@ -35,12 +35,6 @@ return array(
 				'order' => -1000,
 				'resource' => 'default',
 			),
-			array(
-				'label' => 'Fahrräder',
-				'route' => '',
-				'order' => ,
-				'resource' => 'default'
-			)
 		),
 	),
 );
