@@ -10,7 +10,7 @@ return array(
 			'BikeStore.bicycleManager' => 'BikeStore\Factory\Model\Manager\BicycleManagerFactory',
 			'BikeStore.eBikeManager' => 'BikeStore\Factory\Model\Manager\EBikeManagerFactory',
 			'BikeStore.equipmentManager' => 'BikeStore\Factory\Model\Manager\EquipmentManagerFactory',
+			'BikeStore.paymentInfoManager' => 'BikeStore\Factory\Model\Manager\PaymentInfoManagerFactory',
 		),
 	)
 );
-
