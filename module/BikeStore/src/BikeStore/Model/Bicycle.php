@@ -16,6 +16,21 @@ class Bicycle extends Article
      * @ORM\Column(type="integer")
      */
     protected $id;
+    /** @var  string */
+    protected $colour;
+
+    /** @var   */
+    protected $wheeleSize;
+    protected $bikeSize;
+    protected $saddleId;
+    protected $pannierRack; //Boolean
+    protected $frontShock; //Boolean
+    protected $rearShock; //Boolean
+    protected $genderType; //int
+    protected $gearType;
+    protected $gears; //int
+    protected $bikeType;
+
 
     public function __construct()
     {

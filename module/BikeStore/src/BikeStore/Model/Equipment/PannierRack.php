@@ -1,30 +1,32 @@
 <?php
 
-namespace BikeStore\Model;
+namespace BikeStore\Model\Equipment;
 
 use Doctrine\ORM\Mapping as ORM;
+use BikeStore\Model\Equipment;
 
 /**
- * @ORM\Entity(repositoryClass="\BikeStore\Model\Repository\CityBikeRepository")
- * @ORM\Table(name="CityBike")
+ * @ORM\Entity(repositoryClass="\BikeStore\Model\Repository\Equipment\PannierRackRepository")
+ * @ORM\Table(name="PannierRack")
  */
-class CityBike extends Bicycle
+class PannierRack extends Equipment
 {
     /**
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      * @ORM\Column(type="integer")
+     * @var int
      */
     protected $id;
 
     public function __construct()
     {
-        parent::__construct();
+    	parent::__construct();
         $this->id = null;
     }
 
     /**
-     * @return mixed
+     * @return int
      */
     public function getId()
     {
@@ -32,10 +34,11 @@ class CityBike extends Bicycle
     }
 
     /**
-     * @param mixed $id
+     * @param int $id
      */
     public function setId($id)
     {
         $this->id = $id;
     }
 }
+ 

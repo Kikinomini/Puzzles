@@ -19,7 +19,13 @@ class Article
      * @ORM\GeneratedValue(strategy="AUTO")
      * @ORM\Column(type="integer")
      */
+
     protected $id;
+    protected $price;
+    protected $stock;
+    protected $description;
+    
+    
 
     public function __construct()
     {
