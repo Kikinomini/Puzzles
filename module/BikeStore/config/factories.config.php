@@ -13,7 +13,7 @@ return array(
 			'BikeStore.mountainBikeManager' => 'BikeStore\Factory\Model\Manager\MountainBikeManagerFactory',
 			'BikeStore.trekkingBikeManager' => 'BikeStore\Factory\Model\Manager\TrekkingBikeManagerFactory',
 			'BikeStore.equipmentManager' => 'BikeStore\Factory\Model\Manager\EquipmentManagerFactory',
+			'BikeStore.paymentInfoManager' => 'BikeStore\Factory\Model\Manager\PaymentInfoManagerFactory',
 		),
 	)
 );
-
