@@ -31,11 +31,11 @@ class IndexController extends AbstractActionController
 //		var_dump($articles);
 
 		/** @var SaddleManager $saddleManager */
-		$saddleManager = $this->getServiceLocator()->get("BikeStore.equipment.saddleManager");
-		$saddle = new Saddle();
+//		$saddleManager = $this->getServiceLocator()->get("BikeStore.equipment.saddleManager");
+//		$saddle = new Saddle();
 		
-		$saddleManager->save($saddle);
-		var_dump($saddleManager->getAllEntities());
+//		$saddleManager->save($saddle);
+//		var_dump($saddleManager->getAllEntities());
 
 		return new ViewModel(array());
 	}
