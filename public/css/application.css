@@ -8,7 +8,7 @@ body
 	min-height: 100vh !important;
     height: 100vh;
     background-color:transparent;
-	font-family: "Tahoma" !important;
+	font-family: "Tahoma", "Arial", "Helvetica" !important;
 }
 
 .myMainContainerWrapper
@@ -118,18 +118,44 @@ footer a:hover
 .navbar
 {
 	height: 50px;
-	background-color: #8e8e8e !important;
+	background-color: #8e8e8e;
+	background-image: -webkit-linear-gradient(bottom, #aea9a9, #8e8e8e);
 	font-size: 12pt;
-}
 
-.navbar div div ul li a
-{
-	color: #ffffff;
 }
 
 .navbar div div ul
 {
 	float: right;
+}
+
+
+.navbar div div ul li a
+{
+	color: #ffffff;
+	padding-left: 24px;
+}
+
+.loginLable{
+	background-image: url(../image/maennchen.png);
+	background-repeat: no-repeat;
+	background-position: left;
+}
+
+.loginLable:hover{
+	background-image: url(../image/maennchen_gruen.png);
+	background-repeat: no-repeat;
+}
+
+.regLable{
+	background-image: url(../image/mehrmaennchen.png);
+	background-repeat: no-repeat;
+	background-position: left;
+}
+
+.regLable:hover{
+	background-image: url(../image/mehrmaennchen_gruen.png);
+	background-repeat: no-repeat;
 }
 
 
@@ -150,6 +176,11 @@ footer a:hover
 
 }
 
+.mainnav div{
+	margin-left: 0;
+	padding-left: 0;
+}
+
 .mainnav div ul li a
 {
 	font-size: 18pt;
@@ -158,6 +189,15 @@ footer a:hover
 
 .mainnav div ul li a:hover
 {
+	background-color: #82d77e;
+}
+
+.mainnav div ul li a:hover
+{
+	background-color: #82d77e;
+}
+
+.mainNavigation li.active{
 	background-color: #82d77e;
 }
 
@@ -170,12 +210,40 @@ div.warenkorb{
 	font-size: 14pt;
 	text-align: center;
 	margin: auto;
+	width: 200px;
+	margin-left: 15px;
+	margin-bottom: 35px;
 }
 
 div.warenkorb a{
 	text-decoration: none;
 	color: #8e8e8e;
+	text-align: center;
 }
+
+div.warenkorbPic{
+	float: left;
+	background-image: url(../image/Einkaufswagen_grau_klein.png);
+	background-repeat: no-repeat;
+	height: 50px;
+	width: 65px;
+	z-index: 20;
+}
+
+div.warenkorbText{
+	float: right;
+	width: 135px;
+}
+
+div.warenkorb:hover, div.warenkorb:hover div.warenkorbPic
+{
+	text-decoration: none;
+	color: #82d77e;
+	background-image: url(../image/Einkaufswagen_gruen_klein.png);
+	background-repeat: no-repeat;
+	z-index: 100;
+}
+
 
 div.warenkorb a:hover
 {
@@ -186,6 +254,9 @@ div.warenkorb a:hover
 input.suchleiste{
 	width: 100%;
 	display: inline;
+	border-right: none;
+	height: 35px;
+	margin-left: 15px;
 }
 
 .suche{
@@ -194,11 +265,31 @@ input.suchleiste{
 
 .sucheButton{
 	display: inline;
+	height: 35px;
+	width: 35px;
+	background-color: #82d77e;
+	background-image: -webkit-linear-gradient(top, #9dff98, #82d77e);
+	border: 2px;
+	border-color: #000000;
 }
 
-.suchePic{
-	height: 18px;
-	margin: auto;
+.suchePic
+{
+	height: 28px;
+	width: 28px;
+	background-image: url(../image/Lupe_grau_klein.png);
+	background-repeat: no-repeat;
+	background-size: 25px;
+	margin-top: 3px;
+	z-index: 0;
+}
+
+
+.sucheButton :hover
+{
+	background-image: url(../image/lupe_weiss_klein.png) ;
+	background-repeat: no-repeat;
+	z-index: 1;
 }
 
 .flexHeader{
@@ -227,8 +318,24 @@ h2{
 	margin-left: 5pt;
 	font-size: 20pt ;
 }
+
+p.link{
+	float:right;
+}
+
 .bikeStoreLogo
 {
 	margin-right: 5px;
-	height: 115px;
+	height: 80px;
 }
+
+a{
+	color: #82d77e ;
+	text-decoration: none;
+}
+
+a:hover{
+	color: #8e8e8e;
+}
+
+
