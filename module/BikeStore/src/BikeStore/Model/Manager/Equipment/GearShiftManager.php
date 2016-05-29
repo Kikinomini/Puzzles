@@ -1,11 +1,11 @@
 <?php
 
-namespace BikeStore\Model\Manager;
+namespace BikeStore\Model\Manager\Equipment;
 
 use Application\Model\Manager\StandardManager;
-use BikeStore\Model\CityBike;
+use BikeStore\Model\Equipment\GearShift;
 
-class CityBikeManager extends StandardManager
+class GearShiftManager extends StandardManager
 {
     public function __construct($repository, $entity = null)
     {
@@ -13,7 +13,7 @@ class CityBikeManager extends StandardManager
     }
     
     /**
-	 * @return CityBike
+	 * @return GearShift
 	 */
 	public function getEntity()
 	{
@@ -22,7 +22,7 @@ class CityBikeManager extends StandardManager
 
 	/**
 	 * @param object $entity
-	 * @return CityBike
+	 * @return GearShift
 	 */
 	protected function selectCorrectEntity($entity)
 	{
@@ -31,7 +31,7 @@ class CityBikeManager extends StandardManager
 
     /**
      * @param integer $id
-     * @return CityBike
+     * @return GearShift
      */
 	public function getEntityById($id)
 	{

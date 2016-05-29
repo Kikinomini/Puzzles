@@ -1,11 +1,11 @@
 <?php
 
-namespace BikeStore\Model\Manager;
+namespace BikeStore\Model\Manager\Equipment;
 
 use Application\Model\Manager\StandardManager;
-use BikeStore\Model\TrekkingBike;
+use BikeStore\Model\Equipment\Brake;
 
-class TrekkingBikeManager extends StandardManager
+class BrakeManager extends StandardManager
 {
     public function __construct($repository, $entity = null)
     {
@@ -13,7 +13,7 @@ class TrekkingBikeManager extends StandardManager
     }
     
     /**
-	 * @return TrekkingBike
+	 * @return Brake
 	 */
 	public function getEntity()
 	{
@@ -22,7 +22,7 @@ class TrekkingBikeManager extends StandardManager
 
 	/**
 	 * @param object $entity
-	 * @return TrekkingBike
+	 * @return Brake
 	 */
 	protected function selectCorrectEntity($entity)
 	{
@@ -31,7 +31,7 @@ class TrekkingBikeManager extends StandardManager
 
     /**
      * @param integer $id
-     * @return TrekkingBike
+     * @return Brake
      */
 	public function getEntityById($id)
 	{

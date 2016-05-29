@@ -5,28 +5,31 @@ namespace BikeStore\Model;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="\BikeStore\Model\Repository\EBikeRepository")
- * @ORM\Table(name="EBike")
+ * @ORM\Entity(repositoryClass="\BikeStore\Model\Repository\PaymentInfoRepository")
+ * @ORM\Table(name="PaymentInfo")
  */
-class EBike extends Bicycle
+class PaymentInfo
 {
     /**
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      * @ORM\Column(type="integer")
+     * @var int
      */
     protected $id;
-    protected $chargingTime;
-    protected $batteryTime;
+
+    /**
+     * @ORM\OneToOne(targetEntity="\BikeStore\Model\Order", mappedBy="paymentInfo")
+     */
+    protected $order;
 
     public function __construct()
     {
-        parent::__construct();
         $this->id = null;
     }
 
     /**
-     * @return mixed
+     * @return int
      */
     public function getId()
     {
@@ -34,7 +37,7 @@ class EBike extends Bicycle
     }
 
     /**
-     * @param mixed $id
+     * @param int $id
      */
     public function setId($id)
     {

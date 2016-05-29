@@ -16,6 +16,7 @@ class Equipment
      * @ORM\Column(type="integer")
      */
     protected $id;
+    protected $quickDescription;
 
     public function __construct()
     {

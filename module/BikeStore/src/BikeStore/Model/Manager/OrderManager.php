@@ -3,9 +3,9 @@
 namespace BikeStore\Model\Manager;
 
 use Application\Model\Manager\StandardManager;
-use BikeStore\Model\MountainBike;
+use BikeStore\Model\Order;
 
-class MountainBikeManager extends StandardManager
+class OrderManager extends StandardManager
 {
     public function __construct($repository, $entity = null)
     {
@@ -13,7 +13,7 @@ class MountainBikeManager extends StandardManager
     }
     
     /**
-	 * @return MountainBike
+	 * @return Order
 	 */
 	public function getEntity()
 	{
@@ -22,7 +22,7 @@ class MountainBikeManager extends StandardManager
 
 	/**
 	 * @param object $entity
-	 * @return MountainBike
+	 * @return Order
 	 */
 	protected function selectCorrectEntity($entity)
 	{
@@ -31,7 +31,7 @@ class MountainBikeManager extends StandardManager
 
     /**
      * @param integer $id
-     * @return MountainBike
+     * @return Order
      */
 	public function getEntityById($id)
 	{
