@@ -35,6 +35,12 @@ return array(
 				'order' => -1000,
 				'resource' => 'default',
 			),
+			array(
+				'label' => 'Fahrräder',
+				'route' => 'bikelist',
+				'order' => -900,
+				'resource' => 'default',
+			),
 		),
 	),
 );
