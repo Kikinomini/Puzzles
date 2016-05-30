@@ -20,3 +20,7 @@ div.default
 {
     background-color: #1a9cc8;
 }
+#flashMessageContainer
+{
+    margin-bottom: 5px;
+}

@@ -162,7 +162,10 @@ class Module implements CronjobModelInterface, MySettingsInterface
 						$user = $sm->get("userManager")->getUserFromSession();
 						if(!($user instanceof User))
 						{
-							$_SESSION["loginTarget"] = $request->getUriString();
+//							unset($_SESSION["loginTarget"]);
+							$sessionContainer = new Container("loginTarget");
+							$sessionContainer->offsetSet("loginTarget", $request->getUriString());
+//							$_SESSION["loginTarget"] = $request->getUriString();
 							$viewModel->isOnline = false;
 						}
 						$errorTemplate = 'error/403';

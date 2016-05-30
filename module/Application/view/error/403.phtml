@@ -4,7 +4,10 @@
 <br/>
 <br/>
 <?php
-if (!$this->layout()->isOnline) {
-    echo "<i>Sie sind nicht eingeloggt. Jetzt <a href = '" . $this->url("login", array("followTarget" => "1")) . "'>einloggen.</a></i>";
+if(!$this->layout()->isOnline)
+{
+	echo "<i>Sie sind nicht eingeloggt. Jetzt <a href = '" . $this->url("login", array("followTarget" => "1")) .
+		 "'>einloggen</a></i> oder <i><a href='" . $this->url("registration", array("followTarget" => "1")) .
+		 "'>registrieren.</a></i>";
 }
 ?>

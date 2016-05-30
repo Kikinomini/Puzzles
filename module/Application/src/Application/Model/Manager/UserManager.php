@@ -213,7 +213,7 @@ class UserManager extends StandardManager
 					"email",
 					$user->getEmail(),
 					time() + 60 * 60 * 24 * 30,
-					null,
+					"/".$this->basePath,
 					null,
 					false,
 					true
@@ -222,7 +222,7 @@ class UserManager extends StandardManager
 					"password",
 					$user->getPassword(),
 					time() + 60 * 60 * 24 * 30,
-					null,
+					"/".$this->basePath,
 					null,
 					false,
 					true
@@ -236,7 +236,7 @@ class UserManager extends StandardManager
 					"email",
 					"",
 					0,
-					null,
+					"/".$this->basePath,
 					null,
 					false,
 					true
@@ -245,7 +245,7 @@ class UserManager extends StandardManager
 					"password",
 					"",
 					0,
-					null,
+					"/".$this->basePath,
 					null,
 					false,
 					true
@@ -273,7 +273,7 @@ class UserManager extends StandardManager
 			"email",
 			"",
 			0,
-			null,
+			"/".$this->basePath,
 			null,
 			false,
 			true
@@ -282,11 +282,12 @@ class UserManager extends StandardManager
 			"password",
 			"",
 			0,
-			null,
+			"/".$this->basePath,
 			null,
 			false,
 			true
 		);
+
 		$this->response->getHeaders()->addHeader($emailCookie);
 		$this->response->getHeaders()->addHeader($passwordCookie);
 		return true;

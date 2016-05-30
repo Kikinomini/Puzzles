@@ -82,7 +82,7 @@ class CodeManager extends StandardManager
                 $mail->setEmpfaengerEmail($user->getEmail());
                 $mail->setEmpfaengerName($user->getVorname());
 
-                $message = "Hallo ".$user->getVorname().", <br/><br/><p>Du hast dich auf ".$this->systemConfig["websiteName"]." registriert. Um die Registrierung abzuschliesen, drücke auf <a href = '".$this->urlHelper->__invoke("code", array('code' => $code->getCode()), array('force_canonical' => true))."'>diesen Link</a></p>";
+                $message = "Hallo ".$user->getVorname()." ".$user->getNachname().", <br/><br/><p>Sie haben sich auf ".$this->systemConfig["websiteName"]." registriert. Um die Registrierung abzuschliesen, drücken Sie bitte auf <a href = '".$this->urlHelper->__invoke("code", array('code' => $code->getCode()), array('force_canonical' => true))."'>diesen Link</a></p>";
                 $mail->setNachricht($message);
                 $mail->send();
                 break;
@@ -96,7 +96,7 @@ class CodeManager extends StandardManager
                 $mail->setEmpfaengerEmail($user->getEmail());
                 $mail->setEmpfaengerName($user->getVorname());
 
-                $message = "Hallo ".$user->getVorname().", <br/><br/><p>Du hast auf ".$this->systemConfig["websiteName"]." ein neues Passwort angefordert. Um dieses Passwort zu setzen, drücke auf <a href = '".$this->urlHelper->__invoke("changePasswordFromMail", array('code' => $code->getCode()), array('force_canonical' => true))."'>diesen Link</a></p>";
+                $message = "Hallo ".$user->getVorname()." ".$user->getNachname().", <br/><br/><p>Sie haben auf ".$this->systemConfig["websiteName"]." ein neues Passwort angefordert. Um das Passwort zu ändern, drücken Sie bitte auf <a href = '".$this->urlHelper->__invoke("changePasswordFromMail", array('code' => $code->getCode()), array('force_canonical' => true))."'>diesen Link</a></p>";
                 $mail->setNachricht($message);
                 $mail->send();
                 break;
@@ -110,7 +110,7 @@ class CodeManager extends StandardManager
                 $mail->setEmpfaengerEmail($code->getWert());
                 $mail->setEmpfaengerName($user->getVorname());
 
-                $message = "Hallo ".$user->getVorname().", <br/><br/><p>Du hast auf ".$this->systemConfig["websiteName"]." deine Emailadresse geändert. Um deine neue Emailadresse zu bestätigen, drücke auf <a href = '".$this->urlHelper->__invoke("code", array('code' => $code->getCode()), array('force_canonical' => true))."'>diesen Link</a></p>";
+                $message = "Hallo ".$user->getVorname()." ".$user->getNachname().", <br/><br/><p>Sie haben auf ".$this->systemConfig["websiteName"]." Ihre Emailadresse geändert. Um Ihre neue Emailadresse zu bestätigen, drücken Sie bitte auf <a href = '".$this->urlHelper->__invoke("code", array('code' => $code->getCode()), array('force_canonical' => true))."'>diesen Link</a></p>";
                 $mail->setNachricht($message);
                 $mail->send();
                 break;
@@ -190,7 +190,7 @@ class CodeManager extends StandardManager
             $this->save($code);
             $this->remove($code);
 
-            $message = "Du wurdest erfolgreich aktiviert und kannst dich nun einloggen.";
+            $message = "Sie wurden erfolgreich aktiviert.";
         }
         elseif ($code->getAction() == CodeManager::ACTION_VERIFY_NEW_EMAIL)
         {
