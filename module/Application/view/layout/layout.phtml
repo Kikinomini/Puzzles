@@ -74,8 +74,10 @@ JS;
 		<div class="container">
 			<div class="header flexHeader">
 				<div class="logo">
-<!--					<p>Hier fehlt ein Logo</p>-->
-					<img src="image/BikeStoreLogo.gif" class = 'bikeStoreLogo'>
+					<a href="<?php echo $this->url("home"); ?>" class="totallyHidden">
+						<div><img src="image/BikeStoreLogo.gif" class='bikeStoreLogo'></div>
+						<div id="logoLabel">Puzzles</div>
+					</a>
 				</div>
 				<div class="suche flexFillWidth">
 					<div class="flexHeader">
@@ -83,7 +85,9 @@ JS;
 							<input class="suchleiste flexFillWidth" type="text" placeholder=" Suche..."/>
 						</div>
 						<div>
-							<button class="sucheButton"><div class="suchePic"> &nbsp;</div></button>
+							<button class="sucheButton">
+								<div class="suchePic"> &nbsp;</div>
+							</button>
 						</div>
 
 					</div>

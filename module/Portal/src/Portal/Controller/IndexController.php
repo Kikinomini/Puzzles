@@ -12,7 +12,7 @@ use BikeStore\Model\Article;
 use BikeStore\Model\Bicycle;
 use BikeStore\Model\Equipment\Saddle;
 use BikeStore\Model\Manager\ArticleManager;
-use BikeStore\Model\Manager\SaddleManager;
+use BikeStore\Model\Manager\Equipment\SaddleManager;
 use Zend\Http\Response;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;

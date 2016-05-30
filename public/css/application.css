@@ -198,6 +198,29 @@ footer a:hover
 
 div.logo{
 	float: left;
+	/*background-image: url("../image/BikeStoreLogo.gif");*/
+	/*background-repeat: no-repeat;*/
+	/*background-size: cover;*/
+	/*width: 85px;*/
+	/*height: 85px;*/
+	/*padding-top: 85px;*/
+	/*font-weight: bold;*/
+	/*color: #82d77e;*/
+	/*text-align: center;*/
+
+}
+#logoLabel
+{
+	font-weight: bold;
+	color: #82d77e;
+	text-align: center;
+	font-size: 24px;
+
+	-moz-transform: rotate(-3deg);
+	-ms-transform: rotate(-3deg);
+	-o-transform: rotate(-3deg);
+	-webkit-transform: rotate(-3deg);
+	transform: rotate(-3deg);
 }
 
 div.warenkorb{
