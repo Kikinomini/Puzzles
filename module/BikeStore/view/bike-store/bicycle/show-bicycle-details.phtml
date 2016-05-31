@@ -5,5 +5,30 @@
  * Date: 28.05.2016
  * Time: 23:15
  */
-	echo $this -> DetailList;
 ?>
+<div id="detailParth">
+	<a href="">Startseite</a> > <a href=""></a>
+</div>
+<div class="detailContent flexHeader">
+	<div class="detailPicture flexFillWidth" >
+		<h1>Name des Fahrrads</h1>
+		<img src="/image/Fahrrad_gross.jpg"/>
+	</div>
+	<div id="detailBuy">
+		<p>
+			<b>€ Preis ,- </b><br>
+			<small>
+				inkl. MWST.
+			</small>
+		</p>
+		<button class="btn btn-default shoppingCartButton">
+			Warenkorb
+		</button>
+	</div>
+</div>
+<div id="detailProductDetails">
+	<?php
+		echo $this->ProductInfo
+	?>
+</div>
+
