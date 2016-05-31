@@ -12,6 +12,9 @@ use BikeStore\Model\Equipment;
  */
 class RearWheel extends Equipment
 {
+    const GEARS_TYPE_HUB = 1;
+    const GEARS_TYPE_CHAIN = 2;
+
     /**
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
@@ -26,11 +29,11 @@ class RearWheel extends Equipment
 
     /** @var  boolean
      * @ORM\Column(type="boolean")*/
-    protected $backPedalBrake;
+        protected $backPedalBrake;
 
     /** @var  integer
      * @ORM\Column(type="integer")*/
-    protected $gears;
+    protected $gearType;
     
 
 
@@ -91,17 +94,17 @@ class RearWheel extends Equipment
     /**
      * @return int
      */
-    public function getGears()
+    public function getGearType()
     {
-        return $this->gears;
+        return $this->gearType;
     }
 
     /**
-     * @param int $gears
+     * @param int $gearTyp
      */
-    public function setGears($gears)
+    public function setGearType($gearType)
     {
-        $this->gears = $gears;
+        $this->gearType = $gearType;
     }
     
     
