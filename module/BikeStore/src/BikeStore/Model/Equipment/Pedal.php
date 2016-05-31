@@ -27,8 +27,6 @@ class Pedal extends Equipment
     /** @var  integer 
      * @ORM\Column(type="integer")*/
     protected $pedalType;
-    
-
 
     public function __construct()
     {

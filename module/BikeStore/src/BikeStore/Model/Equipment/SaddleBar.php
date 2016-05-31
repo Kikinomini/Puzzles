@@ -81,6 +81,4 @@ class SaddleBar extends Equipment
     {
         $this->diameter = $diameter;
     }
-    
-    
 }

@@ -47,4 +47,20 @@ class FrontWheel extends Equipment
     {
         $this->id = $id;
     }
+
+    /**
+     * @return float
+     */
+    public function getSize()
+    {
+        return $this->size;
+    }
+
+    /**
+     * @param float $size
+     */
+    public function setSize($size)
+    {
+        $this->size = $size;
+    }
 }

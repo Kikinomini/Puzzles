@@ -11,7 +11,6 @@ use BikeStore\Model\Equipment;
  */
 class PannierRack extends Equipment
 {
-
     /**
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")

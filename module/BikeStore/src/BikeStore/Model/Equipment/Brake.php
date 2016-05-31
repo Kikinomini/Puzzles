@@ -47,4 +47,22 @@ class Brake extends Equipment
     {
         $this->id = $id;
     }
+
+    /**
+     * @return int
+     */
+    public function getBreakType()
+    {
+        return $this->breakType;
+    }
+
+    /**
+     * @param int $breakType
+     */
+    public function setBreakType($breakType)
+    {
+        $this->breakType = $breakType;
+    }
+    
+    
 }

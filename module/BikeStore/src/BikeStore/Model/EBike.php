@@ -2,6 +2,7 @@
 
 namespace BikeStore\Model;
 
+use BikeStore\Model\Equipment\Battery;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -16,6 +17,13 @@ class EBike extends Bicycle
      * @ORM\Column(type="integer")
      */
     protected $id;
+
+    /**
+     * @var Battery
+     * @ORM\ManyToOne(targetEntity="\BikeStore\Model\Equipment\Battery")
+     * @ORM\JoinColumn(name="BatteryId", referencedColumnName="id")
+     */
+    protected $battery;
 
     public function __construct()
     {

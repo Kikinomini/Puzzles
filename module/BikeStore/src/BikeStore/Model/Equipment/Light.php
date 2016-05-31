@@ -55,5 +55,39 @@ class Light extends Equipment
     {
         $this->id = $id;
     }
+
+    /**
+     * @return int
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * @param int $type
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isIsBatteriePowered()
+    {
+        return $this->isBatteriePowered;
+    }
+
+    /**
+     * @param boolean $isBatteriePowered
+     */
+    public function setIsBatteriePowered($isBatteriePowered)
+    {
+        $this->isBatteriePowered = $isBatteriePowered;
+    }
+    
+    
 }
  

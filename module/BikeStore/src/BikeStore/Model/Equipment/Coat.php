@@ -53,4 +53,36 @@ class Coat extends Equipment
     {
         $this->id = $id;
     }
+
+    /**
+     * @return float
+     */
+    public function getSize()
+    {
+        return $this->size;
+    }
+
+    /**
+     * @param float $size
+     */
+    public function setSize($size)
+    {
+        $this->size = $size;
+    }
+
+    /**
+     * @return string
+     */
+    public function getProfile()
+    {
+        return $this->profile;
+    }
+
+    /**
+     * @param string $profile
+     */
+    public function setProfile($profile)
+    {
+        $this->profile = $profile;
+    }
 }

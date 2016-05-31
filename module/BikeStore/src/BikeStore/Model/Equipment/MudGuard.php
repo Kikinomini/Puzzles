@@ -18,8 +18,13 @@ class MudGuard extends Equipment
      * @var int
      */
     protected $id;
-    
-    
+
+    /**
+     * @ORM\Column(type="float")
+     * @var float
+     */
+    protected $size;
+
     public function __construct()
     {
     	parent::__construct();
@@ -40,6 +45,22 @@ class MudGuard extends Equipment
     public function setId($id)
     {
         $this->id = $id;
+    }
+
+    /**
+     * @return float
+     */
+    public function getSize()
+    {
+        return $this->size;
+    }
+
+    /**
+     * @param float $size
+     */
+    public function setSize($size)
+    {
+        $this->size = $size;
     }
 }
  

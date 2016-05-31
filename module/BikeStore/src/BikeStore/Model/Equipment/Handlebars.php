@@ -47,4 +47,20 @@ class Handlebars extends Equipment
     {
         $this->id = $id;
     }
+
+    /**
+     * @return float
+     */
+    public function getDiameter()
+    {
+        return $this->diameter;
+    }
+
+    /**
+     * @param float $diameter
+     */
+    public function setDiameter($diameter)
+    {
+        $this->diameter = $diameter;
+    }
 }

@@ -173,22 +173,6 @@ class Bicycle extends Article
 	}
 
 	/**
-	 * @return string
-	 */
-	public function getColour()
-	{
-		return $this->colour;
-	}
-
-	/**
-	 * @param string $colour
-	 */
-	public function setColour($colour)
-	{
-		$this->colour = $colour;
-	}
-
-	/**
 	 * @return Saddle
 	 */
 	public function getSaddle()

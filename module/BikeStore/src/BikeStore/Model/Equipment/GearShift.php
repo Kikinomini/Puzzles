@@ -41,13 +41,6 @@ class GearShift extends Equipment
      */
     protected $type;
 
-    /**
-     * @ORM\Column(type="boolean")
-     * @var boolean
-     */
-    protected $hasBackpedalBrake;
-
-
     public function __construct()
     {
     	parent::__construct();
@@ -68,5 +61,53 @@ class GearShift extends Equipment
     public function setId($id)
     {
         $this->id = $id;
+    }
+
+    /**
+     * @return int
+     */
+    public function getNumberFrontGears()
+    {
+        return $this->numberFrontGears;
+    }
+
+    /**
+     * @param int $numberFrontGears
+     */
+    public function setNumberFrontGears($numberFrontGears)
+    {
+        $this->numberFrontGears = $numberFrontGears;
+    }
+
+    /**
+     * @return int
+     */
+    public function getNumberBackGears()
+    {
+        return $this->numberBackGears;
+    }
+
+    /**
+     * @param int $numberBackGears
+     */
+    public function setNumberBackGears($numberBackGears)
+    {
+        $this->numberBackGears = $numberBackGears;
+    }
+
+    /**
+     * @return int
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * @param int $type
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
     }
 }

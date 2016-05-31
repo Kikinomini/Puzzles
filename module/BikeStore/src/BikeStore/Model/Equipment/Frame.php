@@ -190,4 +190,6 @@ class Frame extends Equipment
 	{
 		$this->backShocker = $backShocker;
 	}
+	
+	
 }
