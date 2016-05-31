@@ -1,14 +1,16 @@
 <?php
 
-namespace BikeStore\Model;
+namespace BikeStore\Model\Equipment;
 
 use Doctrine\ORM\Mapping as ORM;
+use BikeStore\Model\Equipment;
+
 
 /**
- * @ORM\Entity(repositoryClass="\BikeStore\Model\Repository\HandlebarsRepository")
+ * @ORM\Entity(repositoryClass="\BikeStore\Model\Repository\Equipment\HandlebarsRepository")
  * @ORM\Table(name="Handlebars")
  */
-class Handlebars
+class Handlebars extends Equipment
 {
     /**
      * @ORM\Id
@@ -20,6 +22,7 @@ class Handlebars
 
     public function __construct()
     {
+    	parent::__construct();
         $this->id = null;
     }
 

@@ -19,13 +19,37 @@ class Article
      * @ORM\GeneratedValue(strategy="AUTO")
      * @ORM\Column(type="integer")
      */
-
     protected $id;
+
+	/**
+	 * @ORM\Column(type="float")
+	 * @var float
+	 */
     protected $price;
+
+	/**
+	 * @ORM\Column(type="integer")
+	 * @var int
+	 */
     protected $stock;
+
+	/**
+	 * @ORM\Column(type="string")
+	 * @var string
+	 */
     protected $description;
-    
-    
+
+	/**
+	 * @ORM\Column(type="string")
+	 * @var string
+	 */
+    protected $imageName;
+
+	/**
+	 * @ORM\Column(type="boolean")
+	 * @var boolean
+	 */
+    protected $listed;
 
     public function __construct()
     {
@@ -52,4 +76,84 @@ class Article
     {
         return "/bike-store/bicycle/detail-list";
     }
+
+	/**
+	 * @return float
+	 */
+	public function getPrice()
+	{
+		return $this->price;
+	}
+
+	/**
+	 * @param float $price
+	 */
+	public function setPrice($price)
+	{
+		$this->price = $price;
+	}
+
+	/**
+	 * @return int
+	 */
+	public function getStock()
+	{
+		return $this->stock;
+	}
+
+	/**
+	 * @param int $stock
+	 */
+	public function setStock($stock)
+	{
+		$this->stock = $stock;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getDescription()
+	{
+		return $this->description;
+	}
+
+	/**
+	 * @param string $description
+	 */
+	public function setDescription($description)
+	{
+		$this->description = $description;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getImageName()
+	{
+		return $this->imageName;
+	}
+
+	/**
+	 * @param string $imageName
+	 */
+	public function setImageName($imageName)
+	{
+		$this->imageName = $imageName;
+	}
+
+	/**
+	 * @return mixed
+	 */
+	public function getListed()
+	{
+		return $this->listed;
+	}
+
+	/**
+	 * @param mixed $listed
+	 */
+	public function setListed($listed)
+	{
+		$this->listed = $listed;
+	}
 }

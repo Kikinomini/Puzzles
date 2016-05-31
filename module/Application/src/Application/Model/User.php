@@ -5,7 +5,8 @@ namespace Application\Model;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
-/** @ORM\Entity(repositoryClass="\Application\Model\Repository\UserRepository")
+/** 
+ * @ORM\Entity(repositoryClass="\Application\Model\Repository\UserRepository")
  * @ORM\Table(name="User")
  */
 class User
