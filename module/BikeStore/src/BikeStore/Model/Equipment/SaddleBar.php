@@ -32,6 +32,8 @@ class SaddleBar extends Equipment
     {
     	parent::__construct();
         $this->id = null;
+        $this->diameter = -25.7;
+        $this->length = -4.3;
     }
 
     /**

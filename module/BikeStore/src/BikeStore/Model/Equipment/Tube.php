@@ -20,9 +20,7 @@ class Tube extends Equipment
      */
     protected $id;
 
-    /**
-     * @return float
-     */
+    
 
 
     /** @var  float
@@ -33,6 +31,7 @@ class Tube extends Equipment
     {
     	parent::__construct();
         $this->id = null;
+        $this->wheelSize=-3.14;
     }
 
     /**
@@ -51,6 +50,9 @@ class Tube extends Equipment
         $this->id = $id;
     }
 
+    /**
+     * @return float
+     */
     public function getWheelSize()
     {
         return $this->wheelSize;

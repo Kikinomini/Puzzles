@@ -11,7 +11,7 @@ use BikeStore\Model\Equipment;
  */
 class Pedal extends Equipment
 {
-    const PEDAL_TYPE_NORMAL = 1;
+    const PEDAL_TYPE_FLAT = 1;
     const PEDAL_TYPE_SPIKED = 2;
     const PEDAL_TYPE_CLICK = 3;
     const PEDAL_TYPE_SPIKED_CLICK = 4;
@@ -32,6 +32,7 @@ class Pedal extends Equipment
     {
     	parent::__construct();
         $this->id = null;
+        $this->pedalType = self::PEDAL_TYPE_SPIKED;
     }
 
     /**
@@ -64,6 +65,7 @@ class Pedal extends Equipment
     public function setPedalType($pedalType)
     {
         $this->pedalType = $pedalType;
+
     }
     
 }

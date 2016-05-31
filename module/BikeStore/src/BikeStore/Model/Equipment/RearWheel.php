@@ -39,11 +39,14 @@ class RearWheel extends Equipment
 	protected $gearType;
 
 
-	public function __construct()
-	{
-		parent::__construct();
-		$this->id = null;
-	}
+    public function __construct()
+    {
+    	parent::__construct();
+        $this->id = null;
+        $this->wheelSize = -3.14;
+        $this->backPedalBrake=false;
+        $this->gearType = self::GEARS_TYPE_CHAIN;
+    }
 
 	/**
 	 * @return int
