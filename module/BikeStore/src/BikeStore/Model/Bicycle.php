@@ -32,9 +32,7 @@ class Bicycle extends Article
 	 * @ORM\Column(type="integer")
 	 */
 	protected $id;
-
-	/** @var  string */
-	protected $colour;
+	
 
 	/** @var   Saddle
 	 * @ORM\ManyToOne(targetEntity="BikeStore\Model\Equipment\Saddle")
@@ -56,7 +54,7 @@ class Bicycle extends Article
 
 	/** @var  Bell
 	 * @ORM\ManyToOne(targetEntity="BikeStore\Model\Equipment\Bell")
-	 * @ORM\JoinColumn(name="BellId", referencedColumnName="id")
+	 * @ORM\JoinColumn(name="BellId", referencedColumnName="id",nullable=true)
 	 */
 	protected $bell;
 
@@ -74,7 +72,7 @@ class Bicycle extends Article
 
 	/** @var  Dynamo
 	 * @ORM\ManyToOne(targetEntity="BikeStore\Model\Equipment\Dynamo")
-	 * @ORM\JoinColumn(name="DynamoId", referencedColumnName="id")
+	 * @ORM\JoinColumn(name="DynamoId", referencedColumnName="id",nullable=true)
 	 */
 	protected $dynamo;
 
@@ -92,7 +90,7 @@ class Bicycle extends Article
 
 	/** @var  Light
 	@ORM\ManyToOne(targetEntity="BikeStore\Model\Equipment\Light")
-	 * @ORM\JoinColumn(name="LightId", referencedColumnName="id")
+	 * @ORM\JoinColumn(name="LightId", referencedColumnName="id",nullable=true)
 	 */
 	protected $light;
 
@@ -104,7 +102,7 @@ class Bicycle extends Article
 
 	/** @var  PannierRack
 	 * @ORM\ManyToOne(targetEntity="BikeStore\Model\Equipment\PannierRack")
-	 * @ORM\JoinColumn(name="PannierRackId", referencedColumnName="id")
+	 * @ORM\JoinColumn(name="PannierRackId", referencedColumnName="id",nullable=true)
 	 */
 	protected $pannierRack; //Boolean
 
