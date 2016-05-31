@@ -18,6 +18,7 @@ class Saddle extends Equipment
      * @var int
      */
     protected $id;
+    
 
     public function __construct()
     {

@@ -11,6 +11,11 @@ use BikeStore\Model\Equipment;
  */
 class Pedal extends Equipment
 {
+    const PEDAL_TYPE_NORMAL = 1;
+    const PEDAL_TYPE_SPIKED = 2;
+    const PEDAL_TYPE_CLICK = 3;
+    const PEDAL_TYPE_SPIKED_CLICK = 4;
+
     /**
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
@@ -18,6 +23,11 @@ class Pedal extends Equipment
      * @var int
      */
     protected $id;
+
+    /** @var  integer */
+    protected $pedalType;
+    
+
 
     public function __construct()
     {

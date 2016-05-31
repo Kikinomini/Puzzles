@@ -11,6 +11,7 @@ use BikeStore\Model\Equipment;
  */
 class PannierRack extends Equipment
 {
+
     /**
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
@@ -18,6 +19,7 @@ class PannierRack extends Equipment
      * @var int
      */
     protected $id;
+    
 
     public function __construct()
     {

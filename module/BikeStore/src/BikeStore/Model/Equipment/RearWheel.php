@@ -20,6 +20,17 @@ class RearWheel extends Equipment
      */
     protected $id;
 
+    /** @var  integer */
+    protected $wheelSize;
+
+    /** @var  boolean */
+    protected $backPedalBrake;
+
+    /** @var  integer */
+    protected $gears;
+    
+
+
     public function __construct()
     {
     	parent::__construct();

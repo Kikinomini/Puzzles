@@ -17,6 +17,9 @@ class Equipment extends Article
      */
     protected $id;
     protected $quickDescription;
+    
+    /** @var  string */
+    protected $colour;
 
     public function __construct()
     {
