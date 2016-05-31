@@ -20,6 +20,18 @@ class Coat extends Equipment
      */
     protected $id;
 
+    /**
+     * @ORM\Column(type="float")
+     * @var float
+     */
+    protected $size;
+
+    /**
+     * @ORM\Column(type="string")
+     * @var string
+     */
+    protected $profile;
+
     public function __construct()
     {
     	parent::__construct();

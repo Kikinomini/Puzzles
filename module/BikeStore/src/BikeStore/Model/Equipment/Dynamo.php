@@ -11,6 +11,10 @@ use BikeStore\Model\Equipment;
  */
 class Dynamo extends Equipment
 {
+    const DYNAMO_TYPE_EXTERNAL = 1;
+    const DYNAMO_TYPE_SPOKE = 2;
+    const DYNAMO_TYPE_HUB = 3;
+
     /**
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
@@ -18,6 +22,12 @@ class Dynamo extends Equipment
      * @var int
      */
     protected $id;
+
+    /**
+     * @ORM\Column(type="integer")
+     * @var int
+     */
+    protected $type;
 
     public function __construct()
     {

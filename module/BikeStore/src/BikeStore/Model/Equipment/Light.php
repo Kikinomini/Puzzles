@@ -11,6 +11,9 @@ use BikeStore\Model\Equipment;
  */
 class Light extends Equipment
 {
+    const LIGHT_TYPE_LED = 1;
+    const LIGHT_TYPE_HALOGEN = 2;
+
     /**
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
@@ -18,6 +21,18 @@ class Light extends Equipment
      * @var int
      */
     protected $id;
+
+    /**
+     * @ORM\Column(type="integer")
+     * @var int
+     */
+    protected $type;
+
+    /**
+     * @ORM\Column(type="boolean")
+     * @var boolean
+     */
+    protected $isBatteriePowered;
 
     public function __construct()
     {

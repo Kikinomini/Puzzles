@@ -76,6 +76,7 @@ class Frame extends Equipment
 		$this->setFrameSize(37);
 		$this->setBackShocker(true);
 		$this->setFrontShocker(true);
+		$this->setListed(false);
     }
 
     /**

@@ -16,9 +16,11 @@ class Equipment extends Article
      * @ORM\Column(type="integer")
      */
     protected $id;
-    protected $quickDescription;
-    
-    /** @var  string */
+
+    /**
+     * @ORM\Column(type="string")
+     * @var string
+     */
     protected $colour;
 
     public function __construct()
@@ -42,4 +44,20 @@ class Equipment extends Article
     {
         $this->id = $id;
     }
+
+	/**
+	 * @return string
+	 */
+	public function getColour()
+	{
+		return $this->colour;
+	}
+
+	/**
+	 * @param string $colour
+	 */
+	public function setColour($colour)
+	{
+		$this->colour = $colour;
+	}
 }

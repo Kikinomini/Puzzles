@@ -16,8 +16,6 @@ class EBike extends Bicycle
      * @ORM\Column(type="integer")
      */
     protected $id;
-    protected $chargingTime;
-    protected $batteryTime;
 
     public function __construct()
     {

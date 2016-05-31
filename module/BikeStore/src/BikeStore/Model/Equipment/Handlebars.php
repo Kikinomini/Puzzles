@@ -20,6 +20,12 @@ class Handlebars extends Equipment
      */
     protected $id;
 
+    /**
+     * @ORM\Column(type="float")
+     * @var float
+     */
+    protected $diameter;
+
     public function __construct()
     {
     	parent::__construct();

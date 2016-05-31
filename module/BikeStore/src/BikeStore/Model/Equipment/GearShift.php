@@ -12,6 +12,9 @@ use BikeStore\Model\Equipment;
  */
 class GearShift extends Equipment
 {
+    const GEAR_SHIFT_TYPE_HUB = 1;
+    const GEAR_SHIFT_TYPE_CHAIN = 2;
+
     /**
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
@@ -19,6 +22,31 @@ class GearShift extends Equipment
      * @var int
      */
     protected $id;
+
+    /**
+     * @ORM\Column(type="integer")
+     * @var int
+     */
+    protected $numberFrontGears;
+
+    /**
+     * @ORM\Column(type="integer")
+     * @var int
+     */
+    protected $numberBackGears;
+
+    /**
+     * @ORM\Column(type="integer")
+     * @var int
+     */
+    protected $type;
+
+    /**
+     * @ORM\Column(type="boolean")
+     * @var boolean
+     */
+    protected $hasBackpedalBrake;
+
 
     public function __construct()
     {

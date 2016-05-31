@@ -449,5 +449,99 @@ class Bicycle extends Article
         return "/bike-store/bicycle/bike-product-info";
     }
 
+	/**
+	 * @return Brake
+	 */
+	public function getFrontBrake()
+	{
+		return $this->frontBrake;
+	}
 
+	/**
+	 * @param Brake $frontBrake
+	 */
+	public function setFrontBrake($frontBrake)
+	{
+		$this->frontBrake = $frontBrake;
+	}
+
+	/**
+	 * @return Brake
+	 */
+	public function getRearBrake()
+	{
+		return $this->rearBrake;
+	}
+
+	/**
+	 * @param Brake $rearBrake
+	 */
+	public function setRearBrake($rearBrake)
+	{
+		$this->rearBrake = $rearBrake;
+	}
+
+	/**
+	 * @return Coat
+	 */
+	public function getFrontCoat()
+	{
+		return $this->frontCoat;
+	}
+
+	/**
+	 * @param Coat $frontCoat
+	 */
+	public function setFrontCoat($frontCoat)
+	{
+		$this->frontCoat = $frontCoat;
+	}
+
+	/**
+	 * @return Coat
+	 */
+	public function getRearCoat()
+	{
+		return $this->rearCoat;
+	}
+
+	/**
+	 * @param Coat $rearCoat
+	 */
+	public function setRearCoat($rearCoat)
+	{
+		$this->rearCoat = $rearCoat;
+	}
+
+	/**
+	 * @return Tube
+	 */
+	public function getFrontTube()
+	{
+		return $this->frontTube;
+	}
+
+	/**
+	 * @param Tube $frontTube
+	 */
+	public function setFrontTube($frontTube)
+	{
+		$this->frontTube = $frontTube;
+	}
+
+	/**
+	 * @return Tube
+	 */
+	public function getRearTube()
+	{
+		return $this->rearTube;
+	}
+
+	/**
+	 * @param Tube $rearTube
+	 */
+	public function setRearTube($rearTube)
+	{
+		$this->rearTube = $rearTube;
+	}
 }

@@ -20,6 +20,12 @@ class FrontWheel extends Equipment
      */
     protected $id;
 
+    /**
+     * @ORM\Column(type="float")
+     * @var float
+     */
+    protected $size;
+    
     public function __construct()
     {
     	parent::__construct();

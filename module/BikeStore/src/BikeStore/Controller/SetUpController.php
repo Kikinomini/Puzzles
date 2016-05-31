@@ -37,9 +37,6 @@ class SetUpController extends AbstractActionController
 		/** @var ArticleManager $articleManager */
 		$articleManager = $this->getServiceLocator()->get("BikeStore.articleManager");
 
-		if (count($articleManager->getAllEntities()) == 0)
-		{
-
 			$saddle = new Saddle();
 			$articleManager->save($saddle);
 
@@ -107,6 +104,5 @@ class SetUpController extends AbstractActionController
 			$bicycle->setHandlebars($handlebars);
 
 			$articleManager->save($bicycle);
-		}
 	}
 }

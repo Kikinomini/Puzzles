@@ -22,6 +22,12 @@ class Article
     protected $id;
 
 	/**
+	 * @ORM\Column(type="string")
+	 * @var string
+	 */
+	protected $name;
+
+	/**
 	 * @ORM\Column(type="float")
 	 * @var float
 	 */
@@ -32,6 +38,12 @@ class Article
 	 * @var int
 	 */
     protected $stock;
+
+	/**
+	 * @ORM\Column(type="string")
+	 * @var string
+	 */
+	protected $quickDescription;
 
 	/**
 	 * @ORM\Column(type="string")
@@ -160,5 +172,37 @@ class Article
 	public function setListed($listed)
 	{
 		$this->listed = $listed;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getName()
+	{
+		return $this->name;
+	}
+
+	/**
+	 * @param string $name
+	 */
+	public function setName($name)
+	{
+		$this->name = $name;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getQuickDescription()
+	{
+		return $this->quickDescription;
+	}
+
+	/**
+	 * @param string $quickDescription
+	 */
+	public function setQuickDescription($quickDescription)
+	{
+		$this->quickDescription = $quickDescription;
 	}
 }
