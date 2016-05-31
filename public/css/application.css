@@ -402,13 +402,16 @@ a:hover{
 }
 
 .productInfoBackground{
+	background: #82d77e ;
 	background-image: -webkit-linear-gradient(top, #9dff98, #82d77e);
-	background-color: #82d77e ;
 	border: none;
 }
 
 #tabs ul li a{
 	color: #8e8e8e;
-	border: none;
 	font-weight: normal;
+}
+
+#tabs ul li{
+	border: none;
 }
