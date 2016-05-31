@@ -20,6 +20,9 @@ class Tube extends Equipment
      */
     protected $id;
 
+    /** @var  integer */
+    protected $wheelSize;
+
     public function __construct()
     {
     	parent::__construct();

@@ -62,13 +62,25 @@ class Bicycle extends Article
 	 * @ORM\ManyToOne(targetEntity="BikeStore\Model\Equipment\Brake")
 	 * @ORM\JoinColumn(name="BrakeId", referencedColumnName="id")
 	 */
-	protected $brake;
+	protected $frontBrake;
+
+	/** @var  Brake
+	 * @ORM\ManyToOne(targetEntity="BikeStore\Model\Equipment\Brake")
+	 * @ORM\JoinColumn(name="BrakeId", referencedColumnName="id")
+	 */
+	protected $rearBrake;
 
 	/** @var  Coat
 	 * @ORM\ManyToOne(targetEntity="BikeStore\Model\Equipment\Coat")
 	 * @ORM\JoinColumn(name="CoatId", referencedColumnName="id")
 	 */
-	protected $coat;
+	protected $frontCoat;
+
+	/** @var  Coat
+	 * @ORM\ManyToOne(targetEntity="BikeStore\Model\Equipment\Coat")
+	 * @ORM\JoinColumn(name="CoatId", referencedColumnName="id")
+	 */
+	protected $rearCoat;
 
 	/** @var  Dynamo
 	 * @ORM\ManyToOne(targetEntity="BikeStore\Model\Equipment\Dynamo")
@@ -122,7 +134,13 @@ class Bicycle extends Article
 	 * @ORM\ManyToOne(targetEntity="BikeStore\Model\Equipment\Tube")
 	 * @ORM\JoinColumn(name="TubeId", referencedColumnName="id")
 	 */
-	protected $tube;
+	protected $frontTube;
+
+	/** @var  Tube
+	 * @ORM\ManyToOne(targetEntity="BikeStore\Model\Equipment\Tube")
+	 * @ORM\JoinColumn(name="TubeId", referencedColumnName="id")
+	 */
+	protected $rearTube;
 
 	/**
 	 * @var  Frame

@@ -20,6 +20,12 @@ class SaddleBar extends Equipment
      */
     protected $id;
 
+    /** @var  integer */
+    protected $length;
+
+    /** @var  float */
+    protected $diameter;
+
     public function __construct()
     {
     	parent::__construct();
