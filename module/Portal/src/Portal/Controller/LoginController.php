@@ -12,6 +12,7 @@ use Portal\Form\NewPasswordForm;
 use Portal\Form\RegistrationForm;
 use Zend\Http\Request;
 use Zend\Mvc\Controller\AbstractActionController;
+use Zend\Session\Container;
 use Zend\View\Model\ViewModel;
 
 class LoginController extends AbstractActionController
@@ -24,7 +25,8 @@ class LoginController extends AbstractActionController
         /** @var UserManager $userManager */
         $userManager = $this->getServiceLocator()->get('userManager');
 
-        $url = (isset($_SESSION["loginTarget"]))?$_SESSION["loginTarget"]:"";
+        $sessionContainer = new Container("loginTarget");
+        $url = ($sessionContainer->offsetExists("loginTarget"))?$sessionContainer->offsetGet("loginTarget"):false;
         $followTarget = $this->params("followTarget");
 
         if ($request->isPost()) {
@@ -35,7 +37,7 @@ class LoginController extends AbstractActionController
                 $user = $userManager->getUserByEmail($postData["email"]);
                 if ($user != null && $userManager->login($postData["passwort"], $postData["autologin"], $user)) {
                     $this->flashMessenger()->addSuccessMessage("Erfolgreich eingeloggt.");
-                    if ($followTarget == true && $url != "" )
+                    if ($followTarget == true && $url != false)
                     {
                         return $this->redirect()->toUrl($url);
                     }
@@ -44,7 +46,6 @@ class LoginController extends AbstractActionController
                     $this->flashMessenger()->addErrorMessage("Entweder stimmt das Passwort oder die Email nicht.");
                 }
             }
-
         }
 
         $viewModel = new ViewModel(array('form' => $loginForm, "followTarget" => $followTarget));
@@ -58,14 +59,13 @@ class LoginController extends AbstractActionController
         $user = $userManager->getUserFromSession();
         if ($userManager->logout()) {
             if ($user instanceof User) {
-                $this->flashMessenger()->addSuccessMessage("Du wurdest erfolgreich ausgeloggt.");
+                $this->flashMessenger()->addSuccessMessage("Sie wurden erfolgreich ausgeloggt.");
             }
         } else {
-            $this->flashMessenger()->addErrorMessage("Es gab ein Problem. Du konntest nicht ausgeloggt werden.");
+            $this->flashMessenger()->addErrorMessage("Es gab ein Problem. Sie konnten nicht ausgeloggt werden.");
         }
         return $this->redirect()->toRoute('home');
     }
-
 
     public function registrationAction()
     {
@@ -77,14 +77,22 @@ class LoginController extends AbstractActionController
         );
         $user = new User();
 
-        $registrationForm->bind($user);
+        $sessionContainer = new Container("loginTarget");
+        $url = ($sessionContainer->offsetExists("loginTarget"))?$sessionContainer->offsetGet("loginTarget"):false;
+        $followTarget = $this->params("followTarget");
 
+        $registrationForm->bind($user);
         if ($this->getRequest()->isPost()) {
             $postData = $this->getRequest()->getPost();
             $registrationForm->setData($postData);
             if ($registrationForm->isValid()) {
                 $userManager->registrateUser($postData["passwort1"], $user);
-                $this->flashMessenger()->addSuccessMessage("Dein User wurde erfolgreich angelegt. Bitte bestätige die Registrierung durch einen Klick auf dem Link, den wir dir an deine Emailadresse gesendet haben.");
+                $userManager->login($postData["passwort1"], false, $user);
+                $this->flashMessenger()->addSuccessMessage("Ihr User wurde erfolgreich angelegt. Bitte bestätigen Sie die Registrierung durch einen Klick auf dem Link, den wir Ihnen an deine Emailadresse gesendet haben.");
+                if ($followTarget == true && $url != false)
+                {
+                    return $this->redirect()->toUrl($url);
+                }
                 return $this->redirect()->toRoute('home');
             } else {
                 $data["passwort1"] = "";
@@ -121,7 +129,7 @@ class LoginController extends AbstractActionController
                 $user = $userManager->getUserByEmail($postData["email"]);
                 if ($user instanceof User) {
                     $userManager->userForgotPassword($user);
-                    $this->flashMessenger()->addSuccessMessage("Eine Email mit einem Link wurde an dich geschickt. Mit dem Link kannst du dein Passwort zurücksetzen.");
+                    $this->flashMessenger()->addSuccessMessage("Eine Email mit einem Link wurde an Sie verschickt. Mit dem Link können Sie Ihr Passwort zurücksetzen.");
                 } else {
                     $this->flashMessenger()->addErrorMessage("Einen User mit der Emailadresse gibt es nicht.");
                 }

@@ -33,8 +33,10 @@ $config = array(
             'registration' => array(
                 'type' => 'segment',
                 'options' => array(
-                    'route' => '/registration',
-                    'constraints' => array(),
+                    'route' => '/registration[/:followTarget]',
+                    'constraints' => array(
+                        'followTarget' => '0|1',
+                    ),
                     'defaults' => array(
                         'controller' => 'Portal\Controller\Login',
                         'action' => 'registration',

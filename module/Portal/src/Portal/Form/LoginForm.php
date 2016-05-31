@@ -42,7 +42,7 @@ class LoginForm extends Form
 		$password = new Checkbox('autologin');
 		$password->setLabel('Automatischer Login');
 		$password->setAttribute('id', 'autologin');
-		$password->setAttribute('title', 'Du wirst automatisch eingeloggt.');
+		$password->setAttribute('title', 'Sie werden automatisch eingeloggt, wenn Sie diese Seite erneut besuchen.');
 		$password->setAttribute('class', 'form-control');
 		$this->add($password);
 

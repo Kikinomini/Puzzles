@@ -293,7 +293,7 @@ class SmtpMail
             $transport->send($mail);
         } else {
             //todo Var_dump entfernen
-            var_dump($this->empfaengerEmail, $this->senderEmail);
+//            var_dump($this->empfaengerEmail, $this->senderEmail);
         }
     }
 }
