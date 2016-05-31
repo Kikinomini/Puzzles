@@ -22,14 +22,17 @@ class Brake extends Equipment
      */
     protected $id;
 
-
-    /** @var  integer */
-    protected $breakType;
+    /**
+     * @ORM\Column(type="integer")
+     * @var int
+     */
+    protected $brakeType;
 
     public function __construct()
     {
     	parent::__construct();
         $this->id = null;
+        $this->brakeType = self::BRAKE_TYPE_BLOCK;
     }
 
     /**
@@ -51,18 +54,16 @@ class Brake extends Equipment
     /**
      * @return int
      */
-    public function getBreakType()
+    public function getBrakeType()
     {
-        return $this->breakType;
+        return $this->brakeType;
     }
 
     /**
-     * @param int $breakType
+     * @param int $brakeType
      */
-    public function setBreakType($breakType)
+    public function setBrakeType($brakeType)
     {
-        $this->breakType = $breakType;
+        $this->brakeType = $brakeType;
     }
-    
-    
 }

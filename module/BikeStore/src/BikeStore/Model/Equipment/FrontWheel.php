@@ -30,6 +30,7 @@ class FrontWheel extends Equipment
     {
     	parent::__construct();
         $this->id = null;
+        $this->size = -1;
     }
 
     /**

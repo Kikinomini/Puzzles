@@ -68,9 +68,11 @@ class Article
         $this->id = null;
 		$this->setListed(true);
 		$this->setImageName("article.png");
-		$this->setDescription("testArticle");
+		$this->setDescription("this is undefined");
 		$this->setPrice(0.00);
 		$this->setStock(100);
+		$this->setName("undefined");
+		$this->setQuickDescription("undef");
     }
 
     /**

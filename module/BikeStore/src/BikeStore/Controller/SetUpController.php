@@ -87,15 +87,18 @@ class SetUpController extends AbstractActionController
 
 			$bicycle = new Bicycle();
 			$bicycle->setBell($bell);
-			$bicycle->setBrake($brake);
-			$bicycle->setCoat($coat);
+			$bicycle->setFrontBrake($brake);
+			$bicycle->setRearBrake($brake);
+			$bicycle->setFrontCoat($coat);
+			$bicycle->setRearCoat($coat);
 			$bicycle->setDynamo($dynamo);
 			$bicycle->setFrame($frame);
 			$bicycle->setFrontWheel($frontWheel);
 			$bicycle->setRearWheel($rearWheel);
 			$bicycle->setPannierRack($pannierRack);
 			$bicycle->setPedal($pedal);
-			$bicycle->setTube($tube);
+			$bicycle->setFrontTube($tube);
+			$bicycle->setRearTube($tube);
 			$bicycle->setLight($light);
 			$bicycle->setMudGuard($mudGuard);
 			$bicycle->setGearShift($gearShift);

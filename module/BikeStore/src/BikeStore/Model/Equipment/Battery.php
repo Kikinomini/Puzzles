@@ -36,6 +36,8 @@ class Battery extends Equipment
     {
     	parent::__construct();
         $this->id = null;
+		$this->chargingTime = -1;
+		$this->batteryTime = -1;
     }
 
     /**

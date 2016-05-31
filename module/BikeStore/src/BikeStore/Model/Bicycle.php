@@ -60,25 +60,25 @@ class Bicycle extends Article
 
 	/** @var  Brake
 	 * @ORM\ManyToOne(targetEntity="BikeStore\Model\Equipment\Brake")
-	 * @ORM\JoinColumn(name="BrakeId", referencedColumnName="id")
+	 * @ORM\JoinColumn(name="FrontBrakeId", referencedColumnName="id")
 	 */
 	protected $frontBrake;
 
 	/** @var  Brake
 	 * @ORM\ManyToOne(targetEntity="BikeStore\Model\Equipment\Brake")
-	 * @ORM\JoinColumn(name="BrakeId", referencedColumnName="id")
+	 * @ORM\JoinColumn(name="RearBrakeId", referencedColumnName="id")
 	 */
 	protected $rearBrake;
 
 	/** @var  Coat
 	 * @ORM\ManyToOne(targetEntity="BikeStore\Model\Equipment\Coat")
-	 * @ORM\JoinColumn(name="CoatId", referencedColumnName="id")
+	 * @ORM\JoinColumn(name="FrontCoat", referencedColumnName="id")
 	 */
 	protected $frontCoat;
 
 	/** @var  Coat
 	 * @ORM\ManyToOne(targetEntity="BikeStore\Model\Equipment\Coat")
-	 * @ORM\JoinColumn(name="CoatId", referencedColumnName="id")
+	 * @ORM\JoinColumn(name="RearCoat", referencedColumnName="id")
 	 */
 	protected $rearCoat;
 
@@ -116,7 +116,7 @@ class Bicycle extends Article
 	 * @ORM\ManyToOne(targetEntity="BikeStore\Model\Equipment\PannierRack")
 	 * @ORM\JoinColumn(name="PannierRackId", referencedColumnName="id",nullable=true)
 	 */
-	protected $pannierRack; //Boolean
+	protected $pannierRack;
 
 	/** @var  Pedal
 	 * @ORM\ManyToOne(targetEntity="BikeStore\Model\Equipment\Pedal")
@@ -132,13 +132,13 @@ class Bicycle extends Article
 
 	/** @var  Tube
 	 * @ORM\ManyToOne(targetEntity="BikeStore\Model\Equipment\Tube")
-	 * @ORM\JoinColumn(name="TubeId", referencedColumnName="id")
+	 * @ORM\JoinColumn(name="FrontTubeId", referencedColumnName="id")
 	 */
 	protected $frontTube;
 
 	/** @var  Tube
 	 * @ORM\ManyToOne(targetEntity="BikeStore\Model\Equipment\Tube")
-	 * @ORM\JoinColumn(name="TubeId", referencedColumnName="id")
+	 * @ORM\JoinColumn(name="RearTubeId", referencedColumnName="id")
 	 */
 	protected $rearTube;
 
@@ -234,38 +234,6 @@ class Bicycle extends Article
 	public function setBell($bell)
 	{
 		$this->bell = $bell;
-	}
-
-	/**
-	 * @return Brake
-	 */
-	public function getBrake()
-	{
-		return $this->brake;
-	}
-
-	/**
-	 * @param Brake $brake
-	 */
-	public function setBrake($brake)
-	{
-		$this->brake = $brake;
-	}
-
-	/**
-	 * @return Coat
-	 */
-	public function getCoat()
-	{
-		return $this->coat;
-	}
-
-	/**
-	 * @param Coat $coat
-	 */
-	public function setCoat($coat)
-	{
-		$this->coat = $coat;
 	}
 
 	/**
@@ -395,23 +363,7 @@ class Bicycle extends Article
 	{
 		$this->rearWheel = $rearWheel;
 	}
-
-	/**
-	 * @return Tube
-	 */
-	public function getTube()
-	{
-		return $this->tube;
-	}
-
-	/**
-	 * @param Tube $tube
-	 */
-	public function setTube($tube)
-	{
-		$this->tube = $tube;
-	}
-
+	
 	/**
 	 * @return Frame
 	 */

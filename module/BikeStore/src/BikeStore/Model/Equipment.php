@@ -27,6 +27,7 @@ class Equipment extends Article
     {
         parent::__construct();
         $this->id = null;
+		$this->colour = "schwarz";
     }
 
     /**

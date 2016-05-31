@@ -33,6 +33,7 @@ class Dynamo extends Equipment
     {
     	parent::__construct();
         $this->id = null;
+        $this->type = self::DYNAMO_TYPE_HUB;
     }
 
     /**

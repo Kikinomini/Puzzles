@@ -32,12 +32,14 @@ class Light extends Equipment
      * @ORM\Column(type="boolean")
      * @var boolean
      */
-    protected $isBatteriePowered;
+    protected $isBatteryPowered;
 
     public function __construct()
     {
     	parent::__construct();
         $this->id = null;
+        $this->type = self::LIGHT_TYPE_LED;
+        $this->isBatteryPowered = false;
     }
 
     /**
@@ -75,19 +77,17 @@ class Light extends Equipment
     /**
      * @return boolean
      */
-    public function isIsBatteriePowered()
+    public function isIsBatteryPowered()
     {
-        return $this->isBatteriePowered;
+        return $this->isBatteryPowered;
     }
 
     /**
-     * @param boolean $isBatteriePowered
+     * @param boolean $isBatteryPowered
      */
-    public function setIsBatteriePowered($isBatteriePowered)
+    public function setIsBatteryPowered($isBatteryPowered)
     {
-        $this->isBatteriePowered = $isBatteriePowered;
+        $this->isBatteryPowered = $isBatteryPowered;
     }
-    
-    
 }
  

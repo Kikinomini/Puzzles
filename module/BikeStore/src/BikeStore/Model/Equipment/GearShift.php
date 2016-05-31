@@ -45,6 +45,9 @@ class GearShift extends Equipment
     {
     	parent::__construct();
         $this->id = null;
+        $this->numberFrontGears = -1;
+        $this->numberBackGears = -1;
+        $this->type = self::GEAR_SHIFT_TYPE_CHAIN;
     }
 
     /**

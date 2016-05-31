@@ -36,6 +36,8 @@ class Coat extends Equipment
     {
     	parent::__construct();
         $this->id = null;
+        $this->size = -1;
+        $this->profile = "undefined";
     }
 
     /**

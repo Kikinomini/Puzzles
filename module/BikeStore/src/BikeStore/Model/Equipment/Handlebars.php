@@ -30,6 +30,7 @@ class Handlebars extends Equipment
     {
     	parent::__construct();
         $this->id = null;
+        $this->diameter = -1;
     }
 
     /**
