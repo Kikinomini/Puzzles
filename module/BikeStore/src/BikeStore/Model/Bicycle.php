@@ -36,7 +36,7 @@ class Bicycle extends Article
 	/** @var  string */
 	protected $colour;
 
-	/** @var   Saddle
+	/** @var Saddle
 	 * @ORM\ManyToOne(targetEntity="BikeStore\Model\Equipment\Saddle")
 	 * @ORM\JoinColumn(name="SaddleId", referencedColumnName="id")
 	 */

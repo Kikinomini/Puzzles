@@ -54,6 +54,11 @@ class Article
     public function __construct()
     {
         $this->id = null;
+		$this->setListed(true);
+		$this->setImageName("article.png");
+		$this->setDescription("testArticle");
+		$this->setPrice(0.00);
+		$this->setStock(100);
     }
 
     /**
