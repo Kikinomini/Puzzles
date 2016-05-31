@@ -1,0 +1,30 @@
+<?php
+/** @var \BikeStore\Model\Article $article */
+	echo "<h1>Warenkorb<h1>";
+
+ 	$numberArticles = count($this->articles);
+	for ($i=0; $i<$numberArticles; $i++)
+	{
+
+		$article = $this->articles[$i]["article"];
+		$number = $this->articles[$i]["count"];
+//		echo "<p> <IMG SRC = \"/image/"  . $article->getImageName() . "\"/> </p>";
+//		echo "<h2>" . $article->getName() . "</h2>";
+//		echo "<p>" . $article->getQuickDescription() . "</p>";
+//		echo "<p> <b>" . $article->getPrice() . "</b>";
+//		echo "<p> $number </p>";
+
+		?>
+
+
+		<img src = "/image/<?php echo $article->getImageName() ?>"/>
+		<h2><?php echo $article->getName()?></h2>
+		<p><?php echo $article->getQuickDescription()?></p>
+		<p>Preis pro Artikel: <b><?php echo number_format($article->getPrice(),2, ",", ".")?> €</b></p>
+		<p>Gesamtpreis: <b><?php echo number_format(($article->getPrice()*$number),2, ",", ".")?> €</b></p>
+		<p><?php echo $number?></p>
+
+<?php
+	}
+?>
+
