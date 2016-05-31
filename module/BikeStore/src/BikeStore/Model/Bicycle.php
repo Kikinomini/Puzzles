@@ -443,4 +443,11 @@ class Bicycle extends Article
 	{
 		$this->frame = $frame;
 	}
+
+    public function getDetailViewPath()
+    {
+        return "/bike-store/bicycle/bike-product-info";
+    }
+
+
 }

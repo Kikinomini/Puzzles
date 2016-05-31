@@ -10,6 +10,7 @@ namespace BikeStore\Controller;
 
 
 use BikeStore\Model\Article;
+use BikeStore\Model\Bicycle;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 
@@ -25,11 +26,12 @@ class BicycleController extends AbstractActionController
 	public function showBicycleDetailsAction()
 	{
 		
-		$article = new Article();
+		$article = new Bicycle();
 		$viewModel = new ViewModel();
 		$detailList = new ViewModel();
 		$detailList->setTemplate($article->getDetailViewPath());
-		$viewModel->addChild($detailList, "DetailList");
+		$viewModel->addChild($detailList, "ProductInfo");
+		$viewModel->setTemplate("/bike-store/bicycle/show-bicycle-details");
 		
 		return $viewModel;
 	}
