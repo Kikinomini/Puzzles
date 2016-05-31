@@ -24,7 +24,7 @@ class OrderItem
 	protected $order;
 
 	/**
-	 * @ORM\ManyToOne(targetEntity="\BikeStore\Model\Article", inversedBy="orderItems", cascade={"persist","refresh"})
+	 * @ORM\ManyToOne(targetEntity="\BikeStore\Model\Article", cascade={"persist","refresh"})
 	 * @ORM\JoinColumn(name="articleId", referencedColumnName="id")
 	 */
 	protected $article;

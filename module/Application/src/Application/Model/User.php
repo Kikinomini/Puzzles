@@ -2,6 +2,7 @@
 
 namespace Application\Model;
 
+use BikeStore\Model\Order;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -46,6 +47,12 @@ class User
 
 	/** @ORM\OneToMany(targetEntity="\Application\Model\Code", mappedBy="user", cascade="all") */
 	protected $codes;
+
+	/**
+	 * @ORM\OneToMany(targetEntity="\BikeStore\Model\Order", mappedBy="customer", cascade="all")
+	 * @var ArrayCollection|Order[]
+	 */
+	protected $orders;
 
 	/**
 	 * @ORM\ManyToMany(targetEntity="\Application\Model\Resource", cascade="all")
@@ -282,5 +289,21 @@ class User
 	public function setPassword($password)
 	{
 		$this->password = $password;
+	}
+
+	/**
+	 * @return \BikeStore\Model\Order[]|ArrayCollection
+	 */
+	public function getOrders()
+	{
+		return $this->orders;
+	}
+
+	/**
+	 * @param \BikeStore\Model\Order[]|ArrayCollection $orders
+	 */
+	public function setOrders($orders)
+	{
+		$this->orders = $orders;
 	}
 }
