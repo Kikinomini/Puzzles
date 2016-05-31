@@ -12,6 +12,8 @@ use BikeStore\Model\Equipment;
  */
 class Brake extends Equipment
 {
+    const BRAKE_TYPE_BLOCK = 1;
+    const BRAKE_TYPE_DISC = 2;
     /**
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
@@ -19,6 +21,10 @@ class Brake extends Equipment
      * @var int
      */
     protected $id;
+
+
+    /** @var  integer */
+    protected $breakType;
 
     public function __construct()
     {
