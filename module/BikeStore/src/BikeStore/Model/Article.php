@@ -47,4 +47,9 @@ class Article
     {
         $this->id = $id;
     }
+    
+    public function getDetailViewPath()
+    {
+        return "/bike-store/bicycle/detail-list";
+    }
 }

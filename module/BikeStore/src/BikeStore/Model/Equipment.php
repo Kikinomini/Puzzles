@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity(repositoryClass="\BikeStore\Model\Repository\EquipmentRepository")
  * @ORM\Table(name="Equipment")
  */
-class Equipment
+class Equipment extends Article
 {
     /**
      * @ORM\Id
@@ -20,6 +20,7 @@ class Equipment
 
     public function __construct()
     {
+        parent::__construct();
         $this->id = null;
     }
 
