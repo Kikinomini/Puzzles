@@ -20,10 +20,12 @@ class SaddleBar extends Equipment
      */
     protected $id;
 
-    /** @var  integer */
+    /** @var  float
+     * @ORM\Column(type="float")*/
     protected $length;
 
-    /** @var  float */
+    /** @var  float
+     * @ORM\Column(type="float")*/
     protected $diameter;
 
     public function __construct()
@@ -47,4 +49,38 @@ class SaddleBar extends Equipment
     {
         $this->id = $id;
     }
+
+    /**
+     * @return float
+     */
+    public function getLength()
+    {
+        return $this->length;
+    }
+
+    /**
+     * @param float $length
+     */
+    public function setLength($length)
+    {
+        $this->length = $length;
+    }
+
+    /**
+     * @return float
+     */
+    public function getDiameter()
+    {
+        return $this->diameter;
+    }
+
+    /**
+     * @param float $diameter
+     */
+    public function setDiameter($diameter)
+    {
+        $this->diameter = $diameter;
+    }
+    
+    
 }

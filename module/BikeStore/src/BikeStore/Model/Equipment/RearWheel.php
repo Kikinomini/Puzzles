@@ -20,13 +20,16 @@ class RearWheel extends Equipment
      */
     protected $id;
 
-    /** @var  integer */
+    /** @var  integer 
+     * @ORM\Column(type="integer")*/
     protected $wheelSize;
 
-    /** @var  boolean */
+    /** @var  boolean
+     * @ORM\Column(type="boolean")*/
     protected $backPedalBrake;
 
-    /** @var  integer */
+    /** @var  integer
+     * @ORM\Column(type="integer")*/
     protected $gears;
     
 
@@ -52,4 +55,54 @@ class RearWheel extends Equipment
     {
         $this->id = $id;
     }
+
+    /**
+     * @return int
+     */
+    public function getWheelSize()
+    {
+        return $this->wheelSize;
+    }
+
+    /**
+     * @param int $wheelSize
+     */
+    public function setWheelSize($wheelSize)
+    {
+        $this->wheelSize = $wheelSize;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isBackPedalBrake()
+    {
+        return $this->backPedalBrake;
+    }
+
+    /**
+     * @param boolean $backPedalBrake
+     */
+    public function setBackPedalBrake($backPedalBrake)
+    {
+        $this->backPedalBrake = $backPedalBrake;
+    }
+
+    /**
+     * @return int
+     */
+    public function getGears()
+    {
+        return $this->gears;
+    }
+
+    /**
+     * @param int $gears
+     */
+    public function setGears($gears)
+    {
+        $this->gears = $gears;
+    }
+    
+    
 }

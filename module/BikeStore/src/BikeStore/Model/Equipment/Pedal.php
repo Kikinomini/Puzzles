@@ -24,7 +24,8 @@ class Pedal extends Equipment
      */
     protected $id;
 
-    /** @var  integer */
+    /** @var  integer 
+     * @ORM\Column(type="integer")*/
     protected $pedalType;
     
 
@@ -50,5 +51,22 @@ class Pedal extends Equipment
     {
         $this->id = $id;
     }
+
+    /**
+     * @return int
+     */
+    public function getPedalType()
+    {
+        return $this->pedalType;
+    }
+
+    /**
+     * @param int $pedalType
+     */
+    public function setPedalType($pedalType)
+    {
+        $this->pedalType = $pedalType;
+    }
+    
 }
  

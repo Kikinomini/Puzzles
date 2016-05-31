@@ -20,7 +20,13 @@ class Tube extends Equipment
      */
     protected $id;
 
-    /** @var  integer */
+    /**
+     * @return float
+     */
+
+
+    /** @var  float
+     * @ORM\Column(type="float")*/
     protected $wheelSize;
 
     public function __construct()
@@ -43,5 +49,18 @@ class Tube extends Equipment
     public function setId($id)
     {
         $this->id = $id;
+    }
+
+    public function getWheelSize()
+    {
+        return $this->wheelSize;
+    }
+
+    /**
+     * @param float $wheelSize
+     */
+    public function setWheelSize($wheelSize)
+    {
+        $this->wheelSize = $wheelSize;
     }
 }
