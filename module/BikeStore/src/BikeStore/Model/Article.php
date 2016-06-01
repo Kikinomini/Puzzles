@@ -128,6 +128,12 @@ class Article
 		$this->stock = $stock;
 	}
 
+	
+	
+	
+	
+	
+	
 	/**
 	 * @return string
 	 */
