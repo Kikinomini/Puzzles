@@ -157,7 +157,7 @@ class Role {
     }
 
     /**
-     * @return mixed
+     * @return ArrayCollection
      */
     public function getParents()
     {
@@ -173,7 +173,7 @@ class Role {
     }
 
     /**
-     * @return mixed
+     * @return ArrayCollection
      */
     public function getChildren()
     {
