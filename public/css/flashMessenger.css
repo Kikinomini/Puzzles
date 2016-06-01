@@ -1,10 +1,13 @@
 div.flashMessage
 {
     background-color: #ffDDdd;
-    border: 1px solid;
-    border-color: #afafaf;
-    border-radius: 10px;
+	border: 1px solid #afafaf;
+	border-radius: 10px;
     padding: 3px 10px 3px 10px;
+	z-index: 9999;
+	position: absolute;
+	/*width: 100%;*/
+
 }
 span.flashMessage
 {
@@ -22,5 +25,8 @@ div.default
 }
 #flashMessageContainer
 {
+	height: 0px;
+	width: 100%;
+	overflow: visible;
     margin-bottom: 5px;
 }
