@@ -11,15 +11,30 @@
 </div>
 <div class="detailContent flexHeader">
 	<div class="detailPicture flexFillWidth" >
-		<h1>Name des Fahrrads</h1>
-		<img src="/image/Fahrrad_gross.jpg"/>
+		<h1><?php
+			/** @var \BikeStore\Model\Article $article */
+				echo $article->getName();
+			?>
+			</h1>
+		<img src="/image/<?php echo $article->getImageName()
+?>"/>
 	</div>
 	<div id="detailBuy">
 		<p>
-			<b>€ Preis ,- </b><br>
-			<small>
-				inkl. MWST.
-			</small>
+			<b>€ <?php echo $article->getPrice()?> ,- </b><br>
+			<small>inkl. MWST.</small><br>
+			<form>
+			<label>Menge: </label>
+				<select>
+					<datalist id="amount">
+						<option value="1" selected>1</option>
+						<option value="2">2</option>
+						<option value="3">3</option>
+						<option value="4">4</option>
+						<option value="5">5</option>
+					</datalist></option>
+				</select>
+			</form>
 		</p>
 		<button class="btn btn-default shoppingCartButton">
 			Warenkorb
