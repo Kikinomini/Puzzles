@@ -5,6 +5,7 @@
  * Date: 31.05.2016
  * Time: 17:57
  */
+/** @var \BikeStore\Model\Article $article */
 $this->inlineScript()->captureStart();
 echo <<<JS
 	$(document).ready(function(){
@@ -25,7 +26,7 @@ $this->inlineScript()->captureEnd();
 	</ul>
 	<div id="tabs-1">
 		<p>
-			<?php ///** @var \BikeStore\Model\Article $article */
+			<?php
 				echo $article->getDescription()?>
 		</p>
 	</div>

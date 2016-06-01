@@ -384,17 +384,32 @@ a:hover{
 	background-image: url("../image/Einkaufswagen_grau_klein.png");
 	background-color: #82d77e;
 	background-repeat: no-repeat;
-	background-position: 15px;
+	background-position: 30px;
 	background-size: 30px;
 	text-shadow: none;
 }
 
 .shoppingCartButton:hover{
-	background-image: url("../image/Einkaufswagen_gruen_klein.png");
+	background-image: url("../image/cart_white_little.png");
 	font-weight: bold;
-	background-color: #cfcccc;
+	background-color: #82d77e;
 	background-repeat: no-repeat;
-	background-position: 15px;
+	background-position: 30px;
+	background-size: 30px;
+	color: #ffffff;
+}
+
+.shoppingCartButton p{
+	margin: auto;
+	margin-left: 20px;
+}
+
+.shoppingCartButton:active{
+	background-image: url("../image/cart_white_little.png");
+	font-weight: bold;
+	background-color: #82d77e;
+	background-repeat: no-repeat;
+	background-position: 30px;
 	background-size: 30px;
 	color: #ffffff;
 }
