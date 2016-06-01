@@ -39,6 +39,8 @@ class Module implements CronjobModelInterface, MySettingsInterface
 		$dbConfig = $serviceLocator->get('config');
 		$dbConfig = $dbConfig["dbDefault"];
 		MyConnection::setDefaults($dbConfig);
+//		var_dump($dbConfig);
+//		die();
 
 		$eventManager = $e->getApplication()->getEventManager();
 		$moduleRouteListener = new ModuleRouteListener();
