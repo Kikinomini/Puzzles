@@ -299,7 +299,8 @@ input.suchleiste{
 	background-image: url(../image/Lupe_grau_klein.png);
 	background-repeat: no-repeat;
 	background-size: 25px;
-	margin-top: 3px;
+	margin-bottom: 2px;
+	margin-left: -6px;
 	z-index: 0;
 }
 
@@ -379,6 +380,7 @@ a:hover{
 	width: 100%;
 	color: #8e8e8e;
 	font-weight: bold;
+	border: none;
 	background-image: url("../image/Einkaufswagen_grau_klein.png");
 	background-color: #82d77e;
 	background-repeat: no-repeat;
