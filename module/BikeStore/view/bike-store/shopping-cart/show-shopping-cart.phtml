@@ -11,7 +11,8 @@ $this->headLink()->prependStylesheet($this->basepath() . '/css/shopping-cart.css
 		<div class="cartHeadline">
 			Preis
 		</div>
-		<hr id="cartLine1">
+		<br/>
+<!--		<hr id="cartLine1">-->
 
 	<?php
  	$numberArticles = count($this->articles);
@@ -28,7 +29,7 @@ $this->headLink()->prependStylesheet($this->basepath() . '/css/shopping-cart.css
 
 		?>
 
-		<div class="partWareWhole">
+		<div class="partWareWhole <?php echo ($i > 0)?"borderTop":"firstLine";?>">
 			<div class="partWareLeft">
 				<img src = "/image/<?php echo $article->getImageName() ?>"/>
 			</div>
@@ -48,6 +49,15 @@ $this->headLink()->prependStylesheet($this->basepath() . '/css/shopping-cart.css
 
 			
 		</div>
+
+		<?php
+//		if($i<$numberArticles){
+//			echo "<hr class='cartLine2'>";
+//		}
+		?>
+		<?php
+	}
+	?>
 	</div>
 
 	<div class="partBuy">
@@ -68,7 +78,5 @@ $this->headLink()->prependStylesheet($this->basepath() . '/css/shopping-cart.css
 			Kaufen</p>
 	</div>
 </div>
-<?php
-	}
-?>
+
 
