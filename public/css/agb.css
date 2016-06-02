@@ -1,0 +1,27 @@
+.paragraph{
+
+	font-weight: bold;
+	padding-bottom: 10px;"
+}
+.Adress{
+	font-weight: bold;
+	margin-left: 20px;
+}
+.Widerrufsbelehrung{
+	font-weight: bold;
+	padding-bottom: 1px;
+	text-align: center;
+}
+.WiderrufsrechtAuszuübenAdresse{
+	margin-left:20px;
+	margin-top: 5px;
+	margin-bottom:5px;
+}
+.MusterWiderrufsformular{
+	text-align: center;
+	font-weight: bold
+}
+.MusterWiderrufsformular2{
+	border: 1px solid #000000;
+	padding: 10px;
+}
