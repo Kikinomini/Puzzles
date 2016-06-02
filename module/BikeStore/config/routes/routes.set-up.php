@@ -38,4 +38,19 @@ return array(
 			),
 		),
 	),
-);
+	'console' => array(
+		'router' => array(
+			'routes' => array(
+				'insertData' => array(
+					'options' => array(
+						'route' => 'insert',
+						'defaults' => array(
+							'controller' => 'BikeStore\Controller\SetUp',
+							'action' => 'insertTestData',
+							'resource' => 'default',
+						),
+					),
+				),
+			),
+		),
+	),);
