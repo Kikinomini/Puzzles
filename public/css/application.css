@@ -126,6 +126,7 @@ footer a:hover
 	height: 50px;
 	background-color: #8e8e8e;
 	background-image: -webkit-linear-gradient(bottom, #aea9a9, #8e8e8e);
+	background-image: -moz-linear-gradient(bottom, #aea9a9, #8e8e8e);
 	font-size: 12pt;
 
 }
@@ -293,6 +294,7 @@ input.suchleiste{
 	width: 35px;
 	background-color: #82d77e;
 	background-image: -webkit-linear-gradient(top, #9dff98, #82d77e);
+	background-image: -moz-linear-gradient(top, #9dff98, #82d77e);
 	background-position-x: 1px;
 	border: 2px;
 	border-color: #000000;
