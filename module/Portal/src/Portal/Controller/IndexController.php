@@ -21,22 +21,6 @@ class IndexController extends AbstractActionController
 {
 	public function indexAction()
 	{
-		/** @var ArticleManager $articleManager */
-//		$articleManager = $this->getServiceLocator()->get("BikeStore.articleManager");
-
-//		$article = new Article();
-//		$articleManager->save($article);
-//
-//		$articles = $articleManager->getAllEntities();
-//		var_dump($articles);
-
-		/** @var SaddleManager $saddleManager */
-//		$saddleManager = $this->getServiceLocator()->get("BikeStore.equipment.saddleManager");
-//		$saddle = new Saddle();
-		
-//		$saddleManager->save($saddle);
-//		var_dump($saddleManager->getAllEntities());
-
 		return new ViewModel(array());
 	}
 

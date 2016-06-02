@@ -17,8 +17,6 @@ class BikePartController extends AbstractActionController
 {
 	public function showBikePartListAction()
 	{
-
-
 		/** @var EquipmentManager $EquipmenManeger */
 		$EquipmenManeger = $this->serviceLocator->get('BikeStore.equipmentManager');
 

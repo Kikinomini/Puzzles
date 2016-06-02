@@ -29,17 +29,17 @@ var flashMessenger = {
         }
         if (delayInMilliSeconds <= 0)
         {
-            $("#flashMessage" + idNummer).slideUp("slow");
+            $("#flashMessage" + idNummer).fadeOut("slow");
         }
         else
         {
-            $("#flashMessage" + idNummer).delay(delayInMilliSeconds).slideUp("slow");
+            $("#flashMessage" + idNummer).delay(delayInMilliSeconds).fadeOut("slow");
         }
     },
 
     addMessage: function(messageType, messageText, timeToShow)
     {
-        var flashMessage = "<div class = 'flashMessage";
+        var flashMessage = "<div style='display:none' class = 'flashMessage";
         switch (messageType)
         {
             case this.messageTypeSuccess:
@@ -69,15 +69,16 @@ var flashMessenger = {
 			}
         }
         flashMessage += "' id = 'flashMessage"+this.messageCount+"' onmouseout='flashMessenger.hideX("+this.messageCount+")' onmouseover='flashMessenger.showX("+this.messageCount+")'><b>"+messageText+"</b><span class = 'flashMessage' id = 'flashMessageX"+this.messageCount+"' onclick = 'flashMessenger.deleteMessage("+this.messageCount+")'>&#x2716;</span></div>";
+		$(flashMessage).slideUp(0);
         $("#flashMessageContainer").append(flashMessage);
-
+		$("#flashMessage"+this.messageCount).hide().fadeIn("slow");
         if (typeof timeToShow == 'undefined')
         {
             timeToShow = this.defaultTimeToShow;
         }
         if (timeToShow > 0)
         {
-            // this.deleteMessage(this.messageCount, timeToShow);
+            this.deleteMessage(this.messageCount, timeToShow);
         }
         this.messageCount++;
     }

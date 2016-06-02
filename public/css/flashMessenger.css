@@ -5,10 +5,17 @@ div.flashMessage
 	border-radius: 10px;
     padding: 3px 10px 3px 10px;
 	z-index: 9999;
+	width: 100%;
 	position: absolute;
-	/*width: 100%;*/
+	left: 0;
+	right: 0;
 
 }
+div.flashMessage:hover
+{
+	opacity: 0.4;
+}
+
 span.flashMessage
 {
     float: right;
@@ -25,8 +32,9 @@ div.default
 }
 #flashMessageContainer
 {
-	height: 0px;
+	height: 0px; !important;
 	width: 100%;
-	overflow: visible;
+	overflow: visible; !important;
     margin-bottom: 5px;
+	position: relative;
 }
