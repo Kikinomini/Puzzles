@@ -2,6 +2,8 @@
 $this->headLink()->prependStylesheet($this->basepath() . '/css/shopping-cart.css');
 	?>
 
+
+<!--Tabellenkopf-->
 <div class="flexHeader">
 	<div class="flexFillWidth">
 		<h1>Warenkorb</h1>
@@ -14,11 +16,12 @@ $this->headLink()->prependStylesheet($this->basepath() . '/css/shopping-cart.css
 		<br/>
 <!--		<hr id="cartLine1">-->
 
+
+<!--for-Schleife für Warenausgabe-->
 	<?php
  	$numberArticles = count($this->articles);
 	for ($i=0; $i<$numberArticles; $i++)
 	{
-
 		$article = $this->articles[$i]["article"];
 		$number = $this->articles[$i]["count"];
 //		echo "<p> <IMG SRC = \"/image/"  . $article->getImageName() . "\"/> </p>";
@@ -29,10 +32,14 @@ $this->headLink()->prependStylesheet($this->basepath() . '/css/shopping-cart.css
 
 		?>
 
+
+<!--	Eintrag in Korb mit Abgrenzung-->
 		<div class="partWareWhole <?php echo ($i > 0)?"borderTop":"firstLine";?>">
+<!--		Box für Bild-->
 			<div class="partWareLeft">
 				<img src = "/image/<?php echo $article->getImageName() ?>"/>
 			</div>
+<!--		Box für Produktinfo	-->
 			<div class="partWareMiddle">
 				<p>
 				<b><?php echo $article->getName()?></b>
@@ -40,41 +47,39 @@ $this->headLink()->prependStylesheet($this->basepath() . '/css/shopping-cart.css
 				<br>Preis pro Artikel: <b><?php echo number_format($article->getPrice(),2, ",", ".")?> €</b>
 				</p>
 			</div>
+<!--		Box für Aanzahl	-->
 			<div class="partWareRight">
 				<?php echo $number?>
 			</div>
+<!--		Box für Preis aller Artikel eines Typs	-->
 			<div class="partWareRight">
 				<b><?php echo number_format(($article->getPrice()*$number),2, ",", ".")?> €</b>
 			</div>
-
-			
 		</div>
-
-		<?php
-//		if($i<$numberArticles){
-//			echo "<hr class='cartLine2'>";
-//		}
-		?>
 		<?php
 	}
 	?>
 	</div>
 
+
+<!--Kauf-Box rechts-->
 	<div class="partBuy">
 		<?php
-		$numberArticles = count($this->articles);
-		$sum=0.00;
-		for ($i=0; $i<$numberArticles; $i++)
-		{
-			/** @var \BikeStore\Model\Article $article */
-			$article = $this->articles[$i]["article"];
-			$number = $this->articles[$i]["count"];
-			$zwischenwert = ($article->getPrice()*$number);
-			$sum = $sum + $zwischenwert;
-		}
-
+	//		Berechnung Gesamtsumme
+			$numberArticles = count($this->articles);
+			$sum=0.00;
+			for ($i=0; $i<$numberArticles; $i++)
+			{
+				/** @var \BikeStore\Model\Article $article */
+				$article = $this->articles[$i]["article"];
+				$number = $this->articles[$i]["count"];
+				$zwischenwert = ($article->getPrice()*$number);
+				$sum = $sum + $zwischenwert;
+			}
 		?>
 		<p>Summe: <b> <?php echo number_format($sum,2, ",", ".");?> €</b><br>
+
+<!--		Kauf-Button	-->
 			Kaufen</p>
 	</div>
 </div>
