@@ -26,6 +26,14 @@ class ShoppingCartController extends AbstractActionController
 			array( //artikel 2
 				'id' => 4,
 				'count' => 10,
+			),
+			array( //artikel 3
+				'id' => 7,
+				'count' => 3,
+			),
+			array( //artikel 4
+				'id' => 5,
+				'count' => 2,
 			)
 		);
 
