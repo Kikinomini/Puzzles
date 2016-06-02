@@ -66,11 +66,6 @@ class UserManager extends StandardManager
 		return hash('sha512', $password. $this->passwordHash);
 	}
 
-	public function save(User $user = null)
-	{
-		parent::save($user);
-	}
-
 	public function usernameIsFree($username)
 	{
 		$result = $this->repository->findBy(array(
