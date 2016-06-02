@@ -9,6 +9,7 @@
 namespace BikeStore\Controller;
 
 
+use BikeStore\Model\Manager\EquipmentManager;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 
@@ -16,11 +17,16 @@ class BikePartController extends AbstractActionController
 {
 	public function showBikePartListAction()
 	{
-		var_dump($var = 5);
 
-		return array(
-			'myvar' => '12',
-		);
+
+		/** @var EquipmentManager $EquipmenManeger */
+		$EquipmenManeger = $this->serviceLocator->get('BikeStore.equipmentManager');
+
+		/** @var ?? $r_value */ /**TODO Type ändern */
+		$r_value = $EquipmenManeger->findBy(array(
+			"listed" => true,
+		));
+		return array("equipments" => $r_value);
 	}
 
 	public function showBikepartDetailsAction()

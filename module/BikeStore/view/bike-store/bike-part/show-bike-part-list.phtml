@@ -1,0 +1,27 @@
+<?php
+$this->headLink()->prependStylesheet($this->basePath() . '/css/bikePart.css');
+
+echo "<div class = 'table maxWidth'>";
+	echo "<div class ='row'>
+			<div class = 'cell'></div>
+			<div class = 'cell'>Name</div>
+			<div class = 'cell'>Preis</div>
+		</div>";
+
+		/** @var \BikeStore\Model\Equipment $Eqipment */
+		foreach($this->equipments as $Eqipment){
+//			echo "<div class = 'bikePartElement row maxWidthw'>";
+			echo '<a class = "row totalyHidden hiddenLink"  href="'.$this->url('bikelist/details', array('id' => $Eqipment->getId())).'" >';
+			echo "<div class = 'cell bikePartImg'><img class = 'bikePartImg' src='/image/".$this->escapeHtml($Eqipment->getImageName())."'></div>";
+			echo "<div class = 'bikePartInfo cell'>
+					<div class = 'bikePartName'>".$this->escapeHtml($Eqipment->getName())."</div>
+					<div>".$this->escapeHtml($Eqipment->getQuickDescription())."</div>
+				</div>";
+			echo "<div class = 'cell bikePartPrice'>".$this->escapeHtml($Eqipment->getPrice())."</div>";
+			echo '</a>';
+		//	echo "</div>";
+		}
+
+echo "</div>";
+
+echo $this->myvar;

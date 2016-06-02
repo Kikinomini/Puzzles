@@ -1,0 +1,27 @@
+
+.bikePartElement
+{
+	border-top: solid 1px #a1a1a1;
+	display: flex;
+}
+
+div.bikePartImg
+{
+	flex: 1;
+}
+div.bikePartInfo
+{
+	flex: 10;
+}
+div.bikePartPrice
+{
+	flex: 1;
+}
+img.bikePartImg
+{
+	width: 150px
+}
+.bikePartName
+{
+	font-weight: bold;
+}
