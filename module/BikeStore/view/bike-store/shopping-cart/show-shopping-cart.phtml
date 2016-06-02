@@ -14,9 +14,8 @@ $this->headLink()->prependStylesheet($this->basepath() . '/css/shopping-cart.css
 			Preis
 		</div>
 		<br/>
-<!--		<hr id="cartLine1">-->
 
-
+		
 <!--for-Schleife für Warenausgabe-->
 	<?php
  	$numberArticles = count($this->articles);
@@ -44,7 +43,7 @@ $this->headLink()->prependStylesheet($this->basepath() . '/css/shopping-cart.css
 				<p>
 				<b><?php echo $article->getName()?></b>
 				<br><?php echo $article->getQuickDescription()?>
-				<br>Preis pro Artikel: <b><?php echo number_format($article->getPrice(),2, ",", ".")?> €</b>
+				<br>Preis pro Artikel: <b><?php echo number_format($article->getPrice(),2, ",", ".");?> €</b>
 				</p>
 			</div>
 <!--		Box für Aanzahl	-->
@@ -59,24 +58,35 @@ $this->headLink()->prependStylesheet($this->basepath() . '/css/shopping-cart.css
 		<?php
 	}
 	?>
-	</div>
-
-
-<!--Kauf-Box rechts-->
-	<div class="partBuy">
-		<?php
-	//		Berechnung Gesamtsumme
+		<div class="lastLine">
+			<?php
+	//		Berechnung Gesamtsumme + Gesamtanzahl Artikel
 			$numberArticles = count($this->articles);
 			$sum=0.00;
+			$allArticles=0;
 			for ($i=0; $i<$numberArticles; $i++)
 			{
 				/** @var \BikeStore\Model\Article $article */
 				$article = $this->articles[$i]["article"];
 				$number = $this->articles[$i]["count"];
-				$zwischenwert = ($article->getPrice()*$number);
-				$sum = $sum + $zwischenwert;
+				$zwischenwertSum = ($article->getPrice()*$number);
+				$sum = $sum + $zwischenwertSum;
+				$allArticles = $allArticles + $number;
+
 			}
-		?>
+			?>
+
+
+			<b>Summe (<?php echo $allArticles?> Artikel): <span class="priceColor"><?php echo number_format($sum,2, ",", ".");?> €</span></b>
+		</div>
+	</div>
+
+
+<!--Kauf-Box rechts-->
+	<div class="partBuy">
+
+
+
 		<p>Summe: <b> <?php echo number_format($sum,2, ",", ".");?> €</b><br>
 
 <!--		Kauf-Button	-->
