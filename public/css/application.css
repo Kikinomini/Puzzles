@@ -414,6 +414,11 @@ a:hover{
 	color: #ffffff;
 }
 
+.selectWidth{
+	width: 35px;
+	padding: 0 0 0 0;
+}
+
 #detailProductDetails{
 	margin-top: 20px;
 }
@@ -431,4 +436,25 @@ a:hover{
 
 #tabs ul li{
 	border: none;
+}
+
+.showLeft{
+	float: left;
+}
+
+.showRight{
+	float: right;
+}
+
+.block{
+	display: block;
+}
+
+form{
+	height: 40px;
+}
+
+label{
+	margin-right: 5px;
+	margin-top: 6px;
 }
