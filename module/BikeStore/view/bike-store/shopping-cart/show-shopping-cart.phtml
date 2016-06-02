@@ -87,10 +87,11 @@ $this->headLink()->prependStylesheet($this->basepath() . '/css/shopping-cart.css
 
 
 
-		<p>Summe: <b> <?php echo number_format($sum,2, ",", ".");?> €</b><br>
+<!--		<p>Summe: <b> --><?php //echo number_format($sum,2, ",", ".");?><!-- €</b><br>-->
+		<p><b>Summe: <span class="priceColor"><?php echo number_format($sum,2, ",", ".");?> €</span></b>
 
-<!--		Kauf-Button	-->
-			Kaufen</p>
+<!--	Kauf-Button	-->
+		<br>Kaufen</p>
 	</div>
 </div>
 

@@ -1,10 +1,11 @@
 /*Kauf-Box*/
 .partBuy {
-	width: 200px;
+	width: 170px;
 	height: 100%;
 	float: right;
-	margin-right: 15px;
-	margin-top: 50px;
+	/*margin-left: 30px;*/
+	margin-top: 80px;
+	text-align: center;
 }
 
 /*Box für Kopf der Tabelle rechts*/
