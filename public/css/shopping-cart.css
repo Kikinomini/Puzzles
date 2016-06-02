@@ -1,0 +1,48 @@
+.partBuy {
+	width: 200px;
+	height: 100%;
+	float: right;
+	margin-right: 15px;
+	margin-top: 50px;
+}
+
+.cartHeadline {
+	float: right;
+	width: 150px;
+}
+
+#cartLine1 {
+//	noshade;
+	width: 100%;
+	size: 2px;
+	align: center;
+	color: #8e8e8e;
+}
+
+.partWareWhole {
+	height: 110px;
+	width: 100%;
+}
+.partWareWhole div, .partWareWhole div img
+{
+	max-width: 160px;
+}
+
+.partWareLeft
+{
+	float: left;
+	width: 160px;
+}
+
+.partWareMiddle
+{
+	float: left;
+	margin-left: 10px;
+	width: 100%;
+}
+
+.partWareRight
+{
+	float: right;
+	width: 150px;
+}

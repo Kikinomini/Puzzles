@@ -1,7 +1,19 @@
 <?php
-/** @var \BikeStore\Model\Article $article */
-	echo "<h1>Warenkorb<h1>";
+$this->headLink()->prependStylesheet($this->basepath() . '/css/shopping-cart.css');
+	?>
 
+<div class="flexHeader">
+	<div class="flexFillWidth">
+		<h1>Warenkorb</h1>
+		<div class="cartHeadline">
+			Menge
+		</div>
+		<div class="cartHeadline">
+			Preis
+		</div>
+		<hr id="cartLine1">
+
+	<?php
  	$numberArticles = count($this->articles);
 	for ($i=0; $i<$numberArticles; $i++)
 	{
@@ -16,14 +28,46 @@
 
 		?>
 
+		<div class="partWareWhole">
+			<div class="partWareLeft">
+				<img src = "/image/<?php echo $article->getImageName() ?>"/>
+			</div>
+			<div class="partWareMiddle">
+				<p>
+				<b><?php echo $article->getName()?></b>
+				<br><?php echo $article->getQuickDescription()?>
+				<br>Preis pro Artikel: <b><?php echo number_format($article->getPrice(),2, ",", ".")?> €</b>
+				</p>
+			</div>
+			<div class="partWareRight">
+				<?php echo $number?>
+			</div>
+			<div class="partWareRight">
+				<b><?php echo number_format(($article->getPrice()*$number),2, ",", ".")?> €</b>
+			</div>
 
-		<img src = "/image/<?php echo $article->getImageName() ?>"/>
-		<h2><?php echo $article->getName()?></h2>
-		<p><?php echo $article->getQuickDescription()?></p>
-		<p>Preis pro Artikel: <b><?php echo number_format($article->getPrice(),2, ",", ".")?> €</b></p>
-		<p>Gesamtpreis: <b><?php echo number_format(($article->getPrice()*$number),2, ",", ".")?> €</b></p>
-		<p><?php echo $number?></p>
+			
+		</div>
+	</div>
 
+	<div class="partBuy">
+		<?php
+		$numberArticles = count($this->articles);
+		$sum=0.00;
+		for ($i=0; $i<$numberArticles; $i++)
+		{
+			/** @var \BikeStore\Model\Article $article */
+			$article = $this->articles[$i]["article"];
+			$number = $this->articles[$i]["count"];
+			$zwischenwert = ($article->getPrice()*$number);
+			$sum = $sum + $zwischenwert;
+		}
+
+		?>
+		<p>Summe: <b> <?php echo number_format($sum,2, ",", ".");?> €</b><br>
+			Kaufen</p>
+	</div>
+</div>
 <?php
 	}
 ?>
