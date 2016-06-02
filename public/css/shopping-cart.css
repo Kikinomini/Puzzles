@@ -1,0 +1,60 @@
+.partBuy {
+	width: 200px;
+	height: 100%;
+	float: right;
+	margin-right: 15px;
+	margin-top: 50px;
+}
+
+.cartHeadline {
+	float: right;
+	width: 150px;
+}
+
+.firstLine {
+	padding-top: 5px;
+
+	border-top: solid 1px #8e8e8e;
+}
+
+/*#cartLine2 {*/
+/*//	noshade;*/
+	/*width: 100%;*/
+	/*size: 3px;*/
+	/*align: center;*/
+	/*color: #7b7b7b;*/
+	/*margin-bottom: 5px;*/
+/*}*/
+
+.partWareWhole {
+	height: 110px;
+	width: 100%;
+}
+.borderTop
+{
+	padding-top: 5px;
+	border-top: solid 1px #cfcccc;
+}
+.partWareWhole div, .partWareWhole div img
+{
+	max-width: 155px;
+}
+
+.partWareLeft
+{
+	float: left;
+	width: 160px;
+}
+
+.partWareMiddle
+{
+	float: left;
+	margin-left: 10px;
+	width: 100%;
+}
+
+.partWareRight
+{
+	float: right;
+	width: 150px;
+}
