@@ -61,11 +61,11 @@ div.table
     display:table;
 }
 
-div.row
+div.row, div.table div
 {
     display: table-row;
 }
-div.cell
+div.cell, div.table div div
 {
     display: table-cell;
 }

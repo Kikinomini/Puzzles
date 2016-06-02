@@ -77,8 +77,8 @@ var flashMessenger = {
         }
         if (timeToShow > 0)
         {
-            this.deleteMessage(this.messageCount, timeToShow);
+            // this.deleteMessage(this.messageCount, timeToShow);
         }
         this.messageCount++;
     }
-}
+};
