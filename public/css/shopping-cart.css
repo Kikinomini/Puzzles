@@ -1,0 +1,68 @@
+/*Kauf-Box*/
+.partBuy {
+	width: 200px;
+	height: 100%;
+	float: right;
+	margin-right: 15px;
+	margin-top: 50px;
+}
+
+/*Box für Kopf der Tabelle rechts*/
+.cartHeadline {
+	float: right;
+	width: 150px;
+}
+/*Erste Trennlinie*/
+.firstLine {
+	padding-top: 5px;
+
+	border-top: solid 1px #8e8e8e;
+}
+
+/*Trennlinie zwischen Einträgen*/
+.borderTop
+{
+	padding-top: 5px;
+	border-top: solid 1px #cfcccc;
+}
+
+/*#cartLine2 {*/
+/*//	noshade;*/
+	/*width: 100%;*/
+	/*size: 3px;*/
+	/*align: center;*/
+	/*color: #7b7b7b;*/
+	/*margin-bottom: 5px;*/
+/*}*/
+
+/*Eine Tabellenzeile*/
+.partWareWhole {
+	height: 110px;
+	width: 100%;
+}
+.partWareWhole div, .partWareWhole div img
+{
+	max-width: 155px;
+}
+
+/*Box für Bild*/
+.partWareLeft
+{
+	float: left;
+	width: 160px;
+}
+
+/*Box Mitte für Produktbeschreibung*/
+.partWareMiddle
+{
+	float: left;
+	margin-left: 10px;
+	width: 100%;
+}
+
+/*Box für rechte Seite der Tabelle*/
+.partWareRight
+{
+	float: right;
+	width: 150px;
+}

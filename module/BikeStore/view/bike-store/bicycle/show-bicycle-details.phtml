@@ -5,6 +5,7 @@
  * Date: 28.05.2016
  * Time: 23:15
  */
+$this->headLink()->prependStylesheet($this->basepath() . '/css/detailContent.css');
 ?>
 <div id="detailParth">
 	<a href="">Startseite</a> > <a href=""></a>
@@ -24,8 +25,8 @@
 			<b>€ <?php echo $article->getPrice()?> ,- </b><br>
 			<small>inkl. MWST.</small><br>
 			<form>
-			<label>Menge: </label>
-				<select class="form-control">
+			<label class="block showLeft">Menge: </label>
+				<select class="form-control selectWidth block">
 					<datalist id="amount">
 						<option value="1" selected>1</option>
 						<option value="2">2</option>
