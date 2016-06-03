@@ -14,15 +14,15 @@ $this->headLink()->prependStylesheet($this->basepath() . '/css/detailContent.css
 	<div class="detailPicture flexFillWidth" >
 		<h1><?php
 			/** @var \BikeStore\Model\Article $article */
-				echo $article->getName();
+				echo $this->escapeHtml($article->getName());
 			?>
 			</h1>
-		<img src="/image/<?php echo $article->getImageName()
+		<img src="/image/<?php echo $this->escapeHtml($article->getImageName())
 ?>"/>
 	</div>
 	<div id="detailBuy">
 		<p>
-			<b>€ <?php echo $article->getPrice()?> ,- </b><br>
+			<b>€ <?php echo $this->escapeHtml($article->getPrice()) ?> ,- </b><br>
 			<small>inkl. MWST.</small><br>
 			<form>
 			<label class="block showLeft">Menge: </label>
@@ -38,7 +38,7 @@ $this->headLink()->prependStylesheet($this->basepath() . '/css/detailContent.css
 			</form>
 		</p>
 		<button class="btn btn-default shoppingCartButton">
-			<p>Warenkorb</p>
+			<p>in den Warenkorb</p>
 		</button>
 	</div>
 </div>
