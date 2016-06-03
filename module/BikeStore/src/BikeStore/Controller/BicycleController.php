@@ -12,6 +12,7 @@ namespace BikeStore\Controller;
 use Application\Model\User;
 use BikeStore\Model\Article;
 use BikeStore\Model\Bicycle;
+use BikeStore\Model\Manager\ArticleManager;
 use BikeStore\Model\Manager\BicycleManager;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;

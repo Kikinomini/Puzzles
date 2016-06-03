@@ -19,10 +19,7 @@ class Tube extends Equipment
      * @var int
      */
     protected $id;
-
     
-
-
     /** @var  float
      * @ORM\Column(type="float")*/
     protected $wheelSize;

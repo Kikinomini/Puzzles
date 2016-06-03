@@ -7,6 +7,25 @@ use BikeStore\Model\Equipment\Light;
 
 class LightManager extends StandardManager
 {
+    public static function resolveLightType($lightType)
+    {
+        switch($lightType)
+        {
+            case Light::LIGHT_TYPE_HALOGEN:
+            {
+                return "Halogen";
+            }
+            case Light::LIGHT_TYPE_LED:
+            {
+                return "LED";
+            }
+            default:
+            {
+                return "undefined";
+            }
+        }
+    }
+
     public function __construct($repository, $entity = null)
     {
         parent::__construct($repository, $entity);

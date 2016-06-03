@@ -12,9 +12,6 @@ use BikeStore\Model\Equipment;
  */
 class RearWheel extends Equipment
 {
-	const GEARS_TYPE_HUB = 1;
-	const GEARS_TYPE_CHAIN = 2;
-
 	/**
 	 * @ORM\Id
 	 * @ORM\GeneratedValue(strategy="AUTO")
@@ -45,7 +42,7 @@ class RearWheel extends Equipment
         $this->id = null;
         $this->wheelSize = -3.14;
         $this->backPedalBrake=false;
-        $this->gearType = self::GEARS_TYPE_CHAIN;
+        $this->gearType = GearShift::GEAR_SHIFT_TYPE_CHAIN;
     }
 
 	/**

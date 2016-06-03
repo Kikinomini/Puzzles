@@ -7,6 +7,24 @@ use BikeStore\Model\Equipment\GearShift;
 
 class GearShiftManager extends StandardManager
 {
+	public static function resolveGearShiftType($gearShiftType)
+	{
+		switch($gearShiftType)
+		{
+			case GearShift::GEAR_SHIFT_TYPE_CHAIN:
+			{
+				return "Kettenschaltung";
+			}
+			case GearShift::GEAR_SHIFT_TYPE_HUB:
+			{
+				return "Nabenschaltung";
+			}
+			default:
+			{
+				return "undefined";
+			}
+		}
+	}
     public function __construct($repository, $entity = null)
     {
         parent::__construct($repository, $entity);

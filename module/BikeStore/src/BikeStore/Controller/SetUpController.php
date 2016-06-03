@@ -106,54 +106,92 @@ class SetUpController extends AbstractActionController
 		$articleManager = $this->getServiceLocator()->get("BikeStore.articleManager");
 
 		$saddle = new Saddle();
+		$saddle->setPrice(1.5);
+		$saddle->setName("Sattel");
 		$articleManager->save($saddle);
 
 		$saddleBar = new SaddleBar();
+		$saddle->setPrice(3);
+		$saddleBar->setName("Sattelstange");
+		$saddleBar->setDiameter(27);
+		$saddleBar->setLength(40);
 		$articleManager->save($saddleBar);
 
 		$handlebars = new Handlebars();
+		$handlebars->setPrice(4.5);
+		$handlebars->setName("Lenker");
 		$articleManager->save($handlebars);
 
 		$bell = new Bell();
+		$bell->setPrice(6);
+		$bell->setName("Klingel");
 		$articleManager->save($bell);
 
 		$brake = new Brake();
+		$brake->setPrice(7.5);
+		$brake->setName("Bremse");
 		$articleManager->save($brake);
 
 		$coat = new Coat();
+		$coat->setPrice(9);
+		$coat->setName("Mantel");
 		$articleManager->save($coat);
 
 		$dynamo = new Dynamo();
+		$dynamo->setPrice(11.5);
+		$dynamo->setName("Dynamo");
 		$articleManager->save($dynamo);
 
 		$frontWheel = new FrontWheel();
+		$frontWheel->setPrice(13);
+		$frontWheel->setName("Vorderrad");
 		$articleManager->save($frontWheel);
 
 		$gearShift = new GearShift();
+		$gearShift->setPrice(14.5);
+		$gearShift->setName("Gangschaltung");
 		$articleManager->save($gearShift);
 
 		$light = new Light();
+		$light->setPrice(16);
+		$light->setName("Licht");
 		$articleManager->save($light);
 
 		$mudGuard = new MudGuard();
+		$mudGuard->setPrice(17.5);
+		$mudGuard->setName("Schutzblech");
 		$articleManager->save($mudGuard);
 
 		$pannierRack = new PannierRack();
+		$pannierRack->setPrice(19);
+		$pannierRack->setName("Gepäckträger");
 		$articleManager->save($pannierRack);
 
 		$pedal = new Pedal();
+		$pedal->setPrice(20.5);
+		$pedal->setName("Pedal");
 		$articleManager->save($pedal);
 
 		$rearWheel = new RearWheel();
+		$rearWheel->setPrice(22);
+		$rearWheel->setName("Hinterrad");
 		$articleManager->save($rearWheel);
 
 		$tube = new Tube();
+		$tube->setPrice(23.5);
+		$tube->setName("Schlauch");
 		$articleManager->save($tube);
 
 		$frame = new Frame();
+		$frame->setPrice(25);
+		$frame->setName("Rahmen");
 		$articleManager->save($frame);
 
 		$bicycle = new Bicycle();
+		$bicycle->setPrice(26.5);
+		$bicycle->setName("Fahrrad");
+		$bicycle->setQuickDescription("Standardfahrrad");
+		$bicycle->setDescription("Hier könnte ihre Beschreibung stehen");
 		$bicycle->setBell($bell);
 		$bicycle->setFrontBrake($brake);
 		$bicycle->setRearBrake($brake);
@@ -173,9 +211,8 @@ class SetUpController extends AbstractActionController
 		$bicycle->setSaddle($saddle);
 		$bicycle->setSaddleBar($saddleBar);
 		$bicycle->setHandlebars($handlebars);
-
 		$articleManager->save($bicycle);
 
-		echo "insert Article-Test-Data";
+		echo "insert Article-Test-Data successfull";
 	}
 }

@@ -7,6 +7,33 @@ use BikeStore\Model\Equipment\Pedal;
 
 class PedalManager extends StandardManager
 {
+    public static function resolvePedalType($pedalType)
+    {
+        switch($pedalType)
+        {
+            case Pedal::PEDAL_TYPE_FLAT:
+            {
+                return "Blockpedal";
+            }
+            case Pedal::PEDAL_TYPE_CLICK:
+            {
+                return "Klickpedal";
+            }
+            case Pedal::PEDAL_TYPE_SPIKED:
+            {
+                return "Bärentatze-Pedal";
+            }
+            case Pedal::PEDAL_TYPE_SPIKED_CLICK:
+            {
+                return "Block/Bärentatze-Pedal";
+            }
+            default:
+            {
+                return "undefined";
+            }
+        }
+    }
+
     public function __construct($repository, $entity = null)
     {
         parent::__construct($repository, $entity);

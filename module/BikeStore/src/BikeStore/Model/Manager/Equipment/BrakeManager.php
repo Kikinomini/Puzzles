@@ -7,6 +7,25 @@ use BikeStore\Model\Equipment\Brake;
 
 class BrakeManager extends StandardManager
 {
+	public static function resolveBrakeType($brakeType)
+	{
+		switch($brakeType)
+		{
+			case Brake::BRAKE_TYPE_BLOCK:
+			{
+				return "Klotzbremse";
+			}
+			case Brake::BRAKE_TYPE_DISC:
+			{
+				return "Scheibenbremse";
+			}
+			default:
+			{
+				return "undefined";
+			}
+		}
+	}
+	
     public function __construct($repository, $entity = null)
     {
         parent::__construct($repository, $entity);
