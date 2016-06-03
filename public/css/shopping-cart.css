@@ -1,6 +1,6 @@
 /*Kauf-Box*/
 .partBuy {
-	width: 170px;
+	width: 240px;
 	height: 100%;
 	float: right;
 	/*margin-left: 30px;*/
@@ -78,5 +78,26 @@
 }
 
 .priceColor{
-	color: #1fbb2c;
+	color: #3ab93e;
+}
+
+.buyButton {
+	width: 90%;
+	color: #8e8e8e;
+	background-color: #82d77e;
+	background-image: -webkit-linear-gradient(top, #9dff98, #82d77e);
+	background-image: -moz-linear-gradient(top, #9dff98, #82d77e);
+	font-weight: bold;
+	text-shadow: none;
+	border: none;
+
+}
+
+.buyButton:hover {
+	width: 90%;
+	color: #ffffff;
+	background-color: #82d77e;
+	font-weight: bold;
+	text-shadow: none;
+	border: none;
 }
