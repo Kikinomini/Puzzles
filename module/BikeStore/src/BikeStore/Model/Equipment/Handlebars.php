@@ -26,6 +26,12 @@ class Handlebars extends Equipment
      */
     protected $diameter;
 
+    /**
+     * @ORM\Column(type="integer")
+     * @var int
+     */
+    protected $length;
+
     public function __construct()
     {
     	parent::__construct();
@@ -63,5 +69,21 @@ class Handlebars extends Equipment
     public function setDiameter($diameter)
     {
         $this->diameter = $diameter;
+    }
+
+    /**
+     * @return int
+     */
+    public function getLength()
+    {
+        return $this->length;
+    }
+
+    /**
+     * @param int $length
+     */
+    public function setLength($length)
+    {
+        $this->length = $length;
     }
 }
