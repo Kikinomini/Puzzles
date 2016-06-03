@@ -52,6 +52,39 @@ class LoginController extends AbstractActionController
         return $viewModel;
     }
 
+    public function resendRegistrationCodeAction()
+    {
+        /** @var UserManager $userManager */
+        $userManager = $this->getServiceLocator()->get("userManager");
+        $user = $userManager->getUserFromSession();
+        
+        $codes = CodeManager::filterByAction($user->getCodes(), CodeManager::ACTION_REGISTRATION);
+        if ($codes->count() >= 1)
+        {
+            /** @var CodeManager $codeManager */
+            $codeManager = $this->getServiceLocator()->get("codeManager");
+            $codeManager->sendEmail($user, $codes->get(0));
+			$returnValue = array(
+				'emailSend' => true,
+			);
+        }
+        else
+        {
+			$returnValue = array(
+				'emailSend' => true,
+				'failReason' => 'Ihnen konnte nicht erneut eine Email zugesendet werden. Bitte versuchen Sie es später erneut',
+			);
+			if ($user->getAktiviert())
+			{
+				$returnValue["failReason"] = "Ihr User ist bereits aktiviert";
+			}
+
+		}
+		$viewModel = new ViewModel(array("json" => $returnValue));
+		$viewModel->setTemplate("ajax/json");
+		return $viewModel;
+    }
+
     public function logoutAction()
     {
         /** @var UserManager $userManager */

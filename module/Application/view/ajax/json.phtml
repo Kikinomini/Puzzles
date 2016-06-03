@@ -1,0 +1,12 @@
+<?php
+if (isset($this->json))
+{
+	if (is_array($this->json))
+	{
+		echo json_encode($this->json);
+	}
+	else
+	{
+		echo $this->json;
+	}
+}

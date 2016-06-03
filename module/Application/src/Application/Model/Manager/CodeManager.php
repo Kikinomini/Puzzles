@@ -8,10 +8,12 @@ use Application\Model\Code;
 use Application\Model\Repository\CodeRepository;
 use Application\Model\SmtpMail;
 use Application\Model\User;
+use Doctrine\Common\Collections\ArrayCollection;
 use Zend\View\Helper\Url;
 
 class CodeManager extends StandardManager
 {
+	const ACTION_REGISTRATION = "registration";
     const ACTION_VERIFY_NEW_EMAIL = "1";
     const CODE_DEFAULT_LENGTH = 255;
 
@@ -73,7 +75,7 @@ class CodeManager extends StandardManager
 
         switch ($code->getAction())
         {
-            case 'registration':
+            case ACTION_REGISTRATION:
             {
                 $mail = $this->mail;
                 $mail->setAllowReply(false);
@@ -182,7 +184,7 @@ class CodeManager extends StandardManager
             $this->errors[] = "ERROR: Code not valid";
             return $message;
         }
-        if($code->getAction() == "registration") {
+        if($code->getAction() == ACTION_REGISTRATION) {
 
             /** @var User $user */
             $user = $code->getUser();
@@ -230,5 +232,19 @@ class CodeManager extends StandardManager
     public function setErrors($errors)
     {
         $this->errors = $errors;
+    }
+
+    public static function filterByAction(ArrayCollection $codes, $action)
+    {
+        $filteredList = new ArrayCollection();
+        /** @var Code $code */
+        foreach($codes as $code)
+        {
+            if ($code->getAction() == $action)
+            {
+                $filteredList->add($code);
+            }
+        }
+        return $filteredList;
     }
 }

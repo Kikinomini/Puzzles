@@ -32,23 +32,15 @@ class Module implements CronjobModelInterface, MySettingsInterface
 {
 	public function onBootstrap(MvcEvent $e)
 	{
-//        session_start();
-
 		$serviceLocator = $e->getApplication()->getServiceManager();
-		$serviceLocator->myVar = 5;
+//		$serviceLocator->myVar = 5;
 		$dbConfig = $serviceLocator->get('config');
 		$dbConfig = $dbConfig["dbDefault"];
 		MyConnection::setDefaults($dbConfig);
-//		var_dump($dbConfig);
-//		die();
 
 		$eventManager = $e->getApplication()->getEventManager();
 		$moduleRouteListener = new ModuleRouteListener();
 		$moduleRouteListener->attach($eventManager);
-		// $eventManager->attach('route', array('Application\Factory\AclFactory', 'bootstrap'),2);
-
-//		Helper::setEventManager($eventManager);
-//		Helper::setServiceManagaer($e->getApplication()->getServiceManager());
 
 		$logger = new Logger();
 		$writer = new Stream(dirname(dirname(__DIR__)) . "/Log/log.log");
@@ -79,10 +71,10 @@ class Module implements CronjobModelInterface, MySettingsInterface
 		});
 
 		$serviceManager = $e->getApplication()->getServiceManager();
-
 		if($e->getRequest() instanceof Request)
 		{
 			$this->bootstrapSession($e);
+			/** @var MyAcl $acl */
 			$acl = $serviceManager->get('Acl');
 			$eventManager->getSharedManager()->attach('Zend\Mvc\Application', 'dispatch', function($e) use ($acl)
 			{
@@ -164,10 +156,8 @@ class Module implements CronjobModelInterface, MySettingsInterface
 						$user = $sm->get("userManager")->getUserFromSession();
 						if(!($user instanceof User))
 						{
-//							unset($_SESSION["loginTarget"]);
 							$sessionContainer = new Container("loginTarget");
 							$sessionContainer->offsetSet("loginTarget", $request->getUriString());
-//							$_SESSION["loginTarget"] = $request->getUriString();
 							$viewModel->isOnline = false;
 						}
 						$errorTemplate = 'error/403';
@@ -181,7 +171,6 @@ class Module implements CronjobModelInterface, MySettingsInterface
 					default:
 					{
 						$errorTemplate = 'error/statusCode';
-//                    $errorTemplate = 'error/index';
 						$viewModel->statusCode = $response->getStatusCode();
 						$viewModel->reasonPhrase = $response->getReasonPhrase();
 
@@ -225,7 +214,6 @@ class Module implements CronjobModelInterface, MySettingsInterface
 				__NAMESPACE__ => __DIR__ . '/src/' . __NAMESPACE__,
 				'fpdf' => dirname(dirname(__DIR__)) . "/myVendor/fpdf",
 				'fpdi' => dirname(dirname(__DIR__)) . "/myVendor/fpdi",
-//                'MyCronjob' => dirname(dirname(__DIR__)) . "/myVendor/MyCronjob",
 				'MyTelegramBot' => dirname(dirname(__DIR__)) . "/myVendor/MyTelegramBot",
 				'SetCookie' => dirname(dirname(__DIR__)) . "/myVendor/SetCookie",
 				'SimpleHtmlDom' => dirname(dirname(__DIR__)) . "/myVendor/SimpleHtmlDom",
