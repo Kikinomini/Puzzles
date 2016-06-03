@@ -5,12 +5,12 @@
  * Date: 31.05.2016
  * Time: 17:57
  */
-/** @var \BikeStore\Model\Article $article */
+/** @var \BikeStore\Model\Bicycle $article */
 $this->inlineScript()->captureStart();
 echo <<<JS
 	$(document).ready(function(){
 			$("#tabs").tabs({
-				event: "mouseover"
+				
 			});
 	});
 JS;
@@ -27,11 +27,57 @@ $this->inlineScript()->captureEnd();
 	<div id="tabs-1">
 		<p>
 			<?php
-				echo $article->getDescription()?>
+				echo $this->escapeHtml($article->getDescription())?>
 		</p>
 	</div>
 	<div id="tabs-2">
-		<p>Morbi tincidunt, dui sit amet facilisis feugiat, odio metus gravida ante, ut pharetra massa metus id nunc. Duis scelerisque molestie turpis. Sed fringilla, massa eget luctus malesuada, metus eros molestie lectus, ut tempus eros massa ut dolor. Aenean aliquet fringilla sem. Suspendisse sed ligula in ligula suscipit aliquam. Praesent in eros vestibulum mi adipiscing adipiscing. Morbi facilisis. Curabitur ornare consequat nunc. Aenean vel metus. Ut posuere viverra nulla. Aliquam erat volutpat. Pellentesque convallis. Maecenas feugiat, tellus pellentesque pretium posuere, felis lorem euismod felis, eu ornare leo nisi vel felis. Mauris consectetur tortor et purus.</p>
+		<table>
+			<tr><td>Name:</td><td><?php
+					echo $this->escapeHtml($article->getName());
+					?></td></tr>
+			<tr><td>Typ:</td><td><?php
+					$type = $this->escapeHtml($article->getFrame()->getBikeType());
+					if($type = 1){
+						echo "City Fahrrad";
+					}
+					else if($type = 2){
+						echo "Mountainbike";
+					}
+					else if($type = 3){
+						echo "Rennrad";
+					}
+					else if($type = 4){
+						echo "Touring Fahrrad";
+					}
+					else if($type = 5){
+						echo "Elektro Fahrrad";
+					}
+					else{
+						echo "Type nicht gefunden!";
+					}
+					?></td></tr>
+			<tr><td>Radgröße:</td><td><?php
+					echo $this->escapeHtml($article->getFrontWheel()->getSize());
+					?> "</td></tr>
+			<tr><td>Rahmengröße:</td><td><?php
+					echo $this->escapeHtml($article->getFrame()->getFrameSize());
+					?> "</td></tr>
+			<tr><td>Farbe:</td><td><?php
+					echo $this->escapeHtml($article->getFrame()->getColor());
+					?></td></tr>
+			<tr><td>Sattelart:</td><td><?php
+					echo "gibts noch nicht";
+					?></td></tr>
+			<tr><td>Bremspaket:</td><td><?php
+					echo "gibts auch noch nicht!"
+					?></td></tr>
+			<tr><td>Lenkerhöhe:</td><td><?php
+					echo "fehlt";
+					?></td></tr>
+			<tr><td>Sattelhöhe:</td><td><?php
+					echo $this->escapeHtml(number_format($article->getSaddleBar()->getLength(), 2, ",", "." ));
+					?> cm</td></tr>
+		</table>
 	</div>
 </div>
 
