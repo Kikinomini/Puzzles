@@ -30,7 +30,7 @@ return array(
 					),
 					'defaults' => array(
 						'controller' => 'BikeStore\Controller\Bicycle',
-						'action' => 'showBicycleDetails',
+						'action' => 'showArticleDetails',
 						'resource' => 'default',
 					),
 				),

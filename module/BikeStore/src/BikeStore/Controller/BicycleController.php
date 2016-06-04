@@ -34,7 +34,7 @@ class BicycleController extends AbstractActionController
 		);
 	}
 
-	public function showBicycleDetailsAction()
+	public function showArticleDetailsAction()
 	{
 
 		$id = $this->params("id", -1);
