@@ -19,7 +19,7 @@ echo "<div class ='row'>
 foreach($this->bicycles as $bicycle)
 {
 //			echo "<div class = 'bikePartElement row maxWidthw'>";
-	echo '<a class = "row totalyHidden hiddenLink"  href="'.$this->url('bikelist/details', array('id' => $bicycle->getId())).'" >';
+	echo '<a class = "row totalyHidden hiddenLink"  href="'.$this->url('articleDetails', array('id' => $bicycle->getId())).'" >';
 	echo "<div class = 'cell bikePartImg'><img class = 'bikePartImg' src='/image/".$this->escapeHtml($bicycle->getImageName())."'></div>";
 	echo "<div class = 'bikePartInfo cell'>
 					<div class = 'bikePartName'>".$this->escapeHtml($bicycle->getName())."</div>

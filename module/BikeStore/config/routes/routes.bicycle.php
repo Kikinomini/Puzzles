@@ -20,23 +20,6 @@ return array(
 						'resource' => 'default',
 					),
 				),
-				'may_terminate' => true,
-				'child_routes' => array(
-					'details' => array(
-						'type' => 'segment',
-						'options' => array(
-							'route' => '/:id',
-							'constraints' => array(
-								'id' => '[0-9]{1,}'
-							),
-							'defaults' => array(
-								'controller' => 'BikeStore\Controller\Bicycle',
-								'action' => 'showBicycleDetails',
-								'resource' => 'default',
-							),
-						),
-					),
-				),
 			),
 			'articleDetails' => array(
 				'type' => 'segment',

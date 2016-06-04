@@ -11,7 +11,7 @@ echo "<div class = 'table maxWidth'>";
 		/** @var \BikeStore\Model\Equipment $Eqipment */
 		foreach($this->equipments as $Eqipment){
 //			echo "<div class = 'bikePartElement row maxWidthw'>";
-			echo '<a class = "row totalyHidden hiddenLink"  href="'.$this->url('bikelist/details', array('id' => $Eqipment->getId())).'" >';
+			echo '<a class = "row totalyHidden hiddenLink"  href="'.$this->url('articleDetails', array('id' => $Eqipment->getId())).'" >';
 			echo "<div class = 'cell bikePartImg'><img class = 'bikePartImg' src='/image/".$this->escapeHtml($Eqipment->getImageName())."'></div>";
 			echo "<div class = 'bikePartInfo cell'>
 					<div class = 'bikePartName'>".$this->escapeHtml($Eqipment->getName())."</div>
