@@ -5,7 +5,6 @@ namespace BikeStore\Model\Equipment;
 use Doctrine\ORM\Mapping as ORM;
 use BikeStore\Model\Equipment;
 
-
 /**
  * @ORM\Entity(repositoryClass="\BikeStore\Model\Repository\Equipment\HandlebarsRepository")
  * @ORM\Table(name="Handlebars")

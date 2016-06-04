@@ -12,7 +12,8 @@ return array(
 				'type' => 'segment',
 				'options' => array(
 					'route' => '/bike',
-					'constraints' => array(),
+					'constraints' => array(
+					),
 					'defaults' => array(
 						'controller' => 'BikeStore\Controller\Bicycle',
 						'action' => 'showBicycleList',
@@ -34,6 +35,20 @@ return array(
 								'resource' => 'default',
 							),
 						),
+					),
+				),
+			),
+			'articleDetails' => array(
+				'type' => 'segment',
+				'options' => array(
+					'route' => '/article/:id',
+					'constraints' => array(
+						'id' => '[0-9]{1,}'
+					),
+					'defaults' => array(
+						'controller' => 'BikeStore\Controller\Bicycle',
+						'action' => 'showBicycleDetails',
+						'resource' => 'default',
 					),
 				),
 			),

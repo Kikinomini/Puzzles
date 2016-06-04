@@ -1,4 +1,9 @@
 <?php
+if (!isset($this->numberArticlesInShoppingCart))
+{
+	$this->numberArticlesInShoppingCart = 0;
+}
+
 echo $this->doctype(); ?>
 
 <html lang="de">
@@ -99,7 +104,7 @@ JS;
 					<a href="<?php echo $this->url("shoppingCart"); ?>">
 						<div class="warenkorbAlgemein">
 							<div class="warenkorbPic">&nbsp;</div>
-							<div class="warenkorbText">0 Artikel <br> im Warenkorb</div>
+							<div class="warenkorbText"><?php echo $this->numberArticlesInShoppingCart ?> Artikel <br> im Warenkorb</div>
 						</div>
 					</a>
 				</div>

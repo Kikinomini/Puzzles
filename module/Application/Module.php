@@ -33,7 +33,6 @@ class Module implements CronjobModelInterface, MySettingsInterface
 	public function onBootstrap(MvcEvent $e)
 	{
 		$serviceLocator = $e->getApplication()->getServiceManager();
-//		$serviceLocator->myVar = 5;
 		$dbConfig = $serviceLocator->get('config');
 		$dbConfig = $dbConfig["dbDefault"];
 		MyConnection::setDefaults($dbConfig);
@@ -41,6 +40,10 @@ class Module implements CronjobModelInterface, MySettingsInterface
 		$eventManager = $e->getApplication()->getEventManager();
 		$moduleRouteListener = new ModuleRouteListener();
 		$moduleRouteListener->attach($eventManager);
+
+//		/** @var ViewModel $viewModel */
+//		$viewModel = $e->getApplication()->getMvcEvent()->getViewModel();
+//		$viewModel->setVariable("numberArticlesInShoppingCart", 0);
 
 		$logger = new Logger();
 		$writer = new Stream(dirname(dirname(__DIR__)) . "/Log/log.log");
