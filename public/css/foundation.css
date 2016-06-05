@@ -1662,17 +1662,6 @@ label > [type='radio'] {
 [type='file'] {
   width: 100%; }
 
-label {
-  display: block;
-  margin: 0;
-  font-size: 0.875rem;
-  font-weight: normal;
-  line-height: 1.8;
-  color: #0a0a0a; }
-  label.middle {
-    margin: 0 0 1rem;
-    padding: 0.5625rem 0; }
-
 .help-text {
   margin-top: -0.5rem;
   font-size: 0.8125rem;
@@ -3145,38 +3134,6 @@ html.is-reveal-open body {
 
 .switch.large input:checked ~ .switch-paddle::after {
   left: 2.75rem; }
-
-table {
-  width: 100%;
-  margin-bottom: 1rem;
-  border-radius: 0; }
-  table thead,
-  table tbody,
-  table tfoot {
-    border: 1px solid #f1f1f1;
-    background-color: #fefefe; }
-  table caption {
-    font-weight: bold;
-    padding: 0.5rem 0.625rem 0.625rem; }
-  table thead,
-  table tfoot {
-    background: #f8f8f8;
-    color: #0a0a0a; }
-    table thead tr,
-    table tfoot tr {
-      background: transparent; }
-    table thead th,
-    table thead td,
-    table tfoot th,
-    table tfoot td {
-      padding: 0.5rem 0.625rem 0.625rem;
-      font-weight: bold;
-      text-align: left; }
-  table tbody tr:nth-child(even) {
-    background-color: #f1f1f1; }
-  table tbody th,
-  table tbody td {
-    padding: 0.5rem 0.625rem 0.625rem; }
 
 @media screen and (max-width: 63.9375em) {
   table.stack thead {

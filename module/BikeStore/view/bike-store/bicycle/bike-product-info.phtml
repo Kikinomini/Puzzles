@@ -72,8 +72,8 @@ $this->inlineScript()->captureEnd();
 					echo "gibts auch noch nicht!"
 					?></td></tr>
 			<tr><td>Lenkerhöhe:</td><td><?php
-					echo "fehlt";
-					?></td></tr>
+					echo $this->escapeHtml(number_format($article->getHandlebars()->getLength(), 2, ",", "."));
+					?> cm</td></tr>
 			<tr><td>Sattelhöhe:</td><td><?php
 					echo $this->escapeHtml(number_format($article->getSaddleBar()->getLength(), 2, ",", "." ));
 					?> cm</td></tr>

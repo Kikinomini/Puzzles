@@ -290,6 +290,7 @@ input.suchleiste{
 
 .sucheButton{
 	display: inline;
+	padding: 5px 5px 5px 5px;
 	height: 35px;
 	width: 35px;
 	background-color: #82d77e;
@@ -298,6 +299,10 @@ input.suchleiste{
 	background-position-x: 1px;
 	border: 2px;
 	border-color: #000000;
+	border-left: 0px;
+	border-bottom-left-radius: 0px;
+	border-top-left-radius: 0px;
+	fill: #8e8e8e;
 }
 
 .suchePic
@@ -312,12 +317,8 @@ input.suchleiste{
 	z-index: 0;
 }
 
-
-.sucheButton :hover
-{
-	background-image: url(../image/lupe_weiss_klein.png) ;
-	background-repeat: no-repeat;
-	z-index: 1;
+.sucheButton:hover svg{
+	fill: #ffffff;
 }
 
 .flexHeader{
