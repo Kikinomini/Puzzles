@@ -441,3 +441,6 @@ a:hover{
 #tabs ul li{
 	border: none;
 }
+select{
+	height: inherit !important;
+}

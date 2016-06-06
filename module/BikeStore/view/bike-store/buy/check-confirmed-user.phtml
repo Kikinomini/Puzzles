@@ -1,5 +1,40 @@
+<?php
+$resendRegistrationEmailUrl = $this->url("resendRegistrationEmail");
+$this->inlineScript()->captureStart();
+echo <<<JS
+	$(document).ready(function() {
+		$("#resendEmailLink").click(function() {
+		  	MyJsonAjax.requestUrl("$resendRegistrationEmailUrl", function(data) {
+		  	  	if (data["emailSend"] == true)
+		  	  	{
+		  	  		flashMessenger.addMessage(
+		  	  			flashMessenger.messageTypeSuccess, 
+		  	  			"Ihnen wurde erneut eine Email zur Registration gesendet. Bitte bestätigen Sie den Link in der Email."
+		  	  		);
+		  	  	}
+		  	  	else {
+		  	  		flashMessenger.addMessage(
+		  	  			flashMessenger.messageTypeError, 
+		  	  			data["failReason"]
+		  	  		);	
+		  	  	}
+		  	}, function() {
+		  	  		flashMessenger.addMessage(
+		  	  			flashMessenger.messageTypeError, 
+		  	  			"Zur Zeit können wir Ihnen keine Email zukommen lassen. Bitte versuchen Sie es später erneut."
+		  	  		);
+		  	});
+		});
+	});
+JS;
+
+$this->inlineScript()->captureEnd();
+
+?>
+
 
 <h1>Ihr Benutzer muss bestätigt werden</h1>
 <p>Sie müssen ihren Benutzer bestätigen, um einzukaufen. Bitte öffnen
 	Sie den Link, den wir Ihnen per Email zugesendet haben.<br/>
-	Sie haben keine Email erhalten? Schauen Sie in Ihrem Spam-Ordner nach oder <a>fordern Sie eine neue Email an.</a></p>
+	Sie haben keine Email erhalten? Schauen Sie in Ihrem Spam-Ordner nach oder <a id='resendEmailLink'>fordern Sie eine
+		neue Email an.</a></p>

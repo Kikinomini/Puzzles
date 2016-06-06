@@ -75,7 +75,7 @@ class CodeManager extends StandardManager
 
         switch ($code->getAction())
         {
-            case ACTION_REGISTRATION:
+            case self::ACTION_REGISTRATION:
             {
                 $mail = $this->mail;
                 $mail->setAllowReply(false);
@@ -181,10 +181,10 @@ class CodeManager extends StandardManager
         if ($code == null)
         {
             $message = false;
-            $this->errors[] = "ERROR: Code not valid";
+            $this->errors[] = "ERROR: Der Code ist ungültig!";
             return $message;
         }
-        if($code->getAction() == ACTION_REGISTRATION) {
+        if($code->getAction() == self::ACTION_REGISTRATION) {
 
             /** @var User $user */
             $user = $code->getUser();
@@ -213,7 +213,7 @@ class CodeManager extends StandardManager
         else
         {
             $message = false;
-            $this->errors[] = "ERROR: Code not valid";
+            $this->errors[] = "ERROR: Der Code ist ungültig!";
         }
         return $message;
     }
@@ -234,7 +234,7 @@ class CodeManager extends StandardManager
         $this->errors = $errors;
     }
 
-    public static function filterByAction(ArrayCollection $codes, $action)
+    public static function filterByAction($codes, $action)
     {
         $filteredList = new ArrayCollection();
         /** @var Code $code */

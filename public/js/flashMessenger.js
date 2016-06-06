@@ -29,7 +29,7 @@ var flashMessenger = {
         }
         if (delayInMilliSeconds <= 0)
         {
-            $("#flashMessage" + idNummer).fadeOut("slow");
+            $("#flashMessage" + idNummer).dequeue().fadeOut("slow");
         }
         else
         {
