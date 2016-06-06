@@ -3,10 +3,20 @@
 namespace BikeStore\Model\Manager;
 
 use Application\Model\Manager\StandardManager;
+use BikeStore\Model\Article;
 use BikeStore\Model\Equipment;
 
 class EquipmentManager extends StandardManager
 {
+	/**
+	 * @param Article $article
+	 * @return array
+	 */
+	public static function getAsArray($article)
+	{
+		return ArticleManager::getAsArray($article);
+	}
+	
     public function __construct($repository, $entity = null)
     {
         parent::__construct($repository, $entity);

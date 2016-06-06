@@ -85,4 +85,41 @@ class StandardRepository extends EntityRepository
             return $res;
         }
     }
+
+//	public function findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null, $asArray = false)
+//	{
+//		if ($asArray)
+//		{
+//			return parent::findBy($criteria, $orderBy, $limit, $offset);
+//		}
+//		else
+//		{
+//			/** @var ClassMetadata $metadata */
+//			$metadata = $this->getMetadata();
+//			$columnNames = $metadata->getColumnNames();
+//			$associations = $metadata->getAssociationMappings();
+//
+//			foreach ($associations as $association)
+//			{
+//				if (isset($association["joinColumns"])) //spalte gehört zur Tabelle
+//				{
+//					foreach ($association["joinColumns"] as $joinColumn)
+//					{
+//						$columnNames[] = $joinColumn["name"];
+//					}
+//				}
+//			}
+//
+//			$rsm = new Query\ResultSetMapping();
+//			$select = "";
+//			foreach ($columnNames as $column)
+//			{
+//				$rsm->addScalarResult($column, $column);
+//				$select .= "".$column.", ";
+//			}
+//			$select[strlen($select)-2] = " ";
+//			$res = $this->_em->createNativeQuery('SELECT '.$select.' FROM '.$metadata->getTableName().' ', $rsm)->getResult(Query::HYDRATE_ARRAY);
+//			return $res;
+//		}
+//	}
 }

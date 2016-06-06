@@ -7,6 +7,24 @@ use BikeStore\Model\Article;
 
 class ArticleManager extends StandardManager
 {
+
+	/**
+	 * @param Article $article
+	 * @return array
+	 */
+	public static function getAsArray($article)
+	{
+		return array(
+			'pictureName' => $article->getImageName(),
+			'name' => $article->getName(),
+			'quickDescription' => $article->getQuickDescription(),
+			'description' => $article->getDescription(),
+			'price' => $article->getPrice(),
+			'id' => $article->getId(),
+			'listed' => $article->getListed(),
+		);
+	}
+
     public function __construct($repository, $entity = null)
     {
         parent::__construct($repository, $entity);
