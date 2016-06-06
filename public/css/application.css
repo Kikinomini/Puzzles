@@ -248,25 +248,23 @@ div.warenkorb a{
 
 div.warenkorbPic{
 	float: left;
-	background-image: url(../image/Einkaufswagen_grau_klein.png);
-	background-repeat: no-repeat;
-	height: 50px;
 	width: 65px;
-	z-index: 20;
+	fill: #8e8e8e ;
 }
 
 div.warenkorbText{
 	float: right;
 	width: 135px;
+	margin-top: 7px;
+	height: 62px;
 }
 
 div.warenkorb:hover, div.warenkorb:hover div.warenkorbPic
 {
 	text-decoration: none;
 	color: #82d77e;
-	background-image: url(../image/Einkaufswagen_gruen_klein.png);
-	background-repeat: no-repeat;
 	z-index: 100;
+	fill: #82d77e;
 }
 
 
@@ -365,82 +363,4 @@ a{
 
 a:hover{
 	color: #8e8e8e;
-}
-
-#detailParth{
-	margin-top: 10px;
-	margin-left: 5px;
-}
-
-.detailPicture{
-	width: 100%;
-	float: right;
-}
-
-#detailBuy{
-	width: 200px;
-	height: 100%;
-	float: right;
-	margin-right: 5px;
-	margin: auto;
-}
-
-.shoppingCartButton{
-	width: 100%;
-	color: #8e8e8e;
-	font-weight: bold;
-	border: none;
-	background-image: url("../image/Einkaufswagen_grau_klein.png");
-	background-color: #82d77e;
-	background-repeat: no-repeat;
-	background-position: 30px;
-	background-size: 30px;
-	text-shadow: none;
-}
-
-.shoppingCartButton:hover{
-	background-image: url("../image/cart_white_little.png");
-	font-weight: bold;
-	background-color: #82d77e;
-	background-repeat: no-repeat;
-	background-position: 30px;
-	background-size: 30px;
-	color: #ffffff;
-}
-
-.shoppingCartButton p{
-	margin: auto;
-	margin-left: 20px;
-}
-
-.shoppingCartButton:active{
-	background-image: url("../image/cart_white_little.png");
-	font-weight: bold;
-	background-color: #82d77e;
-	background-repeat: no-repeat;
-	background-position: 30px;
-	background-size: 30px;
-	color: #ffffff;
-}
-
-#detailProductDetails{
-	margin-top: 20px;
-}
-
-.productInfoBackground{
-	background: #82d77e ;
-	background-image: -webkit-linear-gradient(top, #9dff98, #82d77e);
-	border: none;
-}
-
-#tabs ul li a{
-	color: #8e8e8e;
-	font-weight: normal;
-}
-
-#tabs ul li{
-	border: none;
-}
-select{
-	height: inherit !important;
 }

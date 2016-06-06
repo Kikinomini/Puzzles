@@ -20,6 +20,17 @@ return array(
 					),
 				),
 			),
+			'addToCart' => array(
+				'type' => 'segment',
+				'options' => array(
+					'route' => '/article/addToCart',
+					'defaults' => array(
+						'controller' => 'BikeStore\Controller\ShoppingCart',
+						'action' => 'addArticleToShoppingCart',
+						'resource' => 'default',
+					),
+				),
+			),
 		),
 	),
 );

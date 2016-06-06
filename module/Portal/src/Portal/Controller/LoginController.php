@@ -54,7 +54,6 @@ class LoginController extends AbstractActionController
 
     public function resendRegistrationCodeAction()
     {
-
         /** @var UserManager $userManager */
         $userManager = $this->getServiceLocator()->get("userManager");
         $user = $userManager->getUserFromSession();
@@ -81,6 +80,7 @@ class LoginController extends AbstractActionController
 			}
 
 		}
+        
 		$this->layout("layout/ajaxData");
 		$viewModel = new ViewModel(array("json" => $returnValue));
 		$viewModel->setTemplate("ajax/json");

@@ -16,6 +16,7 @@ use BikeStore\Model\Manager\ArticleManager;
 use BikeStore\Model\Manager\BicycleManager;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
+use Zend\Session\Container;
 
 class BicycleController extends AbstractActionController
 {
@@ -36,7 +37,6 @@ class BicycleController extends AbstractActionController
 
 	public function showArticleDetailsAction()
 	{
-
 		$id = $this->params("id", -1);
 
 		/** @var ArticleManager $articleManager */
