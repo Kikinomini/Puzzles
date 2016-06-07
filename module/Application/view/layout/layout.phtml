@@ -85,7 +85,9 @@ JS;
 			<div class="header flexHeader">
 				<div class="logo">
 					<a href="<?php echo $this->url("home"); ?>" class="totallyHidden">
-						<div><img src="<?php echo $this->basePath?>/image/wheel.svg" class='bikeStoreLogo'></div>
+						<div class='bikeStoreLogo'>
+							<?php include(realpath('public/image/wheel.svg')) ?>
+						</div>
 						<div id="logoLabel">Puzzles</div>
 					</a>
 				</div>
