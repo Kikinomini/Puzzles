@@ -396,3 +396,7 @@ a:hover{
 	transform-origin: 250px 250px;
 	animation: rotating 6s linear infinite;
 }
+.bikeStoreLogo svg
+{
+	height:100%;
+}
