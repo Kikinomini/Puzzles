@@ -131,7 +131,6 @@ class ShoppingCartController extends AbstractActionController
 		if(isset($articles[$id]))
 		{
 			unset($articles[$id]);
-			
 		}
 		else
 		{
@@ -140,6 +139,7 @@ class ShoppingCartController extends AbstractActionController
 			return;
 		}
 
+		$sessionContainer->offsetSet("articles", $articles);
 		
 		$this->layout("layout/ajaxData");
 		$viewModel = new ViewModel(
@@ -151,8 +151,5 @@ class ShoppingCartController extends AbstractActionController
 		);
 		$viewModel->setTemplate("ajax/json");
 		return $viewModel;
-
-		
-
 	}
 }
