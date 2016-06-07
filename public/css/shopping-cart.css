@@ -1,11 +1,17 @@
 /*Kauf-Box*/
 .partBuy {
 	width: 240px;
-	height: 100%;
+	/*height: 100px;*/
 	float: right;
-	/*margin-left: 30px;*/
-	margin-top: 80px;
+	margin-left: 10px;
+	margin-top: 76px;
+	padding-top: 8px;
+	padding-bottom: 5px;
 	text-align: center;
+	border: 1px solid #dcd9d9;
+	border-radius: 10px;
+	background-color: #f1eeee;
+
 }
 
 /*Box für Kopf der Tabelle rechts*/
@@ -78,9 +84,10 @@
 }
 
 .priceColor{
-	color: #3ab93e;
+	color: #39ab3d;
 }
 
+/*Kaufbutton*/
 .buyButton {
 	width: 90%;
 	color: #8e8e8e;
@@ -101,3 +108,25 @@
 	text-shadow: none;
 	border: none;
 }
+
+/*Löschbutton*/
+/*.deleteButton {*/
+	/*width: 70%;*/
+	/*color: #8e8e8e;*/
+	/*background-color: #82d77e;*/
+	/*background-image: -webkit-linear-gradient(top, #9dff98, #82d77e);*/
+	/*background-image: -moz-linear-gradient(top, #9dff98, #82d77e);*/
+	/*!*font-weight: bold;*!*/
+	/*text-shadow: none;*/
+	/*border: none;*/
+
+/*}*/
+
+/*.deleteButton:hover {*/
+	/*width: 70%;*/
+	/*color: #ffffff;*/
+	/*background-color: #82d77e;*/
+	/*!*font-weight: bold;*!*/
+	/*text-shadow: none;*/
+	/*border: none;*/
+/*}*/

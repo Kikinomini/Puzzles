@@ -42,20 +42,25 @@ $this->headLink()->prependStylesheet($this->basepath() . '/css/shopping-cart.css
 		<div class="partWareWhole <?php echo ($allArticles > 0)?"borderTop":"firstLine";?>">
 <!--		Box für Bild-->
 			<div class="partWareLeft">
-				<img src = "/image/<?php echo $article->getImageName() ?>"/>
+					<a href="<?php echo $this->url("articleDetails", array("id" => $article->getId()));?>"><img src = "/image/<?php echo $article->getImageName() ?>"/></a>
 			</div>
+
 <!--		Box für Produktinfo	-->
 			<div class="partWareMiddle">
 				<p>
-				<b><?php echo $article->getName()?></b>
+				<b><a href="<?php echo $this->url("articleDetails", array("id" => $article->getId()));?>"><?php echo $article->getName()?></a></b>
 				<br><?php echo $article->getQuickDescription()?>
 				<br>Preis pro Artikel: <b><?php echo number_format($article->getPrice(),2, ",", ".");?> €</b>
+<!--				<br><a class="btn btn-default deleteButton">Löschen</a>-->
+					
 				</p>
 			</div>
-<!--		Box für Aanzahl	-->
+
+<!--		Box für Anzahl	-->
 			<div class="partWareRight">
 				<?php echo $number?>
 			</div>
+
 <!--		Box für Preis aller Artikel eines Typs	-->
 			<div class="partWareRight">
 				<b><?php echo number_format(($article->getPrice()*$number),2, ",", ".")?> €</b>
@@ -71,15 +76,14 @@ $this->headLink()->prependStylesheet($this->basepath() . '/css/shopping-cart.css
 
 
 <!--Kauf-Box rechts-->
-	<div class="partBuy">
-
-
-
+	<div>
+		<div class="partBuy">
 <!--		<p>Summe: <b> --><?php //echo number_format($sum,2, ",", ".");?><!-- €</b><br>-->
-		<p><b>Summe (<?php echo $allArticles?> Artikel): <span class="priceColor"><?php echo number_format($sum,2, ",", ".");?> €</span></b>
+			<p><b>Summe (<?php echo $allArticles?> Artikel): <span class="priceColor"><?php echo number_format($sum,2, ",", ".");?> €</span></b>
 
-<!--	Kauf-Button	-->
-		<br><br><a class="btn btn-default buyButton">Zur Kasse gehen</a></p>
+	<!--	Kauf-Button	-->
+			<br><br><a class="btn btn-default buyButton">Zur Kasse gehen</a></p>
+		</div>
 	</div>
 </div>
 

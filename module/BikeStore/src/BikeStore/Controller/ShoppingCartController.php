@@ -55,6 +55,7 @@ class ShoppingCartController extends AbstractActionController
 		return array(
 			"articles" => $articles,
 		);
+		
 	}
 
 	public function addArticleToShoppingCartAction(){
