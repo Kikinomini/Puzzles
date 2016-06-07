@@ -130,3 +130,18 @@
 	/*text-shadow: none;*/
 	/*border: none;*/
 /*}*/
+
+.trash {
+  width: 20px;
+  fill: grey;
+  cursor: pointer;
+  float: right;
+}
+
+.trashcap {
+  transform-origin: 335px 170px;
+  transition: all 0.7s ease;
+}
+.trash:hover .trashcap {
+  transform: rotate(20deg);
+}
