@@ -213,12 +213,13 @@ input,
 optgroup,
 select,
 textarea {
-  color: inherit;
+  /* color: inherit; */
   /* 1 */
   font: inherit;
   /* 2 */
   margin: 0;
-  /* 3 */ }
+  /* 3 */
+  }
 
 /**
    * Address `overflow` set to `hidden` in IE 8/9/10/11.
