@@ -41,7 +41,18 @@ return array(
 						'resource' => 'default',
 					),
 				),	
-			),			
+			),
+			'changeCount' => array(
+				'type' => 'segment',
+				'options' => array(
+					'route' => '/article/changeCount',
+					'defaults' => array(
+						'controller' => 'Bikestore\Controller\ShoppingCart',
+						'action' => 'changeCountOfArticle',
+						'resource' => 'default',
+					),
+				),
+			),
 		),
 	),
 );

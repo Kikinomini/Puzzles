@@ -18,7 +18,8 @@ use Zend\View\Model\ViewModel;
 
 class ShoppingCartController extends AbstractActionController
 {
-	public function showShoppingCartAction(){
+	public function showShoppingCartAction()
+	{
 		$sessionContainer = new Container("shoppingCart");
 		/*
 		$testDaten = array(
@@ -40,13 +41,13 @@ class ShoppingCartController extends AbstractActionController
 		*/
 
 		$articles = array();
-		if ($sessionContainer->offsetExists("articles"))
+		if($sessionContainer->offsetExists("articles"))
 		{
 			/** @var ArticleManager $articleManager */
 			$articleManager = $this->getServiceLocator()->get("BikeStore.articleManager");
 			$articles = $sessionContainer->offsetGet("articles");
 
-			foreach ($articles as $id => &$article)
+			foreach($articles as $id => &$article)
 			{
 				$article["article"] = $articleManager->getEntityById($id);
 			}
@@ -55,16 +56,17 @@ class ShoppingCartController extends AbstractActionController
 		return array(
 			"articles" => $articles,
 		);
-		
+
 	}
 
-	public function addArticleToShoppingCartAction(){
+	public function addArticleToShoppingCartAction()
+	{
 		$sessionContainer = new Container("shoppingCart");
 		/** @var Request $request */
 		$request = $this->getRequest();
 
-		$id = (int) $request->getPost('id', -1);
-		$count = (int) $request->getPost('count', -1);
+		$id = (int)$request->getPost('id', -1);
+		$count = (int)$request->getPost('count', -1);
 
 		$articleManager = $this->getServiceLocator()->get("BikeStore.articleManager");
 		if($article = $articleManager->getEntityById($id) == null)
@@ -76,7 +78,7 @@ class ShoppingCartController extends AbstractActionController
 
 		$articles = array();
 
-		if ($sessionContainer->offsetExists("articles"))
+		if($sessionContainer->offsetExists("articles"))
 		{
 			$articles = $sessionContainer->offsetGet("articles");
 		}
@@ -106,12 +108,13 @@ class ShoppingCartController extends AbstractActionController
 		return $viewModel;
 	}
 
-	public function deleteArticleFromShoppingCartAction(){
+	public function deleteArticleFromShoppingCartAction()
+	{
 		$sessionContainer = new Container("shoppingCart");
 		/** @var Request $request */
 		$request = $this->getRequest();
 
-		$id = (int) $request->getPost('id', -1);
+		$id = (int)$request->getPost('id', -1);
 
 		if($id == -1)
 		{
@@ -120,7 +123,7 @@ class ShoppingCartController extends AbstractActionController
 			return;
 		}
 
-		if (!$sessionContainer->offsetExists("articles"))
+		if(!$sessionContainer->offsetExists("articles"))
 		{
 			$this->getResponse()->setStatusCode(404);
 			$this->getEventManager()->trigger('dispatchError', 'Module', $this->getEvent());
@@ -131,6 +134,7 @@ class ShoppingCartController extends AbstractActionController
 		if(isset($articles[$id]))
 		{
 			unset($articles[$id]);
+			//$sessionContainer->offsetSet("articles", $articles);
 		}
 		else
 		{
@@ -138,8 +142,6 @@ class ShoppingCartController extends AbstractActionController
 			$this->getEventManager()->trigger('dispatchError', 'Module', $this->getEvent());
 			return;
 		}
-
-		$sessionContainer->offsetSet("articles", $articles);
 		
 		$this->layout("layout/ajaxData");
 		$viewModel = new ViewModel(
@@ -151,5 +153,10 @@ class ShoppingCartController extends AbstractActionController
 		);
 		$viewModel->setTemplate("ajax/json");
 		return $viewModel;
+	}
+
+
+	public function changeCountOfArticleAction(){
+		
 	}
 }
