@@ -7,7 +7,10 @@ $this->headLink()->prependStylesheet($this->basepath() . '/css/shopping-cart.css
 <div class="flexHeader">
 	<div class="flexFillWidth">
 		<h1>Warenkorb</h1>
-		<div class="cartHeadline">
+		<div class="boxDelete">
+			&nbsp;
+		</div>
+		<div class="partWareMenge">
 			Menge
 		</div>
 		<div class="cartHeadline">
@@ -51,19 +54,23 @@ $this->headLink()->prependStylesheet($this->basepath() . '/css/shopping-cart.css
 				</p>
 			</div>
 
+<!--			-->
+<!--			<div class="boxDelete">-->
+<!--				<img src="/image/delete.svg">-->
+<!--			</div>-->
 
 			<!-- Box trash test -->
-			<div class="partWareRight">
+			<div class="boxDelete">
 				<?php include(realpath('public/image/delete.svg')) ?>
 			</div>
 
 <!--		Box für Anzahl	-->
-			<div class="partWareRight">
+			<div class="partWareMenge">
 				<?php echo $number?>
 			</div>
 
 <!--		Box für Preis aller Artikel eines Typs	-->
-			<div class="partWareRight">
+			<div class="partWarePreis">
 				<b><?php echo number_format(($article->getPrice()*$number),2, ",", ".")?> €</b>
 			</div>
 		</div>

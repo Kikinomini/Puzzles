@@ -17,7 +17,7 @@
 /*Box für Kopf der Tabelle rechts*/
 .cartHeadline {
 	float: right;
-	width: 150px;
+	width: 120px;
 }
 /*Erste Trennlinie*/
 .firstLine {
@@ -77,10 +77,15 @@
 }
 
 /*Box für rechte Seite der Tabelle*/
-.partWareRight
+.partWarePreis
 {
 	float: right;
-	width: 150px;
+	width: 120px;
+}
+
+.partWareMenge {
+	float: right;
+	width: 85px;
 }
 
 .priceColor{
@@ -130,6 +135,13 @@
 	/*text-shadow: none;*/
 	/*border: none;*/
 /*}*/
+
+.boxDelete
+{
+	width: 30px;
+	float: right;
+	text-align: right;
+}
 
 .trash {
   width: 20px;
