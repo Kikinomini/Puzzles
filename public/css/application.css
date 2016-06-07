@@ -6,16 +6,22 @@ html
 body
 {
 	min-height: 100vh !important;
-    height: 100vh;
-    background-color:transparent;
-	font-family: "Tahoma", "Arial", "Helvetica" !important;
+	/* height: 100vh; */
+	background-color:transparent;
+	font-family: "Tahoma", "Arial", "Helvetica", serif !important;
+}
+
+.ya-see-me-rolling
+{
+	animation: rotating 6s linear infinite;
 }
 
 .myMainContainerWrapper
 {
 	height: 100%;
-    max-height: 100%;
+	max-height: 100%;
 	overflow: auto;
+	padding-top: 10px;
 }
 
 a.hiddenLink
@@ -84,7 +90,6 @@ img.button
 .link:hover
 {
     cursor: pointer;
-    cursor: hand;
 }
 
 div#settings
@@ -230,7 +235,7 @@ div.logo{
 	transform: rotate(-3deg);
 }
 
-div.warenkorb{
+div.warenkorb {
 	float: right;
 	font-size: 14pt;
 	text-align: center;
@@ -240,33 +245,34 @@ div.warenkorb{
 	margin-bottom: 35px;
 }
 
-div.warenkorb a{
+div.warenkorb a {
 	text-decoration: none;
 	color: #8e8e8e;
 	text-align: center;
+	transition: color .5s;
 }
 
-div.warenkorbPic{
+div.warenkorbPic {
 	float: left;
-	background-image: url(../image/Einkaufswagen_grau_klein.png);
-	background-repeat: no-repeat;
-	height: 50px;
 	width: 65px;
-	z-index: 20;
+	fill: #8e8e8e;
+	transition: fill .5s;
 }
 
-div.warenkorbText{
+div.warenkorbText {
 	float: right;
 	width: 135px;
+	margin-top: 7px;
+	height: 62px;
 }
 
-div.warenkorb:hover, div.warenkorb:hover div.warenkorbPic
+div.warenkorb:hover a, div.warenkorb:hover div.warenkorbPic
 {
 	text-decoration: none;
 	color: #82d77e;
-	background-image: url(../image/Einkaufswagen_gruen_klein.png);
-	background-repeat: no-repeat;
 	z-index: 100;
+	fill: #82d77e;
+	transition: none;
 }
 
 
@@ -274,6 +280,7 @@ div.warenkorb a:hover
 {
 	text-decoration: none;
 	color: #82d77e;
+	transition: none;
 }
 
 input.suchleiste{
@@ -299,22 +306,10 @@ input.suchleiste{
 	background-position-x: 1px;
 	border: 2px;
 	border-color: #000000;
-	border-left: 0px;
-	border-bottom-left-radius: 0px;
-	border-top-left-radius: 0px;
+	border-left: 0;
+	border-bottom-left-radius: 0;
+	border-top-left-radius: 0;
 	fill: #8e8e8e;
-}
-
-.suchePic
-{
-	height: 28px;
-	width: 28px;
-	background-image: url(../image/Lupe_grau_klein.png);
-	background-repeat: no-repeat;
-	background-size: 25px;
-	margin-bottom: 2px;
-	margin-left: -6px;
-	z-index: 0;
 }
 
 .sucheButton:hover svg{
@@ -358,6 +353,16 @@ p.link{
 	height: 80px;
 }
 
+.bikeStoreLogo svg
+{
+	height: 100%;
+}
+
+.bikeStoreLogo path {
+	transform-origin: 250px 250px;
+	animation: rotating 6s linear infinite;
+}
+
 a{
 	color: #82d77e ;
 	text-decoration: none;
@@ -367,77 +372,19 @@ a:hover{
 	color: #8e8e8e;
 }
 
-#detailParth{
-	margin-top: 10px;
-	margin-left: 5px;
-}
-
-.detailPicture{
-	width: 100%;
-	float: right;
-}
-
-#detailBuy{
-	width: 200px;
-	height: 100%;
-	float: right;
-	margin-right: 5px;
-	margin: auto;
-}
-
-.shoppingCartButton{
-	width: 100%;
-	color: #8e8e8e;
-	font-weight: bold;
-	border: none;
-	background-image: url("../image/Einkaufswagen_grau_klein.png");
-	background-color: #82d77e;
-	background-repeat: no-repeat;
-	background-position: 30px;
-	background-size: 30px;
-	text-shadow: none;
-}
-
-.shoppingCartButton:hover{
-	background-image: url("../image/cart_white_little.png");
-	font-weight: bold;
-	background-color: #82d77e;
-	background-repeat: no-repeat;
-	background-position: 30px;
-	background-size: 30px;
-	color: #ffffff;
-}
-
-.shoppingCartButton p{
-	margin: auto;
-	margin-left: 20px;
-}
-
-.shoppingCartButton:active{
-	background-image: url("../image/cart_white_little.png");
-	font-weight: bold;
-	background-color: #82d77e;
-	background-repeat: no-repeat;
-	background-position: 30px;
-	background-size: 30px;
-	color: #ffffff;
-}
-
-#detailProductDetails{
-	margin-top: 20px;
-}
-
-.productInfoBackground{
-	background: #82d77e ;
-	background-image: -webkit-linear-gradient(top, #9dff98, #82d77e);
-	border: none;
-}
-
-#tabs ul li a{
-	color: #8e8e8e;
-	font-weight: normal;
-}
-
-#tabs ul li{
-	border: none;
+@keyframes rotating {
+  from {
+    -ms-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  to {
+    -ms-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
 }

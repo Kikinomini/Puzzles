@@ -57,7 +57,7 @@ class LoginController extends AbstractActionController
         /** @var UserManager $userManager */
         $userManager = $this->getServiceLocator()->get("userManager");
         $user = $userManager->getUserFromSession();
-        
+
         $codes = CodeManager::filterByAction($user->getCodes(), CodeManager::ACTION_REGISTRATION);
         if ($codes->count() >= 1)
         {
@@ -71,7 +71,7 @@ class LoginController extends AbstractActionController
         else
         {
 			$returnValue = array(
-				'emailSend' => true,
+				'emailSend' => false,
 				'failReason' => 'Ihnen konnte nicht erneut eine Email zugesendet werden. Bitte versuchen Sie es später erneut',
 			);
 			if ($user->getAktiviert())
@@ -80,6 +80,8 @@ class LoginController extends AbstractActionController
 			}
 
 		}
+        
+		$this->layout("layout/ajaxData");
 		$viewModel = new ViewModel(array("json" => $returnValue));
 		$viewModel->setTemplate("ajax/json");
 		return $viewModel;

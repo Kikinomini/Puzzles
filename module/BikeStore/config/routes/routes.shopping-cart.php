@@ -20,6 +20,28 @@ return array(
 					),
 				),
 			),
+			'addToCart' => array(
+				'type' => 'segment',
+				'options' => array(
+					'route' => '/article/addToCart',
+					'defaults' => array(
+						'controller' => 'BikeStore\Controller\ShoppingCart',
+						'action' => 'addArticleToShoppingCart',
+						'resource' => 'default',
+					),
+				),
+			),
+			'deleteFromCart' => array(
+				'type' => 'segment',
+				'options' => array(
+					'route' => '/article/deleteFromCart',
+					'defaults' => array(
+						'controller' => 'BikeStore\Controller\ShoppingCart',
+						'action' => 'deleteArticleFromShoppingCart',
+						'resource' => 'default',
+					),
+				),	
+			),			
 		),
 	),
 );

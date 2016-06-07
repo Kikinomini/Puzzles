@@ -11,34 +11,33 @@ namespace BikeStore\Controller;
 
 use Application\Model\User;
 use BikeStore\Model\Manager\ArticleManager;
+use Zend\Http\Request;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\Session\Container;
+use Zend\View\Model\ViewModel;
 
 class ShoppingCartController extends AbstractActionController
 {
 	public function showShoppingCartAction(){
-
-		$testDaten = array( //Todo löschen nach dem Testen
-			array( //artikel 1
-				'id' => 1,
+		$sessionContainer = new Container("shoppingCart");
+		/*
+		$testDaten = array(
+			1 => array(
 				'count' => 1,
 			),
-			array( //artikel 2
-				'id' => 4,
+			4 => array(
 				'count' => 10,
 			),
-			array( //artikel 3
-				'id' => 7,
+			7 => array(
 				'count' => 3,
 			),
-			array( //artikel 4
-				'id' => 5,
+			5 => array(
 				'count' => 2,
-			)
+			),
 		);
 
-		$sessionContainer = new Container("shoppingCart");
 		$sessionContainer->offsetSet("articles", $testDaten); //TODO löschen nach dem testen
+		*/
 
 		$articles = array();
 		if ($sessionContainer->offsetExists("articles"))
@@ -47,16 +46,110 @@ class ShoppingCartController extends AbstractActionController
 			$articleManager = $this->getServiceLocator()->get("BikeStore.articleManager");
 			$articles = $sessionContainer->offsetGet("articles");
 
-			foreach ($articles as &$article)
+			foreach ($articles as $id => &$article)
 			{
-				$article["article"] = $articleManager->getEntityById($article["id"]);
+				$article["article"] = $articleManager->getEntityById($id);
 			}
 		}
 
 		return array(
 			"articles" => $articles,
 		);
+		
 	}
 
+	public function addArticleToShoppingCartAction(){
+		$sessionContainer = new Container("shoppingCart");
+		/** @var Request $request */
+		$request = $this->getRequest();
 
+		$id = (int) $request->getPost('id', -1);
+		$count = (int) $request->getPost('count', -1);
+
+		$articleManager = $this->getServiceLocator()->get("BikeStore.articleManager");
+		if($article = $articleManager->getEntityById($id) == null)
+		{
+			$this->getResponse()->setStatusCode(400);
+			$this->getEventManager()->trigger('dispatchError', 'Module', $this->getEvent());
+			return;
+		}
+
+		$articles = array();
+
+		if ($sessionContainer->offsetExists("articles"))
+		{
+			$articles = $sessionContainer->offsetGet("articles");
+		}
+
+		if(isset($articles[$id]))
+		{
+			$articles[$id]["count"] += $count;
+		}
+		else
+		{
+			$articles[$id] = array(
+				'count' => $count
+			);
+		}
+
+		$sessionContainer->offsetSet("articles", $articles);
+
+		$this->layout("layout/ajaxData");
+		$viewModel = new ViewModel(
+			array(
+				"json" => array(
+					"success" => true
+				)
+			)
+		);
+		$viewModel->setTemplate("ajax/json");
+		return $viewModel;
+	}
+
+	public function deleteArticleFromShoppingCartAction(){
+		$sessionContainer = new Container("shoppingCart");
+		/** @var Request $request */
+		$request = $this->getRequest();
+
+		$id = (int) $request->getPost('id', -1);
+
+		if($id == -1)
+		{
+			$this->getResponse()->setStatusCode(400);
+			$this->getEventManager()->trigger('dispatchError', 'Module', $this->getEvent());
+			return;
+		}
+
+		if (!$sessionContainer->offsetExists("articles"))
+		{
+			$this->getResponse()->setStatusCode(404);
+			$this->getEventManager()->trigger('dispatchError', 'Module', $this->getEvent());
+			return;
+		}
+		$articles = $sessionContainer->offsetGet("articles");
+
+		if(isset($articles[$id]))
+		{
+			unset($articles[$id]);
+		}
+		else
+		{
+			$this->getResponse()->setStatusCode(404);
+			$this->getEventManager()->trigger('dispatchError', 'Module', $this->getEvent());
+			return;
+		}
+
+		$sessionContainer->offsetSet("articles", $articles);
+		
+		$this->layout("layout/ajaxData");
+		$viewModel = new ViewModel(
+			array(
+				"json" => array(
+					"success" => true
+				)
+			)
+		);
+		$viewModel->setTemplate("ajax/json");
+		return $viewModel;
+	}
 }

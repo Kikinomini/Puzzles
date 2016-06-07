@@ -1,5 +1,46 @@
 <?php
 $this->headLink()->prependStylesheet($this->basepath() . '/css/shopping-cart.css');
+$url = $this->url("deleteFromCart");
+
+$this->inlineScript()->captureStart();
+echo <<<JS
+		$(document).ready(function() {
+		  	$(".trash").click(function(){
+		  		if($(this).hasClass("loading"))
+		  			return;
+		  		
+		  		$(this).addClass("loading");
+		  	
+		  		var row = $(this).parents(".partWareWhole").first(),
+		  			id = parseInt(row.attr("data-id")),
+		  			count = parseInt(row.attr("data-count")),
+		  			price_sum = parseFloat(row.attr("data-price-sum"));
+		  		
+		  		$.post("$url", {'id': id }, function(data) {
+		  			$(this).removeClass("loading");
+		  		
+		  		  if(data['success'] === true)
+		  		  {
+		  		  		numberArticlesInShoppingCart -= count;
+		  		  		if(numberArticlesInShoppingCart <= 0)
+		  		  		{
+		  		  		 //TODO: Redirect because cart is empty now
+		  		  		}
+						$(".warenkorbText").first().html(numberArticlesInShoppingCart + ' Artikel <br> im Warenkorb');
+						row.slideUp(400, row.remove);
+						
+						// TODO: Preise aktualisieren
+						priceArticlesInShoppingCart -= price_sum;
+						console.log(priceArticlesInShoppingCart);
+		  		  }
+		  		}, "json").fail(function() 
+		  		{
+		  		  flashMessenger.addMessage(flashMessenger.messageTypeError, "Ein Fehler ist aufgetreten, konnte nicht entfernt werden!");
+		  		});
+		  	});
+		 })
+JS;
+$this->inlineScript()->captureEnd();
 	?>
 
 
@@ -7,7 +48,10 @@ $this->headLink()->prependStylesheet($this->basepath() . '/css/shopping-cart.css
 <div class="flexHeader">
 	<div class="flexFillWidth">
 		<h1>Warenkorb</h1>
-		<div class="cartHeadline">
+		<div class="boxDelete">
+			&nbsp;
+		</div>
+		<div class="partWareMenge">
 			Menge
 		</div>
 		<div class="cartHeadline">
@@ -18,80 +62,86 @@ $this->headLink()->prependStylesheet($this->basepath() . '/css/shopping-cart.css
 		
 <!--for-Schleife für Warenausgabe-->
 	<?php
- 	$numberArticles = count($this->articles);
-	for ($i=0; $i<$numberArticles; $i++)
+	$sum=0.00;
+	$allArticles=0;
+
+	foreach ($this->articles as $id => $articleArray)
 	{
-		$article = $this->articles[$i]["article"];
-		$number = $this->articles[$i]["count"];
+		/** @var \BikeStore\Model\Article $article */
+		$article = $articleArray["article"];
+		$number = $articleArray["count"];
 //		echo "<p> <IMG SRC = \"/image/"  . $article->getImageName() . "\"/> </p>";
 //		echo "<h2>" . $article->getName() . "</h2>";
 //		echo "<p>" . $article->getQuickDescription() . "</p>";
 //		echo "<p> <b>" . $article->getPrice() . "</b>";
 //		echo "<p> $number </p>";
-
 		?>
 
 
 <!--	Eintrag in Korb mit Abgrenzung-->
-		<div class="partWareWhole <?php echo ($i > 0)?"borderTop":"firstLine";?>">
+		<div class="partWareWhole <?php echo ($allArticles > 0)?"borderTop":"firstLine";?>"
+			 		data-id="<?= $article->getId() ?>"
+			 		data-count="<?= $number ?>"
+			 		data-price-sum="<?= number_format(($article->getPrice()*$number),2, ",", ".") ?>">
 <!--		Box für Bild-->
 			<div class="partWareLeft">
-				<img src = "/image/<?php echo $article->getImageName() ?>"/>
+					<a href="<?php echo $this->url("articleDetails", array("id" => $article->getId()));?>"><img src = "/image/<?php echo $article->getImageName() ?>"/></a>
 			</div>
+
 <!--		Box für Produktinfo	-->
 			<div class="partWareMiddle">
 				<p>
-				<b><?php echo $article->getName()?></b>
+				<b><a href="<?php echo $this->url("articleDetails", array("id" => $article->getId()));?>"><?php echo $article->getName()?></a></b>
 				<br><?php echo $article->getQuickDescription()?>
 				<br>Preis pro Artikel: <b><?php echo number_format($article->getPrice(),2, ",", ".");?> €</b>
+<!--				<br><a class="btn btn-default deleteButton">Löschen</a>-->
+					
 				</p>
 			</div>
-<!--		Box für Aanzahl	-->
-			<div class="partWareRight">
+
+			<!-- Box trash test -->
+			<div class="boxDelete">
+				<?php include(realpath('public/image/delete.svg')) ?>
+			</div>
+
+<!--		Box für Anzahl	-->
+			<div class="partWareMenge">
 				<?php echo $number?>
 			</div>
+
 <!--		Box für Preis aller Artikel eines Typs	-->
-			<div class="partWareRight">
+			<div class="partWarePreis">
 				<b><?php echo number_format(($article->getPrice()*$number),2, ",", ".")?> €</b>
 			</div>
 		</div>
 		<?php
+		//	Berechnung Gesamtsumme + Gesamtanzahl Artikel
+		$zwischenwertSum = ($article->getPrice()*$number);
+		$sum = $sum + $zwischenwertSum;
+		$allArticles = $allArticles + $number;
 	}
 	?>
 		<div class="lastLine">
-			<?php
-	//		Berechnung Gesamtsumme + Gesamtanzahl Artikel
-			$numberArticles = count($this->articles);
-			$sum=0.00;
-			$allArticles=0;
-			for ($i=0; $i<$numberArticles; $i++)
-			{
-				/** @var \BikeStore\Model\Article $article */
-				$article = $this->articles[$i]["article"];
-				$number = $this->articles[$i]["count"];
-				$zwischenwertSum = ($article->getPrice()*$number);
-				$sum = $sum + $zwischenwertSum;
-				$allArticles = $allArticles + $number;
-
-			}
-			?>
-
-
 			<b>Summe (<?php echo $allArticles?> Artikel): <span class="priceColor"><?php echo number_format($sum,2, ",", ".");?> €</span></b>
 		</div>
 	</div>
 
 
 <!--Kauf-Box rechts-->
-	<div class="partBuy">
-
-
-
+	<div>
+		<div class="partBuy">
 <!--		<p>Summe: <b> --><?php //echo number_format($sum,2, ",", ".");?><!-- €</b><br>-->
-		<p><b>Summe (<?php echo $allArticles?> Artikel): <span class="priceColor"><?php echo number_format($sum,2, ",", ".");?> €</span></b>
-
-<!--	Kauf-Button	-->
-		<br><br><a class="btn btn-default buyButton">Zur Kasse gehen</a></p>
+			<p><b>Summe (<?php echo $allArticles?> Artikel): <span class="priceColor"><?php $sum = number_format($sum,2, ",", "."); echo $sum ?> €</span></b>
+				<?php
+$this->inlineScript()->captureStart();
+echo <<<JS
+priceArticlesInShoppingCart = $sum;
+JS;
+$this->inlineScript()->captureEnd();
+				?>
+	<!--	Kauf-Button	-->
+			<br><br><a href="<?php echo $this->url("selectPayMethod");?>" class="btn btn-default buyButton">Zur Kasse gehen</a></p>
+		</div>
 	</div>
 </div>
 

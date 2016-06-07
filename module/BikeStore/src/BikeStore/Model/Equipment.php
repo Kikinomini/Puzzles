@@ -46,6 +46,11 @@ class Equipment extends Article
         $this->id = $id;
     }
 
+	public function getDetailViewPath()
+	{
+		return "/bike-store/bicycle/equipment-product-info";
+	}
+
 	/**
 	 * @return string
 	 */

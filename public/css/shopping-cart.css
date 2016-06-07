@@ -1,17 +1,23 @@
 /*Kauf-Box*/
 .partBuy {
 	width: 240px;
-	height: 100%;
+	/*height: 100px;*/
 	float: right;
-	/*margin-left: 30px;*/
-	margin-top: 80px;
+	margin-left: 10px;
+	margin-top: 76px;
+	padding-top: 8px;
+	padding-bottom: 5px;
 	text-align: center;
+	border: 1px solid #dcd9d9;
+	border-radius: 6px;
+	background-color: #f1eeee;
+
 }
 
 /*Box für Kopf der Tabelle rechts*/
 .cartHeadline {
 	float: right;
-	width: 150px;
+	width: 120px;
 }
 /*Erste Trennlinie*/
 .firstLine {
@@ -71,16 +77,22 @@
 }
 
 /*Box für rechte Seite der Tabelle*/
-.partWareRight
+.partWarePreis
 {
 	float: right;
-	width: 150px;
+	width: 120px;
+}
+
+.partWareMenge {
+	float: right;
+	width: 85px;
 }
 
 .priceColor{
-	color: #3ab93e;
+	color: #39ab3d;
 }
 
+/*Kaufbutton*/
 .buyButton {
 	width: 90%;
 	color: #8e8e8e;
@@ -100,4 +112,48 @@
 	font-weight: bold;
 	text-shadow: none;
 	border: none;
+}
+
+/*Löschbutton*/
+/*.deleteButton {*/
+	/*width: 70%;*/
+	/*color: #8e8e8e;*/
+	/*background-color: #82d77e;*/
+	/*background-image: -webkit-linear-gradient(top, #9dff98, #82d77e);*/
+	/*background-image: -moz-linear-gradient(top, #9dff98, #82d77e);*/
+	/*!*font-weight: bold;*!*/
+	/*text-shadow: none;*/
+	/*border: none;*/
+
+/*}*/
+
+/*.deleteButton:hover {*/
+	/*width: 70%;*/
+	/*color: #ffffff;*/
+	/*background-color: #82d77e;*/
+	/*!*font-weight: bold;*!*/
+	/*text-shadow: none;*/
+	/*border: none;*/
+/*}*/
+
+.boxDelete
+{
+	width: 30px;
+	float: right;
+	text-align: right;
+}
+
+.trash {
+  width: 20px;
+  fill: grey;
+  cursor: pointer;
+  float: right;
+}
+
+.trashcap {
+  transform-origin: 335px 170px;
+  transition: all 0.7s ease;
+}
+.trash:hover .trashcap {
+  transform: rotate(20deg);
 }

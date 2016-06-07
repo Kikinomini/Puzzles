@@ -22,6 +22,7 @@ class BuyController extends AbstractActionController
 		if ($user->getAktiviert())
 		{
 			//TODO einbauen
+			die("Sie sind aktiviert");
 //			return $this->forward();
 		}
 	}
