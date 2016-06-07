@@ -4,4 +4,29 @@
  * User: Kinomi
  * Date: 31.05.2016
  * Time: 17:57
- */
+ * */
+/** @var \BikeStore\Model\Bicycle $article */
+$this->inlineScript()->captureStart();
+echo <<<JS
+	$(document).ready(function(){
+			$("#tabs").tabs({
+				
+			});
+	});
+JS;
+
+$this->inlineScript()->captureEnd();
+?>
+
+<h1>Produktinformationen</h1>
+<div id="tabs">
+	<ul class="productInfoBackground">
+		<li ><a href="#tabs-1">Beschreibung</a></li>
+	</ul>
+	<div id="tabs-1">
+		<p>
+			<?php
+			echo $this->escapeHtml($article->getDescription())?>
+		</p>
+	</div>
+</div>
