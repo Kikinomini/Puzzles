@@ -5,33 +5,68 @@
  * Date: 28.05.2016
  * Time: 22:08
  */
-
+$this->headLink()->prependStylesheet($this->basePath() . '/css/boxedLayoutAnzeige.css');
+$this->headScript()->appendFile($this->basePath() . '/js/bikePartView.js');
 $this->headLink()->prependStylesheet($this->basePath() . '/css/bikePart.css');
 
 echo "<h1>Fahrräder</h1>";
-echo "<div class = 'table maxWidth'>";
-echo "<div class ='row'>
-			<div class = 'cell'></div>
-			<div class = 'cell'><b><u>Name</u></b></div>
-			<div class = 'cell'><b><u>Preis</u></b></div>
-		</div>";
 
-/** @var \BikeStore\Model\Bicycle $bicycle */
-foreach($this->bicycles as $bicycle)
+$alleElemente = array();
+foreach($this->bicycles as $Eqipment)
 {
-//			echo "<div class = 'bikePartElement row maxWidthw'>";
-	echo '<a class = "row totalyHidden hiddenLink"  href="'.$this->url('articleDetails', array('id' => $bicycle->getId())).'" >';
-	echo "<div class = 'cell bikePartImg'><img class = 'bikePartImg' src='/image/".$this->escapeHtml($bicycle->getImageName())."'></div>";
-	echo "<div class = 'bikePartInfo cell'>
-					<div class = 'bikePartName'>".$this->escapeHtml($bicycle->getName())."</div>
-					<div>".$this->escapeHtml($bicycle->getQuickDescription())."</div>
-				</div>";
-	echo "<div class = 'cell bikePartPrice'>".$this->escapeHtml($bicycle->getPrice())."</div>";
-	echo '</a>';
-	//	echo "</div>";
+	$element = (\BikeStore\Model\Manager\EquipmentManager::getAsArray($Eqipment));;
+	$element["url"] = $this->url('articleDetails', array('id' => $Eqipment->getId()));
+	$alleElemente[] = $element;
 }
+$ElementArray = json_encode($alleElemente);
+echo "<form name = \"test\" action=''><button type=\"button\" onclick=\"elementRender.createList()\"> Liste </button> </br>";
+echo "<button type=\"button\" onclick=\"elementRender.createBox()\"> Kacheln </button></form>";
 
-echo "</div>";
+
+$this->inlineScript()->captureStart();
+
+echo <<<JS
+	$(document).ready(function() {
+	  	elementRender.addArrayElements($ElementArray);
+	  	elementRender.createList();
+	})
+JS;
+
+
+$this->inlineScript()->captureEnd();
+
+echo "<p id='AusgabePanel'></p>";
+?>
+<?php
+
+
+
+
+
+
+//echo "<div class = 'table maxWidth'>";
+//echo "<div class ='row'>
+//			<div class = 'cell'></div>
+//			<div class = 'cell'><b><u>Name</u></b></div>
+//			<div class = 'cell'><b><u>Preis</u></b></div>
+//		</div>";
+//
+///** @var \BikeStore\Model\Bicycle $bicycle */
+//foreach($this->bicycles as $bicycle)
+//{
+////			echo "<div class = 'bikePartElement row maxWidthw'>";
+//	echo '<a class = "row totalyHidden hiddenLink"  href="'.$this->url('articleDetails', array('id' => $bicycle->getId())).'" >';
+//	echo "<div class = 'cell bikePartImg'><img class = 'bikePartImg' src='/image/".$this->escapeHtml($bicycle->getImageName())."'></div>";
+//	echo "<div class = 'bikePartInfo cell'>
+//					<div class = 'bikePartName'>".$this->escapeHtml($bicycle->getName())."</div>
+//					<div>".$this->escapeHtml($bicycle->getQuickDescription())."</div>
+//				</div>";
+//	echo "<div class = 'cell bikePartPrice'>".$this->escapeHtml($bicycle->getPrice())."</div>";
+//	echo '</a>';
+	//	echo "</div>";
+
+
+//echo "</div>";
 
 
 
