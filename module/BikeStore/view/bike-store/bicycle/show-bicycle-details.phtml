@@ -15,7 +15,6 @@ echo <<<JS
 		$(document).ready(function() {
 		  	$("#shoppingCartBtn").click(function(){
 		  		var count = parseInt($("#mengenListe").val());
-		  		
 		  		$.post("$url", {'id': $id , 'count': count}, function(data) {
 		  		  if(data['success'] === true)
 		  		  {
@@ -43,7 +42,7 @@ $this->inlineScript()->captureEnd();
 	</div>
 	<div id="detailBuy">
 		<p>
-			<b>€ <?php echo $this->escapeHtml($article->getPrice()) ?> ,- </b><br>
+			<b><?php echo $this->escapeHtml(number_format($article->getPrice(), 2, ",", ".")) ?> € </b><br>
 			<small>inkl. MWST.</small>
 			<br>
 			<label class="block showLeft">Menge: </label>
