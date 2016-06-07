@@ -94,7 +94,7 @@ $this->headLink()->prependStylesheet($this->basepath() . '/css/shopping-cart.css
 			<p><b>Summe (<?php echo $allArticles?> Artikel): <span class="priceColor"><?php echo number_format($sum,2, ",", ".");?> €</span></b>
 
 	<!--	Kauf-Button	-->
-			<br><br><a class="btn btn-default buyButton">Zur Kasse gehen</a></p>
+			<br><br><a href="<?php echo $this->url("selectPayMethod");?>" class="btn btn-default buyButton">Zur Kasse gehen</a></p>
 		</div>
 	</div>
 </div>
