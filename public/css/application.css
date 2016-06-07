@@ -8,7 +8,7 @@ body
 	min-height: 100vh !important;
     height: 100vh;
     background-color:transparent;
-	font-family: "Tahoma", "Arial", "Helvetica" !important;
+	font-family: "Tahoma", "Arial", "Helvetica", serif !important;
 }
 
 .myMainContainerWrapper
@@ -85,7 +85,6 @@ img.button
 .link:hover
 {
     cursor: pointer;
-    cursor: hand;
 }
 
 div#settings
@@ -302,22 +301,10 @@ input.suchleiste{
 	background-position-x: 1px;
 	border: 2px;
 	border-color: #000000;
-	border-left: 0px;
-	border-bottom-left-radius: 0px;
-	border-top-left-radius: 0px;
+	border-left: 0;
+	border-bottom-left-radius: 0;
+	border-top-left-radius: 0;
 	fill: #8e8e8e;
-}
-
-.suchePic
-{
-	height: 28px;
-	width: 28px;
-	background-image: url(../image/Lupe_grau_klein.png);
-	background-repeat: no-repeat;
-	background-size: 25px;
-	margin-bottom: 2px;
-	margin-left: -6px;
-	z-index: 0;
 }
 
 .sucheButton:hover svg{
@@ -361,6 +348,16 @@ p.link{
 	height: 80px;
 }
 
+.bikeStoreLogo svg
+{
+	height: 100%;
+}
+
+.bikeStoreLogo path {
+	transform-origin: 250px 250px;
+	animation: rotating 6s linear infinite;
+}
+
 a{
 	color: #82d77e ;
 	text-decoration: none;
@@ -385,13 +382,4 @@ a:hover{
     -o-transform: rotate(360deg);
     transform: rotate(360deg);
   }
-}
-
-.bikeStoreLogo path {
-	transform-origin: 50% 50%;
-	animation: rotating 6s linear infinite;
-}
-.bikeStoreLogo svg
-{
-	height:100%;
 }
