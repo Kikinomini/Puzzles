@@ -16,6 +16,7 @@ body
 	height: 100%;
     max-height: 100%;
 	overflow: auto;
+	padding-top: 10px;
 }
 
 a.hiddenLink
@@ -230,7 +231,7 @@ div.logo{
 	transform: rotate(-3deg);
 }
 
-div.warenkorb{
+div.warenkorb {
 	float: right;
 	font-size: 14pt;
 	text-align: center;
@@ -240,31 +241,34 @@ div.warenkorb{
 	margin-bottom: 35px;
 }
 
-div.warenkorb a{
+div.warenkorb a {
 	text-decoration: none;
 	color: #8e8e8e;
 	text-align: center;
+	transition: color .5s;
 }
 
-div.warenkorbPic{
+div.warenkorbPic {
 	float: left;
 	width: 65px;
-	fill: #8e8e8e ;
+	fill: #8e8e8e;
+	transition: fill .5s;
 }
 
-div.warenkorbText{
+div.warenkorbText {
 	float: right;
 	width: 135px;
 	margin-top: 7px;
 	height: 62px;
 }
 
-div.warenkorb:hover, div.warenkorb:hover div.warenkorbPic
+div.warenkorb:hover a, div.warenkorb:hover div.warenkorbPic
 {
 	text-decoration: none;
 	color: #82d77e;
 	z-index: 100;
 	fill: #82d77e;
+	transition: none;
 }
 
 
@@ -272,6 +276,7 @@ div.warenkorb a:hover
 {
 	text-decoration: none;
 	color: #82d77e;
+	transition: none;
 }
 
 input.suchleiste{
