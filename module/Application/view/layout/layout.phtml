@@ -56,6 +56,11 @@ echo $this->doctype(); ?>
 	echo <<<JS
 		settings.basePath = '$basePath';
 		numberArticlesInShoppingCart = $stuff;
+		
+		$("svg circle").click(function() {
+			$("body").addClass('ya-see-me-rolling');
+			return false;
+		});
 JS;
 
 	$this->inlineScript()->captureEnd();

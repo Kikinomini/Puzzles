@@ -18,7 +18,7 @@ echo <<<JS
 		  		$.post("$url", {'id': $id , 'count': count}, function(data) {
 		  		  if(data['success'] === true)
 		  		  {
-		  		  		$("html, body").animate({ scrollTop: 0 }, "slow");
+		  		  		$('.myMainContainerWrapper').animate({scrollTop: 0}, 800);
 		  		  		numberArticlesInShoppingCart += count;
 						flashMessenger.addMessage(flashMessenger.messageTypeSuccess, "$name wurde dem Warenkorb hinzugefügt");
 						$(".warenkorbText").first().html(numberArticlesInShoppingCart + ' Artikel <br> im Warenkorb');

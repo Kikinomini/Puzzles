@@ -9,6 +9,10 @@ body
 	/* height: 100vh; */
 	background-color:transparent;
 	font-family: "Tahoma", "Arial", "Helvetica", serif !important;
+}
+
+.ya-see-me-rolling
+{
 	animation: rotating 6s linear infinite;
 }
 
