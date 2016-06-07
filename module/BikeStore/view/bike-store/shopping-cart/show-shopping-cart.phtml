@@ -30,11 +30,6 @@ $this->headLink()->prependStylesheet($this->basepath() . '/css/shopping-cart.css
 //		echo "<p>" . $article->getQuickDescription() . "</p>";
 //		echo "<p> <b>" . $article->getPrice() . "</b>";
 //		echo "<p> $number </p>";
-
-		//	Berechnung Gesamtsumme + Gesamtanzahl Artikel
-		$zwischenwertSum = ($article->getPrice()*$number);
-		$sum = $sum + $zwischenwertSum;
-		$allArticles = $allArticles + $number;
 		?>
 
 
@@ -67,6 +62,10 @@ $this->headLink()->prependStylesheet($this->basepath() . '/css/shopping-cart.css
 			</div>
 		</div>
 		<?php
+		//	Berechnung Gesamtsumme + Gesamtanzahl Artikel
+		$zwischenwertSum = ($article->getPrice()*$number);
+		$sum = $sum + $zwischenwertSum;
+		$allArticles = $allArticles + $number;
 	}
 	?>
 		<div class="lastLine">
