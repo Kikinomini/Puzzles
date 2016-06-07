@@ -19,8 +19,9 @@ echo <<<JS
 		  		$.post("$url", {'id': $id , 'count': count}, function(data) {
 		  		  if(data['success'] === true)
 		  		  {
+		  		  		numberArticlesInShoppingCart += count;
 						flashMessenger.addMessage(flashMessenger.messageTypeSuccess, "$name wurde dem Warenkorb hinzugefügt");
-						$(".warenkorbText").first().html((numberArticlesInShoppingCart + count) + ' Artikel <br> im Warenkorb');
+						$(".warenkorbText").first().html(numberArticlesInShoppingCart + ' Artikel <br> im Warenkorb');
 		  		  }
 		  		}, "json").fail(function() 
 		  		{
