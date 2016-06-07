@@ -30,6 +30,7 @@
 .shoppingCartButton:hover svg, .shoppingCartButton:hover{
 	font-weight: bold;
 	background-position: 0 0;
+	background-blend-mode: darken;
 	color: #ffffff;
 	fill: #ffffff;
 }
