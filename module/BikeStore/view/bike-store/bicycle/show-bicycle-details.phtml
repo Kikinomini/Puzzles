@@ -22,8 +22,8 @@ echo <<<JS
 						flashMessenger.addMessage(flashMessenger.messageTypeSuccess, "$name wurde dem Warenkorb hinzugefügt");
 						$(".warenkorbText").first().html((numberArticlesInShoppingCart + count) + ' Artikel <br> im Warenkorb');
 		  		  }
-		  		}, "json").fail(function() {
-
+		  		}, "json").fail(function() 
+		  		{
 		  		  flashMessenger.addMessage(flashMessenger.messageTypeError, "Ein Fehler ist aufgetreten, $name konnte nicht dem Warenkorb hinzugefügt werden!");
 		  		});
 		  	});
@@ -32,9 +32,6 @@ JS;
 $this->inlineScript()->captureEnd();
 
 ?>
-<div id="detailParth">
-	<a href="">Startseite</a> > <a href=""></a>
-</div>
 <div class="detailContent flexHeader">
 	<div class="detailPicture flexFillWidth">
 		<h1><?php
