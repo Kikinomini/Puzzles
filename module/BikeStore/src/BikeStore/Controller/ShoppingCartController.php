@@ -105,4 +105,54 @@ class ShoppingCartController extends AbstractActionController
 		$viewModel->setTemplate("ajax/json");
 		return $viewModel;
 	}
+
+	public function deleteArticleFromShoppingCartAction(){
+		$sessionContainer = new Container("shoppingCart");
+		/** @var Request $request */
+		$request = $this->getRequest();
+
+		$id = (int) $request->getPost('id', -1);
+
+		if($id == -1)
+		{
+			$this->getResponse()->setStatusCode(400);
+			$this->getEventManager()->trigger('dispatchError', 'Module', $this->getEvent());
+			return;
+		}
+
+		if (!$sessionContainer->offsetExists("articles"))
+		{
+			$this->getResponse()->setStatusCode(404);
+			$this->getEventManager()->trigger('dispatchError', 'Module', $this->getEvent());
+			return;
+		}
+		$articles = $sessionContainer->offsetGet("articles");
+
+		if(isset($articles[$id]))
+		{
+			unset($articles[$id]);
+			
+		}
+		else
+		{
+			$this->getResponse()->setStatusCode(404);
+			$this->getEventManager()->trigger('dispatchError', 'Module', $this->getEvent());
+			return;
+		}
+
+		
+		$this->layout("layout/ajaxData");
+		$viewModel = new ViewModel(
+			array(
+				"json" => array(
+					"success" => true
+				)
+			)
+		);
+		$viewModel->setTemplate("ajax/json");
+		return $viewModel;
+
+		
+
+	}
 }

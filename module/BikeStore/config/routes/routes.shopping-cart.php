@@ -31,6 +31,17 @@ return array(
 					),
 				),
 			),
+			'deleteFromCart' => array(
+				'type' => 'segment',
+				'options' => array(
+					'route' => '/article/deleteFromCart',
+					'defaults' => array(
+						'controller' => 'BikeStore\Controller\ShoppingCart',
+						'action' => 'deleteArticleFromShoppingCart',
+						'resource' => 'default',
+					),
+				),	
+			),			
 		),
 	),
 );

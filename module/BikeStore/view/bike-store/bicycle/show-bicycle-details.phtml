@@ -17,7 +17,7 @@ echo <<<JS
 		  		var count = parseInt($("#mengenListe").val());
 		  		
 		  		$.post("$url", {'id': $id , 'count': count}, function(data) {
-		  		  if(data['success']=== true)
+		  		  if(data['success'] === true)
 		  		  {
 						flashMessenger.addMessage(flashMessenger.messageTypeSuccess, "$name wurde dem Warenkorb hinzugefügt");
 						$(".warenkorbText").first().html((numberArticlesInShoppingCart + count) + ' Artikel <br> im Warenkorb');
