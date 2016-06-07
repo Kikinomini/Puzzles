@@ -367,7 +367,8 @@ th {
 
 html {
   font-size: 100%;
-  box-sizing: border-box; }
+  box-sizing: border-box;
+  }
 
 *,
 *::before,
@@ -2543,7 +2544,8 @@ legend {
 
 html,
 body {
-  height: 100%; }
+  /* height: 100%; */
+  }
 
 .off-canvas-wrapper {
   width: 100%;

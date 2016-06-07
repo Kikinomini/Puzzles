@@ -6,12 +6,19 @@ $this->inlineScript()->captureStart();
 echo <<<JS
 		$(document).ready(function() {
 		  	$(".trash").click(function(){
+		  		if($(this).hasClass("loading"))
+		  			return;
+		  		
+		  		$(this).addClass("loading");
+		  	
 		  		var row = $(this).parents(".partWareWhole").first(),
 		  			id = parseInt(row.attr("data-id")),
 		  			count = parseInt(row.attr("data-count")),
 		  			price_sum = parseFloat(row.attr("data-price-sum"));
 		  		
 		  		$.post("$url", {'id': id }, function(data) {
+		  			$(this).removeClass("loading");
+		  		
 		  		  if(data['success'] === true)
 		  		  {
 		  		  		numberArticlesInShoppingCart -= count;

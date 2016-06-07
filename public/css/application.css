@@ -6,9 +6,10 @@ html
 body
 {
 	min-height: 100vh !important;
-    height: 100vh;
-    background-color:transparent;
+	/* height: 100vh; */
+	background-color:transparent;
 	font-family: "Tahoma", "Arial", "Helvetica", serif !important;
+	animation: rotating 6s linear infinite;
 }
 
 .myMainContainerWrapper
