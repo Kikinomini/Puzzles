@@ -361,6 +361,11 @@ p.link{
 	height: 80px;
 }
 
+.bikeStoreLogo svg 
+{
+	height: 100%;
+}
+
 a{
 	color: #82d77e ;
 	text-decoration: none;
@@ -388,6 +393,6 @@ a:hover{
 }
 
 .bikeStoreLogo path {
-	transform-origin: 50% 50%;
+	transform-origin: 250px 250px;
 	animation: rotating 6s linear infinite;
 }
