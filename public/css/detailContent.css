@@ -29,7 +29,7 @@
 
 .shoppingCartButton:hover svg, .shoppingCartButton:hover{
 	font-weight: bold;
-	background-color: #82d77e;
+	background-position: 0 0;
 	color: #ffffff;
 	fill: #ffffff;
 }
@@ -100,4 +100,5 @@ table{
 	fill: #8e8e8e;
 	margin: auto;
 	margin-right: 5px;
+	vertical-align: text-bottom;
 }
