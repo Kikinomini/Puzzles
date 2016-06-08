@@ -2,9 +2,7 @@
 
 namespace BikeStore\Model\Repository;
 
-use Application\Model\Repository\StandardRepository;
-
-class BicycleRepository extends StandardRepository
+class BicycleRepository extends ArticleRepository
 {
 
 }

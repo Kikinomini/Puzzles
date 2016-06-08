@@ -2,10 +2,10 @@
 return array(
 	'router' => array(
 		'routes' => array(
-			'selectPayMethod' => array(
+			'insertDeliveryAddress' => array(
 				'type' => 'segment',
 				'options' => array(
-					'route' => '/selectPayMethod',
+					'route' => '/deliveryAddress',
 					'constraints' => array(),
 					'defaults' => array(
 						'controller' => 'BikeStore\Controller\Buy',

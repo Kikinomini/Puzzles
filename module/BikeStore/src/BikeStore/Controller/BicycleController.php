@@ -10,10 +10,12 @@ namespace BikeStore\Controller;
 
 
 use Application\Model\User;
+use BikeStore\Form\BicycleFilterForm;
 use BikeStore\Model\Article;
 use BikeStore\Model\Bicycle;
 use BikeStore\Model\Manager\ArticleManager;
 use BikeStore\Model\Manager\BicycleManager;
+use Zend\Http\Request;
 use BikeStore\Model\Repository\ArticleRepository;
 use Zend\Http\Request;
 use Zend\Mvc\Controller\AbstractActionController;
@@ -42,13 +44,22 @@ class BicycleController extends AbstractActionController
 	{
 		/** @var BicycleManager $bicycleManager */
 		$bicycleManager = $this->serviceLocator->get("BikeStore.BicycleManager");
-		$bicycles = $bicycleManager->findBy(array('listed'=> true));
-		
-		
-		
-		
+		$bicycles = null;
+		$filterForm = new BicycleFilterForm();
+
+		/** @var Request $request */
+		$request = $this->getRequest();
+		if ($request->isGet())
+		{
+			$filterForm->setData($request->getQuery());
+		}
+		if ($bicycles == null)
+		{
+			$bicycles = $bicycleManager->findBy(array('listed' => true));
+		}
+
 		return array(
-			'myvar' => '12',
+			'filterForm' => $filterForm,
 			'bicycles'=>$bicycles,
 		);
 	}

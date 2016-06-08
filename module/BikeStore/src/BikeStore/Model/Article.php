@@ -34,12 +34,6 @@ class Article
     protected $price;
 
 	/**
-	 * @ORM\Column(type="integer")
-	 * @var int
-	 */
-    protected $stock;
-
-	/**
 	 * @ORM\Column(type="string")
 	 * @var string
 	 */
@@ -63,17 +57,40 @@ class Article
 	 */
     protected $listed;
 
-    public function __construct()
+	/**
+	 * @ORM\Column(type="string")
+	 * @var string
+	 */
+	protected $colour;
+
+
+	public function __construct()
     {
         $this->id = null;
 		$this->setListed(true);
 		$this->setImageName("article.png");
 		$this->setDescription("this is undefined");
 		$this->setPrice(0.00);
-		$this->setStock(100);
 		$this->setName("undefined");
 		$this->setQuickDescription("undef");
+		$this->setColour("undefined");
     }
+
+	/**
+	 * @return string
+	 */
+	public function getColour()
+	{
+		return $this->colour;
+	}
+
+	/**
+	 * @param string $colour
+	 */
+	public function setColour($colour)
+	{
+		$this->colour = $colour;
+	}
 
     /**
      * @return mixed
@@ -111,28 +128,6 @@ class Article
 	{
 		$this->price = $price;
 	}
-
-	/**
-	 * @return int
-	 */
-	public function getStock()
-	{
-		return $this->stock;
-	}
-
-	/**
-	 * @param int $stock
-	 */
-	public function setStock($stock)
-	{
-		$this->stock = $stock;
-	}
-
-	
-	
-	
-	
-	
 	
 	/**
 	 * @return string

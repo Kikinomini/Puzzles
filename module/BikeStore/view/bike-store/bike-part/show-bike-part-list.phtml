@@ -1,6 +1,7 @@
 <?php
 $this->headLink()->prependStylesheet($this->basePath() . '/css/bikePart.css');
 $this->headLink()->prependStylesheet($this->basePath() . '/css/boxedLayoutAnzeige.css');
+$this->headLink()->prependStylesheet($this->basePath() . '/css/filterForm.css');
 $this->headScript()->appendFile($this->basePath() . '/js/bikePartView.js');
 
 
@@ -30,9 +31,34 @@ JS;
 
 
 $this->inlineScript()->captureEnd();
-
-echo "<p id='AusgabePanel'></p>";
+echo "<div class='columns large-2'>";
+$this->filterForm->setAttribute("action", $this->url("Bikepart"));
+$this->filterForm->prepare();
+echo $this->form()->openTag($this->filterForm);
 ?>
+
+<div id = 'bikePartType'>
+	<?php
+		echo $this->myForm()->multiCheckBox($this->filterForm->get("equipmentTypes"));
+	?>
+</div>
+<div id = 'bikePartFormPrice'>
+	Preis:
+		<div>
+		<?php
+			echo "<div class = 'columns large-5 small-5'>".$this->formRow($this->filterForm->get("priceMin"))."</div>";
+			echo "<div class = 'columns large-5 small-5'>".$this->formRow($this->filterForm->get("priceMax"))."</div>";
+			echo "<div class = 'columns large-2 small-2'>".$this->formRow($this->filterForm->get("priceSubmitButton"))."</div>";
+		?>
+			</div>
+	</div>
+<?php
+echo $this->form()->closeTag();
+echo "</div>";
+?>
+<div class="columns large-10"><p id='AusgabePanel'></p></div>
+
+
 <?php
 
 

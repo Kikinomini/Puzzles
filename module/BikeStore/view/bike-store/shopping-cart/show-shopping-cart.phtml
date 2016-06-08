@@ -131,7 +131,6 @@ $this->inlineScript()->captureEnd();
 	<!--Kauf-Box rechts-->
 	<div>
 		<div class="partBuy">
-			<!--		<p>Summe: <b> --><?php //echo number_format($sum,2, ",", ".");?><!-- €</b><br>-->
 			<p><b>Summe (<span class="numberOfAllArticles"><?php echo $allArticles ?></span> Artikel): <span
 						class="priceColor"><?php echo number_format($sum, 2, ",", ".");
 						$sum = number_format($sum, 2, ".", ""); ?> €</span></b>
@@ -144,7 +143,7 @@ JS;
 				$this->inlineScript()->captureEnd();
 				?>
 				<!--	Kauf-Button	-->
-				<br><br><a href="<?php echo $this->url("selectPayMethod"); ?>" class="btn btn-default buyButton">Zur
+				<br><br><a href="<?php echo $this->url("insertDeliveryAddress"); ?>" class="btn btn-default buyButton">Zur
 					Kasse gehen</a></p>
 		</div>
 	</div>

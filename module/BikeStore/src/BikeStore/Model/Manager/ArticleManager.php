@@ -4,10 +4,18 @@ namespace BikeStore\Model\Manager;
 
 use Application\Model\Manager\StandardManager;
 use BikeStore\Model\Article;
+use BikeStore\Model\Filter\ArticleFilterContainer;
 use BikeStore\Model\Repository\ArticleRepository;
 
 class ArticleManager extends StandardManager
 {
+
+	public function findByArticleFilterContainer(ArticleFilterContainer $articleFilterContainer)
+	{
+		/** @var ArticleRepository $repo */
+		$repo = $this->repository;
+		return $repo->findByArticleFilterContainer($articleFilterContainer);
+	}
 
 	/**
 	 * @param Article $article
@@ -30,7 +38,7 @@ class ArticleManager extends StandardManager
 	{
 		/** @var ArticleRepository am*/
 		$am = $this->repository;
-		$am->search($string);
+//		$am->search($string);
 	}
 
     public function __construct($repository, $entity = null)

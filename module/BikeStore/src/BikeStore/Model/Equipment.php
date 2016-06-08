@@ -17,12 +17,6 @@ class Equipment extends Article
      */
     protected $id;
 
-    /**
-     * @ORM\Column(type="string")
-     * @var string
-     */
-    protected $colour;
-
     public function __construct()
     {
         parent::__construct();
@@ -49,21 +43,5 @@ class Equipment extends Article
 	public function getDetailViewPath()
 	{
 		return "/bike-store/bicycle/equipment-product-info";
-	}
-
-	/**
-	 * @return string
-	 */
-	public function getColour()
-	{
-		return $this->colour;
-	}
-
-	/**
-	 * @param string $colour
-	 */
-	public function setColour($colour)
-	{
-		$this->colour = $colour;
 	}
 }
