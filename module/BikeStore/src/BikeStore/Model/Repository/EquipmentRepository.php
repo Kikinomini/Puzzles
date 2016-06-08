@@ -15,7 +15,12 @@ class EquipmentRepository extends ArticleRepository
 		return $this;
 	}
 
-	protected function addWhereStatement(BikePartFilterContainer $bikePartFilterContainer, QueryBuilder $queryBuilder)
+	/**
+	 * @param BikePartFilterContainer $bikePartFilterContainer
+	 * @param QueryBuilder $queryBuilder
+	 * @return $this|void
+	 */
+	protected function addWhereStatement(ArticleFilterContainer $bikePartFilterContainer, QueryBuilder $queryBuilder)
 	{
 		parent::addWhereStatement($bikePartFilterContainer, $queryBuilder);
 		$orExpr = $queryBuilder->expr()->orX();
