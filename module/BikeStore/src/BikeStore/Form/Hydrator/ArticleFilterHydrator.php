@@ -26,6 +26,7 @@ class ArticleFilterHydrator implements HydratorInterface
 	 */
 	public function hydrate(array $data, $bikePartFilterContainer)
 	{
+		isset($data["search"]) && $bikePartFilterContainer->setSearchWords($data["search"]);
 		isset($data["priceMin"]) && $bikePartFilterContainer->setPriceMin(floatval($data["priceMin"]));
 		isset($data["priceMax"]) && $bikePartFilterContainer->setPriceMax(floatval($data["priceMax"]));
 

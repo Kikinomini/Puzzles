@@ -25,8 +25,11 @@ class ArticleFilterForm extends MyForm
 
 	public function addElements()
 	{
-		$sideNumber = new Element\Hidden("sideNumber");
+		$sideNumber = new Element\Hidden("page");
 		$this->add($sideNumber);
+
+		$searchText = new Element\Hidden("search");
+		$this->add($searchText);
 
 		$priceMin = new Number("priceMin");
 		$priceMin->setLabel("Von:");

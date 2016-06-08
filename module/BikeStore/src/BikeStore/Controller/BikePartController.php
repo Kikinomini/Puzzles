@@ -36,7 +36,7 @@ class BikePartController extends AbstractActionController
 		{
 			$data = $request->getQuery()->toArray();
 			$articleFilterContainer = new BikePartFilterContainer();
-			$articleFilterContainer->setSearchWords("Fahrrad Bremse");
+//			$articleFilterContainer->setSearchWords("Licht Bremse");
 			$hydrator = new BikePartFilterHydrator();
 			$hydrator->hydrate($data, $articleFilterContainer);
 			$filterForm->setData($data);

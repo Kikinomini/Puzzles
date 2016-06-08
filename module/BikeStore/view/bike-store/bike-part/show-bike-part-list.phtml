@@ -35,6 +35,8 @@ echo "<div class='columns large-2'>";
 $this->filterForm->setAttribute("action", $this->url("Bikepart"));
 $this->filterForm->prepare();
 echo $this->form()->openTag($this->filterForm);
+echo $this->formHidden($this->filterForm->get("search"));
+echo $this->formHidden($this->filterForm->get("page"));
 ?>
 
 <div id = 'bikePartType'>

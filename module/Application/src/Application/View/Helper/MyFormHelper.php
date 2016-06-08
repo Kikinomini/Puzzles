@@ -208,7 +208,7 @@ JS;
 			$checkbox->setLabel($label);
 			$checkbox->setCheckedValue($value);
 //			$checkbox->setChecked(array_key_exists($value, $checked) && $checked[$value]);
-			$checkbox->setChecked(in_array($value, $checkedElements));
+			$checkbox->setChecked(is_array($checkedElements) && in_array($value, $checkedElements));
 			$renderedElement .= $this->phpRenderer->formRow($checkbox);
 		}
 		$renderedElement .= "</div>";
