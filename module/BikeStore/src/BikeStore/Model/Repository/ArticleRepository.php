@@ -61,15 +61,16 @@ class ArticleRepository extends StandardRepository
 			if (!$articleFilterContainer->isCaseSensitive())
 			{
 				$orExpr->add($queryBuilder->expr()->like("LOWER(a.name)", ":word".$index));
-				$orExpr->add($queryBuilder->expr()->like("LOWER(a.quickDescription)", "%".$word."%"));
-				$orExpr->add($queryBuilder->expr()->like("LOWER(a.colour)", "%".$word."%"));
+				$orExpr->add($queryBuilder->expr()->like("LOWER(a.quickDescription)", ":word".$index));
+				$orExpr->add($queryBuilder->expr()->like("LOWER(a.colour)", ":word".$index));
 			}
 			else
 			{
-				$orExpr->add($queryBuilder->expr()->like("a.name", "%".$word."%"));
-				$orExpr->add($queryBuilder->expr()->like("a.quickDescription", "%".$word."%"));
-				$orExpr->add($queryBuilder->expr()->like("a.colour", "%".$word."%"));
+				$orExpr->add($queryBuilder->expr()->like("a.name", ":word".$index));
+				$orExpr->add($queryBuilder->expr()->like("a.quickDescription", ":word".$index));
+				$orExpr->add($queryBuilder->expr()->like("a.colour", ":word".$index));
 			}
+			$queryBuilder->setParameter(":word".$index, "%".$word."%");
 		}
 		$queryBuilder->andWhere($orExpr);
 	}
