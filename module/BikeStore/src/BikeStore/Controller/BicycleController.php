@@ -14,12 +14,30 @@ use BikeStore\Model\Article;
 use BikeStore\Model\Bicycle;
 use BikeStore\Model\Manager\ArticleManager;
 use BikeStore\Model\Manager\BicycleManager;
+use BikeStore\Model\Repository\ArticleRepository;
+use Zend\Http\Request;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use Zend\Session\Container;
 
 class BicycleController extends AbstractActionController
 {
+	public function searchAction()
+	{
+		/** @var Request $request */
+		$request = $this->getRequest();
+		$searchString = $request->getQuery("s");
+		/** @var ArticleManager $articleManager */
+		$articleManager = $this->serviceLocator->get("BikeStore.ArticleManager");
+
+		$article = $articleManager->searchByString($searchString);
+		var_dump($article);
+
+
+
+//		$foundArticles = $articleManager->findBy(array('name'=>$searchString,'quickDescription'=>$searchString));
+
+	}
 	public function showBicycleListAction()
 	{
 		/** @var BicycleManager $bicycleManager */

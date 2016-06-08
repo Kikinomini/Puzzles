@@ -4,6 +4,7 @@ namespace BikeStore\Model\Manager;
 
 use Application\Model\Manager\StandardManager;
 use BikeStore\Model\Article;
+use BikeStore\Model\Repository\ArticleRepository;
 
 class ArticleManager extends StandardManager
 {
@@ -23,6 +24,13 @@ class ArticleManager extends StandardManager
 			'id' => $article->getId(),
 			'listed' => $article->getListed(),
 		);
+	}
+	
+	public function searchByString($string)
+	{
+		/** @var ArticleRepository am*/
+		$am = $this->repository;
+		$am->search($string);
 	}
 
     public function __construct($repository, $entity = null)

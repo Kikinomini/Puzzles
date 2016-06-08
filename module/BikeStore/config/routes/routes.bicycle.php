@@ -34,6 +34,18 @@ return array(
 						'resource' => 'default',
 					),
 				),
+			),'search' => array(
+				'type' => 'segment',
+				'options' => array(
+					'route' => '/search',
+					'constraints' => array(
+					),
+					'defaults' => array(
+						'controller' => 'BikeStore\Controller\Bicycle',
+						'action' => 'search',
+						'resource' => 'default',
+					),
+				),
 			),
 		),
 	),
