@@ -21,8 +21,10 @@ $this->inlineScript()->captureStart();
 
 echo <<<JS
 	$(document).ready(function() {
+		elementRender.BikeList = false;
 	  	elementRender.addArrayElements($ElementArray);
 	  	elementRender.createList();
+	  	
 	})
 JS;
 

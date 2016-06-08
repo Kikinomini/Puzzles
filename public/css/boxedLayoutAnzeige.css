@@ -11,11 +11,17 @@
 
 }
 .NameRow{
-
+	text-align: center;
+	width: 300px;
 }
 .DetailRow{
-
+	text-align: center;
+	width: 300px;
 }
 .rowTable{
-
+	width: 300px;
+}
+.PriceRow{
+	text-align: center;
+	width: 300px;
 }

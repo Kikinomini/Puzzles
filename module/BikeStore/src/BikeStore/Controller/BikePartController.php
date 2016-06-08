@@ -19,8 +19,7 @@ class BikePartController extends AbstractActionController
 	{
 		/** @var EquipmentManager $EquipmenManeger */
 		$EquipmenManeger = $this->serviceLocator->get('BikeStore.equipmentManager');
-
-		/** @var ?? $r_value */ /**TODO Type ändern */
+		
 		$r_value = $EquipmenManeger->findBy(array(
 			"listed" => true,
 		));
