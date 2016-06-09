@@ -5,7 +5,6 @@ $this->headLink()->prependStylesheet($this->basePath() . '/css/filterForm.css');
 $this->headScript()->appendFile($this->basePath() . '/js/bikePartView.js');
 $this->headScript()->appendFile($this->basePath() . '/js/FilterForm.js');
 
-
 echo "<h1>Fahrradteile</h1>";
 $alleElemente = array();
 foreach($this->equipments as $Eqipment)
@@ -20,9 +19,7 @@ include(realpath('public/image/list.svg'));
 echo  "</button></br>";
 echo "<button type=\"button\" onclick=\"elementRender.createBox()\"> Kacheln </button></form>";
 
-
 $this->inlineScript()->captureStart();
-
 echo <<<JS
 	$(document).ready(function() {
 		FilterForm.setForm($("#bikePartFilterForm"));
@@ -35,8 +32,6 @@ echo <<<JS
 	  	elementRender.createList();
 	})
 JS;
-
-
 $this->inlineScript()->captureEnd();
 echo "<div class='row'>";
 echo "<div class='columns large-2'>";

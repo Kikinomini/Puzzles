@@ -69,7 +69,7 @@ class ShoppingCartController extends AbstractActionController
 		$count = (int)$request->getPost('count', -1);
 
 		$articleManager = $this->getServiceLocator()->get("BikeStore.articleManager");
-		if($article = $articleManager->getEntityById($id) == null)
+		if($article = $articleManager->getEntityById($id) == null || $count<=0)
 		{
 			$this->getResponse()->setStatusCode(400);
 			$this->getEventManager()->trigger('dispatchError', 'Module', $this->getEvent());
@@ -134,7 +134,7 @@ class ShoppingCartController extends AbstractActionController
 		if(isset($articles[$id]))
 		{
 			unset($articles[$id]);
-			//$sessionContainer->offsetSet("articles", $articles);
+			$sessionContainer->offsetSet("articles", $articles);
 		}
 		else
 		{
