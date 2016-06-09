@@ -17,7 +17,6 @@ use BikeStore\Model\Manager\ArticleManager;
 use BikeStore\Model\Manager\BicycleManager;
 use Zend\Http\Request;
 use BikeStore\Model\Repository\ArticleRepository;
-use Zend\Http\Request;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use Zend\Session\Container;
