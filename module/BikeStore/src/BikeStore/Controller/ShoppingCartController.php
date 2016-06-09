@@ -134,7 +134,7 @@ class ShoppingCartController extends AbstractActionController
 		if(isset($articles[$id]))
 		{
 			unset($articles[$id]);
-			//$sessionContainer->offsetSet("articles", $articles);
+			$sessionContainer->offsetSet("articles", $articles);
 		}
 		else
 		{

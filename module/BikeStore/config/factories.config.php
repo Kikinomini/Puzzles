@@ -13,5 +13,10 @@ return array(
 			'BikeStore.paymentInfoManager' => 'BikeStore\Factory\Model\Manager\PaymentInfoManagerFactory',
 			'BikeStore.equipment.SaddleManager' => 'BikeStore\Factory\Model\Manager\Equipment\SaddleManagerFactory',
 		),
-	)
+	),
+	'view_helpers' => array(
+		'factories' => array(
+			'price' => 'BikeStore\Factory\View\PriceHelperFactory',
+		),
+	),
 );
