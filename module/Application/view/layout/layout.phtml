@@ -57,10 +57,20 @@ echo $this->doctype(); ?>
 		settings.basePath = '$basePath';
 		numberArticlesInShoppingCart = $stuff;
 		
-		$("svg circle").click(function() {
-			$("body").addClass('ya-see-me-rolling');
-			return false;
-		});
+		$(document).ready(function(){
+			$("svg circle").click(function() {
+				$("body").addClass('ya-see-me-rolling');
+				return false;
+			});
+			$("#searchForm").submit(function(e){
+				if (FilterForm.hasForm())
+				{
+					e.preventDefault();
+					FilterForm.setSearch($(this).find(".suchleiste").val());
+					FilterForm.sendForm();
+				}
+			});
+		})
 JS;
 
 	$this->inlineScript()->captureEnd();
@@ -98,7 +108,7 @@ JS;
 				</div>
 				<div class="suche flexFillWidth">
 <!--					<div class="flexHeader">-->
-						<form class="flexHeader" action="<?php echo $this->url("search"); ?>" method="GET">
+						<form class="flexHeader" id = 'searchForm' action="<?php echo $this->url("search"); ?>" method="GET">
 						<div class="flexFillWidth">
 							<input name="s" class="suchleiste flexFillWidth form-control" type="text" placeholder=" Suche..."/>
 						</div>
