@@ -23,7 +23,7 @@
 .firstLine {
 	padding-top: 5px;
 
-	border-top: solid 1px #8e8e8e;
+	border-top: solid 1px #8e8e8e !important;
 }
 
 /*Trennlinie zwischen Einträgen*/

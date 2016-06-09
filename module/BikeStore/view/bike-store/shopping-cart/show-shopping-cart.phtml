@@ -16,7 +16,10 @@ echo <<<JS
 			  {
 			  		numberArticlesInShoppingCart -= count;
 			  		// $("#article"+id).remove();
-			  		$("#article"+id).slideUp('slow', function(){ $("#article"+id).remove(); });
+			  		$("#article"+id).slideUp('slow', function(){ 
+			  			$("#article"+id).remove();
+			  			$(".partWareWhole:first").addClass("firstLine");
+			  		});
 			  	
 					flashMessenger.addMessage(flashMessenger.messageTypeSuccess, name + " wurde aus dem Warenkorb entfernt");
 					$(".warenkorbText").first().html((numberArticlesInShoppingCart) + ' Artikel <br> im Warenkorb');
@@ -28,6 +31,7 @@ echo <<<JS
 					$(".priceColor").html(new_priceArticlesInShoppingCart.toString().replace(".",",") + " €");
 					// $(".priceColor").html(priceArticlesInShoppingCart.toString().replace(".",",") + "€");
 					$(".numberOfAllArticles").html(numberOfAllArticles);
+					
 			  }
 			}, "json").fail(function() 
 			{
