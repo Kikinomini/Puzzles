@@ -12,14 +12,22 @@ namespace BikeStore\Form;
 use Application\Model\Form\Element\MyMultiCheckbox;
 use BikeStore\Model\Manager\EquipmentManager;
 use Zend\Form\Element\MultiCheckbox;
+use Zend\Mvc\Controller\Plugin\FlashMessenger;
 
 class BikePartFilterForm extends ArticleFilterForm
 {
+	public function __construct(FlashMessenger $flashMessenger = null, $name = null, array $options = array())
+	{
+		parent::__construct($flashMessenger, $name, $options);
+		$this->setAttribute("id", "bikePartFilterForm");
+	}
+
 	public function addElements()
 	{
 		parent::addElements();
 
 		$equipmentTypes = new MultiCheckbox("equipmentTypes");
+		$equipmentTypes->setAttribute("class", "");
 		$equipmentTypes->setValueOptions(array(
 			EquipmentManager::BATTERY => "Batterie",
 			EquipmentManager::BRAKE => "Bremse",
@@ -39,6 +47,8 @@ class BikePartFilterForm extends ArticleFilterForm
 			EquipmentManager::MUD_GUARD => "Schutzblech",
 			EquipmentManager::FRONT_WHEEL => "Vorderrad",
 		));
+		$this->setSendFormOnClickClasses($equipmentTypes);
 		$this->add($equipmentTypes);
+
 	}
 }

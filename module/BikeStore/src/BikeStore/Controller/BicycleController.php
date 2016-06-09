@@ -13,6 +13,7 @@ use Application\Model\User;
 use BikeStore\Form\BicycleFilterForm;
 use BikeStore\Model\Article;
 use BikeStore\Model\Bicycle;
+use BikeStore\Model\Filter\ArticleFilterContainer;
 use BikeStore\Model\Manager\ArticleManager;
 use BikeStore\Model\Manager\BicycleManager;
 use Zend\Http\Request;
@@ -27,12 +28,18 @@ class BicycleController extends AbstractActionController
 	{
 		/** @var Request $request */
 		$request = $this->getRequest();
-		$searchString = $request->getQuery("s");
+		$searchString = $request->getQuery("search");
 		/** @var ArticleManager $articleManager */
 		$articleManager = $this->serviceLocator->get("BikeStore.ArticleManager");
 
-		$article = $articleManager->searchByString($searchString);
-		var_dump($article);
+		$articleFilter = new ArticleFilterContainer();
+		$articleFilter->setSearchWords($searchString);
+
+		$articleArray = $articleManager->findByArticleFilterContainer($articleFilter);
+		var_dump($articleArray);
+		
+
+
 
 
 

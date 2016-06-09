@@ -3,6 +3,7 @@ $this->headLink()->prependStylesheet($this->basePath() . '/css/bikePart.css');
 $this->headLink()->prependStylesheet($this->basePath() . '/css/boxedLayoutAnzeige.css');
 $this->headLink()->prependStylesheet($this->basePath() . '/css/filterForm.css');
 $this->headScript()->appendFile($this->basePath() . '/js/bikePartView.js');
+$this->headScript()->appendFile($this->basePath() . '/js/FilterForm.js');
 
 
 echo "<h1>Fahrradteile</h1>";
@@ -22,10 +23,14 @@ $this->inlineScript()->captureStart();
 
 echo <<<JS
 	$(document).ready(function() {
+		FilterForm.setForm($("#bikePartFilterForm"));
+		$(".sendFormOnClick").click(function(){
+			FilterForm.sendForm();
+		})
+		
 		elementRender.BikeList = false;
 	  	elementRender.addArrayElements($ElementArray);
 	  	elementRender.createList();
-	  	
 	})
 JS;
 

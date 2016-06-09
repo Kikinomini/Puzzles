@@ -22,6 +22,8 @@ use Zend\Mvc\Controller\AbstractActionController;
 
 class BikePartController extends AbstractActionController
 {
+	const ARTICLES_PER_SIDE = 15;
+
 	public function showBikePartListAction()
 	{
 		/** @var EquipmentManager $equipmentManager */
@@ -29,26 +31,21 @@ class BikePartController extends AbstractActionController
 
 		$filterForm = new BikePartFilterForm();
 
-		$articles = null;
 		/** @var Request $request */
 		$request = $this->getRequest();
-		if ($request->isGet())
+		$articleFilterContainer = new BikePartFilterContainer();
+		$articleFilterContainer->setLimit(self::ARTICLES_PER_SIDE);
+
+		if($request->isGet())
 		{
 			$data = $request->getQuery()->toArray();
-			$articleFilterContainer = new BikePartFilterContainer();
 //			$articleFilterContainer->setSearchWords("Licht Bremse");
 			$hydrator = new BikePartFilterHydrator();
 			$hydrator->hydrate($data, $articleFilterContainer);
 			$filterForm->setData($data);
-			$articles = $equipmentManager->findByArticleFilterContainer($articleFilterContainer);
 		}
-		if ($articles === null)
-		{
-			/** @var ArrayCollection $articles */
-			$articles = $equipmentManager->findBy(array(
-				"listed" => true,
-			));
-		}
+
+		$articles = $equipmentManager->findByArticleFilterContainer($articleFilterContainer);
 		return array(
 			"equipments" => $articles,
 			"filterForm" => $filterForm,

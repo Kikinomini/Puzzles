@@ -9,6 +9,7 @@
 namespace BikeStore\Form\Hydrator;
 
 
+use BikeStore\Controller\BikePartController;
 use BikeStore\Model\Filter\ArticleFilterContainer;
 use Zend\Stdlib\Hydrator\HydratorInterface;
 
@@ -29,6 +30,15 @@ class ArticleFilterHydrator implements HydratorInterface
 		isset($data["search"]) && $bikePartFilterContainer->setSearchWords($data["search"]);
 		isset($data["priceMin"]) && $bikePartFilterContainer->setPriceMin(floatval($data["priceMin"]));
 		isset($data["priceMax"]) && $bikePartFilterContainer->setPriceMax(floatval($data["priceMax"]));
+
+		if (isset($data["page"]))
+		{
+			$pageNumber = intval($data["page"]);
+			if ($pageNumber > 0);
+			{
+				$bikePartFilterContainer->setOffset(($pageNumber-1)*BikePartController::ARTICLES_PER_SIDE);
+			}
+		}
 
 		return $bikePartFilterContainer;
 	}

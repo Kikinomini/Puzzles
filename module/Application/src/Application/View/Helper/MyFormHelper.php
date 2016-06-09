@@ -187,6 +187,7 @@ JS;
 	 */
 	public function multiCheckBox($multiCheckBox)
 	{
+
 		$renderedElement = "";
 		if(strlen($multiCheckBox->getLabel()) > 0)
 		{
@@ -195,7 +196,7 @@ JS;
 		}
 		else
 		{
-			$renderedElement .= "<label class = 'myMultiCheckboxHeadLabel' >&nbsp;</label>";
+//			$renderedElement .= "<label class = 'myMultiCheckboxHeadLabel' >&nbsp;</label>";
 		}
 
 		$renderedElement .= "<div class = 'multiCheckBoxBody'>";
@@ -207,6 +208,7 @@ JS;
 			$checkbox->setUseHiddenElement(false);
 			$checkbox->setLabel($label);
 			$checkbox->setCheckedValue($value);
+			$checkbox->setAttribute("class", $multiCheckBox->getAttribute("class"));
 //			$checkbox->setChecked(array_key_exists($value, $checked) && $checked[$value]);
 			$checkbox->setChecked(is_array($checkedElements) && in_array($value, $checkedElements));
 			$renderedElement .= $this->phpRenderer->formRow($checkbox);

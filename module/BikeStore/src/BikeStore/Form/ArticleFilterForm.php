@@ -48,6 +48,18 @@ class ArticleFilterForm extends MyForm
 		$this->add($priceSubmitButton);
 	}
 
+	public function setSendFormOnClickClasses(Element $element)
+	{
+		if ($element->hasAttribute("class"))
+		{
+			$element->setAttribute("class", $element->getAttribute("class")." sendFormOnClick");
+		}
+		else
+		{
+			$element->setAttribute("class", "form-control sendFormOnClick");
+		}
+	}
+
 	public function add($elementOrFieldset, array $flags = array())
 	{
 		if ($elementOrFieldset instanceof Element) {
