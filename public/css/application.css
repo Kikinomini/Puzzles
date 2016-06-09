@@ -13,7 +13,7 @@ body
 
 .ya-see-me-rolling
 {
-	animation: rotating 6s linear infinite;
+	animation: rotating 6s linear 1;
 }
 
 .myMainContainerWrapper
