@@ -9,11 +9,12 @@ body
 	/* height: 100vh; */
 	background-color:transparent;
 	font-family: "Tahoma", "Arial", "Helvetica", serif !important;
+	/* animation: rotating 6s linear infinite; */
 }
 
 .ya-see-me-rolling
 {
-	animation: rotating 6s linear 1;
+	animation: rotating 6s linear infinite;
 }
 
 .myMainContainerWrapper
@@ -73,7 +74,7 @@ div.table
 	border-collapse: collapse;
 }
 
-.row
+.trow
 {
     display: table-row;
 }
@@ -179,7 +180,9 @@ footer a:hover
 
 .header
 {
-	height: 115px;
+	/* height: 115px; */
+	width: 100%;
+	margin-bottom: 10px;
 }
 
 .mainnav{
@@ -208,8 +211,8 @@ footer a:hover
 	background-color: #82d77e;
 }
 
-div.logo{
-	float: left;
+#logo{
+	/* float: left; */
 	/*background-image: url("../image/BikeStoreLogo.gif");*/
 	/*background-repeat: no-repeat;*/
 	/*background-size: cover;*/
@@ -219,15 +222,13 @@ div.logo{
 	/*font-weight: bold;*/
 	/*color: #82d77e;*/
 	/*text-align: center;*/
-
 }
 #logoLabel
 {
 	font-weight: bold;
 	color: #82d77e;
-	text-align: center;
+	/* text-align: center; */
 	font-size: 24px;
-
 	-moz-transform: rotate(-3deg);
 	-ms-transform: rotate(-3deg);
 	-o-transform: rotate(-3deg);
@@ -235,38 +236,62 @@ div.logo{
 	transform: rotate(-3deg);
 }
 
-div.warenkorb {
+#shoppingCart {
 	float: right;
 	font-size: 14pt;
-	text-align: center;
-	margin: auto;
-	width: 200px;
-	margin-left: 15px;
-	margin-bottom: 35px;
+	/* text-align: center; */
+	/* margin: auto; */
+	/* width: 200px; */
+	/* margin-left: 15px; */
+	/* margin-bottom: 35px; */
+	margin: 8px;
 }
 
-div.warenkorb a {
+#shoppingCart a {
 	text-decoration: none;
 	color: #8e8e8e;
 	text-align: center;
 	transition: color .5s;
+	/* width: 100%; */
+	/* margin: auto; */
+	/* width: 225px; */
+	/* display: flex; */
+	/* height: 100%; */
+	/* align-items: center; */
+	/* -webkit-box-align: center; */
 }
 
 div.warenkorbPic {
-	float: left;
-	width: 65px;
+	/* float: left; */
+	/* width: 65px; */
 	fill: #8e8e8e;
 	transition: fill .5s;
+	height: 65px;
+	/* vertical-align: middle; */
+	/* display: inline; */
+	flex: 0 0 auto;
 }
 
-div.warenkorbText {
-	float: right;
-	width: 135px;
-	margin-top: 7px;
-	height: 62px;
+#warenkorbText {
+
+max-width: 215px;
+
+/* margin: auto; */
+
+/* vertical-align: middle; */
+
+/* display: table-cell; */
+
+/* height: 100%; */
+
+/* float: left; */
+
+margin-left: 10px;
+
+flex: 1 1 0px;
 }
 
-div.warenkorb:hover a, div.warenkorb:hover div.warenkorbPic
+#shoppingCart:hover a, #shoppingCart:hover div.warenkorbPic
 {
 	text-decoration: none;
 	color: #82d77e;
@@ -276,7 +301,7 @@ div.warenkorb:hover a, div.warenkorb:hover div.warenkorbPic
 }
 
 
-div.warenkorb a:hover
+#shoppingCart a:hover
 {
 	text-decoration: none;
 	color: #82d77e;
@@ -284,15 +309,17 @@ div.warenkorb a:hover
 }
 
 input.suchleiste{
-	width: 100%;
-	display: inline;
+	/* width: 100%; */
+	/* display: inline; */
 	border-right: none;
 	height: 35px;
-	margin-left: 15px;
+	/* margin-left: 15px; */
+	border-top-right-radius: 0px;
+	border-bottom-right-radius: 0px;
 }
 
-.suche{
-	margin: auto;
+#search{
+	/* margin: auto; */
 }
 
 .sucheButton{
@@ -317,7 +344,7 @@ input.suchleiste{
 }
 
 .flexHeader{
-	width: 100%;
+	width: auto;
 	display: flex;
 	display: -webkit-flex;
 }
@@ -349,7 +376,7 @@ p.link{
 
 .bikeStoreLogo
 {
-	margin-right: 5px;
+	/* margin-right: 5px; */
 	height: 80px;
 }
 
@@ -387,4 +414,32 @@ a:hover{
     -o-transform: rotate(360deg);
     transform: rotate(360deg);
   }
+}
+
+.bikeShopDefaultBtn{
+	color: #8e8e8e;
+	font-weight: bold;
+	border: none;
+	text-shadow: none;
+	background-color: #82d77e;
+	background-image: -webkit-linear-gradient(top, #9dff98, #82d77e);
+	background-image: -moz-linear-gradient(top, #9dff98, #82d77e);
+}
+
+.bikeShopDefaultBtn:hover svg, .bikeShopDefaultBtn:hover{
+	font-weight: bold;
+	background-position: 0 0;
+	background-blend-mode: darken;
+	color: #ffffff;
+	fill: #ffffff;
+}
+
+.warenkorbAlgemein{
+	display: flex;
+	align-items: center;
+	-webkit-box-align: center;
+}
+
+.warenkorbPic > svg{
+	height: 65px;
 }
