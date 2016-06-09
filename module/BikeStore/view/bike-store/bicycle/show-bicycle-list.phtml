@@ -16,7 +16,6 @@ foreach($this->bicycles as $Eqipment)
 {
 	$element = (\BikeStore\Model\Manager\EquipmentManager::getAsArray($Eqipment));;
 	$element["url"] = $this->url('articleDetails', array('id' => $Eqipment->getId()));
-	$element["price"] = number_format($element["price"],2,",",".");
 	$element["bikeType"] = $Eqipment->getFrame()->getBikeType();
 	$element["weelSize"]= $Eqipment->getFrontWheel()->getSize();
 	$newBike["frameSize"]= $Eqipment->getFrame()->getFrameSize();
