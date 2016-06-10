@@ -1,4 +1,36 @@
-#detailParth{
+#priceTable
+{
+	margin: auto;
+}
+#priceTable .cell
+{
+	font-weight: bold;
+}
+.priceTableCellRight
+{
+	text-align: right;
+}
+#totalPriceRow .cell
+{
+	border-top: solid 1px #cfcccc;
+}
+#totalPrice
+{
+	margin-bottom: 7px;
+	font-size: 18px;
+	font-weight: bolder;
+}
+#selectBrakeFront, #selectBrakeRear
+{
+	margin-left: 3px;
+	padding: 6px 3px;
+}
+#selectBrakeRear
+{
+	margin-bottom: 3px;
+}
+
+#detailPath {
 	margin-top: 10px;
 	margin-left: 5px;
 }
@@ -9,7 +41,7 @@
 }
 
 #detailBuy{
-	width: 200px;
+	width: 270px;
 	height: 100%;
 	float: right;
 	margin-right: 5px;

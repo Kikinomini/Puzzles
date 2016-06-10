@@ -19,16 +19,16 @@ class PriceHelper extends AbstractHelper
 //		$this->phpRenderer = $phpRenderer;
 	}
 
-	public function __invoke($price = null, $withStar = false)
+	public function __invoke($price = null, $withStar = true)
 	{
-		if ($price == null)
+		if ($price === null)
 		{
 			return $this;
 		}
 		return $this->formatPrice($price, $withStar);
 	}
 
-	public function formatPrice($price, $withStar = false)
+	public function formatPrice($price, $withStar = true)
 	{
 		return number_format((float)$price, 2, ",", ".")." €".(($withStar)?" *":"");
 	}

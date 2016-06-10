@@ -16,6 +16,7 @@ use BikeStore\Model\Bicycle;
 use BikeStore\Model\Filter\ArticleFilterContainer;
 use BikeStore\Model\Manager\ArticleManager;
 use BikeStore\Model\Manager\BicycleManager;
+use BikeStore\Model\Manager\Equipment\BrakeManager;
 use Zend\Http\Request;
 use BikeStore\Model\Repository\ArticleRepository;
 use Zend\Mvc\Controller\AbstractActionController;
@@ -38,11 +39,6 @@ class BicycleController extends AbstractActionController
 		$articleArray = $articleManager->findByArticleFilterContainer($articleFilter);
 		var_dump($articleArray);
 		
-
-
-
-
-
 //		$foundArticles = $articleManager->findBy(array('name'=>$searchString,'quickDescription'=>$searchString));
 
 	}
@@ -85,8 +81,18 @@ class BicycleController extends AbstractActionController
 			return;
 		}
 
+		$possibleBrakes = array();
+		if ($article instanceof Bicycle)
+		{
+			/** @var BrakeManager $brakeManager */
+			$brakeManager = $this->getServiceLocator()->get("BikeStore.equipment.brakeManager");
+			$possibleBrakes = $brakeManager->findPossibleBrakesForBicycle($article);
+		}
+
 		$viewModel = new ViewModel(array(
-			"article" => $article
+			"article" => $article,
+			"possibleBrakesFront" => $possibleBrakes,
+			"possibleBrakesRear" => $possibleBrakes,
 		));
 		$detailList = new ViewModel(array(
 			"article" => $article
