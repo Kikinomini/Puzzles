@@ -14,6 +14,8 @@ use BikeStore\Model\Bicycle;
 use BikeStore\Model\Equipment\Brake;
 use BikeStore\Model\Manager\ArticleManager;
 use BikeStore\Model\Manager\BicycleManager;
+use BikeStore\Model\Manager\Equipment\BrakeManager;
+use BikeStore\Model\Manager\Equipment\SaddleManager;
 use Zend\Http\Request;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\Session\Container;
@@ -61,6 +63,81 @@ class ShoppingCartController extends AbstractActionController
 		);
 	}
 
+	private function updateFrontBrake(Bicycle $bicycle)
+	{
+		/** @var Request $request */
+		$request = $this->getRequest();
+		$frontBrakeId = (int)$request->getPost('selectBrakeFront', -1);
+		/** @var BrakeManager $brakeManager */
+		$brakeManager = $this->getServiceLocator()->get("BikeStore.equipment.brakeManager");
+
+		if($frontBrakeId != $bicycle->getFrontBrake()->getId() && $frontBrakeId > 0)
+		{
+			$frontBrake = $brakeManager->getEntityById($frontBrakeId);
+			if($frontBrake == null)
+			{
+				return null;
+			}
+			$bicycle = clone $bicycle;
+			$bicycle->setId(null);
+			$bicycle->setListed(false);
+			$bicycle->setPrice($bicycle->getPrice() + $frontBrake->getPrice() - $bicycle->getFrontBrake()->getPrice());
+			$bicycle->setFrontBrake($frontBrake);
+			return $bicycle;
+		}
+		return $bicycle;
+	}
+
+	private function updateRearBrake(Bicycle $bicycle)
+	{
+		/** @var Request $request */
+		$request = $this->getRequest();
+		$rearBrakeId = (int)$request->getPost('selectBrakeRear', -1);
+		/** @var BrakeManager $brakeManager */
+		$brakeManager = $this->getServiceLocator()->get("BikeStore.equipment.brakeManager");
+
+		if($rearBrakeId != $bicycle->getRearBrake()->getId() && $rearBrakeId > 0)
+		{
+			$rearBrake = $brakeManager->getEntityById($rearBrakeId);
+			if($rearBrake == null)
+			{
+				return null;
+			}
+			$bicycle = clone $bicycle;
+			$bicycle->setId(null);
+			$bicycle->setListed(false);
+			$bicycle->setPrice($bicycle->getPrice() + $rearBrake->getPrice() - $bicycle->getRearBrake()->getPrice());
+			$bicycle->setRearBrake($rearBrake);
+			return $bicycle;
+		}
+		return $bicycle;
+	}
+
+	private function updateSaddle(Bicycle $bicycle)
+	{
+		/** @var Request $request */
+		$request = $this->getRequest();
+		$saddleId = (int)$request->getPost('selectSaddle', -1);
+		/** @var SaddleManager $brakeManager */
+		$brakeManager = $this->getServiceLocator()->get("BikeStore.equipment.saddleManager");
+
+		if($saddleId != $bicycle->getSaddle()->getId() && $saddleId > 0)
+		{
+			$saddle = $brakeManager->getEntityById($saddleId);
+			if($saddle == null)
+			{
+				return null;
+			}
+			$bicycle = clone $bicycle;
+			$bicycle->setId(null);
+			$bicycle->setListed(false);
+			$bicycle->setPrice($bicycle->getPrice() + $saddle->getPrice() - $bicycle->getSaddle()->getPrice());
+			$bicycle->setSaddle($saddle);
+			return $bicycle;
+		}
+		return $bicycle;
+	}
+
 	public function addArticleToShoppingCartAction()
 	{
 		$sessionContainer = new Container("shoppingCart");
@@ -81,51 +158,23 @@ class ShoppingCartController extends AbstractActionController
 
 		if($article instanceof Bicycle)
 		{
-			$articleChanged = false;
-			$frontBrakeId = (int)$request->getPost('selectBrakeFront', -1);
-			$rearBrakeId = (int)$request->getPost('selectBrakeRear', -1);
-
-			if($frontBrakeId != $article->getFrontBrake()->getId() && $frontBrakeId > 0)
+			$oldArticle = $article;
+			if(($article = $this->updateFrontBrake($article)) == null ||
+			   ($article = $this->updateRearBrake($article)) == null ||
+			   ($article = $this->updateSaddle($article)) == null
+			)
 			{
-				$articleChanged = true;
-				$frontBrake = $articleManager->getEntityById($frontBrakeId);
-				if(!($frontBrake instanceof Brake))
-				{
-					$this->getResponse()->setStatusCode(400);
-					$this->getEventManager()->trigger('dispatchError', 'Module', $this->getEvent());
-					return;
-				}
-				$article = clone $article;
-				$article->setId(null);
-				$article->setListed(false);
-				$article->setPrice($article->getPrice()+$frontBrake->getPrice()-$article->getFrontBrake()->getPrice());
-				$article->setFrontBrake($frontBrake);
+				$this->getResponse()->setStatusCode(400);
+				$this->getEventManager()->trigger('dispatchError', 'Module', $this->getEvent());
+				return;
 			}
-			if($rearBrakeId != $article->getRearBrake()->getId() && $rearBrakeId > 0)
-			{
-				$rearBrake = $articleManager->getEntityById($rearBrakeId);
-				if (!($rearBrake instanceof Brake))
-				{
-					$this->getResponse()->setStatusCode(400);
-					$this->getEventManager()->trigger('dispatchError', 'Module', $this->getEvent());
-					return;
-				}
-				if (!$articleChanged)
-				{
-					$articleChanged = true;
-					$article = clone $article;
-					$article->setId(null);
-					$article->setListed(false);
-				}
-				$article->setPrice($article->getPrice()+$rearBrake->getPrice()-$article->getRearBrake()->getPrice());
-				$article->setRearBrake($rearBrake);
-			}
-			if ($articleChanged)
+//
+			if($oldArticle != $article)
 			{
 				/** @var BicycleManager $bicycleManager */
 				$bicycleManager = $this->getServiceLocator()->get("BikeStore.bicycleManager");
 				$databaseArticle = $bicycleManager->findOneByBicycle($article);
-				if ($databaseArticle == null)
+				if($databaseArticle == null)
 				{
 					$bicycleManager->save($article);
 				}
