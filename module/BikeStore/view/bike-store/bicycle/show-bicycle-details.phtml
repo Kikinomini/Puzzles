@@ -6,26 +6,29 @@
  * Time: 23:15
  */
 $this->headLink()->prependStylesheet($this->basepath() . '/css/detailContent.css');
-$this->headScript()->appendFile($this->basePath() . '/js/Customizer.js');
+$this->headScript()->appendFile($this->basePath() . '/js/customizer.js');
 
 /** @var \BikeStore\Model\Article $article */
 $isBicycle = ($article instanceof \BikeStore\Model\Bicycle);
-$isBicycleJs = ($isBicycle)?"true":"false";
+$isBicycleJs = ($isBicycle) ? "true" : "false";
 
 $brakesFrontJson = "";
 $brakesRearJson = "";
+$saddleJson = "";
 $currentBrakeFrontId = 0;
 $currentBrakeRearId = 0;
 $currentBrakeFrontPrice = 0;
 $currentBrakeRearPrice = 0;
-if ($isBicycle)
+$currentSaddlePrice = 0;
+$currentSaddleId = 0;
+if($isBicycle)
 {
 	/** @var \BikeStore\Model\Bicycle $article */
 	$currentBrakeFrontPrice = $article->getFrontBrake()->getPrice();
 	$currentBrakeFrontId = $article->getFrontBrake()->getId();
 	$brakeArray = array();
 	/** @var \BikeStore\Model\Equipment\Brake $brake */
-	foreach ($this->possibleBrakesFront as $brake)
+	foreach($this->possibleBrakesFront as $brake)
 	{
 		$brakeArray[] = \BikeStore\Model\Manager\Equipment\BrakeManager::getAsArray($brake);
 	}
@@ -35,11 +38,21 @@ if ($isBicycle)
 	$currentBrakeRearId = $article->getRearBrake()->getId();
 	$brakeArray = array();
 	/** @var \BikeStore\Model\Equipment\Brake $brake */
-	foreach ($this->possibleBrakesRear as $brake)
+	foreach($this->possibleBrakesRear as $brake)
 	{
 		$brakeArray[] = \BikeStore\Model\Manager\Equipment\BrakeManager::getAsArray($brake);
 	}
 	$brakesRearJson = json_encode($brakeArray);
+
+	$currentSaddlePrice = $article->getSaddle()->getPrice();
+	$currentSaddleId = $article->getSaddle()->getId();
+	$saddleArray = array();
+	/** @var \BikeStore\Model\Equipment\Saddle $saddle */
+	foreach($this->possibleSaddles as $saddle)
+	{
+		$saddleArray[] = \BikeStore\Model\Manager\Equipment\SaddleManager::getAsArray($saddle);
+	}
+	$saddleJson = json_encode($saddleArray);
 }
 
 $url = $this->url("addToCart");
@@ -51,9 +64,16 @@ echo <<<JS
 		$(document).ready(function() {
 		  	$("#shoppingCartBtn").click(function(){
 		  		var count = parseInt($("#mengenListe").val());
-		  		var brakeFrontId = parseInt($("#selectBrakeFront").val())
-		  		var brakeRearId = parseInt($("#selectBrakeRear").val())
-		  		$.post("$url", {'id': $id , 'count': count, brakeFrontId: brakeFrontId, brakeRearId: brakeRearId}, function(data) {
+		  		var postValues = {
+		  			id: $id,
+		  			count: count
+		  		}
+		  		if ($isBicycleJs)
+		  		{
+					postValues = $.extend(postValues, customizer.getSelectValues());		  		
+		  			console.log(postValues);
+		  		}
+		  		$.post("$url", postValues, function(data) {
 		  		  if(data['success'] === true)
 		  		  {
 		  		  		$('.myMainContainerWrapper').animate({scrollTop: 0}, 800);
@@ -68,15 +88,28 @@ echo <<<JS
 		  	});
 		  	if ($isBicycleJs)
 		  	{
-				customizer.bicyclePrice = $price;
-				customizer.currentBrakeFrontPrice = $currentBrakeFrontPrice
-				customizer.currentBrakeRearPrice = $currentBrakeRearPrice
-				customizer.addManyBrakesFront($brakesFrontJson);			
-				customizer.addManyBrakesRear($brakesRearJson);	
-				customizer.setCurrentFrontBrake($currentBrakeFrontId);
-				customizer.setCurrentRearBrake($currentBrakeRearId);
-				customizer.addBrakeOptionsToSelectBox();
-				customizer.init();
+		  		customizer.setBicyclePrice($price);
+		  	
+				customizer.addManyOptions("selectBrakeFront", $brakesFrontJson);		  	
+				customizer.addManyOptions("selectBrakeRear", $brakesRearJson);		  	
+				customizer.addManyOptions("selectSaddle", $saddleJson);	
+					  	
+				customizer.setCurrentId("selectBrakeFront", $currentBrakeFrontId);
+				customizer.setCurrentId("selectBrakeRear", $currentBrakeRearId);
+				customizer.setCurrentId("selectSaddle", $currentSaddleId);
+		  		customizer.init();
+		  		
+				// customizer.bicyclePrice = $price;
+//				customizer.currentBrakeFrontPrice = $currentBrakeFrontPrice;
+//				customizer.currentBrakeRearPrice = $currentBrakeRearPrice;
+//				customizer.currentSaddlePrice = $currentSaddlePrice;
+//				
+//				customizer.addManyBrakesFront($brakesFrontJson);			
+//				customizer.addManyBrakesRear($brakesRearJson);	
+//				customizer.setCurrentFrontBrake($currentBrakeFrontId);
+//				customizer.setCurrentRearBrake($currentBrakeRearId);
+//				customizer.addOptionsToSelectBox();
+//				customizer.init();
 		  	}
 		 })
 JS;
@@ -94,26 +127,37 @@ $this->inlineScript()->captureEnd();
 	</div>
 	<div id="detailBuy">
 		<!--		<p>-->
-		<div id = 'priceTable' class = 'table'>
-			<div class = 'row'>
-				<span class = 'priceTableCellLeft cell'><?php if($isBicycle){echo "Fahrrad:";}?></span>
-				<span class = '<?php if($isBicycle){echo "priceTableCellRight ";}?> cell'><?php echo $this->price($article->getPrice(), $isBicycle) ?></span>
+		<div id='priceTable' class='table'>
+			<div class='row'>
+				<span class='priceTableCellLeft cell'><?php if($isBicycle)
+					{
+						echo "Fahrrad:";
+					} ?></span>
+				<span class='<?php if($isBicycle)
+				{
+					echo "priceTableCellRight ";
+				} ?> cell'><?php echo $this->price($article->getPrice(), $isBicycle) ?></span>
 			</div>
 			<?php if($isBicycle)
 			{
 				?>
-				<div class = "row">
-					<label class= 'priceTableCellLeft cell' for="selectBrakeFront">Vorderbremse:</label>
-					<select id="selectBrakeFront" class="form-control priceTableCellRight cell"></select>
+				<div class="row">
+					<label class='priceTableCellLeft cell' for="selectSaddle">Sattel:</label>
+					<select id="selectSaddle" class="form-control priceTableCellRight cell customizingSelectBox"></select>
 				</div>
-				<div class = "row">
-					<label class= 'priceTableCellLeft cell' for="selectBrakeRear">Hinterbremse:</label>
-					<select id="selectBrakeRear" class="form-control priceTableCellRight cell"></select>
+				<div class="row">
+					<label class='priceTableCellLeft cell' for="selectBrakeFront">Vorderbremse:</label>
+					<select id="selectBrakeFront" class="form-control priceTableCellRight cell customizingSelectBox"></select>
+				</div>
+				<div class="row">
+					<label class='priceTableCellLeft cell' for="selectBrakeRear">Hinterbremse:</label>
+					<select id="selectBrakeRear" class="form-control priceTableCellRight cell customizingSelectBox"></select>
 				</div>
 				<div></div>
-				<div class = "row" id = "totalPriceRow">
-					<span class = "priceTableCellLeft cell">Total:</span>
-					<span class = "priceTableCellRight cell"><span id = 'totalPrice'><?php echo $this->price($article->getPrice())?></span></span>
+				<div class="row" id="totalPriceRow">
+					<span class="priceTableCellLeft cell">Total:</span>
+					<span class="priceTableCellRight cell"><span
+							id='totalPrice'><?php echo $this->price($article->getPrice()) ?></span></span>
 				</div>
 				<?php
 			}

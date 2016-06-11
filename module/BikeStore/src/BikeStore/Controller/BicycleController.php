@@ -17,6 +17,7 @@ use BikeStore\Model\Filter\ArticleFilterContainer;
 use BikeStore\Model\Manager\ArticleManager;
 use BikeStore\Model\Manager\BicycleManager;
 use BikeStore\Model\Manager\Equipment\BrakeManager;
+use BikeStore\Model\Manager\Equipment\SaddleManager;
 use Zend\Http\Request;
 use BikeStore\Model\Repository\ArticleRepository;
 use Zend\Mvc\Controller\AbstractActionController;
@@ -82,17 +83,23 @@ class BicycleController extends AbstractActionController
 		}
 
 		$possibleBrakes = array();
+		$possibleSaddles = array();
 		if ($article instanceof Bicycle)
 		{
 			/** @var BrakeManager $brakeManager */
 			$brakeManager = $this->getServiceLocator()->get("BikeStore.equipment.brakeManager");
 			$possibleBrakes = $brakeManager->findPossibleBrakesForBicycle($article);
+
+			/** @var SaddleManager $saddleManager */
+			$saddleManager = $this->getServiceLocator()->get("BikeStore.equipment.saddleManager");
+			$possibleSaddles = $saddleManager->findPossibleSaddlesForBicycle($article);
 		}
 
 		$viewModel = new ViewModel(array(
 			"article" => $article,
 			"possibleBrakesFront" => $possibleBrakes,
 			"possibleBrakesRear" => $possibleBrakes,
+			"possibleSaddles" => $possibleSaddles,
 		));
 		$detailList = new ViewModel(array(
 			"article" => $article

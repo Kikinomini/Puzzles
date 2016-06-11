@@ -82,10 +82,10 @@ class ShoppingCartController extends AbstractActionController
 		if($article instanceof Bicycle)
 		{
 			$articleChanged = false;
-			$frontBrakeId = (int)$request->getPost('brakeFrontId', -1);
-			$rearBrakeId = (int)$request->getPost('brakeRearId', -1);
+			$frontBrakeId = (int)$request->getPost('selectBrakeFront', -1);
+			$rearBrakeId = (int)$request->getPost('selectBrakeRear', -1);
 
-			if($frontBrakeId != $article->getFrontBrake()->getId())
+			if($frontBrakeId != $article->getFrontBrake()->getId() && $frontBrakeId > 0)
 			{
 				$articleChanged = true;
 				$frontBrake = $articleManager->getEntityById($frontBrakeId);
@@ -101,7 +101,7 @@ class ShoppingCartController extends AbstractActionController
 				$article->setPrice($article->getPrice()+$frontBrake->getPrice()-$article->getFrontBrake()->getPrice());
 				$article->setFrontBrake($frontBrake);
 			}
-			if($rearBrakeId != $article->getRearBrake()->getId())
+			if($rearBrakeId != $article->getRearBrake()->getId() && $rearBrakeId > 0)
 			{
 				$rearBrake = $articleManager->getEntityById($rearBrakeId);
 				if (!($rearBrake instanceof Brake))

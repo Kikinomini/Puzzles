@@ -3,9 +3,11 @@
 namespace BikeStore\Model\Manager\Equipment;
 
 use Application\Model\Manager\StandardManager;
+use BikeStore\Model\Bicycle;
 use BikeStore\Model\Equipment\Saddle;
+use BikeStore\Model\Manager\EquipmentManager;
 
-class SaddleManager extends StandardManager
+class SaddleManager extends EquipmentManager
 {
 	public static function resolveSaddleType($saddleType)
 	{
@@ -78,5 +80,30 @@ class SaddleManager extends StandardManager
 	public function getEntityById($id)
 	{
 		return parent::getEntityById($id);
+	}
+
+	public function findPossibleSaddlesForBicycle(Bicycle $bicycle)
+	{
+		/** @var Saddle[] $array */
+		$array = $this->repository->findBy(array(
+			"listed" => true,
+		), array(
+				'price' => 'DESC',
+			)
+		);
+		$saddle = $bicycle->getSaddle();
+		if (!in_array($saddle, $array))
+		{
+			$numberElements = count($array);
+			for ($i = 0; $i < $numberElements; $i++)
+			{
+				if ($array[$i]->getPrice() >= $saddle->getPrice())
+				{
+					array_splice($array, $i, 0, array($saddle));
+					break;
+				}
+			}
+		}
+		return $array;
 	}
 }
