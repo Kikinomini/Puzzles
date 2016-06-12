@@ -763,6 +763,7 @@ php doctrine.php orm:validate-schema
 php doctrine.php orm:schema-tool:create
 php doctrine.php orm:schema-tool:update --dump-sql
 php doctrine.php orm:schema-tool:update --force
+
 		</code>
 	</pre>
 	validate-schema überprüft dabei, ob die Models korrekt sind und ob diese mit der Datenbank übereinstimmen. <br/>
@@ -772,5 +773,10 @@ php doctrine.php orm:schema-tool:update --force
 
 	Nachdem die Datenbank erstellt ist, fehlen noch die Default-Rollen und Resourcen. Dafür kopiert man aus der <a href="../database.sql">database.sql</a> alle Insert-Befehle und führt
 	diese für die Datenbank aus. Jetzt sollte die Webseite laufen
+	<code>
+		php consoleApplication.php insertData
+	</code>
+	Braucht man um die Testdaten einzufügen
 </body>
+
 </html>
