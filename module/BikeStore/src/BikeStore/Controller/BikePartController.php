@@ -44,11 +44,23 @@ class BikePartController extends AbstractActionController
 			$hydrator->hydrate($data, $articleFilterContainer);
 			$filterForm->setData($data);
 		}
-
+		
 		$articles = $equipmentManager->findByArticleFilterContainer($articleFilterContainer);
+		$page = ceil($articleFilterContainer->getOffset()/ self::ARTICLES_PER_SIDE);
+		$maxPage = 10; //ToDo Ändern
+		if ($page > $maxPage) $page = $maxPage;
+		if ($page<=0) $page = 1;
+		$nothing = false;
+		if (count($articles) == 0){
+			$nothing = true;
+		}
 		return array(
 			"equipments" => $articles,
 			"filterForm" => $filterForm,
+			"maxpage" => $maxPage,
+			"page" => $page,
+			"all" => count($articles),
+			"nothing" => $nothing,
 		);
 	}
 

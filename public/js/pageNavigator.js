@@ -5,7 +5,6 @@
 var pageNavigator = {
 	maxPage: 0,
 	actualPage: 0,
-	url: "",
 	createdDiv: "0",
 
 
@@ -49,10 +48,15 @@ var pageNavigator = {
 		if(num == pageNavigator.actualPage){
 			return " <" + num + "> ";
 		}
-		return "<a href='" + pageNavigator.url + "/" + num + "' class='pageNavigatorButton'> <" + num + "> </a>";
+		return "<button type='pageNavigatorButton' onclick='pageNavigator.buttonPressed("+num+")'> <"+ num +"> </button>";
 	},
 	createPointDiv:function (){
 		return "..."
+	},
+
+	buttonPressed:function(num){
+		FilterForm.setSide(num);
+		FilterForm.sendForm();
 	}
 
 }

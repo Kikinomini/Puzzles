@@ -6,7 +6,9 @@
  * Time: 22:08
  */
 $this->headLink()->prependStylesheet($this->basePath() . '/css/boxedLayoutAnzeige.css');
+$this->headLink()->prependStylesheet($this->basePath() . '/css/pageNavigator.css');
 $this->headScript()->appendFile($this->basePath() . '/js/bikePartView.js');
+$this->headScript()->appendFile($this->basePath() . '/js/pageNavigator.js');
 $this->headLink()->prependStylesheet($this->basePath() . '/css/bikePart.css');
 
 echo "<h1>Fahrräder</h1>";
@@ -31,6 +33,9 @@ $this->inlineScript()->captureStart();
 
 echo <<<JS
 	$(document).ready(function() {
+		
+		pageNavigator.actualPage = $this->page;
+		pageNavigator.maxPage = $this->maxPage;
 		elementRender.BikeList = true;
 	  	elementRender.addArrayElements($ElementArray);
 	  	elementRender.createList();
