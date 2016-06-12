@@ -251,7 +251,7 @@ class Module implements CronjobModelInterface, MySettingsInterface
 			$session->regenerateId(true);
 			$container->init = 1;
 			$container->remoteAddr = $request->getServer()->get('REMOTE_ADDR');
-			$container->httpUserAgent = $request->getServer()->get('HTTP_USER_AGENT');
+//			$container->httpUserAgent = $request->getServer()->get('HTTP_USER_AGENT');
 
 			$config = $serviceManager->get('Config');
 			if(!isset($config['session']))

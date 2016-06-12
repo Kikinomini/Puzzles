@@ -46,4 +46,20 @@ class EBike extends Bicycle
     {
         $this->id = $id;
     }
+
+    /**
+     * @return Battery
+     */
+    public function getBattery()
+    {
+        return $this->battery;
+    }
+
+    /**
+     * @param Battery $battery
+     */
+    public function setBattery($battery)
+    {
+        $this->battery = $battery;
+    }
 }

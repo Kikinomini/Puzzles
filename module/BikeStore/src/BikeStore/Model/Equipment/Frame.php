@@ -30,11 +30,11 @@ class Frame extends Equipment
      */
     protected $id;
 
-    /**
-     * @ORM\Column(type="string")
-     * @var string
-     */
-    protected $color;
+//    /**
+//     * @ORM\Column(type="string")
+//     * @var string
+//     */
+//    protected $color;
 
     /**
      * @ORM\Column(type="float")
@@ -70,7 +70,7 @@ class Frame extends Equipment
     {
     	parent::__construct();
         $this->id = null;
-		$this->setColor("Schwarz");
+//		$this->setColor("Schwarz");
 		$this->setBikeType(self::BIKE_TYPE_CITY);
 		$this->setRiderType(self::RIDER_TYPE_MALE);
 		$this->setFrameSize(37);
@@ -95,21 +95,21 @@ class Frame extends Equipment
         $this->id = $id;
     }
 
-	/**
-	 * @return string
-	 */
-	public function getColor()
-	{
-		return $this->color;
-	}
-
-	/**
-	 * @param string $color
-	 */
-	public function setColor($color)
-	{
-		$this->color = $color;
-	}
+//	/**
+//	 * @return string
+//	 */
+//	public function getColor()
+//	{
+//		return $this->color;
+//	}
+//
+//	/**
+//	 * @param string $color
+//	 */
+//	public function setColor($color)
+//	{
+//		$this->color = $color;
+//	}
 
 	/**
 	 * @return float
