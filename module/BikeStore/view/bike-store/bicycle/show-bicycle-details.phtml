@@ -12,19 +12,15 @@ $this->headScript()->appendFile($this->basePath() . '/js/customizer.js');
 $isBicycle = ($article instanceof \BikeStore\Model\Bicycle);
 $isBicycleJs = ($isBicycle) ? "true" : "false";
 
-$brakesFrontJson = "";
-$brakesRearJson = "";
-$saddleJson = "";
+$brakesFrontJson = "{}";
+$brakesRearJson = "{}";
+$saddleJson = "{}";
 $currentBrakeFrontId = 0;
 $currentBrakeRearId = 0;
-$currentBrakeFrontPrice = 0;
-$currentBrakeRearPrice = 0;
-$currentSaddlePrice = 0;
 $currentSaddleId = 0;
 if($isBicycle)
 {
 	/** @var \BikeStore\Model\Bicycle $article */
-	$currentBrakeFrontPrice = $article->getFrontBrake()->getPrice();
 	$currentBrakeFrontId = $article->getFrontBrake()->getId();
 	$brakeArray = array();
 	/** @var \BikeStore\Model\Equipment\Brake $brake */
@@ -34,7 +30,6 @@ if($isBicycle)
 	}
 	$brakesFrontJson = json_encode($brakeArray);
 
-	$currentBrakeRearPrice = $article->getRearBrake()->getPrice();
 	$currentBrakeRearId = $article->getRearBrake()->getId();
 	$brakeArray = array();
 	/** @var \BikeStore\Model\Equipment\Brake $brake */
@@ -44,7 +39,6 @@ if($isBicycle)
 	}
 	$brakesRearJson = json_encode($brakeArray);
 
-	$currentSaddlePrice = $article->getSaddle()->getPrice();
 	$currentSaddleId = $article->getSaddle()->getId();
 	$saddleArray = array();
 	/** @var \BikeStore\Model\Equipment\Saddle $saddle */

@@ -15,6 +15,10 @@ use Zend\Stdlib\Hydrator\HydratorInterface;
 
 class ArticleFilterHydrator implements HydratorInterface
 {
+	/**
+	 * @param object $object
+	 * @return array
+	 */
 	public function extract($object)
 	{
 		return array();

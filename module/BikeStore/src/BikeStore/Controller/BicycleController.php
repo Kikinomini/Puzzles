@@ -70,7 +70,7 @@ class BicycleController extends AbstractActionController
 			'filterForm' => $filterForm,
 			'bicycles'=>$bicycles,
 			'page' => $page,
-			'maxpage' => $maxPage,
+			'maxPage' => $maxPage,
 
 		);
 	}
