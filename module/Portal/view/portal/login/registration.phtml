@@ -6,7 +6,13 @@ echo "<h1>" . $title . "</h1>";
 $this->form->prepare();
 echo $this->form()->openTag($this->form);
 ?>
+<div class="row">
 	<div class="large-5 medium-6 small-12 columns">
+		<?php echo $this->formRow($this->form->get('username')) ?>
+	</div>
+</div>
+<div class="row">
+	<div class="large-5 medium-6 small-12 columns ">
 		<?php echo $this->formRow($this->form->get('vorname')) ?>
 	</div>
 	<div class="large-5 medium-6 small-12 columns">
@@ -18,24 +24,23 @@ echo $this->form()->openTag($this->form);
 	<div class="large-5 medium-6 small-12 columns">
 		<?php echo $this->formRow($this->form->get('geburtsdatum')) ?>
 	</div>
-	<div class="large-5 medium-6 small-12 columns">
-		<?php echo $this->formRow($this->form->get('username')) ?>
-	</div>
+</div>
+<div class="row">
 	<div class="large-5 medium-6 small-12 columns">
 		<?php echo $this->formRow($this->form->get('passwort1')) ?>
 	</div>
 	<div class="large-5 medium-6 small-12 columns">
 		<?php echo $this->formRow($this->form->get('passwort2')) ?>
 	</div>
-	<div class="large-5 medium-6 small-12 columns">
+</div>
+<div class="row">
+	<div class="small-12 columns">
 		<?php echo $this->formRow($this->form->get('agb')) ?>
 	</div>
-	<div class="columns large-12 small-12">
-		<div class="large-5 medium-6 small-12 columns">
-			<br/>
-			<?php echo $this->formRow($this->form->get('submitButton')) ?>
-		</div>
+	<div class="large-5 medium-6 small-12 columns">
+		<br/>
+		<?php echo $this->formRow($this->form->get('submitButton')) ?>
 	</div>
-
+</div>
 <?php
 echo $this->form()->closeTag();

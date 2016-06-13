@@ -19,7 +19,9 @@ if(!$this->nothing){
 	}
 }
 $ElementArray = json_encode($alleElemente);
-echo "<form name = \"test\" action=''><button type=\"button\" onclick=\"elementRender.createList()\"> Liste </button> </br>";
+echo "<form name = \"test\" action=''><button id=\"list \"  class=\"btn btn-default bikeShopDefaultBtn\"type=\"button\" onclick=\"elementRender.createList()\">";
+include(realpath('public/image/list.svg'));
+echo  "</button></br>";
 echo "<button type=\"button\" onclick=\"elementRender.createBox()\"> Kacheln </button></form>";
 
 
@@ -39,7 +41,7 @@ echo <<<JS
 	})
 JS;
 $this->inlineScript()->captureEnd();
-
+echo "<div class='row'>";
 echo "<div class='columns large-2'>";
 $this->filterForm->setAttribute("action", $this->url("Bikepart"));
 $this->filterForm->prepare();
@@ -68,6 +70,7 @@ echo $this->form()->closeTag();
 echo "</div>";
 ?>
 <div class="columns large-10"><p id='AusgabePanel'></p></div>
+</div>
 
 
 <?php
