@@ -149,6 +149,12 @@ footer a:hover
 	padding-left: 24px;
 }
 
+.navbar div div ul li
+{
+	height: 50px;
+}
+
+
 .loginLable{
 	background-image: url(../image/maennchen.png);
 	background-repeat: no-repeat;
@@ -200,6 +206,10 @@ footer a:hover
 {
 	font-size: 18pt;
 	color: #ffffff;
+}
+
+.mainnav div ul li{
+
 }
 
 .mainnav div ul li a:hover
