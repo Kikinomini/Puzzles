@@ -34,7 +34,8 @@ return array(
 						'resource' => 'default',
 					),
 				),
-			),'search' => array(
+			),
+			'search' => array(
 				'type' => 'segment',
 				'options' => array(
 					'route' => '/search',

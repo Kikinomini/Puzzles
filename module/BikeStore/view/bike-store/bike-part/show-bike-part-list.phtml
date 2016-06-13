@@ -2,16 +2,21 @@
 $this->headLink()->prependStylesheet($this->basePath() . '/css/bikePart.css');
 $this->headLink()->prependStylesheet($this->basePath() . '/css/boxedLayoutAnzeige.css');
 $this->headLink()->prependStylesheet($this->basePath() . '/css/filterForm.css');
+$this->headLink()->prependStylesheet($this->basePath() . '/css/pageNavigator.css');
 $this->headScript()->appendFile($this->basePath() . '/js/bikePartView.js');
 $this->headScript()->appendFile($this->basePath() . '/js/FilterForm.js');
+$this->headScript()->appendFile($this->basePath() . '/js/pageNavigator.js');
 
+echo $this->nothing;
 echo "<h1>Fahrradteile</h1>";
 $alleElemente = array();
-foreach($this->equipments as $Eqipment)
-{
-	$element = (\BikeStore\Model\Manager\EquipmentManager::getAsArray($Eqipment));;
-	$element["url"] = $this->url('articleDetails', array('id' => $Eqipment->getId()));
-	$alleElemente[] = $element;
+if(!$this->nothing){
+	foreach($this->equipments as $Eqipment)
+	{
+		$element = (\BikeStore\Model\Manager\EquipmentManager::getAsArray($Eqipment));;
+		$element["url"] = $this->url('articleDetails', array('id' => $Eqipment->getId()));
+		$alleElemente[] = $element;
+	}
 }
 $ElementArray = json_encode($alleElemente);
 echo "<form name = \"test\" action=''><button id=\"list \"  class=\"btn btn-default bikeShopDefaultBtn\"type=\"button\" onclick=\"elementRender.createList()\">";
@@ -19,13 +24,16 @@ include(realpath('public/image/list.svg'));
 echo  "</button></br>";
 echo "<button type=\"button\" onclick=\"elementRender.createBox()\"> Kacheln </button></form>";
 
+
 $this->inlineScript()->captureStart();
 echo <<<JS
 	$(document).ready(function() {
+		pageNavigator.actualPage = $this->page;
+		pageNavigator.maxPage = $this->maxpage;
 		FilterForm.setForm($("#bikePartFilterForm"));
 		$(".sendFormOnClick").click(function(){
 			FilterForm.sendForm();
-		})
+		});
 		
 		elementRender.BikeList = false;
 	  	elementRender.addArrayElements($ElementArray);
@@ -66,29 +74,3 @@ echo "</div>";
 
 
 <?php
-
-
-//echo "<div class = 'table maxWidth'>";
-//	echo "<div class ='row'>
-//			<div class = 'cell'></div>
-//			<div class = 'cell'>Name</div>
-//			<div class = 'cell'>Preis</div>
-//		</div>";
-//
-//		/** @var \BikeStore\Model\Equipment $Eqipment */
-//		foreach($this->equipments as $Eqipment){
-////			echo "<div class = 'bikePartElement row maxWidthw'>";
-//			echo '<a class = "row totalyHidden hiddenLink"  href="'.$this->url('bikelist/details', array('id' => $Eqipment->getId())).'" >';
-//			echo "<div class = 'cell bikePartImg'><img class = 'bikePartImg' src='/image/".$this->escapeHtml($Eqipment->getImageName())."'></div>";
-//			echo "<div class = 'bikePartInfo cell'>
-//					<div class = 'bikePartName'>".$this->escapeHtml($Eqipment->getName())."</div>
-//					<div>".$this->escapeHtml($Eqipment->getQuickDescription())."</div>
-//				</div>";
-//			echo "<div class = 'cell bikePartPrice'>".$this->escapeHtml($Eqipment->getPrice())."</div>";
-//			echo '</a>';
-//		//	echo "</div>";
-//		}
-//
-//echo "</div>";
-//
-////echo $this->myvar;

@@ -16,6 +16,8 @@ use BikeStore\Model\Bicycle;
 use BikeStore\Model\Filter\ArticleFilterContainer;
 use BikeStore\Model\Manager\ArticleManager;
 use BikeStore\Model\Manager\BicycleManager;
+use BikeStore\Model\Manager\Equipment\BrakeManager;
+use BikeStore\Model\Manager\Equipment\SaddleManager;
 use Zend\Http\Request;
 use BikeStore\Model\Repository\ArticleRepository;
 use Zend\Mvc\Controller\AbstractActionController;
@@ -38,11 +40,6 @@ class BicycleController extends AbstractActionController
 		$articleArray = $articleManager->findByArticleFilterContainer($articleFilter);
 		var_dump($articleArray);
 		
-
-
-
-
-
 //		$foundArticles = $articleManager->findBy(array('name'=>$searchString,'quickDescription'=>$searchString));
 
 	}
@@ -64,9 +61,17 @@ class BicycleController extends AbstractActionController
 			$bicycles = $bicycleManager->findBy(array('listed' => true));
 		}
 
+
+		$page = 1;
+		//$page = ceil($articleFilterContainer->getOffset()/ self::ARTICLES_PER_SIDE); //ToDo auskommentieren
+		$maxPage = 10; //ToDo ändern
+
 		return array(
 			'filterForm' => $filterForm,
 			'bicycles'=>$bicycles,
+			'page' => $page,
+			'maxpage' => $maxPage,
+
 		);
 	}
 
@@ -85,8 +90,24 @@ class BicycleController extends AbstractActionController
 			return;
 		}
 
+		$possibleBrakes = array();
+		$possibleSaddles = array();
+		if ($article instanceof Bicycle)
+		{
+			/** @var BrakeManager $brakeManager */
+			$brakeManager = $this->getServiceLocator()->get("BikeStore.equipment.brakeManager");
+			$possibleBrakes = $brakeManager->findPossibleBrakesForBicycle($article);
+
+			/** @var SaddleManager $saddleManager */
+			$saddleManager = $this->getServiceLocator()->get("BikeStore.equipment.saddleManager");
+			$possibleSaddles = $saddleManager->findPossibleSaddlesForBicycle($article);
+		}
+
 		$viewModel = new ViewModel(array(
-			"article" => $article
+			"article" => $article,
+			"possibleBrakesFront" => $possibleBrakes,
+			"possibleBrakesRear" => $possibleBrakes,
+			"possibleSaddles" => $possibleSaddles,
 		));
 		$detailList = new ViewModel(array(
 			"article" => $article

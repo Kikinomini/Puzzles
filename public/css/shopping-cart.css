@@ -22,7 +22,6 @@
 /*Erste Trennlinie*/
 .firstLine {
 	padding-top: 5px;
-
 	border-top: solid 1px #8e8e8e !important;
 }
 
@@ -40,15 +39,6 @@
 	border-top: solid 1px #8e8e8e;
 	text-align: right;
 }
-
-/*#cartLine2 {*/
-/*//	noshade;*/
-	/*width: 100%;*/
-	/*size: 3px;*/
-	/*align: center;*/
-	/*color: #7b7b7b;*/
-	/*margin-bottom: 5px;*/
-/*}*/
 
 /*Eine Tabellenzeile*/
 .partWareWhole {
@@ -114,38 +104,12 @@
 	border: none;
 }
 
-/*Löschbutton*/
-/*.deleteButton {*/
-	/*width: 70%;*/
-	/*color: #8e8e8e;*/
-	/*background-color: #82d77e;*/
-	/*background-image: -webkit-linear-gradient(top, #9dff98, #82d77e);*/
-	/*background-image: -moz-linear-gradient(top, #9dff98, #82d77e);*/
-	/*!*font-weight: bold;*!*/
-	/*text-shadow: none;*/
-	/*border: none;*/
-
-/*}*/
-
-/*.deleteButton:hover {*/
-	/*width: 70%;*/
-	/*color: #ffffff;*/
-	/*background-color: #82d77e;*/
-	/*!*font-weight: bold;*!*/
-	/*text-shadow: none;*/
-	/*border: none;*/
-/*}*/
 
 .boxDelete
 {
 	width: 30px;
 	float: right;
 	text-align: right;
-}
-
-.numberOfAllArticles
-{
-
 }
 
 .trash {

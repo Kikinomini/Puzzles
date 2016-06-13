@@ -68,7 +68,7 @@ a.totallyHidden div div
     padding: 3px;
 }
 
-div.table
+.table
 {
     display:table;
 	border-collapse: collapse;
@@ -78,7 +78,7 @@ div.table
 {
     display: table-row;
 }
-div.cell
+.cell
 {
     display: table-cell;
 }
