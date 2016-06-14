@@ -49,6 +49,5 @@ class BikePartFilterForm extends ArticleFilterForm
 		));
 		$this->setSendFormOnClickClasses($equipmentTypes);
 		$this->add($equipmentTypes);
-
 	}
 }

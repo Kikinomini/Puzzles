@@ -7,20 +7,25 @@
  */
 $this->headLink()->prependStylesheet($this->basePath() . '/css/boxedLayoutAnzeige.css');
 $this->headLink()->prependStylesheet($this->basePath() . '/css/pageNavigator.css');
+$this->headLink()->prependStylesheet($this->basePath() . '/css/bikePart.css');
+$this->headLink()->prependStylesheet($this->basePath() . '/css/filterForm.css');
+
 $this->headScript()->appendFile($this->basePath() . '/js/bikePartView.js');
 $this->headScript()->appendFile($this->basePath() . '/js/pageNavigator.js');
-$this->headLink()->prependStylesheet($this->basePath() . '/css/bikePart.css');
+$this->headScript()->appendFile($this->basePath() . '/js/FilterForm.js');
+
 
 echo "<h1>Fahrräder</h1>";
 
 $alleElemente = array();
-foreach($this->bicycles as $Eqipment)
+/** @var \BikeStore\Model\Bicycle $Eqipment */
+foreach ($this->bicycles as $Eqipment)
 {
 	$element = (\BikeStore\Model\Manager\EquipmentManager::getAsArray($Eqipment));;
 	$element["url"] = $this->url('articleDetails', array('id' => $Eqipment->getId()));
-	$element["bikeType"] = $Eqipment->getFrame()->getBikeType();
-	$element["weelSize"]= $Eqipment->getFrontWheel()->getSize();
-	$newBike["frameSize"]= $Eqipment->getFrame()->getFrameSize();
+	$element["bikeType"] = \BikeStore\Model\Manager\Equipment\FrameManager::resolveBikeType($Eqipment->getFrame()->getBikeType());
+	$element["weelSize"] = $Eqipment->getFrontWheel()->getSize();
+	$element["frameSize"] = $Eqipment->getFrame()->getFrameSize();
 	$alleElemente[] = $element;
 
 }
@@ -30,7 +35,6 @@ echo "<button type=\"button\" onclick=\"elementRender.createBox()\"> Kacheln </b
 
 
 $this->inlineScript()->captureStart();
-
 echo <<<JS
 	$(document).ready(function() {
 		pageNavigator.actualPage = $this->page;
@@ -38,58 +42,64 @@ echo <<<JS
 		elementRender.BikeList = true;
 	  	elementRender.addArrayElements($ElementArray);
 	  	elementRender.createList();
+	  	
+	  	FilterForm.setForm($("#bicycleFilterForm"));
+		$(".sendFormOnClick").click(function(){
+			FilterForm.sendForm();
+		});
 	})
 JS;
-
-
 $this->inlineScript()->captureEnd();
 
-echo "<p id='AusgabePanel'></p>";
+echo "<div class='row'>";
+echo "<div class='columns large-2'>";
+$this->filterForm->setAttribute("action", $this->url("bikelist"));
+$this->filterForm->prepare();
+echo $this->form()->openTag($this->filterForm);
+echo $this->formHidden($this->filterForm->get("search"));
+echo $this->formHidden($this->filterForm->get("page"));
 ?>
+
+<div id='bicycleFormFrameType' class = "multiCheckBox">
+	<?php
+	echo $this->myForm()->multiCheckBox($this->filterForm->get("frameType"));
+	?>
+</div>
+<br/>
+<div id='bicycleFormFrameType' class = "multiCheckBox">
+	<?php
+	echo $this->myForm()->multiCheckBox($this->filterForm->get("riderType"));
+	?>
+</div>
+<div id='bicycleFormFrameHeight'>
+	Rahmenhöhe:
+	<div class = 'row'>
+		<?php
+		echo "<div class = 'columns large-5 small-5'>" . $this->formRow($this->filterForm->get("frameHeightMin")) .
+			 "</div>";
+		echo "<div class = 'columns large-5 small-5'>" . $this->formRow($this->filterForm->get("frameHeightMax")) .
+			 "</div>";
+		echo "<div class = 'columns large-2 small-2'>" .
+			 $this->formRow($this->filterForm->get("smallSubmitButton")) . "</div>";
+		?>
+	</div>
+</div>
+<div id='bicycleFormPrice'>
+	Preis:
+	<div class = 'row'>
+		<?php
+		echo "<div class = 'columns large-5 small-5'>" . $this->formRow($this->filterForm->get("priceMin")) .
+			 "</div>";
+		echo "<div class = 'columns large-5 small-5'>" . $this->formRow($this->filterForm->get("priceMax")) .
+			 "</div>";
+		echo "<div class = 'columns large-2 small-2'>" .
+			 $this->formRow($this->filterForm->get("smallSubmitButton")) . "</div>";
+		?>
+	</div>
+</div>
 <?php
-
-
-
-
-
-
-//echo "<div class = 'table maxWidth'>";
-//echo "<div class ='row'>
-//			<div class = 'cell'></div>
-//			<div class = 'cell'><b><u>Name</u></b></div>
-//			<div class = 'cell'><b><u>Preis</u></b></div>
-//		</div>";
-//
-///** @var \BikeStore\Model\Bicycle $bicycle */
-//foreach($this->bicycles as $bicycle)
-//{
-////			echo "<div class = 'bikePartElement row maxWidthw'>";
-//	echo '<a class = "row totalyHidden hiddenLink"  href="'.$this->url('articleDetails', array('id' => $bicycle->getId())).'" >';
-//	echo "<div class = 'cell bikePartImg'><img class = 'bikePartImg' src='/image/".$this->escapeHtml($bicycle->getImageName())."'></div>";
-//	echo "<div class = 'bikePartInfo cell'>
-//					<div class = 'bikePartName'>".$this->escapeHtml($bicycle->getName())."</div>
-//					<div>".$this->escapeHtml($bicycle->getQuickDescription())."</div>
-//				</div>";
-//	echo "<div class = 'cell bikePartPrice'>".$this->escapeHtml($bicycle->getPrice())."</div>";
-//	echo '</a>';
-	//	echo "</div>";
-
-
-//echo "</div>";
-
-
-
-
-// @var \BikeStore\Model\Bicycle $bicycle */
-/*
-foreach($this->bicycles as $bicycle)
-{
-	echo "<div><table><tr>";
-	echo "<td><img width='400' src = \"/image/".$bicycle->getImageName()."\"/></td><td>";
-	echo "<b><u>".$bicycle->getName()."</u></b><br/>";
-	echo "Rahmenfarbe: ".$bicycle->getFrame()->getColor()."<br/>";
-	echo "Rahmengröße: ".$bicycle->getFrame()->getFrameSize()."<br/>";
-	echo "Rahmengröße: ".$bicycle->getFrame()->getFrameSize()."<br/>";
-
-	echo "</td></tr></table><div/>";
-}*/
+echo $this->form()->closeTag();
+echo "</div>";
+?>
+<div class="columns large-10"><p id='AusgabePanel'></p></div>
+</div>

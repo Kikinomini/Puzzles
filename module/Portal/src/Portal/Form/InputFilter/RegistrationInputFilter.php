@@ -244,5 +244,4 @@ class RegistrationInputFilter extends InputFilter
 			),
 		));
 	}
-
 }

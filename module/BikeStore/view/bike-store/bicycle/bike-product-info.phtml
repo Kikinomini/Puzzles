@@ -40,7 +40,7 @@ $this->inlineScript()->captureEnd();
 					?></td></tr>
 			<tr><td>Kategory:</td><td><?php
 					$type = $this->escapeHtml($article->getFrame()->getRiderType());
-					echo \BikeStore\Model\Manager\Equipment\FrameManager::resolveRideType($type);
+					echo \BikeStore\Model\Manager\Equipment\FrameManager::resolveRiderType($type);
 					?></td></tr>
 			<tr><td>Radgröße:</td><td><?php
 					echo $this->escapeHtml($article->getFrontWheel()->getSize());
@@ -49,7 +49,7 @@ $this->inlineScript()->captureEnd();
 					echo $this->escapeHtml($article->getFrame()->getFrameSize());
 					?> "</td></tr>
 			<tr><td>Farbe:</td><td><?php
-					echo $this->escapeHtml($article->getFrame()->getColor());
+					echo $this->escapeHtml($article->getFrame()->getColour());
 					?></td></tr>
 			<tr><td>Satteltyp:</td><td><?php
 					$type = $this->escapeHtml($article->getSaddle()->getType());

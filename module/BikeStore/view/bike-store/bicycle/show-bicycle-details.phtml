@@ -12,19 +12,15 @@ $this->headScript()->appendFile($this->basePath() . '/js/customizer.js');
 $isBicycle = ($article instanceof \BikeStore\Model\Bicycle);
 $isBicycleJs = ($isBicycle) ? "true" : "false";
 
-$brakesFrontJson = "";
-$brakesRearJson = "";
-$saddleJson = "";
+$brakesFrontJson = "{}";
+$brakesRearJson = "{}";
+$saddleJson = "{}";
 $currentBrakeFrontId = 0;
 $currentBrakeRearId = 0;
-$currentBrakeFrontPrice = 0;
-$currentBrakeRearPrice = 0;
-$currentSaddlePrice = 0;
 $currentSaddleId = 0;
 if($isBicycle)
 {
 	/** @var \BikeStore\Model\Bicycle $article */
-	$currentBrakeFrontPrice = $article->getFrontBrake()->getPrice();
 	$currentBrakeFrontId = $article->getFrontBrake()->getId();
 	$brakeArray = array();
 	/** @var \BikeStore\Model\Equipment\Brake $brake */
@@ -34,7 +30,6 @@ if($isBicycle)
 	}
 	$brakesFrontJson = json_encode($brakeArray);
 
-	$currentBrakeRearPrice = $article->getRearBrake()->getPrice();
 	$currentBrakeRearId = $article->getRearBrake()->getId();
 	$brakeArray = array();
 	/** @var \BikeStore\Model\Equipment\Brake $brake */
@@ -44,7 +39,6 @@ if($isBicycle)
 	}
 	$brakesRearJson = json_encode($brakeArray);
 
-	$currentSaddlePrice = $article->getSaddle()->getPrice();
 	$currentSaddleId = $article->getSaddle()->getId();
 	$saddleArray = array();
 	/** @var \BikeStore\Model\Equipment\Saddle $saddle */
@@ -97,19 +91,7 @@ echo <<<JS
 				customizer.setCurrentId("selectBrakeFront", $currentBrakeFrontId);
 				customizer.setCurrentId("selectBrakeRear", $currentBrakeRearId);
 				customizer.setCurrentId("selectSaddle", $currentSaddleId);
-		  		customizer.init();
-		  		
-				// customizer.bicyclePrice = $price;
-//				customizer.currentBrakeFrontPrice = $currentBrakeFrontPrice;
-//				customizer.currentBrakeRearPrice = $currentBrakeRearPrice;
-//				customizer.currentSaddlePrice = $currentSaddlePrice;
-//				
-//				customizer.addManyBrakesFront($brakesFrontJson);			
-//				customizer.addManyBrakesRear($brakesRearJson);	
-//				customizer.setCurrentFrontBrake($currentBrakeFrontId);
-//				customizer.setCurrentRearBrake($currentBrakeRearId);
-//				customizer.addOptionsToSelectBox();
-//				customizer.init();
+		  		customizer.init();	
 		  	}
 		 })
 JS;
@@ -128,7 +110,7 @@ $this->inlineScript()->captureEnd();
 	<div id="detailBuy">
 		<!--		<p>-->
 		<div id='priceTable' class='table'>
-			<div class='row'>
+			<div class='trow'>
 				<span class='priceTableCellLeft cell'><?php if($isBicycle)
 					{
 						echo "Fahrrad:";
@@ -141,20 +123,20 @@ $this->inlineScript()->captureEnd();
 			<?php if($isBicycle)
 			{
 				?>
-				<div class="row">
+				<div class="trow">
 					<label class='priceTableCellLeft cell' for="selectSaddle">Sattel:</label>
 					<select id="selectSaddle" class="form-control priceTableCellRight cell customizingSelectBox"></select>
 				</div>
-				<div class="row">
+				<div class="trow">
 					<label class='priceTableCellLeft cell' for="selectBrakeFront">Vorderbremse:</label>
 					<select id="selectBrakeFront" class="form-control priceTableCellRight cell customizingSelectBox"></select>
 				</div>
-				<div class="row">
+				<div class="trow">
 					<label class='priceTableCellLeft cell' for="selectBrakeRear">Hinterbremse:</label>
 					<select id="selectBrakeRear" class="form-control priceTableCellRight cell customizingSelectBox"></select>
 				</div>
 				<div></div>
-				<div class="row" id="totalPriceRow">
+				<div class="trow" id="totalPriceRow">
 					<span class="priceTableCellLeft cell">Total:</span>
 					<span class="priceTableCellRight cell"><span
 							id='totalPrice'><?php echo $this->price($article->getPrice()) ?></span></span>

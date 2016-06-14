@@ -35,6 +35,26 @@ return array(
 						),
 					),
 				),
+				'deleteAllArticles' => array(
+					'options' => array(
+						'route' => 'deleteData',
+						'defaults' => array(
+							'controller' => 'BikeStore\Controller\SetUp',
+							'action' => 'deleteAllArticles',
+							'resource' => 'default',
+						),
+					),
+				),
+				'refreshData' => array(
+					'options' => array(
+						'route' => 'refreshData',
+						'defaults' => array(
+							'controller' => 'BikeStore\Controller\SetUp',
+							'action' => 'refreshTestArticles',
+							'resource' => 'default',
+						),
+					),
+				),
 			),
 		),
 	),

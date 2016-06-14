@@ -71,7 +71,6 @@ class BicycleController extends AbstractActionController
 			'bicycles'=>$bicycles,
 			'page' => $page,
 			'maxPage' => $maxPage,
-
 		);
 	}
 

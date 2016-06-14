@@ -12,6 +12,7 @@ use Application\Model\Form\Element\MyMultiCheckbox;
 use Zend\Form\Element;
 use Zend\Form\Element\Submit;
 use Zend\Form\Form;
+use Zend\Form\View\Helper\FormRow;
 use Zend\View\Helper\AbstractHelper;
 use Zend\View\Renderer\PhpRenderer;
 
@@ -211,7 +212,7 @@ JS;
 			$checkbox->setAttribute("class", $multiCheckBox->getAttribute("class"));
 //			$checkbox->setChecked(array_key_exists($value, $checked) && $checked[$value]);
 			$checkbox->setChecked(is_array($checkedElements) && in_array($value, $checkedElements));
-			$renderedElement .= $this->phpRenderer->formRow($checkbox);
+			$renderedElement .= $this->phpRenderer->formRow($checkbox, FormRow::LABEL_APPEND);
 		}
 		$renderedElement .= "</div>";
 		return $renderedElement;

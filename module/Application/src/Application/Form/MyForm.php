@@ -91,8 +91,7 @@ abstract class MyForm extends Form{
         $submitButton->setValue($value);
         $this->add($submitButton);
     }
-
-
+    
     abstract public function addElements();
 
     public function addEssentials(){}
