@@ -434,6 +434,8 @@ a:hover{
 	background-color: #82d77e;
 	background-image: -webkit-linear-gradient(top, #9dff98, #82d77e);
 	background-image: -moz-linear-gradient(top, #9dff98, #82d77e);
+	max-height: 30pt;
+	max-width: 30pt;
 }
 
 .bikeShopDefaultBtn:hover svg, .bikeShopDefaultBtn:hover{
