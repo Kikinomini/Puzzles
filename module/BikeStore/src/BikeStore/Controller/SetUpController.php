@@ -199,7 +199,7 @@ class SetUpController extends AbstractActionController
 						/** @var Frame $article */
 						$article->setBackShocker(($l % 2) == 0);
 						$article->setBikeType(($l % 5) + 1);
-						$article->setFrameSize(24 + 2 * $l);
+						$article->setFrameSize(56 + 2 * $l);
 						$article->setFrontShocker(($l % 2) == 1);
 						$article->setRiderType(($l % 3) + 1);
 						break;

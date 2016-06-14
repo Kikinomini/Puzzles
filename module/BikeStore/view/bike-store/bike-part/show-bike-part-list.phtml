@@ -10,8 +10,9 @@ $this->headScript()->appendFile($this->basePath() . '/js/pageNavigator.js');
 echo $this->nothing;
 echo "<h1>Fahrradteile</h1>";
 $alleElemente = array();
-if(!$this->nothing){
-	foreach($this->equipments as $Eqipment)
+if (!$this->nothing)
+{
+	foreach ($this->equipments as $Eqipment)
 	{
 		$element = (\BikeStore\Model\Manager\EquipmentManager::getAsArray($Eqipment));;
 		$element["url"] = $this->url('articleDetails', array('id' => $Eqipment->getId()));
@@ -21,7 +22,7 @@ if(!$this->nothing){
 $ElementArray = json_encode($alleElemente);
 echo "<form name = \"test\" action=''><button id=\"list \"  class=\"btn btn-default bikeShopDefaultBtn\"type=\"button\" onclick=\"elementRender.createList()\">";
 include(realpath('public/image/list.svg'));
-echo  "</button></br>";
+echo "</button></br>";
 echo "<button type=\"button\" onclick=\"elementRender.createBox()\"> Kacheln </button></form>";
 
 
@@ -50,27 +51,30 @@ echo $this->formHidden($this->filterForm->get("search"));
 echo $this->formHidden($this->filterForm->get("page"));
 ?>
 
-<div id = 'bikePartType'>
-	<?php
-		echo $this->myForm()->multiCheckBox($this->filterForm->get("equipmentTypes"));
-	?>
-</div>
-<div id = 'bikePartFormPrice'>
-	Preis:
-		<div>
+	<div id='bikePartType' class = "multiCheckBox">
 		<?php
-			echo "<div class = 'columns large-5 small-5'>".$this->formRow($this->filterForm->get("priceMin"))."</div>";
-			echo "<div class = 'columns large-5 small-5'>".$this->formRow($this->filterForm->get("priceMax"))."</div>";
-			echo "<div class = 'columns large-2 small-2'>".$this->formRow($this->filterForm->get("priceSubmitButton"))."</div>";
+		echo $this->myForm()->multiCheckBox($this->filterForm->get("equipmentTypes"));
 		?>
-			</div>
+	</div>
+	<div id='bikePartFormPrice'>
+		Preis:
+		<div class = "row">
+			<?php
+			echo "<div class = 'columns large-5 small-5'>" . $this->formRow($this->filterForm->get("priceMin")) .
+				 "</div>";
+			echo "<div class = 'columns large-5 small-5'>" . $this->formRow($this->filterForm->get("priceMax")) .
+				 "</div>";
+			echo "<div class = 'columns large-2 small-2'>" .
+				 $this->formRow($this->filterForm->get("smallSubmitButton")) . "</div>";
+			?>
+		</div>
 	</div>
 <?php
 echo $this->form()->closeTag();
 echo "</div>";
 ?>
-<div class="columns large-10"><p id='AusgabePanel'></p></div>
-</div>
+	<div class="columns large-10"><p id='AusgabePanel'></p></div>
+	</div>
 
 
 <?php

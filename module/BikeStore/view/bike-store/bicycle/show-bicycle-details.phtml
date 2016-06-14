@@ -110,7 +110,7 @@ $this->inlineScript()->captureEnd();
 	<div id="detailBuy">
 		<!--		<p>-->
 		<div id='priceTable' class='table'>
-			<div class='row'>
+			<div class='trow'>
 				<span class='priceTableCellLeft cell'><?php if($isBicycle)
 					{
 						echo "Fahrrad:";
@@ -123,20 +123,20 @@ $this->inlineScript()->captureEnd();
 			<?php if($isBicycle)
 			{
 				?>
-				<div class="row">
+				<div class="trow">
 					<label class='priceTableCellLeft cell' for="selectSaddle">Sattel:</label>
 					<select id="selectSaddle" class="form-control priceTableCellRight cell customizingSelectBox"></select>
 				</div>
-				<div class="row">
+				<div class="trow">
 					<label class='priceTableCellLeft cell' for="selectBrakeFront">Vorderbremse:</label>
 					<select id="selectBrakeFront" class="form-control priceTableCellRight cell customizingSelectBox"></select>
 				</div>
-				<div class="row">
+				<div class="trow">
 					<label class='priceTableCellLeft cell' for="selectBrakeRear">Hinterbremse:</label>
 					<select id="selectBrakeRear" class="form-control priceTableCellRight cell customizingSelectBox"></select>
 				</div>
 				<div></div>
-				<div class="row" id="totalPriceRow">
+				<div class="trow" id="totalPriceRow">
 					<span class="priceTableCellLeft cell">Total:</span>
 					<span class="priceTableCellRight cell"><span
 							id='totalPrice'><?php echo $this->price($article->getPrice()) ?></span></span>

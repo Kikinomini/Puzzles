@@ -7,7 +7,7 @@ use BikeStore\Model\Equipment\Frame;
 
 class FrameManager extends StandardManager
 {
-	public static function resolveRideType($riderType)
+	public static function resolveRiderType($riderType)
 	{
 		switch($riderType)
 		{

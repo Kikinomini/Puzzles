@@ -41,7 +41,7 @@ class ArticleFilterForm extends MyForm
 		$priceMax->setAttribute("step", "0.01");
 		$this->add($priceMax);
 
-		$priceSubmitButton = new Submit("priceSubmitButton");
+		$priceSubmitButton = new Submit("smallSubmitButton");
 		$priceSubmitButton->setLabel("&nbsp;");
 		$priceSubmitButton->setValue(">>");
 		$priceSubmitButton->setLabelOption('disable_html_escape', true);
