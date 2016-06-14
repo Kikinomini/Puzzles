@@ -48,7 +48,7 @@ var pageNavigator = {
 		if(num == pageNavigator.actualPage){
 			return " <" + num + "> ";
 		}
-		return "<button type='pageNavigatorButton' onclick='pageNavigator.buttonPressed("+num+")'> <"+ num +"> </button>";
+		return "<button type='pageNavigatorButton' onclick='pageNavigator.buttonPressed("+num+")'> <b><"+ num +"> </b></button>";
 	},
 	createPointDiv:function (){
 		return "..."

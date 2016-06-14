@@ -26,4 +26,7 @@ class BuyController extends AbstractActionController
 //			return $this->forward();
 		}
 	}
+	public function insertAdress(){
+		
+	}
 }
