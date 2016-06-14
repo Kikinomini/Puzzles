@@ -46,7 +46,7 @@ class BikePartController extends AbstractActionController
 		}
 		
 		$articles = $equipmentManager->findByArticleFilterContainer($articleFilterContainer);
-		$page = ceil($articleFilterContainer->getOffset()/ self::ARTICLES_PER_SIDE);
+		$page = ceil($articleFilterContainer->getOffset()/ self::ARTICLES_PER_SIDE) +1;
 		$maxPage = 10; //ToDo Ändern
 		if ($page > $maxPage) $page = $maxPage;
 		if ($page<=0) $page = 1;

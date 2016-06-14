@@ -442,6 +442,8 @@ a:hover{
 	background-blend-mode: darken;
 	color: #ffffff;
 	fill: #ffffff;
+	max-height: 30pt;
+	max-width: 30pt;
 }
 
 .warenkorbAlgemein{
