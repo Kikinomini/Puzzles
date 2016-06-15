@@ -21,7 +21,7 @@ class BuyController extends AbstractActionController
 		$user = $userManager->getUserFromSession();
 		if ($user->getAktiviert())
 		{
-			$this->forward()->dispatch("BikeStore\\Controller\\Buy", array("action" => "insertAdress"));
+			return $this->forward()->dispatch("BikeStore\\Controller\\Buy", array("action" => "insertAddress"));
 		}
 	}
 	public function insertAddressAction(){

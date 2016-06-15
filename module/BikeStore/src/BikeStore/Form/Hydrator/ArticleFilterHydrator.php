@@ -26,24 +26,24 @@ class ArticleFilterHydrator implements HydratorInterface
 
 	/**
 	 * @param array $data
-	 * @param ArticleFilterContainer $bikePartFilterContainer
+	 * @param ArticleFilterContainer $articleFilterContainer
 	 * @return ArticleFilterContainer
 	 */
-	public function hydrate(array $data, $bikePartFilterContainer)
+	public function hydrate(array $data, $articleFilterContainer)
 	{
-		isset($data["search"]) && $bikePartFilterContainer->setSearchWords($data["search"]);
-		isset($data["priceMin"]) && $bikePartFilterContainer->setPriceMin(floatval($data["priceMin"]));
-		isset($data["priceMax"]) && $bikePartFilterContainer->setPriceMax(floatval($data["priceMax"]));
+		isset($data["search"]) && $articleFilterContainer->setSearchWords($data["search"]);
+		isset($data["priceMin"]) && $articleFilterContainer->setPriceMin(floatval($data["priceMin"]));
+		isset($data["priceMax"]) && $articleFilterContainer->setPriceMax(floatval($data["priceMax"]));
 
 		if (isset($data["page"]))
 		{
 			$pageNumber = intval($data["page"]);
 			if ($pageNumber > 0);
 			{
-				$bikePartFilterContainer->setOffset(($pageNumber-1)*BikePartController::ARTICLES_PER_SIDE);
+				$articleFilterContainer->setOffset(($pageNumber - 1) * BikePartController::ARTICLES_PER_SIDE);
 			}
 		}
 
-		return $bikePartFilterContainer;
+		return $articleFilterContainer;
 	}
 }

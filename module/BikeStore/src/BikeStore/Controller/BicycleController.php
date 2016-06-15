@@ -11,9 +11,11 @@ namespace BikeStore\Controller;
 
 use Application\Model\User;
 use BikeStore\Form\BicycleFilterForm;
+use BikeStore\Form\Hydrator\BicycleFilterHydrator;
 use BikeStore\Model\Article;
 use BikeStore\Model\Bicycle;
 use BikeStore\Model\Filter\ArticleFilterContainer;
+use BikeStore\Model\Filter\BicycleFilterContainer;
 use BikeStore\Model\Manager\ArticleManager;
 use BikeStore\Model\Manager\BicycleManager;
 use BikeStore\Model\Manager\Equipment\BrakeManager;
@@ -26,6 +28,8 @@ use Zend\Session\Container;
 
 class BicycleController extends AbstractActionController
 {
+	const ARTICLES_PER_SIDE = 15;
+
 	public function searchAction()
 	{
 		/** @var Request $request */
@@ -50,20 +54,25 @@ class BicycleController extends AbstractActionController
 		$bicycles = null;
 		$filterForm = new BicycleFilterForm();
 
+
 		/** @var Request $request */
 		$request = $this->getRequest();
-		if ($request->isGet())
+		$articleFilterContainer = new BicycleFilterContainer();
+		$articleFilterContainer->setLimit(self::ARTICLES_PER_SIDE);
+
+		if($request->isGet())
 		{
-			$filterForm->setData($request->getQuery());
-		}
-		if ($bicycles == null)
-		{
-			$bicycles = $bicycleManager->findBy(array('listed' => true));
+			$data = $request->getQuery()->toArray();
+//			$articleFilterContainer->setSearchWords("Licht Bremse");
+			$hydrator = new BicycleFilterHydrator();
+			$hydrator->hydrate($data, $articleFilterContainer);
+			$filterForm->setData($data);
 		}
 
+		$bicycles = $bicycleManager->findByArticleFilterContainer($articleFilterContainer);
 
-		$page = 1;
-		//$page = ceil($articleFilterContainer->getOffset()/ self::ARTICLES_PER_SIDE); //ToDo auskommentieren
+//		$page = 1;
+		$page = ceil($articleFilterContainer->getOffset()/ self::ARTICLES_PER_SIDE); //ToDo auskommentieren
 		$maxPage = 10; //ToDo ändern
 
 		return array(

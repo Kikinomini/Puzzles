@@ -4,15 +4,16 @@ namespace BikeStore\Model\Manager;
 
 use Application\Model\Manager\StandardManager;
 use BikeStore\Model\Bicycle;
+use BikeStore\Model\Filter\ArticleFilterContainer;
 
-class BicycleManager extends StandardManager
+class BicycleManager extends ArticleManager
 {
     public function __construct($repository, $entity = null)
     {
         parent::__construct($repository, $entity);
     }
-    
-    /**
+
+	/**
 	 * @return Bicycle
 	 */
 	public function getEntity()

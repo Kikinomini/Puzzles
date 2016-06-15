@@ -53,18 +53,10 @@ class BicycleFilterForm extends ArticleFilterForm
 
 		$frameHeightMin = new Number("frameHeightMin");
 		$frameHeightMin->setLabel("Von:");
-//		$frameHeightMin->setAttribute("step", "0.01");
 		$this->add($frameHeightMin);
 
 		$frameHeightMax = new Number("frameHeightMax");
 		$frameHeightMax->setLabel("Bis:");
 		$this->add($frameHeightMax);
-
-
-//		$priceMin = new Number("priceMin");
-//		$this->add($priceMin);
-//
-//		$priceMax = new Number("priceMax");
-//		$this->add($priceMax);
 	}
 }

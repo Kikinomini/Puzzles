@@ -70,10 +70,9 @@ class Frame extends Equipment
     {
     	parent::__construct();
         $this->id = null;
-//		$this->setColor("Schwarz");
 		$this->setBikeType(self::BIKE_TYPE_CITY);
 		$this->setRiderType(self::RIDER_TYPE_MALE);
-		$this->setFrameSize(37);
+		$this->setFrameSize(-37);
 		$this->setBackShocker(true);
 		$this->setFrontShocker(true);
 		$this->setListed(false);

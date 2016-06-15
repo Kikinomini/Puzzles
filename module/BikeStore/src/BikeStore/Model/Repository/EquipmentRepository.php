@@ -2,7 +2,6 @@
 
 namespace BikeStore\Model\Repository;
 
-
 use BikeStore\Model\Filter\ArticleFilterContainer;
 use BikeStore\Model\Filter\BikePartFilterContainer;
 use Doctrine\ORM\QueryBuilder;
