@@ -60,9 +60,9 @@ else
 ?>
 
 <!--Tabellenkopf-->
-<div class="flexHeader">
+<div class="row">
 
-	<div class="flexFillWidth">
+	<div class="medium-9 columns small-12 show-for-medium">
 		<h1>Warenkorb</h1>
 			<div class="boxDelete">
 				&nbsp;
@@ -154,9 +154,99 @@ else
 
 
 
+<!--	Div für kleine Geräte-->
+	<div class="medium-9 columns small-12 show-for-small-only">
+		<h1>Warenkorb</h1>
+		<div class="boxDelete">
+			&nbsp;
+		</div>
+		<br/>
+
+
+		<!--for-Schleife für Warenausgabe-->
+		<?php
+		$sum = 0.00;
+		$allArticles = 0;
+
+		foreach($this->articles as $articleArray)
+		{
+			/** @var \BikeStore\Model\Article $article */
+			$article = $articleArray["article"];
+			$number = $articleArray["count"];
+//		echo "<p> <IMG SRC = \"/image/"  . $article->getImageName() . "\"/> </p>";
+//		echo "<h2>" . $article->getName() . "</h2>";
+//		echo "<p>" . $article->getQuickDescription() . "</p>";
+//		echo "<p> <b>" . $article->getPrice() . "</b>";
+//		echo "<p> $number </p>";
+			?>
+
+
+			<!--	Eintrag in Korb mit Abgrenzung-->
+			<div class="partWareWhole <?php echo ($allArticles > 0) ? "borderTop" : "firstLine"; ?>"
+				 id="article<?php echo $article->getId() ?>">
+				
+				<!--		Box für Bild-->
+				<div class="partWareLeft">
+					<a href="<?php echo $this->url("articleDetails", array("id" => $article->getId())); ?>"><img
+							src="/image/<?php echo $article->getImageName() ?>"/></a>
+				</div>
+
+				<!--		Box für Produktinfo	-->
+				<div class="partWareMiddle">
+					<p>
+						<b><a href="<?php echo $this->url("articleDetails", array("id" => $article->getId())); ?>"><?php echo $article->getName() ?></a></b>
+						<br><?php echo $article->getQuickDescription() ?>
+						<br>Preis pro Artikel: <b><?php echo number_format($article->getPrice(), 2, ",", "."); ?>
+							€</b>
+						<br>Anzahl: <?php echo $number?> Artikel</br>
+						<span><b>Gesamtpreis: <?php echo number_format(($article->getPrice() * $number), 2, ",", ".") ?> €</b></span>
+						<!--				<br><a class="btn btn-default deleteButton">Löschen</a>-->
+
+					</p>
+				</div>
+
+				<!-- Löschen Box -->
+				<div class="boxDelete">
+				<span class="spanDelete">
+					<input type='hidden' value="<?php echo $article->getId() ?>" class="articleId">
+					<input type='hidden' value="<?php echo $article->getName() ?>" class="articleName">
+					<input type='hidden' value="<?php echo $number ?>" class="articleCount">
+					<input type='hidden' value="<?php echo $article->getPrice() ?>" class="articlePrice">
+					<?php include(realpath('public/image/delete.svg')) ?>
+				</span>
+				</div>
+
+<!--				<!--		Box für Anzahl	-->
+<!--				<div class="partWareMenge">-->
+<!--					--><?php //echo $number ?>
+<!--				</div>-->
+
+				<!--		Box für Preis aller Artikel eines Typs	-->
+<!--				<div class="partWarePreis">-->
+<!--					<b>--><?php //echo number_format(($article->getPrice() * $number), 2, ",", ".") ?><!-- €</b>-->
+<!--				</div>-->
+			</div>
+			<?php
+			//	Berechnung Gesamtsumme + Gesamtanzahl Artikel
+			$zwischenwertSum = ($article->getPrice() * $number);
+			$sum = $sum + $zwischenwertSum;
+			$allArticles = $allArticles + $number;
+		}
+		?>
+		<div class="lastLine">
+			<b>Summe (<span class="numberOfAllArticles"><?php echo $allArticles ?></span> Artikel): <span
+					class="priceColor"><?php echo number_format($sum, 2, ",", "."); ?> €</span></b>
+		</div>
+
+
+
+	</div>
+
+
+
 
 	<!--Kauf-Box rechts-->
-	<div>
+	<div class = "medium-3 colums small-12 ">
 		<div class="partBuy">
 			<p><b>Summe (<span class="numberOfAllArticles"><?php echo $allArticles ?></span> Artikel): <span
 						class="priceColor"><?php echo number_format($sum, 2, ",", ".");
