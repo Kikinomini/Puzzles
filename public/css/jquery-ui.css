@@ -780,8 +780,9 @@ button.ui-button::-moz-focus-inner {
 	background-position: -65px -16px;
 }
 .ui-tabs {
-	position: relative;/* position: relative prevents IE scroll bug (element with position: relative inside container with overflow: auto appear as "fixed") */
-	padding: .2em;
+	position: relative;
+	/* position: relative prevents IE scroll bug (element with position: relative inside container with overflow: auto appear as "fixed") */
+	/* padding: .2em; */
 }
 .ui-tabs .ui-tabs-nav {
 	margin: 0;
@@ -810,6 +811,8 @@ button.ui-button::-moz-focus-inner {
 .ui-tabs .ui-tabs-nav li.ui-state-disabled .ui-tabs-anchor,
 .ui-tabs .ui-tabs-nav li.ui-tabs-loading .ui-tabs-anchor {
 	cursor: text;
+	/* color: #ffffff; */
+	background-color: #eeeeee;
 }
 .ui-tabs-collapsible .ui-tabs-nav li.ui-tabs-active .ui-tabs-anchor {
 	cursor: pointer;

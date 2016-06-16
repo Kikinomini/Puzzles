@@ -42,9 +42,9 @@ class BicycleController extends AbstractActionController
 		$articleFilter->setSearchWords($searchString);
 
 		$articleArray = $articleManager->findByArticleFilterContainer($articleFilter);
-		var_dump($articleArray);
 		
-//		$foundArticles = $articleManager->findBy(array('name'=>$searchString,'quickDescription'=>$searchString));
+		return array("result" => $articleArray);
+
 
 	}
 	public function showBicycleListAction()
