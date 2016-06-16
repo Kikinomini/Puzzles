@@ -10,6 +10,7 @@ namespace BikeStore\Controller;
 
 
 use Application\Model\Manager\UserManager;
+use Zend\Http\Request;
 use Zend\Mvc\Controller\AbstractActionController;
 
 class BuyController extends AbstractActionController
@@ -25,6 +26,8 @@ class BuyController extends AbstractActionController
 		}
 	}
 	public function insertAddressAction(){
+		/** @var Request $request */
 		$request = $this->getRequest();
+
 	}
 }
