@@ -71,6 +71,22 @@ echo $this->doctype(); ?>
 					FilterForm.sendForm();
 				}
 			});
+			
+			$(".amountInput").autocomplete({
+				minLength:0,
+				source: [
+				"1",
+				"2",
+				"3",
+				"4",
+				"5",
+				"10",
+				"15",
+				]
+			}).click(function(){            
+				$(this).autocomplete("search", "")
+				// $(this).data("autocomplete").search($(this).val());
+			});
 		})
 JS;
 
@@ -108,16 +124,17 @@ JS;
 					</a>
 				</div>
 				<div id="search" class="columns expand">
-						<form class="flexHeader" id = 'searchForm' action="<?php echo $this->url("search"); ?>" method="GET">
+					<form class="flexHeader" id='searchForm' action="<?php echo $this->url("search"); ?>" method="GET">
 						<div class="flexFillWidth">
-							<input name="search" class="suchleiste flexFillWidth form-control" type="text" placeholder=" Suche..."/>
+							<input name="search" class="suchleiste flexFillWidth form-control" type="text"
+								   placeholder=" Suche..."/>
 						</div>
 						<div>
 							<button class="sucheButton btn">
 								<?php include(realpath('public/image/search.svg')) ?>
 							</button>
 						</div>
-						</form>
+					</form>
 				</div>
 				<div id="shoppingCart" class="columns small-12 large-3">
 					<a href="<?php echo $this->url("shoppingCart"); ?>">
@@ -125,7 +142,8 @@ JS;
 							<div class="warenkorbPic">
 								<?php include(realpath('public/image/shoppingcart.svg')) ?>
 							</div>
-							<span id="warenkorbText"><?php echo $this->numberArticlesInShoppingCart ?> Artikel <br class="show-for-large"> im Warenkorb</span>
+							<span id="warenkorbText"><?php echo $this->numberArticlesInShoppingCart ?> Artikel <br
+									class="show-for-large"> im Warenkorb</span>
 						</div>
 					</a>
 				</div>
@@ -146,7 +164,7 @@ JS;
 			</nav>
 			<div class="mainContent">
 				<?php
-					echo $this->content;
+				echo $this->content;
 				?>
 				<?php echo $this->inlineScript() ?>
 			</div>

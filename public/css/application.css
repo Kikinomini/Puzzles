@@ -457,3 +457,23 @@ a:hover{
 .warenkorbPic > svg{
 	height: 65px;
 }
+
+.hideSpinner::-webkit-inner-spin-button,
+.hideSpinner::-webkit-outer-spin-button
+{
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	margin: 0;
+}
+
+.hideSpinner
+{
+	-moz-appearance:textfield;
+}
+.amountInput{
+	width: 40px;
+	padding: 0 0 0 0;
+	text-align: center;
+}
+

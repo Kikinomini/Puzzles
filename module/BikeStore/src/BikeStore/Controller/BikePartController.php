@@ -36,13 +36,12 @@ class BikePartController extends AbstractActionController
 		$articleFilterContainer = new BikePartFilterContainer();
 		$articleFilterContainer->setLimit(self::ARTICLES_PER_SIDE);
 
+		$filterForm->bind($articleFilterContainer);
 		if($request->isGet())
 		{
 			$data = $request->getQuery()->toArray();
-//			$articleFilterContainer->setSearchWords("Licht Bremse");
-			$hydrator = new BikePartFilterHydrator();
-			$hydrator->hydrate($data, $articleFilterContainer);
 			$filterForm->setData($data);
+			$filterForm->isValid();
 		}
 		
 		$articles = $equipmentManager->findByArticleFilterContainer($articleFilterContainer);

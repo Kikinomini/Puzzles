@@ -118,7 +118,7 @@ $this->inlineScript()->captureEnd();
 				<span class='<?php if($isBicycle)
 				{
 					echo "priceTableCellRight ";
-				} ?> cell'><?php echo $this->price($article->getPrice(), $isBicycle) ?></span>
+				} ?> cell'><?php echo $this->price($article->getPrice()) ?></span>
 			</div>
 			<?php if($isBicycle)
 			{
@@ -148,15 +148,16 @@ $this->inlineScript()->captureEnd();
 		<small>inkl. MWST.</small>
 		<br>
 		<label class="block showLeft" for="mengenListe">Menge: </label>
-		<select id="mengenListe" class="form-control selectWidth block">
-			<datalist id="amount">
-				<option value="1" selected>1</option>
-				<option value="2">2</option>
-				<option value="3">3</option>
-				<option value="4">4</option>
-				<option value="5">5</option>
-			</datalist>
-		</select>
+		<input id = "mengenListe" type = "number" class="hideSpinner amountInput form-control selectWidth block" value = "1" />
+<!--		<select id="mengenListe" class="form-control selectWidth block">-->
+<!--			<datalist id="amount">-->
+<!--				<option value="1" selected>1</option>-->
+<!--				<option value="2">2</option>-->
+<!--				<option value="3">3</option>-->
+<!--				<option value="4">4</option>-->
+<!--				<option value="5">5</option>-->
+<!--			</datalist>-->
+<!--		</select>-->
 		<!--		</p>-->
 		<button id="shoppingCartBtn" class="btn btn-default shoppingCartButton distanceTop">
 			<svg version="1.1" class="shoppingCartButtonPic" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
