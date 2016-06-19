@@ -10,8 +10,10 @@ namespace BikeStore\Controller;
 
 
 use Application\Model\Manager\UserManager;
+use BikeStore\Form\AddressForm;
 use Zend\Http\Request;
 use Zend\Mvc\Controller\AbstractActionController;
+use Zend\Session\Container;
 
 class BuyController extends AbstractActionController
 {
@@ -28,6 +30,30 @@ class BuyController extends AbstractActionController
 	public function insertAddressAction(){
 		/** @var Request $request */
 		$request = $this->getRequest();
+		
+		/** @var AddressForm $addressForm */
+		$addressForm = new AddressForm();
+
+		/** @var Container $sessionContainer */
+		$sessionContainer = new Container("AddressContainer");
+
+
+		if ($request->isPost())
+		{
+			$postData = $request->getPost();
+
+			$addressForm->setData($postData);
+
+			if($addressForm->isValid())
+			{
+			}
+			else{
+				return array(
+					'Form' => $addressForm,
+				);
+			}
+		}
+
 
 	}
 }

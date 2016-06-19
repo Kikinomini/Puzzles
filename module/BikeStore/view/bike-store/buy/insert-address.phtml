@@ -1,2 +1,12 @@
 <?php
+
+$this->headScript()->appendFile($this->basePath() . '/js/FilterForm.js');
+
+
 echo "Dies ist ein Test ";
+$this->inlineScript()->captureStart();
+echo <<<JS
+		FilterForm.setForm($("#AddressForm"));
+		
+JS;
+$this->inlineScript()->captureEnd();
