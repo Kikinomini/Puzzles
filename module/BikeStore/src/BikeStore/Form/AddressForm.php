@@ -62,7 +62,7 @@ class AddressForm extends Form
 		$Country->setAttribute('class', 'form-control');
 		$this->add($Country);
 
-		$MrMrs = new Select("MrMrs");
+		$MrMrs = new Text("MrMrs");
 		$MrMrs->setAttribute('id', 'MrMrs');
 		$MrMrs->setLabel('Herr/Frau');
 		$MrMrs->setAttribute('required', 'true');

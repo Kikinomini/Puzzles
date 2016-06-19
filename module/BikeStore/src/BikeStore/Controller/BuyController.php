@@ -14,6 +14,7 @@ use BikeStore\Form\AddressForm;
 use Zend\Http\Request;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\Session\Container;
+use Zend\View\Model\ViewModel;
 
 class BuyController extends AbstractActionController
 {
@@ -48,11 +49,13 @@ class BuyController extends AbstractActionController
 			{
 			}
 			else{
-				return array(
-					'Form' => $addressForm,
-				);
+
 			}
+
 		}
+		return new ViewModel(
+			array('form' => $addressForm)
+		);
 
 
 	}

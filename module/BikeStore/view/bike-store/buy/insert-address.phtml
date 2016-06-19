@@ -10,3 +10,35 @@ echo <<<JS
 		
 JS;
 $this->inlineScript()->captureEnd();
+$this->form->prepare();
+echo $this->form()->openTag($this->form);
+?>
+<div class = "row">
+	<div class="large-5 medium-6 small-12 columns ">
+		<?php echo $this->formRow($this->form->get('street')) ?>
+	</div>
+	<div class="large-5 medium-6 small-12 columns ">
+		<?php echo $this->formRow($this->form->get('PLZ')) ?>
+	</div>
+	<div class="large-5 medium-6 small-12 columns ">
+		<?php echo $this->formRow($this->form->get('HouseNumber')) ?>
+	</div>
+	<div class="large-5 medium-6 small-12 columns ">
+		<?php echo $this->formRow($this->form->get('City')) ?>
+	</div>
+	<div class="large-5 medium-6 small-12 columns ">
+		<?php echo $this->formRow($this->form->get('Country')) ?>
+	</div>
+	<div class="large-5 medium-6 small-12 columns ">
+		<?php echo $this->formRow($this->form->get('MrMrs')) ?>
+	</div>
+	<div class="large-5 medium-6 small-12 columns ">
+		<?php echo $this->formRow($this->form->get('FirstName')) ?>
+	</div>
+	<div class="large-5 medium-6 small-12 columns ">
+		<?php echo $this->formRow($this->form->get('LastName')) ?>
+	</div>
+
+</div>
+<?php
+echo $this->form()->closeTag();
