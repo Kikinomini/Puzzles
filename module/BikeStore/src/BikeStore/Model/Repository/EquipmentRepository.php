@@ -8,6 +8,12 @@ use Doctrine\ORM\QueryBuilder;
 
 class EquipmentRepository extends ArticleRepository
 {
+	protected function addSelectFromCount(QueryBuilder $queryBuilder)
+	{
+		$queryBuilder->select($queryBuilder->expr()->count('a'))->from('BikeStore\Model\Equipment', 'a');
+		return $this;
+	}
+
 	protected function addSelectFrom(QueryBuilder $queryBuilder)
 	{
 		$queryBuilder->select('a')->from('BikeStore\Model\Equipment', 'a');

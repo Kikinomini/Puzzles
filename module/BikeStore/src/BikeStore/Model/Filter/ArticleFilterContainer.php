@@ -19,6 +19,9 @@ class ArticleFilterContainer
 	private $offset = 0;
 	private $limit = null;
 
+	private $result = null;
+	private $numberResultsWithoutLimitOffset = 0;
+
 	/**
 	 * @return mixed
 	 */
@@ -162,5 +165,42 @@ class ArticleFilterContainer
 	public function isPriceMaxSet()
 	{
 		return ($this->priceMax != null && $this->priceMax > 0);
+	}
+
+	/**
+	 * @return null
+	 */
+	public function getResult()
+	{
+		return $this->result;
+	}
+
+	/**
+	 * @param null $result
+	 */
+	public function setResult($result)
+	{
+		$this->result = $result;
+	}
+
+	/**
+	 * @return int
+	 */
+	public function getNumberResultsWithoutLimitOffset()
+	{
+		return $this->numberResultsWithoutLimitOffset;
+	}
+
+	/**
+	 * @param int $numberResultsWithoutLimitOffset
+	 */
+	public function setNumberResultsWithoutLimitOffset($numberResultsWithoutLimitOffset)
+	{
+		$this->numberResultsWithoutLimitOffset = $numberResultsWithoutLimitOffset;
+	}
+
+	public function getNumberResults()
+	{
+		return count($this->result);
 	}
 }

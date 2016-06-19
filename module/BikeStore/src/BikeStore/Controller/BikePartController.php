@@ -37,22 +37,20 @@ class BikePartController extends AbstractActionController
 		$articleFilterContainer->setLimit(self::ARTICLES_PER_SIDE);
 
 		$filterForm->bind($articleFilterContainer);
-		if($request->isGet())
+		if ($request->isGet())
 		{
 			$data = $request->getQuery()->toArray();
 			$filterForm->setData($data);
 			$filterForm->isValid();
 		}
-		
+
 		$articles = $equipmentManager->findByArticleFilterContainer($articleFilterContainer);
-		$page = ceil($articleFilterContainer->getOffset()/ self::ARTICLES_PER_SIDE) +1;
-		$maxPage = 10; //ToDo Ändern
-		if ($page > $maxPage) $page = $maxPage;
-		if ($page<=0) $page = 1;
-		$nothing = false;
-		if (count($articles) == 0){
-			$nothing = true;
-		}
+		$page = ceil($articleFilterContainer->getOffset() / self::ARTICLES_PER_SIDE) + 1;
+		$maxPage = ceil($articleFilterContainer->getNumberResultsWithoutLimitOffset() / self::ARTICLES_PER_SIDE);
+		
+		$page = ($page > $maxPage)? $maxPage:$page;
+		$page = ($page <= 0)? 1:$page;
+		$nothing = (count($articles) == 0);
 		return array(
 			"equipments" => $articles,
 			"filterForm" => $filterForm,

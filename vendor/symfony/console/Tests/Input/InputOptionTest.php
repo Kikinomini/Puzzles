@@ -150,13 +150,13 @@ class InputOptionTest extends \PHPUnit_Framework_TestCase
     {
         $option = new InputOption('foo', null, InputOption::VALUE_REQUIRED, '', 'default');
         $option->setDefault(null);
-        $this->assertNull($option->getDefault(), '->setDefault() can reset the default value by passing null');
+        $this->assertNull($option->getDefault(), '->setRenderDefault() can reset the default value by passing null');
         $option->setDefault('another');
-        $this->assertEquals('another', $option->getDefault(), '->setDefault() changes the default value');
+        $this->assertEquals('another', $option->getDefault(), '->setRenderDefault() changes the default value');
 
         $option = new InputOption('foo', null, InputOption::VALUE_REQUIRED | InputOption::VALUE_IS_ARRAY);
         $option->setDefault(array(1, 2));
-        $this->assertEquals(array(1, 2), $option->getDefault(), '->setDefault() changes the default value');
+        $this->assertEquals(array(1, 2), $option->getDefault(), '->setRenderDefault() changes the default value');
     }
 
     /**
