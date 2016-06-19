@@ -41,7 +41,8 @@ echo <<<JS
 		pageNavigator.maxPage = $this->maxPage;
 		elementRender.BikeList = true;
 	  	elementRender.addArrayElements($ElementArray);
-	  	elementRender.createList();
+	  	elementRender.init();
+	  	elementRender.render();
 	  	
 	  	FilterForm.setForm($("#bicycleFilterForm"));
 		$(".sendFormOnClick").click(function(){
@@ -52,7 +53,7 @@ JS;
 $this->inlineScript()->captureEnd();
 
 echo "<div class='row'>";
-echo "<div class='columns large-2'>";
+echo "<div class='columns small-2'>";
 $this->filterForm->setAttribute("action", $this->url("bikelist"));
 $this->filterForm->prepare();
 echo $this->form()->openTag($this->filterForm);

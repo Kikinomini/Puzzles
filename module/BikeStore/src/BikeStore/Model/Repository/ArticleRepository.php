@@ -17,7 +17,29 @@ class ArticleRepository extends StandardRepository
 		$this->addWhereStatement($articleFilterContainer, $queryManager);
 		$this->addOffsetLimit($articleFilterContainer, $queryManager);
 		
-		return $queryManager->getQuery()->getResult();
+		$this->countAllByArticleFilterContainer($articleFilterContainer);
+		$result = $queryManager->getQuery()->getResult();
+		$articleFilterContainer->setResult($result);
+		return $result;
+	}
+	
+	public function countAllByArticleFilterContainer(ArticleFilterContainer $articleFilterContainer)
+	{
+		$queryManager = $this->_em->createQueryBuilder();
+		$this->addSelectFromCount($queryManager);
+		$queryManager->where("a.listed = :listedVal");
+		$queryManager->setParameter("listedVal", true);
+		$this->addWhereStatement($articleFilterContainer, $queryManager);
+
+		$number = $queryManager->getQuery()->getSingleScalarResult();
+		$articleFilterContainer->setNumberResultsWithoutLimitOffset($number);
+		return $number;
+	}
+
+	protected function addSelectFromCount(QueryBuilder $queryBuilder)
+	{
+		$queryBuilder->select($queryBuilder->expr()->count('a'))->from('BikeStore\Model\Article', 'a');
+		return $this;
 	}
 	protected function addSelectFrom(QueryBuilder $queryBuilder)
 	{

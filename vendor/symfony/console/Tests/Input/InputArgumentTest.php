@@ -80,13 +80,13 @@ class InputArgumentTest extends \PHPUnit_Framework_TestCase
     {
         $argument = new InputArgument('foo', InputArgument::OPTIONAL, '', 'default');
         $argument->setDefault(null);
-        $this->assertNull($argument->getDefault(), '->setDefault() can reset the default value by passing null');
+        $this->assertNull($argument->getDefault(), '->setRenderDefault() can reset the default value by passing null');
         $argument->setDefault('another');
-        $this->assertEquals('another', $argument->getDefault(), '->setDefault() changes the default value');
+        $this->assertEquals('another', $argument->getDefault(), '->setRenderDefault() changes the default value');
 
         $argument = new InputArgument('foo', InputArgument::OPTIONAL | InputArgument::IS_ARRAY);
         $argument->setDefault(array(1, 2));
-        $this->assertEquals(array(1, 2), $argument->getDefault(), '->setDefault() changes the default value');
+        $this->assertEquals(array(1, 2), $argument->getDefault(), '->setRenderDefault() changes the default value');
     }
 
     /**

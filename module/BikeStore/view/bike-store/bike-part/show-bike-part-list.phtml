@@ -20,7 +20,7 @@ if (!$this->nothing)
 	}
 }
 $ElementArray = json_encode($alleElemente);
-echo "<form name = \"test\" action=''><button id=\"list \"  class=\"btn btn-default bikeShopDefaultBtn\"type=\"button\" onclick=\"elementRender.createList()\">";
+echo "<form name = \"test\" action=''><button id=\"list \"  class=\"btn btn-default bikeShopDefaultBtn\" type=\"button\" onclick=\"elementRender.createList()\">";
 include(realpath('public/image/list.svg'));
 echo "</button></br>";
 echo "<button type=\"button\" onclick=\"elementRender.createBox()\"> Kacheln </button></form>";
@@ -38,12 +38,13 @@ echo <<<JS
 		
 		elementRender.BikeList = false;
 	  	elementRender.addArrayElements($ElementArray);
-	  	elementRender.createList();
+	  	elementRender.init();
+	  	elementRender.render();
 	})
 JS;
 $this->inlineScript()->captureEnd();
 echo "<div class='row'>";
-echo "<div class='columns large-2'>";
+echo "<div class='columns small-2'>";
 $this->filterForm->setAttribute("action", $this->url("Bikepart"));
 $this->filterForm->prepare();
 echo $this->form()->openTag($this->filterForm);

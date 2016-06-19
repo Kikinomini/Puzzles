@@ -71,9 +71,8 @@ class BicycleController extends AbstractActionController
 
 		$bicycles = $bicycleManager->findByArticleFilterContainer($articleFilterContainer);
 
-//		$page = 1;
-		$page = ceil($articleFilterContainer->getOffset()/ self::ARTICLES_PER_SIDE); //ToDo auskommentieren
-		$maxPage = 10; //ToDo ändern
+		$page = ceil($articleFilterContainer->getOffset()/ self::ARTICLES_PER_SIDE)+1;
+		$maxPage = ceil($articleFilterContainer->getNumberResultsWithoutLimitOffset()/ self::ARTICLES_PER_SIDE);
 
 		return array(
 			'filterForm' => $filterForm,

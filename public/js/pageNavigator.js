@@ -58,5 +58,4 @@ var pageNavigator = {
 		FilterForm.setSide(num);
 		FilterForm.sendForm();
 	}
-
-}
+};
