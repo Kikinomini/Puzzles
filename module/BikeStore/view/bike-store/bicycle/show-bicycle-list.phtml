@@ -30,8 +30,12 @@ foreach ($this->bicycles as $Eqipment)
 
 }
 $ElementArray = json_encode($alleElemente);
-echo "<form name = \"test\" action=''><button type=\"button\" onclick=\"elementRender.createList()\"> Liste </button> </br>";
-echo "<button type=\"button\" onclick=\"elementRender.createBox()\"> Kacheln </button></form>";
+echo "<form name = \"test\" action=''><button id=\"list \"  class=\"btn btn-default bikeShopDefaultBtn\" type=\"button\" onclick=\"elementRender.createList()\">";
+include(realpath('public/image/list.svg'));
+echo "</button></br>";
+echo "<button id=\"list \"  class=\"btn btn-default bikeShopDefaultBtn\" type=\"button\" onclick=\"elementRender.createBox()\">";
+include (realpath('public/image/box.svg'));
+echo "</button></form>";
 
 
 $this->inlineScript()->captureStart();
