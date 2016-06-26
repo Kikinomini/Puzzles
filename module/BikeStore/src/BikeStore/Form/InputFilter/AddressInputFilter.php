@@ -9,6 +9,8 @@
 namespace BikeStore\Form\InputFilter;
 
 
+use Zend\InputFilter\Input;
+use Zend\InputFilter\InputFilter;
 use Zend\Validator\Between;
 use Zend\Validator\Regex;
 
