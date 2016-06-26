@@ -46,7 +46,9 @@ class BuyController extends AbstractActionController
 			$addressForm->setData($postData);
 
 			$valide = $addressForm->isValid();
-
+			if($valide){
+				$sessionContainer->offsetSet('Address',$addressForm);
+			}
 		}
 		return new ViewModel(
 			array('valide' => $valide ,'form' => $addressForm)
