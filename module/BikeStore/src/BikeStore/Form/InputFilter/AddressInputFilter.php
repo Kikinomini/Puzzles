@@ -36,52 +36,52 @@ class AddressInputFilter extends InputFilter
 		$this->add($PLZInput);
 	}
 	public function addHousNumber(){
-		$HousNumber = new Input("HousNumber");
+		$HousNumber = new Input("HouseNumber");
 		$HousNumber->setRequired(true);
 		$HousNumber->getValidatorChain()
-			->attach(new Regex('[1-9][0-9]*[a-z]?'));
+			->attach(new Regex(array('pattern' =>"/^[1-9][0-9]*[a-z]?$/i")));
 		$this->add($HousNumber);
 	}
 	public function addStreet(){
-		$Street = new Input("HousNumber");
+		$Street = new Input("street");
 		$Street->setRequired(true);
 		$Street->getValidatorChain()
-			->attach(new Regex('[A-Z,a-z,0-9,ß,ä,Ä,ü,Ü,ö,Ö,\-\ ]+'));
+			->attach(new Regex(array('pattern' =>'/^[a-zA-Z0-9ßÄäÜüÖö -]*$/i')));
 		$this->add($Street);
 	}
 	public function addCity(){
 		$City = new Input("City");
 		$City->setRequired(true);
 		$City->getValidatorChain()
-			->attach(new Regex('[A-Z,a-z,0-9,ß,ä,Ä,ü,Ü,ö,Ö,\-\ ]+'));
+			->attach(new Regex(array('pattern' =>'/^[a-zA-Z0-9ßÄäÜüÖö -]*$/i')));
 		$this->add($City);
 	}
 	public function addCountry(){
 		$Country = new Input("Country");
 		$Country->setRequired(true);
 		$Country->getValidatorChain()
-			->attach(new Regex('[A-Z,a-z]+'));
+			->attach(new Regex(array('pattern' =>'/^[a-zA-Z]*$/i')));
 		$this->add($Country);
 	}
 	public function addMrMrs(){
 		$MrMrs = new Input("MrMrs");
 		$MrMrs->setRequired(true);
 		$MrMrs->getValidatorChain()
-			->attach(new Regex('Herr|Frau'));
+			->attach(new Regex(array('pattern' =>"/Herr|Frau/")));
 		$this->add($MrMrs);
 	}
 	public function addFirstName(){
-		$City = new Input("City");
+		$City = new Input("FirstName");
 		$City->setRequired(true);
 		$City->getValidatorChain()
-			->attach(new Regex('[A-Z,a-z,ß,ä,Ä,ü,Ü,ö,Ö,\-\ ]+'));
+			->attach(new Regex(array('pattern' =>'/^[a-zA-Z -ßÜüÄäÖö]*$/i')));
 		$this->add($City);
 	}
 	public function addLastName(){
-		$City = new Input("City");
+		$City = new Input("LastName");
 		$City->setRequired(true);
 		$City->getValidatorChain()
-			->attach(new Regex('[A-Z,a-z,ß,ä,Ä,ü,Ü,ö,Ö,\-\ ]+'));
+			->attach(new Regex(array('pattern' =>'/^[a-zA-Z ßÄäÜüÖö]*$/i')));
 		$this->add($City);
 	}
 }

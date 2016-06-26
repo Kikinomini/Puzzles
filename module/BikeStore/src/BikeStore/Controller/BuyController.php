@@ -45,13 +45,7 @@ class BuyController extends AbstractActionController
 
 			$addressForm->setData($postData);
 
-			if($addressForm->isValid())
-			{
-				$valide = true;
-			}
-			else{
-
-			}
+			$valide = $addressForm->isValid();
 
 		}
 		return new ViewModel(

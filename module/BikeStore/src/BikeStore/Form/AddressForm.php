@@ -28,7 +28,7 @@ class AddressForm extends MyForm
 		$this->setAttribute("id", "AddressForm");
 	}
 
-	private function addElements()
+	public function addElements()
 	{
 		$Street = new Text("street");
 		$Street->setLabel('Straße');
