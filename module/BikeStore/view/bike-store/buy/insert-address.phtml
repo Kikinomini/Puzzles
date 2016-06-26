@@ -3,7 +3,9 @@
 $this->headScript()->appendFile($this->basePath() . '/js/FilterForm.js');
 
 
-echo "Dies ist ein Test ";
+if($this->valide)
+	echo "Valide";
+else echo "UnValide";
 $this->inlineScript()->captureStart();
 echo <<<JS
 		FilterForm.setForm($("#AddressForm"));
@@ -37,6 +39,9 @@ echo $this->form()->openTag($this->form);
 	</div>
 	<div class="large-5 medium-6 small-12 columns ">
 		<?php echo $this->formRow($this->form->get('LastName')) ?>
+	</div>
+	<div class="large-5 medium-6 small-12 columns ">
+		<?php echo $this->formRow($this->form->get('SubmitButton')) ?>
 	</div>
 
 </div>

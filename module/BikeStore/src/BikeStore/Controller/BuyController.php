@@ -38,7 +38,7 @@ class BuyController extends AbstractActionController
 		/** @var Container $sessionContainer */
 		$sessionContainer = new Container("AddressContainer");
 
-
+		$valide = false;
 		if ($request->isPost())
 		{
 			$postData = $request->getPost();
@@ -47,6 +47,7 @@ class BuyController extends AbstractActionController
 
 			if($addressForm->isValid())
 			{
+				$valide = true;
 			}
 			else{
 
@@ -54,7 +55,7 @@ class BuyController extends AbstractActionController
 
 		}
 		return new ViewModel(
-			array('form' => $addressForm)
+			array('valide' => $valide ,'form' => $addressForm)
 		);
 
 
