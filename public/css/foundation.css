@@ -2295,11 +2295,12 @@ html.is-reveal-open body {
 
 .column, .columns {
   -webkit-flex: 1 1 0px;
-      -ms-flex: 1 1 0px;
-          flex: 1 1 0px;
+  -ms-flex: 1 1 0px;
+  flex: 1 1 0px;
   padding-left: 0.9375rem;
   padding-right: 0.9375rem;
-  min-width: initial; }
+  min-width: initial;
+  }
 
 .column.row.row, .row.row.columns {
   float: none;
@@ -2454,9 +2455,10 @@ html.is-reveal-open body {
           flex-wrap: wrap; }
   .small-up-1 > .column, .small-up-1 > .columns {
     -webkit-flex: 0 0 100%;
-        -ms-flex: 0 0 100%;
-            flex: 0 0 100%;
-    max-width: 100%; }
+    -ms-flex: 0 0 100%;
+    flex: 0 0 100%;
+    max-width: 100%;
+    }
 
 .small-up-2 {
   -webkit-flex-wrap: wrap;

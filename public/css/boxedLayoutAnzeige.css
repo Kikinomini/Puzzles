@@ -9,14 +9,28 @@
 }
 .PictureRow{
 
+width: 150px;
 }
 .NameRow{
 
+width: 150px;
 }
-.DetailRow{
-}
+.DetailRow{width: 150px;overflow: hidden;}
 .rowTable{
 }
 .PriceRow{
 
+width: 150px;
+}
+
+.grid-elem {
+    padding: 20px;
+    width: 150px;
+}
+
+.grid-elem > a {
+    display: block;
+    width: 150px;
+    max-width: 150px;
+    overflow: hidden;
 }

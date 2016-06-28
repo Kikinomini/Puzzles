@@ -29,6 +29,7 @@ a.hiddenLink
 { 
     color: inherit;
 }
+
 a.totallyHidden:hover,
 a.totallyHidden:hover div,
 a.totallyHidden:hover div div,
@@ -332,7 +333,7 @@ div.warenkorbPic {
 	div.warenkorbPic > svg {
 		height: 34px;
 	}
-	
+
 	#warenkorbText {
 		margin-top: 2px;
 		margin-left: 8px;
