@@ -3,6 +3,7 @@
 namespace BikeStore;
 
 use Zend\EventManager\Event;
+use Zend\Http\Request;
 use Zend\ModuleManager\Feature\AutoloaderProviderInterface;
 use Zend\ModuleManager\Feature\ConfigProviderInterface;
 use Zend\Mvc\MvcEvent;
@@ -28,7 +29,14 @@ class Module implements AutoloaderProviderInterface, ConfigProviderInterface
 				$viewModel->setVariable("numberArticlesInShoppingCart", $numberArticles);
 			}
 		});
-
+		/** @var Request $request */
+		$request = $e->getRequest();
+		if ($request->isGet());
+		{
+			/** @var ViewModel $viewModel */
+			$viewModel = $e->getApplication()->getMvcEvent()->getViewModel();
+			$viewModel->setVariable("searchString", $request->getQuery("search", ""));
+		}
 	}
 
 	public function getConfig()

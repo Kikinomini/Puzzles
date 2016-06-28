@@ -10,6 +10,7 @@ namespace BikeStore\Controller;
 
 
 use Application\Model\User;
+use BikeStore\Form\ArticleFilterForm;
 use BikeStore\Form\BicycleFilterForm;
 use BikeStore\Form\Hydrator\BicycleFilterHydrator;
 use BikeStore\Model\Article;
@@ -34,18 +35,36 @@ class BicycleController extends AbstractActionController
 	{
 		/** @var Request $request */
 		$request = $this->getRequest();
-		$searchString = $request->getQuery("search");
 		/** @var ArticleManager $articleManager */
 		$articleManager = $this->serviceLocator->get("BikeStore.ArticleManager");
 
-		$articleFilter = new ArticleFilterContainer();
-		$articleFilter->setSearchWords($searchString);
+		$articleFilterContainer = new ArticleFilterContainer();
+		$filterForm = new ArticleFilterForm();
 
-		$articleArray = $articleManager->findByArticleFilterContainer($articleFilter);
+		$filterForm->bind($articleFilterContainer);
+		if ($request->isGet())
+		{
+			$data = $request->getQuery()->toArray();
+			$filterForm->setData($data);
+			$filterForm->isValid();
+		}
 		
-		return array("result" => $articleArray);
+		$articleFilterContainer->setLimit(self::ARTICLES_PER_SIDE);
 
+		$articleArray = $articleManager->findByArticleFilterContainer($articleFilterContainer);
 
+		$page = ceil($articleFilterContainer->getOffset() / self::ARTICLES_PER_SIDE) + 1;
+		$maxPage = ceil($articleFilterContainer->getNumberResultsWithoutLimitOffset() / self::ARTICLES_PER_SIDE);
+
+		$page = ($page > $maxPage)? 1:$page;
+		$page = ($page <= 0)? 1:$page;
+		
+		return array(
+			'filterForm' => $filterForm,
+			"result" => $articleArray,
+			'page' => $page,
+			'maxPage' => $maxPage,
+		);
 	}
 	public function showBicycleListAction()
 	{
@@ -60,19 +79,21 @@ class BicycleController extends AbstractActionController
 		$articleFilterContainer = new BicycleFilterContainer();
 		$articleFilterContainer->setLimit(self::ARTICLES_PER_SIDE);
 
-		if($request->isGet())
+		$filterForm->bind($articleFilterContainer);
+		if ($request->isGet())
 		{
 			$data = $request->getQuery()->toArray();
-//			$articleFilterContainer->setSearchWords("Licht Bremse");
-			$hydrator = new BicycleFilterHydrator();
-			$hydrator->hydrate($data, $articleFilterContainer);
 			$filterForm->setData($data);
+			$filterForm->isValid();
 		}
 
 		$bicycles = $bicycleManager->findByArticleFilterContainer($articleFilterContainer);
 
 		$page = ceil($articleFilterContainer->getOffset()/ self::ARTICLES_PER_SIDE)+1;
 		$maxPage = ceil($articleFilterContainer->getNumberResultsWithoutLimitOffset()/ self::ARTICLES_PER_SIDE);
+
+		$page = ($page > $maxPage)? 1:$page;
+		$page = ($page <= 0)? 1:$page;
 
 		return array(
 			'filterForm' => $filterForm,

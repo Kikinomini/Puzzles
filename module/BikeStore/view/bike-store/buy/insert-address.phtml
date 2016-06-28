@@ -2,95 +2,99 @@
 
 $this->headScript()->appendFile($this->basePath() . '/js/FilterForm.js');
 
-
-if($this->valide)
-	echo "Valide";
-else echo "UnValide";
 $this->inlineScript()->captureStart();
 echo <<<JS
-		FilterForm.setForm($("#AddressForm"));
+		$(document).ready(function() {
+		  	$("#IstGleich").change(function(){
+				if (this.checked)
+				{
+					$("#formRechnungsadresse").slideUp();
+				}
+				else 
+				{
+					$("#formRechnungsadresse").slideDown();
+				}
+		  	});
+		})
 		
 JS;
 $this->inlineScript()->captureEnd();
 $this->form->prepare();
 echo $this->form()->openTag($this->form);
 ?>
-<div class = "row">
+	<div class="row">
 
-	<div class="large-12 medium-12 small-12 columns ">
-		Lieferadresse:
-	</div>
+		<div class="large-12 medium-12 small-12 columns ">
+			<h1>Lieferadresse:</h1>
+		</div>
 
-	<div class="large-5 medium-6 small-12 columns ">
-		<?php echo $this->formRow($this->form->get('street')) ?>
-	</div>
-	<div class="large-5 medium-6 small-12 columns ">
-		<?php echo $this->formRow($this->form->get('PLZ')) ?>
-	</div>
-	<div class="large-5 medium-6 small-12 columns ">
-		<?php echo $this->formRow($this->form->get('HouseNumber')) ?>
-	</div>
-	<div class="large-5 medium-6 small-12 columns ">
-		<?php echo $this->formRow($this->form->get('City')) ?>
-	</div>
-	<div class="large-5 medium-6 small-12 columns ">
-		<?php echo $this->formRow($this->form->get('Country')) ?>
-	</div>
-	<div class="large-5 medium-6 small-12 columns ">
-		<?php echo $this->formRow($this->form->get('MrMrs')) ?>
-	</div>
-	<div class="large-5 medium-6 small-12 columns ">
-		<?php echo $this->formRow($this->form->get('FirstName')) ?>
-	</div>
-	<div class="large-5 medium-6 small-12 columns ">
-		<?php echo $this->formRow($this->form->get('LastName')) ?>
-	</div>
+		<div class="large-5 medium-6 small-12 columns ">
+			<?php echo $this->formRow($this->form->get('street')) ?>
+		</div>
+		<div class="large-5 medium-6 small-12 columns ">
+			<?php echo $this->formRow($this->form->get('PLZ')) ?>
+		</div>
+		<div class="large-5 medium-6 small-12 columns ">
+			<?php echo $this->formRow($this->form->get('HouseNumber')) ?>
+		</div>
+		<div class="large-5 medium-6 small-12 columns ">
+			<?php echo $this->formRow($this->form->get('City')) ?>
+		</div>
+		<div class="large-5 medium-6 small-12 columns ">
+			<?php echo $this->formRow($this->form->get('Country')) ?>
+		</div>
+		<div class="large-5 medium-6 small-12 columns ">
+			<?php echo $this->formRow($this->form->get('MrMrs')) ?>
+		</div>
+		<div class="large-5 medium-6 small-12 columns ">
+			<?php echo $this->formRow($this->form->get('FirstName')) ?>
+		</div>
+		<div class="large-5 medium-6 small-12 columns ">
+			<?php echo $this->formRow($this->form->get('LastName')) ?>
+		</div>
 
+		<div class="large-10 medium-12 small-12 columns ">
+			<?php echo $this->formRow($this->form->get('IstGleich')) ?>
+		</div>
 
+		<div class = "large-12 medium-12 small-12 columns ">
+		<div id="formRechnungsadresse" class="row ">
+			<div class="large-12 medium-12 small-12 columns ">
+				<h1>Rechnungsadresse:</h1>
+			</div>
 
-
-	<div class="large-12 medium-12 small-12 columns ">
-		<?php echo $this->formRow($this->form->get('IstGleich')) ?>
-	</div>
-
-
-	<div class="large-12 medium-12 small-12 columns ">
-		Rechnungsadresse:
-	</div>
-
-	<div class="large-5 medium-6 small-12 columns ">
-		<?php echo $this->formRow($this->form->get('rstreet')) ?>
-	</div>
-	<div class="large-5 medium-6 small-12 columns ">
-		<?php echo $this->formRow($this->form->get('rPLZ')) ?>
-	</div>
-	<div class="large-5 medium-6 small-12 columns ">
-		<?php echo $this->formRow($this->form->get('rHouseNumber')) ?>
-	</div>
-	<div class="large-5 medium-6 small-12 columns ">
-		<?php echo $this->formRow($this->form->get('rCity')) ?>
-	</div>
-	<div class="large-5 medium-6 small-12 columns ">
-		<?php echo $this->formRow($this->form->get('rCountry')) ?>
-	</div>
-	<div class="large-5 medium-6 small-12 columns ">
-		<?php echo $this->formRow($this->form->get('rMrMrs')) ?>
-	</div>
-	<div class="large-5 medium-6 small-12 columns ">
-		<?php echo $this->formRow($this->form->get('rFirstName')) ?>
-	</div>
-	<div class="large-5 medium-6 small-12 columns ">
-		<?php echo $this->formRow($this->form->get('rLastName')) ?>
-	</div>
-
-
+			<div class="large-5 medium-6 small-12 columns ">
+				<?php echo $this->formRow($this->form->get('rstreet')) ?>
+			</div>
+			<div class="large-5 medium-6 small-12 columns ">
+				<?php echo $this->formRow($this->form->get('rPLZ')) ?>
+			</div>
+			<div class="large-5 medium-6 small-12 columns ">
+				<?php echo $this->formRow($this->form->get('rHouseNumber')) ?>
+			</div>
+			<div class="large-5 medium-6 small-12 columns ">
+				<?php echo $this->formRow($this->form->get('rCity')) ?>
+			</div>
+			<div class="large-5 medium-6 small-12 columns ">
+				<?php echo $this->formRow($this->form->get('rCountry')) ?>
+			</div>
+			<div class="large-5 medium-6 small-12 columns ">
+				<?php echo $this->formRow($this->form->get('rMrMrs')) ?>
+			</div>
+			<div class="large-5 medium-6 small-12 columns ">
+				<?php echo $this->formRow($this->form->get('rFirstName')) ?>
+			</div>
+			<div class="large-5 medium-6 small-12 columns ">
+				<?php echo $this->formRow($this->form->get('rLastName')) ?>
+			</div>
+		</div>
+		</div>
 
 
+		<div class="large-5 medium-6 small-12 columns ">
+			<?php echo $this->formRow($this->form->get('SubmitButton')) ?>
+		</div>
 
-	<div class="large-5 medium-6 small-12 columns ">
-		<?php echo $this->formRow($this->form->get('SubmitButton')) ?>
 	</div>
-
-</div>
 <?php
 echo $this->form()->closeTag();

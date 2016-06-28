@@ -48,16 +48,13 @@ class BikePartController extends AbstractActionController
 		$page = ceil($articleFilterContainer->getOffset() / self::ARTICLES_PER_SIDE) + 1;
 		$maxPage = ceil($articleFilterContainer->getNumberResultsWithoutLimitOffset() / self::ARTICLES_PER_SIDE);
 		
-		$page = ($page > $maxPage)? $maxPage:$page;
+		$page = ($page > $maxPage)? 1:$page;
 		$page = ($page <= 0)? 1:$page;
-		$nothing = (count($articles) == 0);
 		return array(
-			"equipments" => $articles,
 			"filterForm" => $filterForm,
+			"equipments" => $articles,
 			"maxpage" => $maxPage,
 			"page" => $page,
-			"all" => count($articles),
-			"nothing" => $nothing,
 		);
 	}
 

@@ -2,6 +2,7 @@
 
 namespace BikeStore\Model\Equipment;
 
+use BikeStore\Model\Manager\Equipment\GearShiftManager;
 use Doctrine\ORM\Mapping as ORM;
 use BikeStore\Model\Equipment;
 
@@ -112,5 +113,13 @@ class GearShift extends Equipment
     public function setType($type)
     {
         $this->type = $type;
+    }
+
+    public function getViewInformationAsArray()
+    {
+        $array = parent::getViewInformationAsArray();
+        $array["Typ"] = GearShiftManager::resolveGearShiftType($this->getType());
+        $array["Gänge"] = $this->getNumberFrontGears()+$this->getNumberBackGears()." (".$this->getNumberFrontGears()." vorne, ".$this->getNumberBackGears(). " hinten)";
+        return $array;
     }
 }

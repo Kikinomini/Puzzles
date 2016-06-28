@@ -64,4 +64,11 @@ class FrontWheel extends Equipment
     {
         $this->size = $size;
     }
+
+    public function getViewInformationAsArray()
+    {
+        $array = parent::getViewInformationAsArray();
+        $array["Größe"] = $this->getSize()."\"";
+        return $array;
+    }
 }

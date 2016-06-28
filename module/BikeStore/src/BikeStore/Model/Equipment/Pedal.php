@@ -2,6 +2,7 @@
 
 namespace BikeStore\Model\Equipment;
 
+use BikeStore\Model\Manager\Equipment\PedalManager;
 use Doctrine\ORM\Mapping as ORM;
 use BikeStore\Model\Equipment;
 
@@ -67,6 +68,12 @@ class Pedal extends Equipment
         $this->pedalType = $pedalType;
 
     }
-    
+
+    public function getViewInformationAsArray()
+    {
+        $array = parent::getViewInformationAsArray();
+        $array["Art"] = PedalManager::resolvePedalType($this->pedalType);
+        return $array;
+    }
 }
  

@@ -30,12 +30,12 @@ foreach ($this->bicycles as $Eqipment)
 
 }
 $ElementArray = json_encode($alleElemente);
-echo "<form name = \"test\" action=''><button id=\"list \"  class=\"btn btn-default bikeShopDefaultBtn\" type=\"button\" onclick=\"elementRender.createList()\">";
+echo "<button id='list '  class='bikeShopDefaultBtn' type='button' onclick='elementRender.createList()'>";
 include(realpath('public/image/list.svg'));
-echo "</button></br>";
-echo "<button id=\"list \"  class=\"btn btn-default bikeShopDefaultBtn\" type=\"button\" onclick=\"elementRender.createBox()\">";
-include (realpath('public/image/box.svg'));
-echo "</button></form>";
+echo "</button>";
+echo "<button id='list '  class='bikeShopDefaultBtn' type='button' onclick='elementRender.createBox()'>";
+include(realpath('public/image/box.svg'));
+echo "</button>";
 
 
 $this->inlineScript()->captureStart();
@@ -65,20 +65,20 @@ echo $this->formHidden($this->filterForm->get("search"));
 echo $this->formHidden($this->filterForm->get("page"));
 ?>
 
-<div id='bicycleFormFrameType' class = "multiCheckBox">
+<div id='bicycleFormFrameType' class="multiCheckBox">
 	<?php
 	echo $this->myForm()->multiCheckBox($this->filterForm->get("frameType"));
 	?>
 </div>
 <br/>
-<div id='bicycleFormFrameType' class = "multiCheckBox">
+<div id='bicycleFormFrameType' class="multiCheckBox">
 	<?php
 	echo $this->myForm()->multiCheckBox($this->filterForm->get("riderType"));
 	?>
 </div>
 <div id='bicycleFormFrameHeight'>
 	Rahmenhöhe:
-	<div class = 'row'>
+	<div class='row'>
 		<?php
 		echo "<div class = 'columns large-5 small-5'>" . $this->formRow($this->filterForm->get("frameHeightMin")) .
 			 "</div>";
@@ -91,7 +91,7 @@ echo $this->formHidden($this->filterForm->get("page"));
 </div>
 <div id='bicycleFormPrice'>
 	Preis:
-	<div class = 'row'>
+	<div class='row'>
 		<?php
 		echo "<div class = 'columns large-5 small-5'>" . $this->formRow($this->filterForm->get("priceMin")) .
 			 "</div>";

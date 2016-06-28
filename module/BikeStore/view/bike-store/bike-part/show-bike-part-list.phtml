@@ -7,7 +7,6 @@ $this->headScript()->appendFile($this->basePath() . '/js/bikePartView.js');
 $this->headScript()->appendFile($this->basePath() . '/js/FilterForm.js');
 $this->headScript()->appendFile($this->basePath() . '/js/pageNavigator.js');
 
-echo $this->nothing;
 echo "<h1>Fahrradteile</h1>";
 $alleElemente = array();
 if (!$this->nothing)
@@ -20,12 +19,12 @@ if (!$this->nothing)
 	}
 }
 $ElementArray = json_encode($alleElemente);
-echo "<form name = \"test\" action=''><button id=\"list \"  class=\"btn btn-default bikeShopDefaultBtn\" type=\"button\" onclick=\"elementRender.createList()\">";
+echo "<button id='list '  class=' bikeShopDefaultBtn' type='button' onclick='elementRender.createList()'>";
 include(realpath('public/image/list.svg'));
-echo "</button></br>";
-echo "<button id=\"list \"  class=\"btn btn-default bikeShopDefaultBtn\" type=\"button\" onclick=\"elementRender.createBox()\">";
-include (realpath('public/image/box.svg'));
-echo "</button></form>";
+echo "</button>";
+echo "<button id='list '  class='bikeShopDefaultBtn' type='button' onclick='elementRender.createBox()'>";
+include(realpath('public/image/box.svg'));
+echo "</button>";
 
 
 $this->inlineScript()->captureStart();
@@ -54,30 +53,28 @@ echo $this->formHidden($this->filterForm->get("search"));
 echo $this->formHidden($this->filterForm->get("page"));
 ?>
 
-	<div id='bikePartType' class = "multiCheckBox">
+<div id='bikePartType' class="multiCheckBox">
+	<?php
+	echo $this->myForm()->multiCheckBox($this->filterForm->get("equipmentTypes"));
+	?>
+</div>
+<div id='bikePartFormPrice'>
+	Preis:
+	<div class="row">
 		<?php
-		echo $this->myForm()->multiCheckBox($this->filterForm->get("equipmentTypes"));
+		echo "<div class = 'columns large-5 small-5'>" . $this->formRow($this->filterForm->get("priceMin")) .
+			 "</div>";
+		echo "<div class = 'columns large-5 small-5'>" . $this->formRow($this->filterForm->get("priceMax")) .
+			 "</div>";
+		echo "<div class = 'columns large-2 small-2'>" .
+			 $this->formRow($this->filterForm->get("smallSubmitButton")) . "</div>";
 		?>
 	</div>
-	<div id='bikePartFormPrice'>
-		Preis:
-		<div class = "row">
-			<?php
-			echo "<div class = 'columns large-5 small-5'>" . $this->formRow($this->filterForm->get("priceMin")) .
-				 "</div>";
-			echo "<div class = 'columns large-5 small-5'>" . $this->formRow($this->filterForm->get("priceMax")) .
-				 "</div>";
-			echo "<div class = 'columns large-2 small-2'>" .
-				 $this->formRow($this->filterForm->get("smallSubmitButton")) . "</div>";
-			?>
-		</div>
-	</div>
+</div>
 <?php
 echo $this->form()->closeTag();
 echo "</div>";
 ?>
-	<div class="columns large-10"><p id='AusgabePanel'></p></div>
-	</div>
+<div class="columns large-10"><p id='AusgabePanel'></p></div>
+</div>
 
-
-<?php

@@ -87,4 +87,12 @@ class Battery extends Equipment
 	{
 		$this->batteryTime = $batteryTime;
 	}
+
+	public function getViewInformationAsArray()
+	{
+		$array = parent::getViewInformationAsArray();
+		$array["Nutzzeit"] = str_replace(".",",",round($this->batteryTime, 2)). " Stunden";
+		$array["Ladezeit"] = str_replace(".",",",round($this->chargingTime, 2)). " Stunden";
+		return $array;
+	}
 }

@@ -1,15 +1,7 @@
 <?php
 
-
 namespace BikeStore\Form;
 
-
-/**
- * Created by PhpStorm.
- * User: Marten
- * Date: 16.06.2016
- * Time: 19:12
- */
 use Application\Form\MyForm;
 use BikeStore\Form\InputFilter\AddressInputFilter;
 use Zend\Form\Element\Checkbox;
@@ -17,8 +9,6 @@ use Zend\Form\Element\Submit;
 use Zend\Form\Element\Text;
 use Zend\Form\Element\Number;
 use Zend\Form\Element\Select;
-
-
 
 class AddressForm extends MyForm
 {	
