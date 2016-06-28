@@ -40,18 +40,18 @@ var pageNavigator = {
 				}
 			}
 		}
-		pageNavigator.createdDiv = "<div class='completePageNavigator row'>Seitennavigation:" + out + "</div>";
+		pageNavigator.createdDiv = '<ul class="pagination" role="navigation" aria-label="Pagination">Seite:&nbsp;&nbsp;' + out + "</ul>";
 		return pageNavigator.createdDiv;
 	},
 
 	createOneButton:function(num){
 		if(num == pageNavigator.actualPage){
-			return " <" + num + "> ";
+			return '<li class="current"><span class="show-for-sr">Momentan auf:</span>' + num + '</li>';
 		}
-		return "<button type='pageNavigatorButton' onclick='pageNavigator.buttonPressed("+num+")'> <b><"+ num +"> </b></button>";
+		return "<li><button type='pageNavigatorButton' onclick='pageNavigator.buttonPressed("+num+")'>"+ num +"</button></li>";
 	},
 	createPointDiv:function (){
-		return "..."
+		return '<li class="ellipsis" aria-hidden="true"></li>'
 	},
 
 	buttonPressed:function(num){

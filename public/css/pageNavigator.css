@@ -7,3 +7,12 @@
 .completePageNavigator {
 
 }
+
+.pagination {
+    padding-left: 8px;
+}
+
+.pagination,
+.pagination li {
+    font-size: medium;
+}
