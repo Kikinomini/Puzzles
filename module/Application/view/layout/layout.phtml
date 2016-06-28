@@ -98,7 +98,7 @@ JS;
 	<nav class="navbar  navbar-fixed-top" role="navigation">
 		<div class="container">
 			<div class="navbar-header">
-				<div id="logo-top" class="columns show-for-small-only shrink">
+				<div id="logo-top" class="columns hide-for-large shrink">
 					<a href="<?php echo $this->url("home"); ?>" class="totallyHidden">
 						<div class='bikeStoreLogo'>
 							<?php include(realpath('public/image/wheel.svg')) ?>
@@ -121,7 +121,7 @@ JS;
 		<div class="container">
 			<?php include("alerts.phtml"); ?>
 			<div id="header" class="header row align-middle">
-				<div id="logo" class="columns show-for-medium shrink">
+				<div id="logo" class="columns show-for-large shrink">
 					<a href="<?php echo $this->url("home"); ?>" class="totallyHidden">
 						<div class='bikeStoreLogo'>
 							<?php include(realpath('public/image/wheel.svg')) ?>
@@ -142,7 +142,7 @@ JS;
 						</div>
 					</form>
 				</div>
-				<div id="shoppingCart" class="columns small-12 large-3">
+				<div id="shoppingCart" class="columns small-12 medium-4 large-3">
 					<a href="<?php echo $this->url("shoppingCart"); ?>">
 						<div class="warenkorbAlgemein">
 							<div class="warenkorbPic">

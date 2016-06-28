@@ -288,6 +288,7 @@ nav {
 	margin: 8px;
 }
 
+
 #shoppingCart a {
 	text-decoration: none;
 	color: #8e8e8e;
@@ -313,23 +314,36 @@ div.warenkorbPic {
 	flex: 0 0 auto;
 }
 
+
 #warenkorbText {
+	max-width: 215px;
+	/* margin: auto; */
+	/* vertical-align: middle; */
+	/* display: table-cell; */
+	/* height: 100%; */
+	/* float: left; */
+	margin-left: 10px;
+	flex: 1 1 0px;
+}
 
-max-width: 215px;
+@media screen and (max-width: 40em) 
+{
+	div.warenkorbPic,
+	div.warenkorbPic > svg {
+		height: 34px;
+	}
+	
+	#warenkorbText {
+		margin-top: 2px;
+		margin-left: 8px;
+		max-width: 179px;
+		font-size: medium;
+	}
 
-/* margin: auto; */
-
-/* vertical-align: middle; */
-
-/* display: table-cell; */
-
-/* height: 100%; */
-
-/* float: left; */
-
-margin-left: 10px;
-
-flex: 1 1 0px;
+	.warenkorbAlgemein {
+		float: right;
+		margin-top: 8px
+	}
 }
 
 #shoppingCart:hover a, #shoppingCart:hover div.warenkorbPic
