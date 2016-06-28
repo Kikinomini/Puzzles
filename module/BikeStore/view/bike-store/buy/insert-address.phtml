@@ -16,6 +16,11 @@ $this->form->prepare();
 echo $this->form()->openTag($this->form);
 ?>
 <div class = "row">
+
+	<div class="large-12 medium-12 small-12 columns ">
+		Lieferadresse:
+	</div>
+
 	<div class="large-5 medium-6 small-12 columns ">
 		<?php echo $this->formRow($this->form->get('street')) ?>
 	</div>
@@ -40,6 +45,48 @@ echo $this->form()->openTag($this->form);
 	<div class="large-5 medium-6 small-12 columns ">
 		<?php echo $this->formRow($this->form->get('LastName')) ?>
 	</div>
+
+
+
+
+	<div class="large-12 medium-12 small-12 columns ">
+		<?php echo $this->formRow($this->form->get('IstGleich')) ?>
+	</div>
+
+
+	<div class="large-12 medium-12 small-12 columns ">
+		Rechnungsadresse:
+	</div>
+
+	<div class="large-5 medium-6 small-12 columns ">
+		<?php echo $this->formRow($this->form->get('rstreet')) ?>
+	</div>
+	<div class="large-5 medium-6 small-12 columns ">
+		<?php echo $this->formRow($this->form->get('rPLZ')) ?>
+	</div>
+	<div class="large-5 medium-6 small-12 columns ">
+		<?php echo $this->formRow($this->form->get('rHouseNumber')) ?>
+	</div>
+	<div class="large-5 medium-6 small-12 columns ">
+		<?php echo $this->formRow($this->form->get('rCity')) ?>
+	</div>
+	<div class="large-5 medium-6 small-12 columns ">
+		<?php echo $this->formRow($this->form->get('rCountry')) ?>
+	</div>
+	<div class="large-5 medium-6 small-12 columns ">
+		<?php echo $this->formRow($this->form->get('rMrMrs')) ?>
+	</div>
+	<div class="large-5 medium-6 small-12 columns ">
+		<?php echo $this->formRow($this->form->get('rFirstName')) ?>
+	</div>
+	<div class="large-5 medium-6 small-12 columns ">
+		<?php echo $this->formRow($this->form->get('rLastName')) ?>
+	</div>
+
+
+
+
+
 	<div class="large-5 medium-6 small-12 columns ">
 		<?php echo $this->formRow($this->form->get('SubmitButton')) ?>
 	</div>

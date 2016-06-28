@@ -33,7 +33,7 @@ class BuyController extends AbstractActionController
 		$request = $this->getRequest();
 		
 		/** @var AddressForm $addressForm */
-		$addressForm = new AddressForm();
+		$addressForm = new AddressForm(true);
 
 		/** @var Container $sessionContainer */
 		$sessionContainer = new Container("AddressContainer");
@@ -42,13 +42,47 @@ class BuyController extends AbstractActionController
 		if ($request->isPost())
 		{
 			$postData = $request->getPost();
+			$valide;
+
+			if($postData->get('IstGleich')=='verschieden'){
+				$addressForm = new AddressForm(false);
+			}
+			else{
+
+			}
 
 			$addressForm->setData($postData);
-
 			$valide = $addressForm->isValid();
+
 			if($valide){
-				$sessionContainer->offsetSet('Address',$addressForm);
+				$deliveryAddress = array(	"street"=> $postData->get("street"),
+									"PLZ"=>$postData->get("PLZ"),
+								  	"HouseNumber"=>$postData->get("HouseNumber"),
+									"City"=>$postData->get("City"),
+								   	"Country"=>$postData->get("Country"),
+								 	"MrMrs"=>$postData->get("MrMrs"),
+								 	"FirstName"=>$postData->get("FirstName"),
+								 	"LastName"=>$postData->get("LastName"));
+
+				$billingAddress = array();
+				if($postData->get('IstGleich')=='verschieden')
+					$billingAddress = array("street"=> $postData->get("rstreet"),
+						"PLZ"=>$postData->get("rPLZ"),
+						"HouseNumber"=>$postData->get("rHouseNumber"),
+						"City"=>$postData->get("rCity"),
+						"Country"=>$postData->get("rCountry"),
+						"MrMrs"=>$postData->get("rMrMrs"),
+						"FirstName"=>$postData->get("rFirstName"),
+						"LastName"=>$postData->get("rLastName"));
+				else{
+					$billingAddress = $deliveryAddress;
+				}
+
+
+				$sessionContainer->offsetSet('deliveryAddress',$deliveryAddress);
+				$sessionContainer->offsetSet('billingAddress',$billingAddress);
 			}
+
 		}
 		return new ViewModel(
 			array('valide' => $valide ,'form' => $addressForm)
