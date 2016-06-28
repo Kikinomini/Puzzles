@@ -203,12 +203,20 @@ footer a:hover
 .mainnav{
 	height: 50px;
 	background-color: #cfcccc;
+}
 
+nav {
+	position: relative;
+	z-index: 100;
 }
 
 .mainnav div{
 	margin-left: 0;
 	padding-left: 0;
+}
+
+#main-menu {
+	background-color: rgba(173, 173, 173, 0.8);
 }
 
 .mainnav div ul li a
@@ -242,6 +250,20 @@ footer a:hover
 	/*color: #82d77e;*/
 	/*text-align: center;*/
 }
+
+#logo-top,
+#logo-top #logoLabel,
+#logo-top .bikeStoreLogo {
+	float: left;
+}
+
+#logo-top #logoLabel {
+	margin-top: 16px;
+	margin-left: 10px;
+	font-size: large;
+}
+
+
 #logoLabel
 {
 	font-weight: bold;
@@ -252,7 +274,7 @@ footer a:hover
 	-ms-transform: rotate(-3deg);
 	-o-transform: rotate(-3deg);
 	-webkit-transform: rotate(-3deg);
-	transform: rotate(-3deg);
+	transform: translate(-3px, -5px) rotate(-3deg);
 }
 
 #shoppingCart {
@@ -423,8 +445,12 @@ p.link{
 
 .bikeStoreLogo
 {
-	/* margin-right: 5px; */
 	height: 80px;
+}
+
+#logo-top .bikeStoreLogo {
+	margin-top:2px;
+	height: 45px;
 }
 
 .bikeStoreLogo svg

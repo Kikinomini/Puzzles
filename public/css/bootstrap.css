@@ -4544,6 +4544,8 @@ textarea.input-group-sm > .input-group-btn > .btn {
 .navbar-nav > li > a {
   padding-top: 10px;
   padding-bottom: 10px;
+  padding-left: 25px;
+  padding-right: 25px;
   line-height: 20px;
 }
 
@@ -6597,6 +6599,7 @@ button.close {
   position: fixed;
 }
 
+/*noinspection CssInvalidPropertyValue*/
 @-ms-viewport {
   width: device-width;
 }
