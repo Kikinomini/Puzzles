@@ -1532,9 +1532,10 @@ b {
       background: #e6e6e6; }
   .pagination .current {
     padding: 0.1875rem 0.625rem;
-    background: #2ba6cb;
+    background: #82d77e;
     color: #fefefe;
-    cursor: default; }
+    cursor: default;
+    }
   .pagination .disabled {
     padding: 0.1875rem 0.625rem;
     color: #cacaca;
