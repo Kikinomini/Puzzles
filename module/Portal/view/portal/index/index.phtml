@@ -6,13 +6,13 @@
 		<button class="orbit-previous"><span class="show-for-sr">Previous Slide</span>&#9664;&#xFE0E;</button>
 		<button class="orbit-next"><span class="show-for-sr">Next Slide</span>&#9654;&#xFE0E;</button>
 		<li class="is-active orbit-slide">
-			<img class="orbit-image" src="../sliderImg/Slider1.png" alt="Werbung">
+			<img class="orbit-image" src="/sliderImg/Slider1.png" alt="Werbung">
 		</li>
 		<li class="orbit-slide">
-			<img class="orbit-image" src="../sliderImg/slider2.png" alt="Rad im Kornfeld">
+			<img class="orbit-image" src="/sliderImg/slider2.png" alt="Rad im Kornfeld">
 		</li>
 		<li class="orbit-slide">
-			<img class="orbit-image" src="../sliderImg/slider3.png" alt="Radrennen">
+			<img class="orbit-image" src="/sliderImg/slider3.png" alt="Radrennen">
 		</li>
 	</ul>
 	<nav class="orbit-bullets">
@@ -30,5 +30,5 @@
 	<b><a href="<?php echo $this->url("Bikepart");?>">zum Zubehör</a></b>
 </div>
 <?php
-    echo $this->inlineScript()->appendFile($this->basePath('js/app.js'));
+    $this->inlineScript()->appendFile($this->basePath('js/app.js'));
 ?>
