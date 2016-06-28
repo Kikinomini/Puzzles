@@ -2,6 +2,7 @@
 
 namespace BikeStore\Model\Equipment;
 
+use BikeStore\Model\Manager\Equipment\FrameManager;
 use Doctrine\ORM\Mapping as ORM;
 use BikeStore\Model\Equipment;
 
@@ -22,93 +23,71 @@ class Frame extends Equipment
 	const BIKE_TYPE_TOURING = 4;
 	const BIKE_TYPE_EBIKE = 5;
 
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     * @ORM\Column(type="integer")
-     * @var int
-     */
-    protected $id;
+	/**
+	 * @ORM\Id
+	 * @ORM\GeneratedValue(strategy="AUTO")
+	 * @ORM\Column(type="integer")
+	 * @var int
+	 */
+	protected $id;
 
-//    /**
-//     * @ORM\Column(type="string")
-//     * @var string
-//     */
-//    protected $color;
+	/**
+	 * @ORM\Column(type="float")
+	 * @var float
+	 */
+	protected $frameSize;
 
-    /**
-     * @ORM\Column(type="float")
-     * @var float
-     */
-    protected $frameSize;
+	/**
+	 * @ORM\Column(type="integer")
+	 * @var int
+	 */
+	protected $riderType;
 
-    /**
-     * @ORM\Column(type="integer")
-     * @var int
-     */
-    protected $riderType;
+	/**
+	 * @ORM\Column(type="integer")
+	 * @var int
+	 */
+	protected $bikeType;
 
-    /**
-     * @ORM\Column(type="integer")
-     * @var int
-     */
-    protected $bikeType;
+	/**
+	 * @ORM\Column(type="boolean")
+	 * @var boolean
+	 */
+	protected $frontShocker;
 
-    /**
-     * @ORM\Column(type="boolean")
-     * @var boolean
-     */
-    protected $frontShocker;
+	/**
+	 * @ORM\Column(type="boolean")
+	 * @var boolean
+	 */
+	protected $backShocker;
 
-    /**
-     * @ORM\Column(type="boolean")
-     * @var boolean
-     */
-    protected $backShocker;
-
-    public function __construct()
-    {
-    	parent::__construct();
-        $this->id = null;
+	public function __construct()
+	{
+		parent::__construct();
+		$this->id = null;
 		$this->setBikeType(self::BIKE_TYPE_CITY);
 		$this->setRiderType(self::RIDER_TYPE_MALE);
 		$this->setFrameSize(-37);
 		$this->setBackShocker(true);
 		$this->setFrontShocker(true);
 		$this->setListed(false);
-    }
+	}
 
-    /**
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
+	/**
+	 * @return int
+	 */
+	public function getId()
+	{
+		return $this->id;
+	}
 
-    /**
-     * @param int $id
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
-    }
-
-//	/**
-//	 * @return string
-//	 */
-//	public function getColor()
-//	{
-//		return $this->color;
-//	}
-//
-//	/**
-//	 * @param string $color
-//	 */
-//	public function setColor($color)
-//	{
-//		$this->color = $color;
-//	}
+	/**
+	 * @param int $id
+	 */
+	public function setId($id)
+	{
+		$this->id = $id;
+	}
 
 	/**
 	 * @return float
@@ -188,5 +167,16 @@ class Frame extends Equipment
 	public function setBackShocker($backShocker)
 	{
 		$this->backShocker = $backShocker;
+	}
+
+	public function getViewInformationAsArray()
+	{
+		$array = parent::getViewInformationAsArray();
+		$array["Rahmengröße"] = $this->frameSize . "\"";
+		$array["Typ"] = FrameManager::resolveBikeType($this->bikeType);
+		$array["Kategorie"] = FrameManager::resolveRiderType($this->riderType);
+		$array["Stoßdämpfer"] = ($this->frontShocker &&
+								 $this->backShocker) ? "Vorne und hinten" : ($this->frontShocker) ? "Vorne" : ($this->backShocker) ? "Hinten" : "Keine";
+		return $array;
 	}
 }

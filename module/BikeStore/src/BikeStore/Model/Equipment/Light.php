@@ -2,6 +2,7 @@
 
 namespace BikeStore\Model\Equipment;
 
+use BikeStore\Model\Manager\Equipment\LightManager;
 use Doctrine\ORM\Mapping as ORM;
 use BikeStore\Model\Equipment;
 
@@ -89,5 +90,12 @@ class Light extends Equipment
     {
         $this->isBatteryPowered = $isBatteryPowered;
     }
+
+    public function getViewInformationAsArray()
+    {
+        $array = parent::getViewInformationAsArray();
+        $array["Typ"] = LightManager::resolveLightType($this->type);
+        $array["Batteriebetrieben"] = ($this->isBatteryPowered)?"Ja":"Nein";
+        return $array;
+    }
 }
- 

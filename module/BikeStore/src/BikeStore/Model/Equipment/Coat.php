@@ -87,4 +87,12 @@ class Coat extends Equipment
     {
         $this->profile = $profile;
     }
+
+    public function getViewInformationAsArray()
+    {
+        $array = parent::getViewInformationAsArray();
+        $array["Größe"] = $this->size."\"";
+        $array["Profil"] = $this->profile;
+        return $array;
+    }
 }

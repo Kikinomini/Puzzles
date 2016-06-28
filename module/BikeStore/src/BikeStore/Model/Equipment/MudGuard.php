@@ -63,5 +63,11 @@ class MudGuard extends Equipment
     {
         $this->size = $size;
     }
+
+    public function getViewInformationAsArray()
+    {
+        $array = parent::getViewInformationAsArray();
+        $array["Größe"] = $this->size."\"";
+        return $array;
+    }
 }
- 

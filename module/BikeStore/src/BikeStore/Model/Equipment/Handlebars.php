@@ -86,4 +86,12 @@ class Handlebars extends Equipment
     {
         $this->length = $length;
     }
+    
+    public function getViewInformationAsArray()
+    {
+        $array = parent::getViewInformationAsArray();
+        $array["Durchmesser"] = $this->diameter." mm";
+        $array["Länge"] = $this->length." mm";
+        return $array;
+    }
 }

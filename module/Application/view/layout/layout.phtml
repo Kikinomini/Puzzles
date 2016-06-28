@@ -29,6 +29,7 @@ echo $this->doctype(); ?>
 		->prependStylesheet($this->basePath() . '/css/bootstrap.css')
 		->prependStylesheet($this->basePath() . '/css/flashMessenger.css')
 		->prependStylesheet($this->basePath() . '/css/dropit.css')
+		->prependStylesheet($this->basePath() . '/css/pageNavigator.css')
 		->prependStylesheet($this->basePath() . '/css/foundation.css')
 		->prependStylesheet($this->basePath() . '/css/myForm.css'); ?>
 
@@ -54,6 +55,7 @@ echo $this->doctype(); ?>
 	$basePath = $this->basePath();
 	$this->inlineScript()->captureStart();
 	$stuff = $this->numberArticlesInShoppingCart;
+	$searchStringValue = (isset($searchString))?$searchString:"";
 	echo <<<JS
 		settings.basePath = '$basePath';
 		numberArticlesInShoppingCart = $stuff;
@@ -133,7 +135,7 @@ JS;
 					<form class="flexHeader" id='searchForm' action="<?php echo $this->url("search"); ?>" method="GET">
 						<div class="flexFillWidth">
 							<input name="search" class="suchleiste flexFillWidth form-control" type="text"
-								   placeholder=" Suche..."/>
+								   placeholder=" Suche..." value = "<?php echo $searchStringValue ?>" />
 						</div>
 						<div>
 							<button class="sucheButton btn">

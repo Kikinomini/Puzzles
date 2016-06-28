@@ -3,6 +3,7 @@
 namespace BikeStore\Model\Equipment;
 
 use BikeStore\Model\Equipment;
+use BikeStore\Model\Manager\Equipment\SaddleManager;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -92,5 +93,13 @@ class Saddle extends Equipment
 	public function setMaterial($material)
 	{
 		$this->material = $material;
+	}
+
+	public function getViewInformationAsArray()
+	{
+		$array = parent::getViewInformationAsArray();
+		$array["Typ"] = SaddleManager::resolveSaddleType($this->getType());
+		$array["Material"] = SaddleManager::resolveSaddleMaterial($this->getMaterial());
+		return $array;
 	}
 }

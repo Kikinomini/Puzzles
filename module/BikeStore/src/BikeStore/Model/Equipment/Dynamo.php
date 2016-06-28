@@ -2,6 +2,7 @@
 
 namespace BikeStore\Model\Equipment;
 
+use BikeStore\Model\Manager\Equipment\DynamoManager;
 use Doctrine\ORM\Mapping as ORM;
 use BikeStore\Model\Equipment;
 
@@ -66,6 +67,13 @@ class Dynamo extends Equipment
     public function setType($type)
     {
         $this->type = $type;
+    }
+
+    public function getViewInformationAsArray()
+    {
+        $array = parent::getViewInformationAsArray();
+        $array["Typ"] = DynamoManager::resolveDynamoType($this->getType());
+        return $array;
     }
 }
  

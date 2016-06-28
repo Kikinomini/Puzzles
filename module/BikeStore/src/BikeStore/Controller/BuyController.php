@@ -38,11 +38,9 @@ class BuyController extends AbstractActionController
 		/** @var Container $sessionContainer */
 		$sessionContainer = new Container("AddressContainer");
 
-		$valide = false;
 		if ($request->isPost())
 		{
 			$postData = $request->getPost();
-			$valide;
 
 			if($postData->get('IstGleich')=='verschieden'){
 				$addressForm = new AddressForm(false);
@@ -52,9 +50,8 @@ class BuyController extends AbstractActionController
 			}
 
 			$addressForm->setData($postData);
-			$valide = $addressForm->isValid();
 
-			if($valide){
+			if($addressForm->isValid()){
 				$deliveryAddress = array(	"street"=> $postData->get("street"),
 									"PLZ"=>$postData->get("PLZ"),
 								  	"HouseNumber"=>$postData->get("HouseNumber"),
@@ -64,7 +61,6 @@ class BuyController extends AbstractActionController
 								 	"FirstName"=>$postData->get("FirstName"),
 								 	"LastName"=>$postData->get("LastName"));
 
-				$billingAddress = array();
 				if($postData->get('IstGleich')=='verschieden')
 					$billingAddress = array("street"=> $postData->get("rstreet"),
 						"PLZ"=>$postData->get("rPLZ"),
@@ -77,7 +73,6 @@ class BuyController extends AbstractActionController
 				else{
 					$billingAddress = $deliveryAddress;
 				}
-
 
 				$sessionContainer->offsetSet('deliveryAddress',$deliveryAddress);
 				$sessionContainer->offsetSet('billingAddress',$billingAddress);

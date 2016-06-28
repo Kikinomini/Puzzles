@@ -62,4 +62,11 @@ class Tube extends Equipment
     {
         $this->wheelSize = $wheelSize;
     }
+
+    public function getViewInformationAsArray()
+    {
+        $array = parent::getViewInformationAsArray();
+        $array["Größe"] = $this->getWheelSize()."\"";
+        return $array;
+    }
 }

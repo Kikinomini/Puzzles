@@ -40,5 +40,11 @@ class Bell extends Equipment
     {
         $this->id = $id;
     }
+
+    public function getViewInformationAsArray()
+    {
+        $array = parent::getViewInformationAsArray();
+        return $array;
+    }
 }
  

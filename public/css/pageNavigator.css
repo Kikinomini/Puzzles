@@ -1,11 +1,30 @@
-.actualPage{
+.pageNavigatorButton, .currentPage {
+	padding: 0 10px;
+	border-radius: 3px;
+	margin-left: 2px;
+}
+
+.pageNavigatorButton:hover {
+	cursor: pointer;
+	background-color: #e4e9df;
+}
+
+.currentPage {
+	border: solid 1px #64a660;
+}
+
+.pageNavigatorButton
+{
+	color: #82d77e;
+}
+
+.pointDiv {
 
 }
-.pointDiv{
 
-}
 .completePageNavigator {
-
+	margin-top: 10px;
+	margin-bottom: 10px;
 }
 
 .pagination {

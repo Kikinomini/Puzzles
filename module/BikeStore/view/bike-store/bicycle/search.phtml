@@ -5,66 +5,86 @@
  * Date: 07.06.2016
  * Time: 11:36
  */
-$this->headScript()->appendFile($this->basePath() . '/js/bikePartView.js');
 $this->headLink()->prependStylesheet($this->basePath() . '/css/boxedLayoutAnzeige.css');
 $this->headLink()->prependStylesheet($this->basePath() . '/css/bikePart.css');
-
-
 $this->headLink()->prependStylesheet($this->basePath() . '/css/bikePart.css');
 $this->headLink()->prependStylesheet($this->basePath() . '/css/boxedLayoutAnzeige.css');
 $this->headLink()->prependStylesheet($this->basePath() . '/css/filterForm.css');
+
 $this->headScript()->appendFile($this->basePath() . '/js/bikePartView.js');
+$this->headScript()->appendFile($this->basePath() . '/js/pageNavigator.js');
 $this->headScript()->appendFile($this->basePath() . '/js/FilterForm.js');
 
 
 echo "<h1>Suchergebnisse</h1>";
 $alleElemente = array();
-foreach($this->result as $Eqipment)
+foreach ($this->result as $Eqipment)
 {
 	$element = (\BikeStore\Model\Manager\EquipmentManager::getAsArray($Eqipment));;
 	$element["url"] = $this->url('articleDetails', array('id' => $Eqipment->getId()));
 	$alleElemente[] = $element;
 }
 $ElementArray = json_encode($alleElemente);
-echo "<form name = \"test\" action=''><button type=\"button\" onclick=\"elementRender.createList()\"> Liste </button> </br>";
-echo "<button type=\"button\" onclick=\"elementRender.createBox()\"> Kacheln </button></form>";
 
-
+$urlBicycleListLink = $this->url("bikelist");
+$urlEquipmentListLink = $this->url("Bikepart");
 $this->inlineScript()->captureStart();
-
 echo <<<JS
 	$(document).ready(function() {
-		FilterForm.setForm($("#bikePartFilterForm"));
-		$(".sendFormOnClick").click(function(){
-			FilterForm.sendForm();
-		})
+		pageNavigator.actualPage = $this->page;
+		pageNavigator.maxPage = $this->maxPage;
 		
 		elementRender.BikeList = false;
 	  	elementRender.addArrayElements($ElementArray);
-	  	elementRender.createList();
+	  	elementRender.init();
+	  	elementRender.render();
+	  	FilterForm.setForm($("#articleFilterForm"));
+	  
+	  	$(document).ready(function(){
+			$("#buttonBicycle").click(function(){
+				$("#articleFilterForm").attr("action", "$urlBicycleListLink");
+				FilterForm.sendForm();
+			});	
+			$("#buttonBikePart").click(function(){
+				$("#articleFilterForm").attr("action", "$urlEquipmentListLink");
+				FilterForm.sendForm();
+			})	
+	  	});
 	})
 JS;
-
-
 $this->inlineScript()->captureEnd();
+
+echo "<div class='row'>";
 echo "<div class='columns small-5 medium-3 large-2'>";
-//$this->filterForm->setAttribute("action", $this->url("search"));
-//$this->filterForm->prepare();
-//echo $this->form()->openTag($this->filterForm);
-//echo $this->formHidden($this->filterForm->get("search"));
-//echo $this->formHidden($this->filterForm->get("page"));
+$this->filterForm->setAttribute("action", $this->url("search"));
+$this->filterForm->prepare();
+
+echo "<button id='list '  class='bikeShopDefaultBtn' type='button' onclick='elementRender.createList()'>";
+include(realpath('public/image/list.svg'));
+echo "</button>";
+echo "<button id='list '  class='bikeShopDefaultBtn' type='button' onclick='elementRender.createBox()'>";
+include(realpath('public/image/box.svg'));
+echo "</button>";
+
+echo $this->form()->openTag($this->filterForm);
+echo $this->formHidden($this->filterForm->get("search"));
+echo $this->formHidden($this->filterForm->get("page"));
 ?>
 
-<div id = 'bikePartType'>
-	<?php
-//	echo $this->myForm()->multiCheckBox($this->filterForm->get("equipmentTypes"));
-	?>
-</div>
-<div id = 'bikePartFormPrice'>
+<div id='bikePartFormPrice'>
+	<h4>Filter</h4>
+	<a class="btn-link" id="buttonBicycle">Fahrräder</a>
+	<br/>
+	<a class="btn-link" id="buttonBikePart">Zubehör</a> <br/>
 	Preis:
-	<div>
+	<div class = "row">
 		<?php
-//		echo "<div class = 'columns large-2 small-2'>".$this->formRow($this->filterForm->get("priceSubmitButton"))."</div>";
+		echo "<div class = 'columns large-5 small-5'>" . $this->formRow($this->filterForm->get("priceMin")) .
+			 "</div>";
+		echo "<div class = 'columns large-5 small-5'>" . $this->formRow($this->filterForm->get("priceMax")) .
+			 "</div>";
+		echo "<div class = 'columns large-2 small-2'>" .
+			 $this->formRow($this->filterForm->get("smallSubmitButton")) . "</div>";
 		?>
 	</div>
 </div>
@@ -73,37 +93,4 @@ echo $this->form()->closeTag();
 echo "</div>";
 ?>
 <div class="columns"><p id='AusgabePanel'></p></div>
-
-
-<?php
-//echo "<div id='AusgabePanel'>";
-//echo "</div>";
-//$alleElemente = array();
-//foreach($this->result as $Eqipment)
-//{
-//	$element = (\BikeStore\Model\Manager\EquipmentManager::getAsArray($Eqipment));;
-//	$element["url"] = $this->url('articleDetails', array('id' => $Eqipment->getId()));
-//	$element["price"] = number_format($element["price"],2,",",".");
-//	$element["bikeType"] = $Eqipment->getFrame()->getBikeType();
-//	$element["weelSize"]= $Eqipment->getFrontWheel()->getSize();
-//	$newBike["frameSize"]= $Eqipment->getFrame()->getFrameSize();
-//	$alleElemente[] = $element;
-//
-//}
-//$ElementArray = json_encode($alleElemente);
-//echo "<form name = \"test\" action=''><button type=\"button\" onclick=\"elementRender.createList()\"> Liste </button> </br>";
-//echo "<button type=\"button\" onclick=\"elementRender.createBox()\"> Kacheln </button></form>";
-//
-//
-//$this->inlineScript()->captureStart();
-//
-//echo <<<JS
-//	$(document).ready(function() {
-//		elementRender.BikeList = true;
-//	  	elementRender.addArrayElements($ElementArray);
-//	  	elementRender.createList();
-//	})
-//JS;
-//
-//
-//$this->inlineScript()->captureEnd();
+</div>

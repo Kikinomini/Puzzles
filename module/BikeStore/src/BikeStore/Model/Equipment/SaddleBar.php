@@ -83,4 +83,12 @@ class SaddleBar extends Equipment
     {
         $this->diameter = $diameter;
     }
+
+    public function getViewInformationAsArray()
+    {
+        $array = parent::getViewInformationAsArray();
+        $array["Durchmesser"] = $this->diameter." mm";
+        $array["Länge"] = $this->length." mm";
+        return $array;
+    }
 }

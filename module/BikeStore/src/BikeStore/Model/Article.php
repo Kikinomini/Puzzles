@@ -208,4 +208,12 @@ class Article
 	{
 		$this->quickDescription = $quickDescription;
 	}
+
+	public function getViewInformationAsArray()
+	{
+		return array(
+			"Name" => $this->name,
+			"Farbe" => $this->colour,
+		);
+	}
 }

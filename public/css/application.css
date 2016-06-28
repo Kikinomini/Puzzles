@@ -31,9 +31,11 @@ a.hiddenLink
 }
 
 a.totallyHidden:hover,
+a.totallyHidden:hover img,
 a.totallyHidden:hover div,
 a.totallyHidden:hover div div,
 a.totallyHidden,
+a.totallyHidden img,
 a.totallyHidden div,
 a.totallyHidden div div
 {
@@ -478,12 +480,12 @@ p.link{
 	animation: rotating 6s linear infinite;
 }
 
-a{
+a, .btn-link{
 	color: #82d77e;
 	text-decoration: none;
 }
 
-a:hover{
+a:hover, .btn-link:hover{
 	color: #8e8e8e;
 }
 
@@ -505,8 +507,6 @@ a:hover{
 }
 
 .bikeShopDefaultBtn{
-	color: #8e8e8e;
-	font-weight: bold;
 	border: none;
 	text-shadow: none;
 	background-color: #82d77e;
@@ -514,6 +514,9 @@ a:hover{
 	background-image: -moz-linear-gradient(top, #9dff98, #82d77e);
 	max-height: 30pt;
 	max-width: 30pt;
+	padding: 6px;
+	margin-left: 3px;
+	margin-bottom: 3px;
 }
 
 .bikeShopDefaultBtn:hover svg, .bikeShopDefaultBtn:hover{

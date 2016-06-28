@@ -2,6 +2,7 @@
 
 namespace BikeStore\Model\Equipment;
 
+use BikeStore\Model\Manager\Equipment\BrakeManager;
 use Doctrine\ORM\Mapping as ORM;
 use BikeStore\Model\Equipment;
 
@@ -65,5 +66,12 @@ class Brake extends Equipment
     public function setBrakeType($brakeType)
     {
         $this->brakeType = $brakeType;
+    }
+
+    public function getViewInformationAsArray()
+    {
+        $array = parent::getViewInformationAsArray();
+        $array["Bremsart"] = BrakeManager::resolveBrakeType($this->brakeType);
+        return $array;
     }
 }

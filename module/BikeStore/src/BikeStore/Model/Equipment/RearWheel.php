@@ -2,6 +2,7 @@
 
 namespace BikeStore\Model\Equipment;
 
+use BikeStore\Model\Manager\Equipment\GearShiftManager;
 use Doctrine\ORM\Mapping as ORM;
 use BikeStore\Model\Equipment;
 
@@ -109,5 +110,13 @@ class RearWheel extends Equipment
 		$this->gearType = $gearType;
 	}
 
+	public function getViewInformationAsArray()
+	{
+		$array = parent::getViewInformationAsArray();
+		$array["Größe"] = $this->getWheelSize()."\"";
+		$array["Rück-Tritt-Bremse"] = ($this->backPedalBrake)?"Vorhanden": "Nicht vorhanden";
+		$array["Kettentyp"] = GearShiftManager::resolveGearShiftType($this->gearType);
+		return $array;
+	}
 
 }
