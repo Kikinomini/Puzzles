@@ -107,7 +107,8 @@ abbr[title] {
    */
 b,
 strong {
-  font-weight: bold; }
+  font-weight: bold;
+  }
 
 /**
    * Address styling not present in Safari and Chrome.
@@ -500,6 +501,11 @@ button {
   .show-for-large-only {
     display: none !important; } }
 
+strong,
+b {
+  font-weight: bold;
+  line-height: inherit;
+  }
 .show-for-sr,
 .show-on-focus {
   position: absolute !important;

@@ -4418,6 +4418,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
     width: auto;
     border-top: 0;
     box-shadow: none;
+    /* background-color: blueviolet; */
   }
   .navbar-collapse.collapse {
     display: block !important;
@@ -4489,7 +4490,8 @@ textarea.input-group-sm > .input-group-btn > .btn {
 
 .navbar-brand {
   float: left;
-  padding: 15px 15px;
+  margin-left: 8px;
+  padding: 4px 4px;
   font-size: 18px;
   line-height: 20px;
 }
@@ -4511,7 +4513,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
   padding: 9px 10px;
   margin-top: 8px;
   margin-right: 15px;
-  margin-bottom: 8px;
+  /* margin-bottom: 8px; */
   background-color: transparent;
   background-image: none;
   border: 1px solid transparent;

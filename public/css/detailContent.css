@@ -77,6 +77,11 @@
 	color: #ffffff;
 }
 
+.selectWidth{
+	width: 35px;
+	padding: 0 0 0 0;
+}
+
 #detailProductDetails{
 	margin-top: 20px;
 }

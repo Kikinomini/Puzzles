@@ -1,6 +1,6 @@
 /*Kauf-Box*/
 .partBuy {
-	width: 100%;
+	width: 240px;
 	/*height: 100px;*/
 	float: right;
 	margin-left: 10px;
@@ -17,8 +17,7 @@
 /*Box für Kopf der Tabelle rechts*/
 .cartHeadline {
 	float: right;
-/*	width: 120px;  */
-	width: 14%;
+	width: 120px;
 }
 /*Erste Trennlinie*/
 .firstLine {
@@ -51,9 +50,6 @@
 .partWareWhole div img
 {
 	max-width: 155px;
-	min-width: 140px;
-	/*max-width: 19%;*/
-	max-height: 100px;
 }
 
 /*Box für Bild*/
@@ -61,10 +57,7 @@
 {
 	float: left;
 	width: 160px;
-	/*width: 20%;*/
 }
-
-
 
 /*Box Mitte für Produktbeschreibung*/
 .partWareMiddle
@@ -77,16 +70,12 @@
 .partWarePreis
 {
 	float: right;
-	/*width: 120px;*/
-	width: 14%;
-
+	width: 120px;
 }
 
 .partWareMenge {
 	float: right;
-	/*width: 85px;*/
-	width: 10%;
-
+	width: 85px;
 }
 
 .priceColor{
@@ -118,7 +107,7 @@
 
 .boxDelete
 {
-	width: 21px;
+	width: 30px;
 	float: right;
 	text-align: right;
 }
@@ -137,5 +126,3 @@
 .trash:hover .trashcap {
   transform: rotate(20deg);
 }
-
-

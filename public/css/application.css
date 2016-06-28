@@ -127,6 +127,16 @@ footer a:hover
 	text-decoration: none;
 }
 
+#mainmenu {
+    position: relative;
+    z-index: 20;
+}
+
+.navbar-collapse.in,
+.navbar-collapse.collapsing {
+    background-color: #a9a9a9;
+}
+
 .navbar
 {
 	height: 50px;
@@ -134,7 +144,6 @@ footer a:hover
 	background-image: -webkit-linear-gradient(bottom, #aea9a9, #8e8e8e);
 	background-image: -moz-linear-gradient(bottom, #aea9a9, #8e8e8e);
 	font-size: 12pt;
-
 }
 
 .navbar div div ul
@@ -146,7 +155,7 @@ footer a:hover
 .navbar div div ul li a
 {
 	color: #ffffff;
-	padding-left: 24px;
+	padding-left: 30px;
 }
 
 .navbar div div ul li
@@ -384,6 +393,34 @@ p.link{
 	float:right;
 }
 
+.bikeStoreLogo.small {
+    height: 42px;
+    float: left;
+}
+
+#logoLabel.small {
+    float: left;
+    margin-left: 10px;
+    margin-top: 9px;
+    font-size: 18px;
+}
+
+.navbar-toggle {
+    margin-top: 4px;
+    margin-right: 8px;
+    font-weight: bold;
+    color: white;
+}
+
+.navbar-toggle:hover {
+    color: #e9e9e9;
+}
+
+.navbar-toggle:active {
+    margin-top: 5px;
+    margin-right: 7px;
+}
+
 .bikeStoreLogo
 {
 	/* margin-right: 5px; */
@@ -458,22 +495,7 @@ a:hover{
 	height: 65px;
 }
 
-.hideSpinner::-webkit-inner-spin-button,
-.hideSpinner::-webkit-outer-spin-button
-{
-	-webkit-appearance: none;
-	-moz-appearance: none;
-	appearance: none;
-	margin: 0;
+.gridItem {
+    display: block;
+    padding: 20px;
 }
-
-.hideSpinner
-{
-	-moz-appearance:textfield;
-}
-.amountInput{
-	width: 40px;
-	padding: 0 0 0 0;
-	text-align: center;
-}
-
