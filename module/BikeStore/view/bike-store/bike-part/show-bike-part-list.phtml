@@ -19,13 +19,6 @@ if (!$this->nothing)
 	}
 }
 $ElementArray = json_encode($alleElemente);
-echo "<button id='list '  class=' bikeShopDefaultBtn' type='button' onclick='elementRender.createList()'>";
-include(realpath('public/image/list.svg'));
-echo "</button>";
-echo "<button id='list '  class='bikeShopDefaultBtn' type='button' onclick='elementRender.createBox()'>";
-include(realpath('public/image/box.svg'));
-echo "</button>";
-
 
 $this->inlineScript()->captureStart();
 echo <<<JS
@@ -48,6 +41,16 @@ echo "<div class='row'>";
 echo "<div class='columns small-2'>";
 $this->filterForm->setAttribute("action", $this->url("Bikepart"));
 $this->filterForm->prepare();
+
+echo "<button id='list '  class=' bikeShopDefaultBtn' type='button' onclick='elementRender.createList()'>";
+include(realpath('public/image/list.svg'));
+echo "</button>";
+echo "<button id='list '  class='bikeShopDefaultBtn' type='button' onclick='elementRender.createBox()'>";
+include(realpath('public/image/box.svg'));
+echo "</button>";
+
+echo "<h4>Filter</h4>";
+
 echo $this->form()->openTag($this->filterForm);
 echo $this->formHidden($this->filterForm->get("search"));
 echo $this->formHidden($this->filterForm->get("page"));

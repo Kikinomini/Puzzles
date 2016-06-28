@@ -25,12 +25,6 @@ foreach ($this->result as $Eqipment)
 	$alleElemente[] = $element;
 }
 $ElementArray = json_encode($alleElemente);
-echo "<button id='list '  class='bikeShopDefaultBtn' type='button' onclick='elementRender.createList()'>";
-include(realpath('public/image/list.svg'));
-echo "</button>";
-echo "<button id='list '  class='bikeShopDefaultBtn' type='button' onclick='elementRender.createBox()'>";
-include(realpath('public/image/box.svg'));
-echo "</button>";
 
 $urlBicycleListLink = $this->url("bikelist");
 $urlEquipmentListLink = $this->url("Bikepart");
@@ -64,14 +58,21 @@ echo "<div class='row'>";
 echo "<div class='columns small-2'>";
 $this->filterForm->setAttribute("action", $this->url("search"));
 $this->filterForm->prepare();
+
+echo "<button id='list '  class='bikeShopDefaultBtn' type='button' onclick='elementRender.createList()'>";
+include(realpath('public/image/list.svg'));
+echo "</button>";
+echo "<button id='list '  class='bikeShopDefaultBtn' type='button' onclick='elementRender.createBox()'>";
+include(realpath('public/image/box.svg'));
+echo "</button>";
+
 echo $this->form()->openTag($this->filterForm);
 echo $this->formHidden($this->filterForm->get("search"));
 echo $this->formHidden($this->filterForm->get("page"));
 ?>
 
 <div id='bikePartFormPrice'>
-	<br/>
-	<h4>Suche eingrenzen:</h4>
+	<h4>Filter</h4>
 	<a class="btn-link" id="buttonBicycle">Fahrräder</a>
 	<br/>
 	<a class="btn-link" id="buttonBikePart">Zubehör</a> <br/>
