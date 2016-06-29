@@ -8,7 +8,6 @@
 
 namespace BikeStore\Controller;
 
-
 use Application\Model\Manager\UserManager;
 use BikeStore\Form\AddressForm;
 use Zend\Http\Request;

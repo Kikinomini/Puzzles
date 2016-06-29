@@ -52,6 +52,10 @@ class BicycleController extends AbstractActionController
 		$articleFilterContainer->setLimit(self::ARTICLES_PER_SIDE);
 
 		$articleArray = $articleManager->findByArticleFilterContainer($articleFilterContainer);
+		$filterForm->setData(array(
+			'priceMin' => $articleFilterContainer->getPriceMin(),
+			'priceMax' => $articleFilterContainer->getPriceMax(),
+		));
 
 		$page = ceil($articleFilterContainer->getOffset() / self::ARTICLES_PER_SIDE) + 1;
 		$maxPage = ceil($articleFilterContainer->getNumberResultsWithoutLimitOffset() / self::ARTICLES_PER_SIDE);
@@ -88,6 +92,10 @@ class BicycleController extends AbstractActionController
 		}
 
 		$bicycles = $bicycleManager->findByArticleFilterContainer($articleFilterContainer);
+		$filterForm->setData(array(
+			'priceMin' => $articleFilterContainer->getPriceMin(),
+			'priceMax' => $articleFilterContainer->getPriceMax(),
+		));
 
 		$page = ceil($articleFilterContainer->getOffset()/ self::ARTICLES_PER_SIDE)+1;
 		$maxPage = ceil($articleFilterContainer->getNumberResultsWithoutLimitOffset()/ self::ARTICLES_PER_SIDE);

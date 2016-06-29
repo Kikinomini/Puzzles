@@ -16,8 +16,6 @@ use Zend\Validator\Regex;
 
 class AddressInputFilter extends InputFilter
 {
-
-
 	public function __construct($onlyOne)
 	{
 		$this->addPLZ();

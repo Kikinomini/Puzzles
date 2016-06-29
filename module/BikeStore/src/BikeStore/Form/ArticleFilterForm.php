@@ -37,11 +37,13 @@ class ArticleFilterForm extends MyForm
 		$priceMin = new Number("priceMin");
 		$priceMin->setLabel("Von:");
 		$priceMin->setAttribute("step", "0.01");
+		$priceMin->setAttribute("min", "0");
 		$this->add($priceMin);
 
 		$priceMax = new Number("priceMax");
 		$priceMax->setLabel("Bis:");
 		$priceMax->setAttribute("step", "0.01");
+		$priceMin->setAttribute("min", "0");
 		$this->add($priceMax);
 
 		$priceSubmitButton = new Submit("smallSubmitButton");

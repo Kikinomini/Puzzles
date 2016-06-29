@@ -14,13 +14,14 @@ class Module implements AutoloaderProviderInterface, ConfigProviderInterface
 {
 	public function onBootstrap(MvcEvent $e)
 	{
-		$e->getApplication()->getEventManager()->getSharedManager()->attach("*",MvcEvent::EVENT_RENDER, function(MvcEvent $e){
+		$e->getApplication()->getEventManager()->getSharedManager()->attach("*", MvcEvent::EVENT_RENDER, function(MvcEvent $e)
+		{
 			$sessionContainer = new Container("shoppingCart");
 			if ($sessionContainer->offsetExists("articles"))
 			{
 				$numberArticles = 0;
 				$articles = $sessionContainer->offsetGet("articles");
-				foreach($articles as $article)
+				foreach ($articles as $article)
 				{
 					$numberArticles += $article["count"];
 				}
@@ -31,11 +32,14 @@ class Module implements AutoloaderProviderInterface, ConfigProviderInterface
 		});
 		/** @var Request $request */
 		$request = $e->getRequest();
-		if ($request->isGet());
+		if ($request instanceof Request)
 		{
-			/** @var ViewModel $viewModel */
-			$viewModel = $e->getApplication()->getMvcEvent()->getViewModel();
-			$viewModel->setVariable("searchString", $request->getQuery("search", ""));
+			if ($request->isGet())
+			{
+				/** @var ViewModel $viewModel */
+				$viewModel = $e->getApplication()->getMvcEvent()->getViewModel();
+				$viewModel->setVariable("searchString", $request->getQuery("search", ""));
+			}
 		}
 	}
 
@@ -44,16 +48,16 @@ class Module implements AutoloaderProviderInterface, ConfigProviderInterface
 		$config = array();
 		foreach (glob(__DIR__ . '/config/*.config.php') as $filename)
 		{
-            		$config = array_merge_recursive($config, include($filename));
+			$config = array_merge_recursive($config, include($filename));
 		}
 		return $config;
 	}
 
 	public function getAutoloaderConfig()
 	{
-		return array (
-			'Zend\Loader\StandardAutoloader' => array (
-				'namespaces' => array (
+		return array(
+			'Zend\Loader\StandardAutoloader' => array(
+				'namespaces' => array(
 					__NAMESPACE__ => __DIR__ . '/src/' . __NAMESPACE__,
 				)
 			)

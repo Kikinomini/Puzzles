@@ -10,7 +10,10 @@ class BicycleRepository extends ArticleRepository
 {
 	protected function addSelectFromCount(QueryBuilder $queryBuilder)
 	{
-		$queryBuilder->select($queryBuilder->expr()->count('a'))->from('BikeStore\Model\Bicycle', 'a');
+		$queryBuilder->select($queryBuilder->expr()->count('a'))
+			->addSelect($queryBuilder->expr()->max("a.price"))
+			->addSelect($queryBuilder->expr()->min("a.price"))
+			->from('BikeStore\Model\Bicycle', 'a');
 		$queryBuilder->innerJoin('a.frame', 'f');
 		return $this;
 	}

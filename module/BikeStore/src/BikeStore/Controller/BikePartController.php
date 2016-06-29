@@ -45,6 +45,10 @@ class BikePartController extends AbstractActionController
 		}
 
 		$articles = $equipmentManager->findByArticleFilterContainer($articleFilterContainer);
+		$filterForm->setData(array(
+			'priceMin' => $articleFilterContainer->getPriceMin(),
+			'priceMax' => $articleFilterContainer->getPriceMax(),
+		));
 		$page = ceil($articleFilterContainer->getOffset() / self::ARTICLES_PER_SIDE) + 1;
 		$maxPage = ceil($articleFilterContainer->getNumberResultsWithoutLimitOffset() / self::ARTICLES_PER_SIDE);
 		

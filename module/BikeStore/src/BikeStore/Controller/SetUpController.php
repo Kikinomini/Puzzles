@@ -115,8 +115,8 @@ class SetUpController extends AbstractActionController
 		$article->setName($reflectionClass->getShortName() . " " . $lfdNr);
 		$article->setImageName("testImage.php?t=" . $article->getName());
 		$article->setPrice($price);
-		$article->setQuickDescription($reflectionClass->getName());
-		$article->setDescription(nl2br($reflectionClass->getDocComment()));
+		$article->setQuickDescription(str_replace("\\", " ", $reflectionClass->getName()));
+		$article->setDescription($reflectionClass->getDocComment());
 
 		return $article;
 	}
