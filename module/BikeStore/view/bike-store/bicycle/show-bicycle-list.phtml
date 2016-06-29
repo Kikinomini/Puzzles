@@ -17,9 +17,6 @@ $this->headScript()->appendFile($this->basePath() . '/js/FilterForm.js');
 
 echo "<h1>Fahrräder</h1>";
 
-$maxPrice = 0;
-$minFrameSize = 9999;
-$maxFrameSize = 0;
 $alleElemente = array();
 /** @var \BikeStore\Model\Bicycle $equipment */
 foreach ($this->bicycles as $equipment)
@@ -30,9 +27,6 @@ foreach ($this->bicycles as $equipment)
 	$element["weelSize"] = $equipment->getFrontWheel()->getSize();
 	$element["frameSize"] = $equipment->getFrame()->getFrameSize();
 	$alleElemente[] = $element;
-	$maxPrice = max($maxPrice, $element["price"]);
-	$minFrameSize = min($minFrameSize, $element["frameSize"]);
-	$maxFrameSize = max($maxFrameSize, $element["frameSize"]);
 }
 $ElementArray = json_encode($alleElemente);
 
@@ -45,13 +39,6 @@ echo <<<JS
 	  	elementRender.addArrayElements($ElementArray);
 	  	elementRender.init();
 	  	elementRender.render();
-	  	 		
-	  	setFilterRanges({
-	  		minPrice: 0,
-	  		maxPrice: $maxPrice,
-	  		minFrameSize: $minFrameSize,
-	  		maxFrameSize: $maxFrameSize
-	  	});
 	  	
 	  	FilterForm.setForm($("#bicycleFilterForm"));
 		$(".sendFormOnClick").click(function(){

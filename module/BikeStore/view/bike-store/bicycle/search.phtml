@@ -17,14 +17,12 @@ $this->headScript()->appendFile($this->basePath() . '/js/FilterForm.js');
 
 
 echo "<h1>Suchergebnisse</h1>";
-$maxPrice = 0;
 $alleElemente = array();
 foreach ($this->result as $Eqipment)
 {
 	$element = (\BikeStore\Model\Manager\EquipmentManager::getAsArray($Eqipment));;
 	$element["url"] = $this->url('articleDetails', array('id' => $Eqipment->getId()));
 	$alleElemente[] = $element;
-	$maxPrice = max($maxPrice, $element["price"]);
 }
 $ElementArray = json_encode($alleElemente);
 
@@ -41,11 +39,6 @@ echo <<<JS
 	  	elementRender.init();
 	  	elementRender.render();
 	  	FilterForm.setForm($("#articleFilterForm"));
-	  	
-	  	setFilterRanges({
-	  		minPrice: 0,
-	  		maxPrice: $maxPrice
-	  	});
 	  
 	  	$(document).ready(function(){
 			$("#buttonBicycle").click(function(){
