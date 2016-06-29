@@ -18,13 +18,13 @@ $saddleJson = "{}";
 $currentBrakeFrontId = 0;
 $currentBrakeRearId = 0;
 $currentSaddleId = 0;
-if($isBicycle)
+if ($isBicycle)
 {
 	/** @var \BikeStore\Model\Bicycle $article */
 	$currentBrakeFrontId = $article->getFrontBrake()->getId();
 	$brakeArray = array();
 	/** @var \BikeStore\Model\Equipment\Brake $brake */
-	foreach($this->possibleBrakesFront as $brake)
+	foreach ($this->possibleBrakesFront as $brake)
 	{
 		$brakeArray[] = \BikeStore\Model\Manager\Equipment\BrakeManager::getAsArray($brake);
 	}
@@ -33,7 +33,7 @@ if($isBicycle)
 	$currentBrakeRearId = $article->getRearBrake()->getId();
 	$brakeArray = array();
 	/** @var \BikeStore\Model\Equipment\Brake $brake */
-	foreach($this->possibleBrakesRear as $brake)
+	foreach ($this->possibleBrakesRear as $brake)
 	{
 		$brakeArray[] = \BikeStore\Model\Manager\Equipment\BrakeManager::getAsArray($brake);
 	}
@@ -42,7 +42,7 @@ if($isBicycle)
 	$currentSaddleId = $article->getSaddle()->getId();
 	$saddleArray = array();
 	/** @var \BikeStore\Model\Equipment\Saddle $saddle */
-	foreach($this->possibleSaddles as $saddle)
+	foreach ($this->possibleSaddles as $saddle)
 	{
 		$saddleArray[] = \BikeStore\Model\Manager\Equipment\SaddleManager::getAsArray($saddle);
 	}
@@ -109,31 +109,30 @@ $this->inlineScript()->captureEnd();
 	</div>
 	<div id="detailBuy" class="column small-12 medium-5 large-4">
 		<!--		<p>-->
+		<?php if ($isBicycle)
+		{
+		?>
 		<div id='priceTable' class='table'>
 			<div class='trow'>
-				<span class='priceTableCellLeft cell'><?php if($isBicycle)
-					{
-						echo "Fahrrad:";
-					} ?></span>
-				<span class='<?php if($isBicycle)
-				{
-					echo "priceTableCellRight ";
-				} ?> cell'><?php echo $this->price($article->getPrice()) ?></span>
+					<span class='priceTableCellLeft cell'>
+						Fahrrad:
+					</span>
+					<span class='priceTableCellRight cell'><?php echo $this->price($article->getPrice()) ?></span>
 			</div>
-			<?php if($isBicycle)
-			{
-				?>
 				<div class="trow">
 					<label class='priceTableCellLeft cell' for="selectSaddle">Sattel:</label>
-					<select id="selectSaddle" class="form-control priceTableCellRight cell customizingSelectBox"></select>
+					<select id="selectSaddle"
+							class="form-control priceTableCellRight cell customizingSelectBox"></select>
 				</div>
 				<div class="trow">
 					<label class='priceTableCellLeft cell' for="selectBrakeFront">Vorderbremse:</label>
-					<select id="selectBrakeFront" class="form-control priceTableCellRight cell customizingSelectBox"></select>
+					<select id="selectBrakeFront"
+							class="form-control priceTableCellRight cell customizingSelectBox"></select>
 				</div>
 				<div class="trow">
 					<label class='priceTableCellLeft cell' for="selectBrakeRear">Hinterbremse:</label>
-					<select id="selectBrakeRear" class="form-control priceTableCellRight cell customizingSelectBox"></select>
+					<select id="selectBrakeRear"
+							class="form-control priceTableCellRight cell customizingSelectBox"></select>
 				</div>
 				<div></div>
 				<div class="trow" id="totalPriceRow">
@@ -141,25 +140,29 @@ $this->inlineScript()->captureEnd();
 					<span class="priceTableCellRight cell"><span
 							id='totalPrice'><?php echo $this->price($article->getPrice()) ?></span></span>
 				</div>
-				<?php
-			}
-			?>
+
 		</div>
+
 		<small class="float-right">inkl. MWST.</small>
 		<br>
 		<br>
 		<label class="block showLeft" for="mengenListe">Menge: </label>
-		<input id = "mengenListe" type = "number" class="hideSpinner amountInput form-control selectWidth block showLeft" value = "1" />
-<!--		<select id="mengenListe" class="form-control selectWidth block">-->
-<!--			<datalist id="amount">-->
-<!--				<option value="1" selected>1</option>-->
-<!--				<option value="2">2</option>-->
-<!--				<option value="3">3</option>-->
-<!--				<option value="4">4</option>-->
-<!--				<option value="5">5</option>-->
-<!--			</datalist>-->
-<!--		</select>-->
-		<!--		</p>-->
+		<input id="mengenListe" type="number" class="hideSpinner amountInput form-control selectWidth block showLeft"
+			   value="1"/>
+			<?php
+		}
+		else
+		{
+			echo "<b>" .$this->price($article->getPrice())."</b>"
+			?>
+			<small >&nbsp;&nbsp;inkl. MWST.</small>
+			<input id="mengenListe" type="number" class="hideSpinner amountInput form-control selectWidth block showRight"
+				   value="1"/>
+			<label for="mengenListe" class = "block showRight">Menge: </label>
+
+			<?php
+		}
+		?>
 		<button id="shoppingCartBtn" class="btn btn-default shoppingCartButton distanceTop">
 			<svg version="1.1" class="shoppingCartButtonPic" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
 				 xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"

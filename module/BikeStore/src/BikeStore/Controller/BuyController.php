@@ -9,6 +9,7 @@
 namespace BikeStore\Controller;
 
 use Application\Model\Manager\UserManager;
+use Application\Model\SmtpMail;
 use BikeStore\Form\AddressForm;
 use BikeStore\Model\Manager\ArticleManager;
 use Zend\Http\Request;
@@ -39,8 +40,7 @@ class BuyController extends AbstractActionController
 		/** @var Container $sessionContainer */
 		$sessionContainer = new Container("AddressContainer");
 
-		$valide = true;
-
+		$valide = false;
 		if ($request->isPost())
 		{
 			$postData = $request->getPost();
@@ -55,6 +55,7 @@ class BuyController extends AbstractActionController
 			$addressForm->setData($postData);
 
 			if($addressForm->isValid()){
+				$valide = true;
 				$deliveryAddress = array(	"street"=> $postData->get("street"),
 									"PLZ"=>$postData->get("PLZ"),
 								  	"HouseNumber"=>$postData->get("HouseNumber"),
@@ -81,15 +82,10 @@ class BuyController extends AbstractActionController
 				$sessionContainer->offsetSet('billingAddress',$billingAddress);
 				return $this->redirect()->toRoute("selectPaymentMethod");
 			}
-			else {
-				$valide = false;
-			}
 		}
 		return new ViewModel(
 			array('valide' => $valide ,'form' => $addressForm)
 		);
-
-
 	}
 
     /**
@@ -141,7 +137,7 @@ class BuyController extends AbstractActionController
 
                 $sessionPaymentContainer->offsetSet('sum', $sum);
 
-                $orderID = date("mdY") . '_' . rand(10000, 99999);
+                $orderID = date("Ymd") . '_' . rand(10000, 99999);
                 $sessionPaymentContainer->offsetSet('orderID', $orderID);
 
                 $sessionPaymentContainer->offsetSet('articles', $articles);
@@ -210,20 +206,49 @@ class BuyController extends AbstractActionController
         /** @var Container $sessionAddressContainer */
         $sessionAddressContainer = new Container("AddressContainer");
 
+		/** @var SmtpMail $mail */
         $mail = $this->getServiceLocator()->get('mail');
         $mail->setAllowReply(false);
         $mail->setBetreff("Bestellung " . $sessionPaymentContainer->offsetGet('orderID'));
-        $mail->setTitle("Registration");
-        $mail->setEmpfaengerEmail("schule@it-ott.de");
+        $mail->setTitle("Bestellung");
+        $mail->setEmpfaengerEmail("puzzles@puzzles.silas.link");
         $mail->setEmpfaengerName("Puzzle Payments");
 
+		$articles = $sessionPaymentContainer->offsetGet('articles');
         $message = json_encode([
-            $sessionPaymentContainer->offsetGet('articles'),
+            $articles,
             $sessionAddressContainer->offsetGet("deliveryAddress"),
             $sessionAddressContainer->offsetGet("billingAddress")
         ]);
         $mail->setNachricht($message);
         $mail->send();
+
+		//Ab hier an den Kunden
+		/** @var UserManager $userManager */
+		$userManager = $this->getServiceLocator()->get("userManager");
+
+		$user = $userManager->getUserFromSession();
+		$mail->setAllowReply(false);
+		$mail->setBetreff("Bestellbestätigung BST_" . $sessionPaymentContainer->offsetGet('orderID'));
+		$mail->setTitle("Bestellung vom ".date("d.m.Y"));
+		$mail->setEmpfaengerEmail($user->getEmail());
+		$mail->setEmpfaengerName($user->getVorname()." ".$user->getNachname());
+
+		$message = "Hallo Herr/Frau ".$user->getNachname().", <br/>".
+				   "anbei schicken wir Ihnen eine Bestellübersicht Ihrer Bestellung. <br/><br/><table border = '1' width = '100%' style='border-collapse:0px'>";
+
+		$price = 0;
+		foreach ($articles as $articleArray)
+		{
+			$singlePrice = $articleArray["price"];
+			$count = $articleArray["count"];
+			$price += $singlePrice;
+			$message .= "<tr><td>".$articleArray["name"]."</td><td>Anzahl: ".$count."</td><td>".$singlePrice*$count." €</td></tr>";
+		}
+		$message .= "</table><br/>";
+		$message .= "Gesamtpreis: <b>".$price." €</b><br/><br><i>Diese Email ist keine Rechnung! Eine Rechnung wird Ihnen an den von Ihnen angegebene Rechnungsadresse.</i>";
+		$mail->setNachricht($message);
+		$mail->send();
 
         $sessionCartContainer->offsetUnset('articles');
         //$sessionAddressContainer->offsetUnset("deliveryAddress");
