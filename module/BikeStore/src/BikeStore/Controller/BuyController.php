@@ -144,6 +144,8 @@ class BuyController extends AbstractActionController
                 $orderID = date("mdY") . '_' . rand(10000, 99999);
                 $sessionPaymentContainer->offsetSet('orderID', $orderID);
 
+                $sessionPaymentContainer->offsetSet('articles', $articles);
+
                 $paymentMethods = array(
                     "transfer" => array(
                         "name" => "Überweisung",
@@ -207,6 +209,17 @@ class BuyController extends AbstractActionController
         $sessionPaymentContainer = new Container("PaymentContainer");
         /** @var Container $sessionAddressContainer */
         //$sessionAddressContainer = new Container("AddressContainer");
+
+        $mail = $this->getServiceLocator()->get('mail');
+        $mail->setAllowReply(false);
+        $mail->setBetreff("Bestellung " . $sessionPaymentContainer->offsetGet('orderID'));
+        $mail->setTitle("Registration");
+        $mail->setEmpfaengerEmail("schule@it-ott.de");
+        $mail->setEmpfaengerName("Puzzle Payments");
+
+        $message = json_encode($sessionPaymentContainer->offsetGet('articles'));
+        $mail->setNachricht($message);
+        $mail->send();
 
         $sessionCartContainer->offsetUnset('articles');
         //$sessionAddressContainer->offsetUnset("deliveryAddress");
