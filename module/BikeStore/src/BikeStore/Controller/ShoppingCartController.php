@@ -58,8 +58,20 @@ class ShoppingCartController extends AbstractActionController
 			}
 		}
 
+		$buyUrl = "insertDeliveryAddress";
+
+		/** @var Container $sessionAddressContainer */
+		$sessionAddressContainer = new Container("AddressContainer");
+
+		if($sessionAddressContainer->offsetExists("deliveryAddress") &&
+			$sessionAddressContainer->offsetExists("billingAddress")) {
+			$buyUrl = "selectPaymentMethod";
+		}
+
+
 		return array(
 			"articles" => $articles,
+			"buyUrl" => $buyUrl,
 		);
 
 	}

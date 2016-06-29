@@ -13,6 +13,10 @@ body
 	/* animation: rotating 6s linear infinite; */
 }
 
+.mainContent {
+	padding-bottom: 22px;
+}
+
 .ya-see-me-rolling
 {
 	animation: rotating 6s linear 1;
@@ -433,7 +437,7 @@ p{
 
 h2{
 	margin-left: 5px;
-	font-size: 20px ;
+	font-size: 20px;
 }
 
 p.link{
@@ -551,4 +555,29 @@ a:hover, .btn-link:hover{
 .gridItem {
     display: block;
     padding: 20px;
+}
+
+.debugInfo {
+	position: absolute;
+	top: 0;
+	left: 0;
+	background: rgba(255,255,255,0.5);
+	z-index: 10000;
+	padding: 15px;
+	border: 2px solid red;
+	display: none;
+}
+
+.debugInfo:hover {
+	display: none;
+}
+
+.payButton {
+	background-color: #eee;
+	margin: 12px 10px;
+	padding: 6px 18px;
+}
+
+.payButton:hover {
+	background-color: #99f994;
 }

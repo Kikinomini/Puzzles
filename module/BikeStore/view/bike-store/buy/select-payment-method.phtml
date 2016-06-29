@@ -1,0 +1,81 @@
+<?php
+$dAddr['heading'] = "Lieferadresse";
+$bAddr['heading'] = "Rechnungsadresse";
+$sum = 0;
+
+/** @var array $paymentMethods */
+$this->inlineScript()->captureStart();
+echo 'var paymentMethods = ' . json_encode($paymentMethods) . ';';
+echo <<<JS
+$(document).ready(function() {
+    $(".payButton").click(function() {
+        var method = $(this).attr("data-method");
+        window.location.href = paymentMethods[method].directTo;
+    });
+});
+JS;
+$this->inlineScript()->captureEnd();
+?>
+
+<h1>Bestellübersicht</h1>
+<div class="row">
+    <?php foreach ([$dAddr, $bAddr] as $addr): ?>
+    <div class="column small-12 medium-5 large-3">
+        <h2><?= $addr['heading'] ?></h2>
+        <?= $addr['FirstName'] ?> <?= $addr['LastName'] ?><br>
+        <?= $addr['street'] ?> <?= $addr['HouseNumber'] ?><br>
+        <?= $addr['PLZ'] ?> <?= $addr['City'] ?><br>
+        <br>
+        <a href="<?= $this->url("insertDeliveryAddress") ?>">Ändern</a>
+    </div>
+    <?php endforeach; ?>
+</div>
+
+<h2>Artikel</h2>
+<div class="row">
+    <div class="column small-12">
+        <?php foreach ($articles as $id => $article): ?>
+        <div class="row align-right">
+            <div class="column small-4 medium-3 large-2">
+                <a href="<?= $this->url("articleDetails", array("id" => $id)); ?>">
+                    <img src="<?= $article['image'] ?>"/>
+                </a>
+            </div>
+            <div class="column small-8 medium-4 large-3">
+                <a href="<?= $this->url("articleDetails", array("id" => $id)); ?>">
+                    <?= $article['name'] ?>
+                </a><br>
+                Preis pro Artikel: <b><?= $this->price($article['price']) ?></b>
+            </div>
+            <div class="column small-8 medium-5 large-7">
+                Menge: <?= $article['count'] ?><br>
+                Preis: <b><?= $this->price($article['count'] * $article['price']) ?></b>
+            </div>
+        </div>
+            <hr>
+            <br>
+            <?php $sum += $article['count'] * $article['price'] ?>
+        <?php endforeach; ?>
+        <a href="<?= $this->url("shoppingCart") ?>">Ändern</a>
+        <div class="row">
+            <div class="column small-9 large-4 text-right"><b>Summe</b></div>
+            <div class="column small-3 large-2 text-right"><b><?= $this->price($sum, false) ?></b></div>
+        </div>
+        <div class="row">
+            <div class="column small-9 large-4 text-right">Enthaltene MwSt. (19%)</div>
+            <div class="column small-3 large-2 text-right"><b><?= $this->price($sum * (1 / 6.263), false) ?></b></div>
+        </div>
+    </div>
+</div>
+
+<hr>
+<div class="row">
+    <?php foreach ($paymentMethods as $method => $data): ?>
+    <div class="column small-12 medium-3">
+        <button class="payButton" data-method="<?= $method ?>">
+            Per <?= $data['name'] ?><br>
+            jetzt kostenpflichtig bestellen
+        </button>
+    </div>
+    <?php endforeach; ?>
+</div>

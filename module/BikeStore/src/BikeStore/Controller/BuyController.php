@@ -10,6 +10,7 @@ namespace BikeStore\Controller;
 
 use Application\Model\Manager\UserManager;
 use BikeStore\Form\AddressForm;
+use BikeStore\Model\Manager\ArticleManager;
 use Zend\Http\Request;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\Session\Container;
@@ -27,7 +28,8 @@ class BuyController extends AbstractActionController
 			return $this->forward()->dispatch("BikeStore\\Controller\\Buy", array("action" => "insertAddress"));
 		}
 	}
-	public function insertAddressAction(){
+	
+	public function insertAddressAction() {
 		/** @var Request $request */
 		$request = $this->getRequest();
 		
@@ -36,6 +38,8 @@ class BuyController extends AbstractActionController
 
 		/** @var Container $sessionContainer */
 		$sessionContainer = new Container("AddressContainer");
+
+		$valide = true;
 
 		if ($request->isPost())
 		{
@@ -75,8 +79,11 @@ class BuyController extends AbstractActionController
 
 				$sessionContainer->offsetSet('deliveryAddress',$deliveryAddress);
 				$sessionContainer->offsetSet('billingAddress',$billingAddress);
+				return $this->redirect()->toRoute("selectPaymentMethod");
 			}
-
+			else {
+				$valide = false;
+			}
 		}
 		return new ViewModel(
 			array('valide' => $valide ,'form' => $addressForm)
@@ -84,4 +91,85 @@ class BuyController extends AbstractActionController
 
 
 	}
+
+    /**
+     * @return \Zend\Http\Response
+     */
+    public function selectPaymentMethodAction()
+	{
+		//TODO: Check if last steps fulfilled
+		/** @var UserManager $userManager */
+		$userManager = $this->getServiceLocator()->get("userManager");
+		$user = $userManager->getUserFromSession();
+		if (!$user->getAktiviert()) {
+			return $this->redirect()->toRoute("insertDeliveryAddress");
+		}
+
+		/** @var Container $sessionAddressContainer */
+		$sessionAddressContainer = new Container("AddressContainer");
+
+		if(!$sessionAddressContainer->offsetExists("deliveryAddress") ||
+			!$sessionAddressContainer->offsetExists("billingAddress")) {
+			return $this->redirect()->toRoute("insertDeliveryAddress");
+		}
+
+                /** @var Container $sessionCartContainer */
+                $sessionCartContainer = new Container("shoppingCart");
+
+                if(!$sessionCartContainer->offsetExists("articles") || !count($sessionCartContainer->offsetGet("articles"))) {
+                    return $this->redirect()->toRoute("shoppingCart");
+                }
+
+                /** @var ArticleManager $articleManager */
+                $articleManager = $this->getServiceLocator()->get("BikeStore.articleManager");
+                $articles = $sessionCartContainer->offsetGet("articles");
+
+                foreach($articles as $id => &$article)
+                {
+                    $art = $articleManager->getEntityById($id);
+                    $article["name"] = $art->getName();
+                    $article["price"] = $art->getPrice();
+                    $article["image"] = "/image/" . $art->getImageName();
+                    $article["info"] = $art->getViewInformationAsArray();
+                }
+
+                $paymentMethods = array(
+                    "transfer" => array(
+                        "name" => "Überweisung",
+                        "directTo" => "/paymentTransfer"
+                    ),
+                    "bill" =>  array(
+                        "name" => "Rechnung",
+                        "directTo" => "/paymentBill"
+                    ),
+                    "paypal" =>  array(
+                        "name" => "Paypal",
+                        "directTo" => "/paymentPaypal"
+                    ),
+                );
+
+                return new ViewModel(
+                    array(
+                        'dAddr' => $sessionAddressContainer->offsetGet("deliveryAddress"),
+                        'bAddr' => $sessionAddressContainer->offsetGet("billingAddress"),
+                        'articles' => $articles,
+                        'paymentMethods' => $paymentMethods
+                    )
+                );
+	}
+
+    public function paymentTransferAction()
+    {
+
+    }
+
+    public function paymentBillAction()
+    {
+
+    }
+
+    public function paymentPaypalAction()
+    {
+
+    }
 }
