@@ -73,7 +73,7 @@ echo <<<JS
 		  		  		$('.myMainContainerWrapper').animate({scrollTop: 0}, 800);
 		  		  		numberArticlesInShoppingCart += count;
 						flashMessenger.addMessage(flashMessenger.messageTypeSuccess, "$name wurde dem Warenkorb hinzugefügt");
-						$(".warenkorbText").first().html(numberArticlesInShoppingCart + ' Artikel <br> im Warenkorb');
+						$("#warenkorbText>span").text(numberArticlesInShoppingCart);
 		  		  }
 		  		}, "json").fail(function() 
 		  		{

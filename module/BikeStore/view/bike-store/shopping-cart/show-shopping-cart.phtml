@@ -25,7 +25,7 @@ echo <<<JS
 			  		});
 			  	
 					flashMessenger.addMessage(flashMessenger.messageTypeSuccess, name + " wurde aus dem Warenkorb entfernt");
-					$(".warenkorbText").first().html((numberArticlesInShoppingCart) + ' Artikel <br> im Warenkorb');
+					$("#warenkorbText>span").text(numberArticlesInShoppingCart);
 					priceArticlesInShoppingCart -= (price*count);
 					var new_priceArticlesInShoppingCart = (Math.round(priceArticlesInShoppingCart * 100)/100).toFixed(2);
 					
