@@ -518,6 +518,7 @@ a:hover, .btn-link:hover{
 	padding: 6px;
 	margin-left: 3px;
 	margin-bottom: 3px;
+	fill: #808080;
 }
 
 .bikeShopDefaultBtn:hover svg, .bikeShopDefaultBtn:hover{

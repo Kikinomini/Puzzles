@@ -59,10 +59,10 @@ echo "<div class='columns small-5 medium-3 large-2'>";
 $this->filterForm->setAttribute("action", $this->url("search"));
 $this->filterForm->prepare();
 
-echo "<button id='list '  class='bikeShopDefaultBtn' type='button' onclick='elementRender.createList()'>";
+echo "<button id='list '  class='bikeShopDefaultBtn' type='button' onclick='elementRender.createList()' title='Listenansicht'>";
 include(realpath('public/image/list.svg'));
 echo "</button>";
-echo "<button id='list '  class='bikeShopDefaultBtn' type='button' onclick='elementRender.createBox()'>";
+echo "<button id='list '  class='bikeShopDefaultBtn' type='button' onclick='elementRender.createBox()' title='Kachelansicht'>";
 include(realpath('public/image/box.svg'));
 echo "</button>";
 
