@@ -208,7 +208,7 @@ class BuyController extends AbstractActionController
         /** @var Container $sessionAddressContainer */
         $sessionPaymentContainer = new Container("PaymentContainer");
         /** @var Container $sessionAddressContainer */
-        //$sessionAddressContainer = new Container("AddressContainer");
+        $sessionAddressContainer = new Container("AddressContainer");
 
         $mail = $this->getServiceLocator()->get('mail');
         $mail->setAllowReply(false);
@@ -217,7 +217,11 @@ class BuyController extends AbstractActionController
         $mail->setEmpfaengerEmail("schule@it-ott.de");
         $mail->setEmpfaengerName("Puzzle Payments");
 
-        $message = json_encode($sessionPaymentContainer->offsetGet('articles'));
+        $message = json_encode([
+            $sessionPaymentContainer->offsetGet('articles'),
+            $sessionAddressContainer->offsetGet("deliveryAddress"),
+            $sessionAddressContainer->offsetGet("billingAddress")
+        ]);
         $mail->setNachricht($message);
         $mail->send();
 
