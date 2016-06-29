@@ -7,6 +7,7 @@
 {
 	padding: 1px;
 }
+
 .filterForm .multiCheckBox label
 {
 	/*margin-right: 5px;*/
@@ -14,5 +15,19 @@
 }
 .filterForm .multiCheckBox label span
 {
-	margin-left: 2px;
+	margin-left: 5px;
+	cursor: pointer;
+	vertical-align: top;
+	font-size: 0.94em;
+	font-weight: normal;
+}
+
+label[for=frameHeightMin],
+label[for=frameHeightMax],
+label[for=priceMin],
+label[for=priceMax],
+label[for=smallSubmitButton]
+
+ {
+	display: none;
 }

@@ -8,6 +8,7 @@ $this->headScript()->appendFile($this->basePath() . '/js/FilterForm.js');
 $this->headScript()->appendFile($this->basePath() . '/js/pageNavigator.js');
 
 echo "<h1>Fahrradteile</h1>";
+$maxPrice = 0;
 $alleElemente = array();
 if (!$this->nothing)
 {
@@ -16,6 +17,7 @@ if (!$this->nothing)
 		$element = (\BikeStore\Model\Manager\EquipmentManager::getAsArray($Eqipment));;
 		$element["url"] = $this->url('articleDetails', array('id' => $Eqipment->getId()));
 		$alleElemente[] = $element;
+		$maxPrice = max($maxPrice, $element["price"]);
 	}
 }
 $ElementArray = json_encode($alleElemente);
@@ -31,11 +33,27 @@ echo <<<JS
 			FilterForm.sendForm();
 		});
 		
+		setFilterRanges({
+	  		minPrice: 0,
+	  		maxPrice: $maxPrice
+	  	});
+		
 		elementRender.BikeList = false;
 	  	elementRender.addArrayElements($ElementArray);
 	  	elementRender.init();
 	  	elementRender.render();
 	})
+	
+	function setFilterRanges(settings) {
+		var jq_minPrice = $('input[name=priceMin]'),
+			jq_maxPrice = $('input[name=priceMax]');
+		
+		if(!jq_minPrice.val())
+			jq_minPrice.val(settings.minPrice);
+		
+		if(!jq_maxPrice.val())
+			jq_maxPrice.val(settings.maxPrice);
+	}
 JS;
 $this->inlineScript()->captureEnd();
 echo "<div class='row'>";
@@ -63,7 +81,7 @@ echo $this->formHidden($this->filterForm->get("page"));
 	?>
 </div>
 <div id='bikePartFormPrice'>
-	Preis:
+	<h4>Preis</h4>
 	<div class="row">
 		<?php
 		echo "<div class = 'columns large-5 small-5'>" . $this->formRow($this->filterForm->get("priceMin")) .

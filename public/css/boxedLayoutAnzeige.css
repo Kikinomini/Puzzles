@@ -30,7 +30,13 @@ width: 150px;
 
 .grid-elem > a {
     display: block;
-    width: 150px;
-    max-width: 150px;
+    width: 170px;
+    max-width: 170px;
+    padding: 10px;
     overflow: hidden;
+    box-shadow: 0 0 6px 1px rgba(0, 0, 0, 0.08);
+}
+
+.grid-elem > a:hover {
+    box-shadow: 0 0 6px 2px rgba(0, 0, 0, 0.15);
 }

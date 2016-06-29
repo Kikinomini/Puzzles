@@ -98,8 +98,8 @@ JS;
 $this->inlineScript()->captureEnd();
 
 ?>
-<div class="detailContent flexHeader">
-	<div class="detailPicture flexFillWidth">
+<div class="detailContent row">
+	<div class="detailPicture column">
 		<h1><?php
 			echo $this->escapeHtml($article->getName());
 			?>
@@ -107,7 +107,7 @@ $this->inlineScript()->captureEnd();
 		<img src="/image/<?php echo $this->escapeHtml($article->getImageName())
 		?>"/>
 	</div>
-	<div id="detailBuy">
+	<div id="detailBuy" class="column small-12 medium-5 large-4">
 		<!--		<p>-->
 		<div id='priceTable' class='table'>
 			<div class='trow'>
@@ -145,10 +145,11 @@ $this->inlineScript()->captureEnd();
 			}
 			?>
 		</div>
-		<small>inkl. MWST.</small>
+		<small class="float-right">inkl. MWST.</small>
+		<br>
 		<br>
 		<label class="block showLeft" for="mengenListe">Menge: </label>
-		<input id = "mengenListe" type = "number" class="hideSpinner amountInput form-control selectWidth block" value = "1" />
+		<input id = "mengenListe" type = "number" class="hideSpinner amountInput form-control selectWidth block showLeft" value = "1" />
 <!--		<select id="mengenListe" class="form-control selectWidth block">-->
 <!--			<datalist id="amount">-->
 <!--				<option value="1" selected>1</option>-->

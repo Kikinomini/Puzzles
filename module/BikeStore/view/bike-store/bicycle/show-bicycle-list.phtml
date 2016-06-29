@@ -17,6 +17,9 @@ $this->headScript()->appendFile($this->basePath() . '/js/FilterForm.js');
 
 echo "<h1>Fahrräder</h1>";
 
+$maxPrice = 0;
+$minFrameSize = 9999;
+$maxFrameSize = 0;
 $alleElemente = array();
 /** @var \BikeStore\Model\Bicycle $equipment */
 foreach ($this->bicycles as $equipment)
@@ -27,7 +30,9 @@ foreach ($this->bicycles as $equipment)
 	$element["weelSize"] = $equipment->getFrontWheel()->getSize();
 	$element["frameSize"] = $equipment->getFrame()->getFrameSize();
 	$alleElemente[] = $element;
-
+	$maxPrice = max($maxPrice, $element["price"]);
+	$minFrameSize = min($minFrameSize, $element["frameSize"]);
+	$maxFrameSize = max($maxFrameSize, $element["frameSize"]);
 }
 $ElementArray = json_encode($alleElemente);
 
@@ -40,6 +45,13 @@ echo <<<JS
 	  	elementRender.addArrayElements($ElementArray);
 	  	elementRender.init();
 	  	elementRender.render();
+	  	 		
+	  	setFilterRanges({
+	  		minPrice: 0,
+	  		maxPrice: $maxPrice,
+	  		minFrameSize: $minFrameSize,
+	  		maxFrameSize: $maxFrameSize
+	  	});
 	  	
 	  	FilterForm.setForm($("#bicycleFilterForm"));
 		$(".sendFormOnClick").click(function(){
@@ -47,6 +59,25 @@ echo <<<JS
 			FilterForm.sendForm();
 		});
 	})
+	
+	function setFilterRanges(settings) {
+		var jq_minPrice = $('input[name=priceMin]'),
+			jq_maxPrice = $('input[name=priceMax]'),
+			jq_minFrameHeight = $('input[name=frameHeightMin]'),
+			jq_maxFrameHeight = $('input[name=frameHeightMax]');
+		
+		if(!jq_minPrice.val())
+			jq_minPrice.val(settings.minPrice).attr('min', settings.minPrice).attr('max', settings.maxPrice);
+		
+		if(!jq_maxPrice.val())
+			jq_maxPrice.val(settings.maxPrice).attr('min', settings.minPrice).attr('max', settings.maxPrice);
+			
+		if(!jq_minFrameHeight.val())
+			jq_minFrameHeight.val(settings.minFrameSize).attr('min', settings.minFrameSize).attr('max', settings.maxFrameSize);
+			
+		if(!jq_maxFrameHeight.val())
+			jq_maxFrameHeight.val(settings.maxFrameSize).attr('min', settings.minFrameSize).attr('max', settings.maxFrameSize);
+	}
 JS;
 $this->inlineScript()->captureEnd();
 
@@ -81,7 +112,7 @@ echo $this->formHidden($this->filterForm->get("page"));
 	?>
 </div>
 <div id='bicycleFormFrameHeight'>
-	Rahmenhöhe:
+	<h4>Rahmenhöhe</h4>
 	<div class='row'>
 		<?php
 		echo "<div class = 'columns large-5 small-5'>" . $this->formRow($this->filterForm->get("frameHeightMin")) .
@@ -94,7 +125,7 @@ echo $this->formHidden($this->filterForm->get("page"));
 	</div>
 </div>
 <div id='bicycleFormPrice'>
-	Preis:
+	<h4>Preis</h4>
 	<div class='row'>
 		<?php
 		echo "<div class = 'columns large-5 small-5'>" . $this->formRow($this->filterForm->get("priceMin")) .

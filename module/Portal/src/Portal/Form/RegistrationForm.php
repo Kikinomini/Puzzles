@@ -73,7 +73,7 @@ class RegistrationForm extends Form
 		$this->add($password);
 
 		$agb = new Checkbox('agb');
-		$agb->setLabel('<a href= "'.$this->urlAgb.'">AGB</a> gelesen und einverstanden');
+		$agb->setLabel('<a target="_blank" href= "'.$this->urlAgb.'">AGB</a> gelesen und einverstanden');
 		$agb->setAttribute('id', 'agb');
 		$agb->setAttribute('required', 'true');
 		$agb->setAttribute('class', 'form-control');

@@ -797,6 +797,7 @@ button.ui-button::-moz-focus-inner {
 	border-bottom-width: 0;
 	padding: 0;
 	white-space: nowrap;
+	/* opacity: 0.8; */
 }
 .ui-tabs .ui-tabs-nav .ui-tabs-anchor {
 	float: left;
@@ -804,15 +805,17 @@ button.ui-button::-moz-focus-inner {
 	text-decoration: none;
 }
 .ui-tabs .ui-tabs-nav li.ui-tabs-active {
-	margin-bottom: -1px;
-	padding-bottom: 1px;
+	/* margin-bottom: -1px; */
+	/* padding-bottom: 1px; */
+	opacity: 1;
+	overflow: hidden;
 }
 .ui-tabs .ui-tabs-nav li.ui-tabs-active .ui-tabs-anchor,
 .ui-tabs .ui-tabs-nav li.ui-state-disabled .ui-tabs-anchor,
 .ui-tabs .ui-tabs-nav li.ui-tabs-loading .ui-tabs-anchor {
 	cursor: text;
 	/* color: #ffffff; */
-	background-color: #eeeeee;
+	background-color: #EEEEEE;
 }
 .ui-tabs-collapsible .ui-tabs-nav li.ui-tabs-active .ui-tabs-anchor {
 	cursor: pointer;
@@ -821,7 +824,10 @@ button.ui-button::-moz-focus-inner {
 	display: block;
 	border-width: 0;
 	padding: 1em 1.4em;
-	background: none;
+	background: #eeeeee;
+	white-space: pre-line;
+	overflow-x: hidden;
+	overflow-wrap: break-word;
 }
 .ui-tooltip {
 	padding: 8px;
