@@ -1,7 +1,7 @@
 <?php
 $dAddr['heading'] = "Lieferadresse";
 $bAddr['heading'] = "Rechnungsadresse";
-$sum = 0;
+//$sum = 0;
 
 /** @var array $paymentMethods */
 $this->inlineScript()->captureStart();
@@ -10,7 +10,13 @@ echo <<<JS
 $(document).ready(function() {
     $(".payButton").click(function() {
         var method = $(this).attr("data-method");
-        window.location.href = paymentMethods[method].directTo;
+        
+        if(method == 'paypal') {
+            $('#paypalpay').submit();
+        }
+        else {
+            window.location.href = paymentMethods[method].directTo;
+        }
     });
 });
 JS;
@@ -54,7 +60,7 @@ $this->inlineScript()->captureEnd();
         </div>
             <hr>
             <br>
-            <?php $sum += $article['count'] * $article['price'] ?>
+            <?php //$sum += $article['count'] * $article['price'] ?>
         <?php endforeach; ?>
         <a href="<?= $this->url("shoppingCart") ?>">Ändern</a>
         <div class="row">
@@ -79,3 +85,14 @@ $this->inlineScript()->captureEnd();
     </div>
     <?php endforeach; ?>
 </div>
+<form id="paypalpay" action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post" target="_top">
+    <input type="hidden" name="cmd" value="_xclick">
+    <input type="hidden" name="amount" value="<?= $sum ?>">
+    <input type="hidden" name="currency_code" value="EUR">
+    <input type="hidden" value="DE" name="lc">
+    <input type="hidden" name="item_name" value="Puzzles BikeStore Bestellung">
+    <input type="hidden" value="payments@silas.link" name="business">
+    <input type="hidden" name="return" value="<?= $this->url('paymentPaypal', array(), array('force_canonical' => true)) ?>">
+    <input type="hidden" value="<?= $this->url('home') ?>" name="cancel_return">
+    <input type="hidden" name="custom" value="<?= $orderID ?>">
+</form>

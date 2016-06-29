@@ -124,6 +124,8 @@ class BuyController extends AbstractActionController
                 $articleManager = $this->getServiceLocator()->get("BikeStore.articleManager");
                 $articles = $sessionCartContainer->offsetGet("articles");
 
+                $sum = 0;
+
                 foreach($articles as $id => &$article)
                 {
                     $art = $articleManager->getEntityById($id);
@@ -131,7 +133,16 @@ class BuyController extends AbstractActionController
                     $article["price"] = $art->getPrice();
                     $article["image"] = "/image/" . $art->getImageName();
                     $article["info"] = $art->getViewInformationAsArray();
+                    $sum += $article["price"] * $article["count"];
                 }
+
+                /** @var Container $sessionAddressContainer */
+                $sessionPaymentContainer = new Container("PaymentContainer");
+
+                $sessionPaymentContainer->offsetSet('sum', $sum);
+
+                $orderID = date("mdY") . '_' . rand(10000, 99999);
+                $sessionPaymentContainer->offsetSet('orderID', $orderID);
 
                 $paymentMethods = array(
                     "transfer" => array(
@@ -153,23 +164,54 @@ class BuyController extends AbstractActionController
                         'dAddr' => $sessionAddressContainer->offsetGet("deliveryAddress"),
                         'bAddr' => $sessionAddressContainer->offsetGet("billingAddress"),
                         'articles' => $articles,
-                        'paymentMethods' => $paymentMethods
+                        'paymentMethods' => $paymentMethods,
+                        'sum' => $sum,
+                        'orderID' => $orderID
                     )
                 );
 	}
 
     public function paymentTransferAction()
     {
+        /** @var Container $sessionAddressContainer */
+        $sessionPaymentContainer = new Container("PaymentContainer");
 
+        $sum = $sessionPaymentContainer->offsetGet('sum');
+        $orderID = $sessionPaymentContainer->offsetGet('orderID');
+
+        $this->_paymentDone();
+        return new ViewModel(
+            array(
+                'sum' => $sum,
+                'orderID' => $orderID
+            )
+        );
     }
 
     public function paymentBillAction()
     {
-
+        $this->_paymentDone();
     }
 
     public function paymentPaypalAction()
     {
+        $this->_paymentDone();
+    }
 
+    protected function _paymentDone()
+    {
+        //TODO: Just save this somewhere
+        /** @var Container $sessionCartContainer */
+        $sessionCartContainer = new Container("shoppingCart");
+        /** @var Container $sessionAddressContainer */
+        $sessionPaymentContainer = new Container("PaymentContainer");
+        /** @var Container $sessionAddressContainer */
+        //$sessionAddressContainer = new Container("AddressContainer");
+
+        $sessionCartContainer->offsetUnset('articles');
+        //$sessionAddressContainer->offsetUnset("deliveryAddress");
+        //$sessionAddressContainer->offsetUnset("billingAddress");
+        $sessionPaymentContainer->offsetUnset('sum');
+        $sessionPaymentContainer->offsetUnset('orderID');
     }
 }
