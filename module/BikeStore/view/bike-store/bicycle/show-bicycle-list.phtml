@@ -18,14 +18,14 @@ $this->headScript()->appendFile($this->basePath() . '/js/FilterForm.js');
 echo "<h1>Fahrräder</h1>";
 
 $alleElemente = array();
-/** @var \BikeStore\Model\Bicycle $Eqipment */
-foreach ($this->bicycles as $Eqipment)
+/** @var \BikeStore\Model\Bicycle $equipment */
+foreach ($this->bicycles as $equipment)
 {
-	$element = (\BikeStore\Model\Manager\EquipmentManager::getAsArray($Eqipment));;
-	$element["url"] = $this->url('articleDetails', array('id' => $Eqipment->getId()));
-	$element["bikeType"] = \BikeStore\Model\Manager\Equipment\FrameManager::resolveBikeType($Eqipment->getFrame()->getBikeType());
-	$element["weelSize"] = $Eqipment->getFrontWheel()->getSize();
-	$element["frameSize"] = $Eqipment->getFrame()->getFrameSize();
+	$element = (\BikeStore\Model\Manager\EquipmentManager::getAsArray($equipment));;
+	$element["url"] = $this->url('articleDetails', array('id' => $equipment->getId()));
+	$element["bikeType"] = \BikeStore\Model\Manager\Equipment\FrameManager::resolveBikeType($equipment->getFrame()->getBikeType());
+	$element["weelSize"] = $equipment->getFrontWheel()->getSize();
+	$element["frameSize"] = $equipment->getFrame()->getFrameSize();
 	$alleElemente[] = $element;
 
 }
@@ -43,6 +43,7 @@ echo <<<JS
 	  	
 	  	FilterForm.setForm($("#bicycleFilterForm"));
 		$(".sendFormOnClick").click(function(){
+			$("input[name=page]").val(1);
 			FilterForm.sendForm();
 		});
 	})

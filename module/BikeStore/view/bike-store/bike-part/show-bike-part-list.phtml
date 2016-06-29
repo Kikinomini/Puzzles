@@ -27,6 +27,7 @@ echo <<<JS
 		pageNavigator.maxPage = $this->maxpage;
 		FilterForm.setForm($("#bikePartFilterForm"));
 		$(".sendFormOnClick").click(function(){
+			$("input[name=page]").val(1);
 			FilterForm.sendForm();
 		});
 		
