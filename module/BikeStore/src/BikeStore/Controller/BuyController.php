@@ -13,6 +13,7 @@ use Application\Model\SmtpMail;
 use BikeStore\Form\AddressForm;
 use BikeStore\Model\Manager\ArticleManager;
 use Zend\Http\Request;
+use Zend\Http\Response;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\Session\Container;
 use Zend\View\Model\ViewModel;
@@ -177,7 +178,11 @@ class BuyController extends AbstractActionController
         $sum = $sessionPaymentContainer->offsetGet('sum');
         $orderID = $sessionPaymentContainer->offsetGet('orderID');
 
-        $this->_paymentDone();
+        $response = $this->_paymentDone();
+		if ($response instanceof Response)
+		{
+			return $response;
+		}
         return new ViewModel(
             array(
                 'sum' => $sum,
@@ -188,12 +193,12 @@ class BuyController extends AbstractActionController
 
     public function paymentBillAction()
     {
-        $this->_paymentDone();
+        return $this->_paymentDone();
     }
 
     public function paymentPaypalAction()
     {
-        $this->_paymentDone();
+        return $this->_paymentDone();
     }
 
     protected function _paymentDone()
@@ -260,5 +265,6 @@ class BuyController extends AbstractActionController
         //$sessionAddressContainer->offsetUnset("billingAddress");
         $sessionPaymentContainer->offsetUnset('sum');
         $sessionPaymentContainer->offsetUnset('orderID');
+		return null;
     }
 }
