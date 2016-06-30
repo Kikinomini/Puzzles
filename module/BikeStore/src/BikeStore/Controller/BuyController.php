@@ -252,7 +252,7 @@ class BuyController extends AbstractActionController
 		{
 			$singlePrice = $articleArray["price"];
 			$count = $articleArray["count"];
-			$price += $singlePrice;
+			$price += $singlePrice*$count;
 			$message .= "<tr><td>".$articleArray["name"]."</td><td>Anzahl: ".$count."</td><td>".$singlePrice*$count." €</td></tr>";
 		}
 		$message .= "</table><br/>";
