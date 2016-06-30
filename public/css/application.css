@@ -13,6 +13,11 @@ body
 	/* animation: rotating 6s linear infinite; */
 }
 
+.ui-datepicker-year, .ui-datepicker-month
+{
+	color: black;
+}
+
 .mainContent {
 	padding-bottom: 22px;
 }
