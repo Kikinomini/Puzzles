@@ -206,10 +206,15 @@ class BuyController extends AbstractActionController
         /** @var Container $sessionAddressContainer */
         $sessionAddressContainer = new Container("AddressContainer");
 
+		$orderId = $sessionPaymentContainer->offsetGet('orderID');
+		if ($orderId == null)
+		{
+			return $this->redirect()->toRoute("home");
+		}
 		/** @var SmtpMail $mail */
         $mail = $this->getServiceLocator()->get('mail');
         $mail->setAllowReply(false);
-        $mail->setBetreff("Bestellung " . $sessionPaymentContainer->offsetGet('orderID'));
+        $mail->setBetreff("Bestellung " . $orderId);
         $mail->setTitle("Bestellung");
         $mail->setEmpfaengerEmail("puzzles@puzzles.silas.link");
         $mail->setEmpfaengerName("Puzzle Payments");
